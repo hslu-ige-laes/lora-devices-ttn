@@ -1,8 +1,5 @@
-# lora-devices-ttn
-> LoRaWAN device integration into <a href="https://www.thethingsnetwork.org/">ttn (the things network)</a>
+# LoRaWAN device integration into <a href="https://www.thethingsnetwork.org/">ttn</a>
 
-## Intro
-- Before a device can communicate via The Things Network you need to register it with an application. The general workflow for doing that can be found <a href="https://www.thethingsnetwork.org/docs/devices/registration.html">here</a>.
 - Each device requires a specific code part to parse the sensor data information out of the whole message. This function is called "payload decoder".
 - In most cases the manufacturer provides this information. Nevertheless we share in this repository the payload decoder code for the devices we're working with.
 
@@ -13,7 +10,7 @@
 
 <!-- | Manufacturer | Product Name | Product-Link | Price [CHF] | Description |-->
 
-## Create account
+## Create ttn account
 To register your device you’ll need a The Things Network account.
 1. Go to [account.thethingsnetwork.org](https://account.thethingsnetwork.org/) and [click create an account](https://account.thethingsnetwork.org/register)
    - You will receive an email to confirm your email address. You have 24 hours to do so.
