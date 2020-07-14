@@ -1,7 +1,5 @@
-[name]: 
-
 # avelon-wisely-carbonsense
-![Product Image](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/img/avelon-wisely-carbonsense_01.png)
+![Product Image](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/img/avelon-wisely-carbonsense_01.png =250x)
 - Manufacturer: [Avelon](https://avelon.com/en/wisely/)
 - Product: [Wisely Carbon Sense ](https://avelon.com/en/wisely/)
 - [Ordering Link](https://avelon.com/en/buy-wisesly/)
