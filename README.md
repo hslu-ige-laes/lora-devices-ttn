@@ -9,7 +9,7 @@
 ## Device Overview
 | File | Manufacturer | Product | Price [CHF] | Description | Image |
 | --- | --- | --- | --- | --- |
-|[avelon-wisely-carbonsense](https://github.com/hslu-ige-laes/lora-devices-ttn/blob/master/avelon-wisely-carbonsense.md)| Avelon | [Wisely Carbon Sense](https://avelon.com/en/wisely/) | 263.- (2020-07) | Indoor sensor for Temperature, Humidity and CO2 | ![Product Image](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/img/avelon-wisely-carbonsense_01.png =50x) |
+|[avelon-wisely-carbonsense](https://github.com/hslu-ige-laes/lora-devices-ttn/blob/master/avelon-wisely-carbonsense.md)| Avelon | [Wisely Carbon Sense](https://avelon.com/en/wisely/) | 263.- (2020-07) | Indoor sensor for Temperature, Humidity and CO2 | ![Product Image](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/img/avelon-wisely-carbonsense_01.png | width=50) |
 
 <!-- | Manufacturer | Product Name | Product-Link | Price [CHF] | Description |-->
 
