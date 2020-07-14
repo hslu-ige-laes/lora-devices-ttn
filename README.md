@@ -10,7 +10,7 @@
 
 <!-- | Manufacturer | Product Name | Product-Link | Price [CHF] | Description |-->
 
-## Create ttn account
+## Create ttn Account
 To register your device you’ll need a The Things Network account.
 1. Go to [account.thethingsnetwork.org](https://account.thethingsnetwork.org/) and [click create an account](https://account.thethingsnetwork.org/register)
    - You will receive an email to confirm your email address. You have 24 hours to do so.

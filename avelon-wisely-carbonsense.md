@@ -1,5 +1,6 @@
-# avelon-wisely-carbonsense
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/img/avelon-wisely-carbonsense_01.png" width="250" align="right"></img>
+
+# avelon-wisely-carbonsense
 - Manufacturer: [Avelon](https://avelon.com/en/wisely/)
 - Product: [Wisely Carbon Sense ](https://avelon.com/en/wisely/)
 - [Ordering Link](https://avelon.com/en/buy-wisesly/)
@@ -15,6 +16,9 @@
   - Expected life time: 3 ... 5 years at roomtemperature
 - Size: 80 × 80 × 27 mm
 - Weight: 100 g
+- Documentation
+  - [Payload Description from avelon.cloud help (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/img/avelon-wisely-carbonsense_02.pdf)
+  - [Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/img/avelon-wisely-carbonsense_03.pdf)
 
 ## Important notes
 - The sensor comes in four different "flavours"
@@ -24,6 +28,11 @@
   - <span style="color:lightgreen"><b>Self-Managed</b> (that's what you wanna have!!! Data goes over the ttn network to the ttn server where you pick it up, no monthly charges or fees)</span>
 
 ## Installation and payload decoder
+
+### Create ttn Account
+See [here](./README.md#create-ttn-account) if this has not yet been done.
+
+### Add an Application
 
 
 ```javascript

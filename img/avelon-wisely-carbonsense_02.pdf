@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)https://avelon.cloud/docs/de/content/web/device/management/iot/payload/wisely.htm -->
+<html lang="de-de" xml:lang="de-de" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="[%=System.LinkedTitle%]"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        <link href="./avelon-wisely-carbonsense_02_files/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True">
+        <link href="./avelon-wisely-carbonsense_02_files/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True">
+        <link href="./avelon-wisely-carbonsense_02_files/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True">
+        <link href="./avelon-wisely-carbonsense_02_files/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True"><title>Wisely-Nutzlast (Payload)
+        </title>
+        <link href="./avelon-wisely-carbonsense_02_files/2016.css" rel="stylesheet" type="text/css">
+        <script src="./avelon-wisely-carbonsense_02_files/jquery.min.js.download" type="text/javascript">
+        </script>
+        <script src="./avelon-wisely-carbonsense_02_files/require.min.js.download" defer="defer" type="text/javascript">
+        </script>
+        <script src="./avelon-wisely-carbonsense_02_files/require.config.js.download" defer="defer" type="text/javascript">
+        </script>
+        <script src="./avelon-wisely-carbonsense_02_files/foundation.min.js.download" defer="defer" type="text/javascript">
+        </script>
+        <script src="./avelon-wisely-carbonsense_02_files/plugins.min.js.download" defer="defer" type="text/javascript">
+        </script>
+        <script src="./avelon-wisely-carbonsense_02_files/MadCapAll.js.download" defer="defer" type="text/javascript">
+        </script>
+    <meta class="foundation-mq-small"><meta class="foundation-mq-medium"><meta class="foundation-mq-large"><meta class="foundation-mq-xlarge"><meta class="foundation-mq-xxlarge"><style></style><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="../../../../../../Data/Language.js" src="./avelon-wisely-carbonsense_02_files/Language.js.download"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="../../../../../../Data/Filters.js" src="./avelon-wisely-carbonsense_02_files/Filters.js.download"></script></head>
+    <body id="mc-main-content" role="main">
+        <h1 xmlns:madcap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" style="page-break-before: always;"><a name="kanchor103"></a>Wisely-Nutzlast (Payload)
+        </h1>
+        <p class="p_warning">Änderungen an der Dokumentation der Nutzlast ohne vorherige Ankündigung vorbehalten.</p>
+        <div class="section">
+            <h2 xmlns:madcap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">Analoge Kanäle</h2>
+            <div class="noPageBreak">
+                <p>Geräte der Wisely-Serie unterstützen verschiedene analoge Kanäle, abhängig von ihrem jeweiligen Modell.</p>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    </colgroup><tbody>
+                        <tr>
+                            <th>
+                                <p>Analoger Kanal</p>
+                            </th>
+                            <th>
+                                <p>Datenkanal</p>
+                            </th>
+                            <th>
+                                <p>Byte-Länge</p>
+                            </th>
+                            <th>
+                                <p>Wisely<br>Standard</p>
+                            </th>
+                            <th>
+                                <p>Wisely<br>CarbonSense</p>
+                            </th>
+                            <th>
+                                <p>Wisely<br>AllSense</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Atmosphärischer Druck</p>
+                            </td>
+                            <td>
+                                <p>0x01
+                            </p>
+                            </td>
+                            <td>
+                                <p>2</p>
+                            </td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>*</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Temperatur</p>
+                            </td>
+                            <td>
+                                <p>0x02</p>
+                            </td>
+                            <td>
+                                <p>2</p>
+                            </td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Feuchtigkeit</p>
+                            </td>
+                            <td>
+                                <p>0x03</p>
+                            </td>
+                            <td>
+                                <p>1</p>
+                            </td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>VOC</p>
+                            </td>
+                            <td>
+                                <p>0x04</p>
+                            </td>
+                            <td>
+                                <p>2</p>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Leuchtdichte</p>
+                            </td>
+                            <td>
+                                <p>0x05</p>
+                            </td>
+                            <td>
+                                <p>2</p>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>*</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>CO₂</p>
+                            </td>
+                            <td>
+                                <p>0x06</p>
+                            </td>
+                            <td>
+                                <p>2</p>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>PIR/Anwesenheit - verstrichene aktive Zeit</p>
+                            </td>
+                            <td>
+                                <p>0x07</p>
+                            </td>
+                            <td>
+                                <p>2</p>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <p><span style="font-family: Wingdings;">ü</span>*</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>* Aufgrund von Einschränkungen der Nutzlastlänge sind diese Kanäle ab Werk nicht aktiviert.</p>
+            </div>
+            <h2 xmlns:madcap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">Nutzlast des Standard-Uplinks</h2>
+            <p class="p_hint">Die Nutzlast wird von links nach rechts gelesen. Der Messwert am Anfang der Nutzlast entspricht dem ältesten.</p>
+            <h3>Wisely Standard</h3>
+            <h4>Datenport</h4>
+            <p>Port: 5</p>
+            <h4>Länge der Nutzlast</h4>
+            <p>Die Länge der Nutzlast ist variabel und wird bestimmt durch:</p>
+            <ul>
+                <li value="1">individuelle Abtasteinstellungen</li>
+                <li value="2">zyklisches Sendeintervall</li>
+                <li value="3">Spreizfaktor</li>
+            </ul>
+            <div class="noPageBreak">
+                <h4>Format der Nutzlast</h4>
+                <p>Die Nutzlast besteht aus</p>
+                <ul>
+                    <li value="1">einem führenden Byte, das die Batteriekapazität angibt</li>
+                    <li value="2">einer Folge von Messdaten</li>
+                </ul>
+                <table>
+                    <colgroup><col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    </colgroup><tbody><tr>
+                        <th><small>BAT</small>
+                        </th>
+                        <th><small>PRESH0</small>
+                        </th>
+                        <th><small>PRESL0</small>
+                        </th>
+                        <th><small>TEMPH0</small>
+                        </th>
+                        <th><small>TEMPL0</small>
+                        </th>
+                        <th><small>HUM0</small>
+                        </th>
+                        <th><small>PRESHx</small>
+                        </th>
+                        <th><small>PRESLx</small>
+                        </th>
+                        <th><small>TEMPHx</small>
+                        </th>
+                        <th><small>TEMPLx</small>
+                        </th>
+                        <th><small>HUMx</small>
+                        </th>
+                        <th><small>…</small>
+                        </th>
+                        <th><small>OFFSET</small>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="bordered-cell">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                        <td class="bordered-cell" style="background-color: #ffe4e1;">&nbsp;</td>
+                    </tr>
+                </tbody></table>
+            </div>
+            <div class="noPageBreak">
+                <h5>Batterie</h5>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Feld</p>
+                        </th>
+                        <th>
+                            <p>Beschreibung</p>
+                        </th>
+                        <th>
+                            <p>Dekodierung</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>BAT</p>
+                        </td>
+                        <td>
+                            <p>Batteriekapazität, Wert zwischen 0 und 255</p>
+                        </td>
+                        <td>
+                            <p>(Batterie in %) = 100.0 * BAT / 254.0</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <p>Spezialwerte für die Batterie sind:</p>
+                <ul>
+                    <li value="1">BAT = 254: Batterie auf maximaler Spannung</li>
+                    <li value="2">BAT = 1: keine weitere Batteriekapazität verfügbar</li>
+                    <li value="3">BAT = 255: Gerät konnte die Spannung nicht erfassen</li>
+                    <li value="4">BAT = 0: Keine Batterie eingelegt (externes Netzteil)</li>
+                </ul>
+            </div>
+            <div class="noPageBreak">
+                <h5>Messdaten und Konvertierung</h5>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Feld</p>
+                        </th>
+                        <th>
+                            <p>Datenkanal</p>
+                        </th>
+                        <th>
+                            <p>Beschreibung</p>
+                        </th>
+                        <th>
+                            <p>Dekodierung</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>PRESHx, PRESLx</p>
+                        </td>
+                        <td>
+                            <p>0x01</p>
+                        </td>
+                        <td>
+                            <p>Atmosphärischer Druck (in hPa)</p>
+                        </td>
+                        <td>
+                            <p>((PRESHx&lt;&lt;8) | PRESLx) / 10.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>TEMPHx, TEMPLx</p>
+                        </td>
+                        <td>
+                            <p>0x02</p>
+                        </td>
+                        <td>
+                            <p>Temperatur (in °C)</p>
+                        </td>
+                        <td>
+                            <p>((TEMPHx&lt;&lt;8) | TEMPLx) / 10.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>HUx</p>
+                        </td>
+                        <td>
+                            <p>0x03</p>
+                        </td>
+                        <td>
+                            <p>Feuchtigkeit (in %rH)</p>
+                        </td>
+                        <td>
+                            <p>HUx / 2.0</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <h5>Offset</h5>
+                <p>Das System geht davon aus, dass der Zeitpunkt der letzten Messung in der Nutzlast identisch ist mit dem Zeitpunkt der Übertragung des Pakets.</p>
+                <p>Wenn die Anzahl der Messungen die zulässige Nutzlastgrösse überschreitet, wird ein vollständiges Datenpaket bereits vor dem nächsten geplanten Paket gesendet, und die übrigen Messungen werden anschliessend mit der nächsten geplanten Nutzlast gesendet.</p>
+                <p>Um die Tatsache zu kompensieren, dass die Zeit der letzten Messung in der ersten Nutzlast von der tatsächlichen Übertragungszeit abweicht, wird ein Offset &gt; 0 gesetzt, der die Anzahl der Intervalle der Länge <strong>CyclicTransmissionCounter</strong> × <strong>SensorSampleTime</strong> zwischen diesen beiden Zeitstempeln angibt.</p>
+            </div>
+            <h3>Wisely CarbonSense</h3>
+            <h4>Datenport</h4>
+            <p>Port: 5</p>
+            <h4>Länge der Nutzlast</h4>
+            <p>Die Länge der Nutzlast ist variabel und wird bestimmt durch:</p>
+            <ul>
+                <li value="1">individuelle Abtasteinstellungen</li>
+                <li value="2">zyklisches Sendeintervall</li>
+                <li value="3">Spreizfaktor</li>
+            </ul>
+            <div class="noPageBreak">
+                <h4>Format der Nutzlast</h4>
+                <p>Die Nutzlast besteht aus</p>
+                <ul>
+                    <li value="1">einem führenden Byte, das die Batteriekapazität angibt</li>
+                    <li value="2">einer Folge von Messdaten</li>
+                </ul>
+                <table>
+                    <colgroup><col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    </colgroup><tbody>
+                        <tr>
+                            <th><small>BAT</small>
+                            </th>
+                            <th><small>PRESH0</small>
+                            </th>
+                            <th><small>PRESL0</small>
+                            </th>
+                            <th><small>TEMPH0</small>
+                            </th>
+                            <th><small>TEMPL0</small>
+                            </th>
+                            <th><small>HUM0</small>
+                            </th>
+                            <th><small>CO₂H0</small>
+                            </th>
+                            <th><small>CO₂L0</small>
+                            </th>
+                            <th><small>PRESHx</small>
+                            </th>
+                            <th><small>PLESLx</small>
+                            </th>
+                            <th><small>TEMPHx</small>
+                            </th>
+                            <th><small>TEMPLx</small>
+                            </th>
+                            <th><small>HUMx</small>
+                            </th>
+                            <th><small>CO₂Hx</small>
+                            </th>
+                            <th><small>CO₂Lx</small>
+                            </th>
+                            <th><small>…</small>
+                            </th>
+                            <th><small>OFFSET</small>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="bordered-cell">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #ffe4e1;">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="noPageBreak">
+                <h5>Batterie</h5>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    </colgroup><tbody>
+                        <tr>
+                            <th>
+                                <p>Feld</p>
+                            </th>
+                            <th>
+                                <p>Beschreibung</p>
+                            </th>
+                            <th>
+                                <p>Dekodierung</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>BAT</p>
+                            </td>
+                            <td>
+                                <p>Batteriekapazität, Wert zwischen 0 und 255</p>
+                            </td>
+                            <td>
+                                <p>(Batterie in %) = 100.0 * BAT / 254.0</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Spezialwerte für die Batterie sind:</p>
+                <ul>
+                    <li value="1">BAT = 254: Batterie auf maximaler Spannung</li>
+                    <li value="2">BAT = 1: keine weitere Batteriekapazität verfügbar</li>
+                    <li value="3">BAT = 255: Gerät konnte die Spannung nicht erfassen</li>
+                    <li value="4">BAT = 0: Keine Batterie eingelegt (externes Netzteil)</li>
+                </ul>
+            </div>
+            <div class="noPageBreak">
+                <h5>Messdaten und Konvertierung</h5>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Feld</p>
+                        </th>
+                        <th>
+                            <p>Datenkanal</p>
+                        </th>
+                        <th>
+                            <p>Beschreibung</p>
+                        </th>
+                        <th>
+                            <p>Dekodierung</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>PRESHx, PRESLx</p>
+                        </td>
+                        <td>
+                            <p>0x01</p>
+                        </td>
+                        <td>
+                            <p>Atmosphärischer Druck (in hPa)</p>
+                        </td>
+                        <td>
+                            <p>((PRESHx&lt;&lt;8) | PRESLx) / 10.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>TEMPHx, TEMPLx</p>
+                        </td>
+                        <td>
+                            <p>0x02</p>
+                        </td>
+                        <td>
+                            <p>Temperatur (in °C)</p>
+                        </td>
+                        <td>
+                            <p>((TEMPHx&lt;&lt;8) | TEMPLx) / 10.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>HUx</p>
+                        </td>
+                        <td>
+                            <p>0x03</p>
+                        </td>
+                        <td>
+                            <p>Feuchtigkeit (in %rH)</p>
+                        </td>
+                        <td>
+                            <p>HUx / 2.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>CO₂Hx, CO₂Lx</p>
+                        </td>
+                        <td>
+                            <p>0x06</p>
+                        </td>
+                        <td>
+                            <p>CO₂-Konzentration (in ppm)</p>
+                        </td>
+                        <td>
+                            <p>((CO2Hx&lt;&lt;8) | CO2Lx)</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <h5>Offset</h5>
+                <p>Das System geht davon aus, dass der Zeitpunkt der letzten Messung in der Nutzlast identisch ist mit dem Zeitpunkt der Übertragung des Pakets.</p>
+                <p>Wenn die Anzahl der Messungen die zulässige Nutzlastgrösse überschreitet, wird ein vollständiges Datenpaket bereits vor dem nächsten geplanten Paket gesendet, und die übrigen Messungen werden anschliessend mit der nächsten geplanten Nutzlast gesendet.</p>
+                <p>Um die Tatsache zu kompensieren, dass die Zeit der letzten Messung in der ersten Nutzlast von der tatsächlichen Übertragungszeit abweicht, wird ein Offset &gt; 0 gesetzt, der die Anzahl der Intervalle der Länge <strong>CyclicTransmissionCounter</strong> × <strong>SensorSampleTime</strong> zwischen diesen beiden Zeitstempeln angibt.</p>
+            </div>
+            <h3>Wisely AllSense</h3>
+            <h4>Datenport</h4>
+            <p>Port: 5</p>
+            <h4>Länge der Nutzlast</h4>
+            <p>Die Länge der Nutzlast ist variabel und wird bestimmt durch:</p>
+            <ul>
+                <li value="1">individuelle Abtasteinstellungen</li>
+                <li value="2">zyklisches Sendeintervall</li>
+                <li value="3">Spreizfaktor</li>
+            </ul>
+            <div class="noPageBreak">
+                <h4>Format der Nutzlast</h4>
+                <p>Die Nutzlast besteht aus</p>
+                <ul>
+                    <li value="1">einem führenden Byte, das die Batteriekapazität angibt</li>
+                    <li value="2">einer Folge von Messdaten</li>
+                </ul>
+                <table>
+                    <colgroup><col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    </colgroup><tbody>
+                        <tr>
+                            <th><small>BAT</small>
+                            </th>
+                            <th><small>TEMPH0</small>
+                            </th>
+                            <th><small>TEMPL0</small>
+                            </th>
+                            <th><small>HUM0</small>
+                            </th>
+                            <th><small>VOCH0</small>
+                            </th>
+                            <th><small>VOCL0</small>
+                            </th>
+                            <th><small>CO₂H0</small>
+                            </th>
+                            <th><small>CO₂L0</small>
+                            </th>
+                            <th><small>TEMPHx</small>
+                            </th>
+                            <th><small>TEMPLx</small>
+                            </th>
+                            <th><small>HUMx</small>
+                            </th>
+                            <th><small>VOCHx</small>
+                            </th>
+                            <th><small>VOCLx</small>
+                            </th>
+                            <th><small>CO₂Hx</small>
+                            </th>
+                            <th><small>CO₂Lx</small>
+                            </th>
+                            <th><small>…</small>
+                            </th>
+                            <th><small>OFFSET</small>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="bordered-cell">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #ffe4e1;">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="noPageBreak">
+                <h5>Batterie</h5>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Feld</p>
+                        </th>
+                        <th>
+                            <p>Beschreibung</p>
+                        </th>
+                        <th>
+                            <p>Dekodierung</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>BAT</p>
+                        </td>
+                        <td>
+                            <p>Batteriekapazität, Wert zwischen 0 und 255</p>
+                        </td>
+                        <td>
+                            <p>(Batterie in %) = 100.0 * BAT / 254.0</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <p>Spezialwerte für die Batterie sind:</p>
+                <ul>
+                    <li value="1">BAT = 254: Batterie auf maximaler Spannung</li>
+                    <li value="2">BAT = 1: keine weitere Batteriekapazität verfügbar</li>
+                    <li value="3">BAT = 255: Gerät konnte die Spannung nicht erfassen</li>
+                    <li value="4">BAT = 0: Keine Batterie eingelegt (externes Netzteil)</li>
+                </ul>
+            </div>
+            <div class="noPageBreak">
+                <h5>Messdaten und Konvertierung</h5>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Feld</p>
+                        </th>
+                        <th>
+                            <p>Datenkanal</p>
+                        </th>
+                        <th>
+                            <p>Beschreibung</p>
+                        </th>
+                        <th>
+                            <p>Dekodierung</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>TEMPHx, TEMPLx</p>
+                        </td>
+                        <td>
+                            <p>0x02</p>
+                        </td>
+                        <td>
+                            <p>Temperatur (in °C)</p>
+                        </td>
+                        <td>
+                            <p>((TEMPHx&lt;&lt;8 ) | TEMPLx) / 10.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>HUx</p>
+                        </td>
+                        <td>
+                            <p>0x03</p>
+                        </td>
+                        <td>
+                            <p>Feuchtigkeit (in %rH)</p>
+                        </td>
+                        <td>
+                            <p>HUx / 2.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>VOCHx, VOCLx</p>
+                        </td>
+                        <td>
+                            <p>0x04</p>
+                        </td>
+                        <td>
+                            <p>Flüchtige organische Verbindungen (in IAQ)</p>
+                        </td>
+                        <td>
+                            <p>((VOCHx&lt;&lt;8 ) | VOCLx)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>CO₂Hx, CO₂Lx</p>
+                        </td>
+                        <td>
+                            <p>0x06</p>
+                        </td>
+                        <td>
+                            <p>CO₂-Konzentration (in ppm)</p>
+                        </td>
+                        <td>
+                            <p>((CO2Hx&lt;&lt;8) | CO₂Lx)</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <h5>Offset</h5>
+                <p>Das System geht davon aus, dass der Zeitpunkt der letzten Messung in der Nutzlast identisch ist mit dem Zeitpunkt der Übertragung des Pakets.</p>
+                <p>Wenn die Anzahl der Messungen die zulässige Nutzlastgrösse überschreitet, wird ein vollständiges Datenpaket bereits vor dem nächsten geplanten Paket gesendet, und die übrigen Messungen werden anschliessend mit der nächsten geplanten Nutzlast gesendet.</p>
+                <p>Um die Tatsache zu kompensieren, dass die Zeit der letzten Messung in der ersten Nutzlast von der tatsächlichen Übertragungszeit abweicht, wird ein Offset &gt; 0 gesetzt, der die Anzahl der Intervalle der Länge <strong>CyclicTransmissionCounter</strong> × <strong>SensorSampleTime</strong> zwischen diesen beiden Zeitstempeln angibt.</p>
+            </div>
+            <h2 xmlns:madcap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">Nutzlast des erweiterten Uplinks (nur Wisely AllSense)</h2>
+            <p class="p_hint">Im Abschnitt <strong>Sensorauswahl (nur Wisely AllSense)</strong> erfahren Sie, wie die erweiterte Uplink-Nutzlast aktiviert werden kann.</p>
+            <h4>Datenport</h4>
+            <p>Port: 6</p>
+            <h4>Länge der Nutzlast</h4>
+            <p>Die Länge der Nutzlast ist variabel und wird bestimmt durch:</p>
+            <ul>
+                <li value="1">individuelle Abtasteinstellungen</li>
+                <li value="2">zyklisches Sendeintervall</li>
+                <li value="3">Spreizfaktor</li>
+            </ul>
+            <div class="noPageBreak">
+                <h4>Format der Nutzlast</h4>
+                <p>Die Nutzlast besteht aus</p>
+                <ul>
+                    <li value="1">einem führenden Byte, das die Batteriekapazität angibt</li>
+                    <li value="2">einer Folge von Messdaten</li>
+                </ul>
+                <table>
+                    <colgroup><col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    </colgroup><tbody>
+                        <tr>
+                            <th><small>BAT</small>
+                            </th>
+                            <th><small>PRESH0</small>
+                            </th>
+                            <th><small>PRESL0</small>
+                            </th>
+                            <th><small>TEMPH0</small>
+                            </th>
+                            <th><small>TEMPL0</small>
+                            </th>
+                            <th><small>HUM0</small>
+                            </th>
+                            <th><small>VOCH0</small>
+                            </th>
+                            <th><small>VOCL0</small>
+                            </th>
+                            <th><small>LDH0</small>
+                            </th>
+                            <th><small>LDL0</small>
+                            </th>
+                            <th><small>CO₂H</small>
+                            </th>
+                            <th><small>CO₂L0</small>
+                            </th>
+                            <th><small>PIRH0</small>
+                            </th>
+                            <th><small>PIRL0</small>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="bordered-cell">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <table>
+                    <colgroup><col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    <col style="width: 80px;">
+                    </colgroup><tbody>
+                        <tr>
+                            <th><small>PRESHx</small>
+                            </th>
+                            <th><small>PRESLx</small>
+                            </th>
+                            <th><small>TEMPHx</small>
+                            </th>
+                            <th><small>TEMPLx</small>
+                            </th>
+                            <th><small>HUMx</small>
+                            </th>
+                            <th><small>VOCHx</small>
+                            </th>
+                            <th><small>VOCLx</small>
+                            </th>
+                            <th><small>LDHx</small>
+                            </th>
+                            <th><small>LDLx</small>
+                            </th>
+                            <th><small>CO₂Hx</small>
+                            </th>
+                            <th><small>CO₂Lx</small>
+                            </th>
+                            <th><small>PIRHx</small>
+                            </th>
+                            <th><small>PIRLx</small>
+                            </th>
+                            <th><small>…</small>
+                            </th>
+                            <th><small>OFFSET</small>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #dcffff;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #fff8dc;">&nbsp;</td>
+                            <td class="bordered-cell" style="background-color: #ffe4e1;">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="noPageBreak">
+                <h5>Batterie</h5>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Feld</p>
+                        </th>
+                        <th>
+                            <p>Beschreibung</p>
+                        </th>
+                        <th>
+                            <p>Dekodierung</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>BAT</p>
+                        </td>
+                        <td>
+                            <p>Batteriekapazität, Wert zwischen 0 und 255</p>
+                        </td>
+                        <td>
+                            <p>(Batterie in %) = 100.0 * BAT / 254.0</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <p>Spezialwerte für die Batterie sind:</p>
+                <ul>
+                    <li value="1">BAT = 254: Batterie auf maximaler Spannung</li>
+                    <li value="2">BAT = 1: keine weitere Batteriekapazität verfügbar</li>
+                    <li value="3">BAT = 255: Gerät konnte die Spannung nicht erfassen</li>
+                    <li value="4">BAT = 0: Keine Batterie eingelegt (externes Netzteil)</li>
+                </ul>
+            </div>
+            <div class="noPageBreak">
+                <h5>Messdaten und Konvertierung</h5>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Feld</p>
+                        </th>
+                        <th>
+                            <p>Datenkanal</p>
+                        </th>
+                        <th>
+                            <p>Beschreibung</p>
+                        </th>
+                        <th>
+                            <p>Dekodierung</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>PRESHx, PRESLx</p>
+                        </td>
+                        <td>
+                            <p>0x01</p>
+                        </td>
+                        <td>
+                            <p>Atmosphärischer Druck (in hPa)</p>
+                        </td>
+                        <td>
+                            <p>((PRESHx&lt;&lt;8 ) | PRESLx) / 10.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>TEMPHx, TEMPLx</p>
+                        </td>
+                        <td>
+                            <p>0x02</p>
+                        </td>
+                        <td>
+                            <p>Temperatur (in °C)</p>
+                        </td>
+                        <td>
+                            <p>((TEMPHxx&lt;&lt;8 ) | TEMPLx) / 10.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>HUx</p>
+                        </td>
+                        <td>
+                            <p>0x03</p>
+                        </td>
+                        <td>
+                            <p>Feuchtigkeit (in %rH)</p>
+                        </td>
+                        <td>
+                            <p>HUx / 2.0</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>VOCHx, VOCLx</p>
+                        </td>
+                        <td>
+                            <p>0x04</p>
+                        </td>
+                        <td>
+                            <p>Flüchtige organische Verbindunge (in IAQ)</p>
+                        </td>
+                        <td>
+                            <p>((VOCHx&lt;&lt;8) | VOCLx)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>LDHx, LDLx</p>
+                        </td>
+                        <td>
+                            <p>0x05</p>
+                        </td>
+                        <td>
+                            <p>Beleuchtungsdichte (in lux)</p>
+                        </td>
+                        <td>
+                            <p>((LDHx&lt;&lt;8) | LDLx)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>CO₂Hx, CO₂Lx</p>
+                        </td>
+                        <td>
+                            <p>0x06</p>
+                        </td>
+                        <td>
+                            <p>CO₂-Konzentration (in ppm)</p>
+                        </td>
+                        <td>
+                            <p>((CO2Hx&lt;&lt;8) | CO₂Lx)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>PIRHx, PIRLx</p>
+                        </td>
+                        <td>
+                            <p>0x07</p>
+                        </td>
+                        <td>
+                            <p>Raumnutzung (in Minuten)</p>
+                        </td>
+                        <td>
+                            <p>((PIRHx&lt;&lt;8) | PIRLx)</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <h5>Offset</h5>
+                <p>Das System geht davon aus, dass der Zeitpunkt der letzten Messung in der Nutzlast identisch ist mit dem Zeitpunkt der Übertragung des Pakets.</p>
+                <p>Wenn die Anzahl der Messungen die zulässige Nutzlastgrösse überschreitet, wird ein vollständiges Datenpaket bereits vor dem nächsten geplanten Paket gesendet, und die übrigen Messungen werden anschliessend mit der nächsten geplanten Nutzlast gesendet.</p>
+                <p>Um die Tatsache zu kompensieren, dass die Zeit der letzten Messung in der ersten Nutzlast von der tatsächlichen Übertragungszeit abweicht, wird ein Offset &gt; 0 gesetzt, der die Anzahl der Intervalle der Länge <strong>CyclicTransmissionCounter</strong> × <strong>SensorSampleTime</strong> zwischen diesen beiden Zeitstempeln angibt.</p>
+            </div>
+            <h2 xmlns:madcap="http://www.madcapsoftware.com/Schemas/MadCap.xsd">Nutzlast des Downlinks</h2>
+            <h3>Sensor-Abtastzeit</h3>
+            <p>Die Abtastperiode ist die Zeitdifferenz zwischen zwei  Messungen. Die Abtastperiode ist zur Konfigurationszeit und zur Laufzeit einstellbar und wird in Minuten angegeben. Der Parameter ist für alle Messkanäle relevant.</p>
+            <h4>Datenport</h4>
+            <p>Port: 10</p>
+            <h4>Downlink-Meldung</h4>
+            <table>
+                <colgroup><col>
+                <col>
+                <col>
+                </colgroup><tbody><tr>
+                    <th>
+                        <p>Bezeichner</p>
+                    </th>
+                    <th>
+                        <p>Funktion</p>
+                    </th>
+                    <th>
+                        <p>Daten</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="bordered-cell">
+                        <p>0xFF</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0x02</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0x01 - 0xFF</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <table>
+                <colgroup><col>
+                <col>
+                <col>
+                </colgroup><tbody><tr>
+                    <th>
+                        <p>Feld</p>
+                    </th>
+                    <th>
+                        <p>Beschreibung</p>
+                    </th>
+                    <th>
+                        <p>Wert</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Bezeichner</p>
+                    </td>
+                    <td>
+                        <p>Bezeichner</p>
+                    </td>
+                    <td>
+                        <p>0xFF</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Funktion</p>
+                    </td>
+                    <td>
+                        <p>Funktionscode</p>
+                    </td>
+                    <td>
+                        <p>0x02</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Daten</p>
+                    </td>
+                    <td>
+                        <p>Abtastzeitraum des Sensors in Minuten</p>
+                    </td>
+                    <td>
+                        <p>0x01 - 0xFF</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <h4>Standardeinstellung</h4>
+            <table>
+                <colgroup><col>
+                <col>
+                <col>
+                </colgroup><tbody><tr>
+                    <th>
+                        <p>Bezeichner</p>
+                    </th>
+                    <th>
+                        <p>Funktion</p>
+                    </th>
+                    <th>
+                        <p>Daten</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="bordered-cell">
+                        <p>0xFF</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0x02</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0x01</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <h3>Zähler für zyklische Übertragung</h3>
+            <p>Das Gerät überträgt seine Daten nach <strong>Zähler für zyklische Übertragung</strong> × <strong>Sensor-Abtastzeit</strong> ab der letzten Übertragung.</p>
+            <h4>Datenport</h4>
+            <p>Port: 10</p>
+            <h4>Downlink-Meldung</h4>
+            <table>
+                <colgroup><col>
+                <col>
+                <col>
+                </colgroup><tbody><tr>
+                    <th>
+                        <p>Bezeichner</p>
+                    </th>
+                    <th>
+                        <p>Funktion</p>
+                    </th>
+                    <th>
+                        <p>Daten</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="bordered-cell">
+                        <p>0xFF</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0xF0</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0x01 - 0xFF</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <table>
+                <colgroup><col>
+                <col>
+                <col>
+                </colgroup><tbody><tr>
+                    <th>
+                        <p>Feld</p>
+                    </th>
+                    <th>
+                        <p>Beschreibung</p>
+                    </th>
+                    <th>
+                        <p>Wert</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Bezeichner</p>
+                    </td>
+                    <td>
+                        <p>Bezeichner</p>
+                    </td>
+                    <td>
+                        <p>0xFF</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Funktion</p>
+                    </td>
+                    <td>
+                        <p>Funktionscode</p>
+                    </td>
+                    <td>
+                        <p>0xF0</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Daten</p>
+                    </td>
+                    <td>
+                        <p>Zähler für zyklische Übertragung</p>
+                    </td>
+                    <td>
+                        <p>0x01 - 0xFF</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <h4>Standardeinstellung</h4>
+            <table>
+                <colgroup><col>
+                <col>
+                <col>
+                </colgroup><tbody><tr>
+                    <th>
+                        <p>Bezeichner</p>
+                    </th>
+                    <th>
+                        <p>Funktion</p>
+                    </th>
+                    <th>
+                        <p>Daten</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="bordered-cell">
+                        <p>0xFF</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0xF0</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0x3C</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <h3>LED-Anzeige an der Vorderseite</h3>
+            <p>Diese Funktion steht nur bei Wisely CarbonSense und Wisely AllSense zur Verfügung.</p>
+            <p>Wird ein einstellbarer CO₂-Grenzwert überschritten, blinkt die LED auf der Vorderseite des Gerätes alle 60&nbsp;Sekunden (250&nbsp;ms an, 500&nbsp;ms aus, 4&nbsp;Mal wiederholt).</p>
+            <h4>Datenport</h4>
+            <p>Port: 10</p>
+            <h4>Downlink-Meldung</h4>
+            <table>
+                <colgroup><col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                </colgroup><tbody><tr>
+                    <th>
+                        <p>Bezeichner</p>
+                    </th>
+                    <th>
+                        <p>Funktion</p>
+                    </th>
+                    <th>
+                        <p>Grenzwerttyp</p>
+                    </th>
+                    <th>
+                        <p>Oberer GW</p>
+                    </th>
+                    <th>
+                        <p>Unterer GW</p>
+                    </th>
+                    <th>
+                        <p>R</p>
+                    </th>
+                    <th>
+                        <p>G</p>
+                    </th>
+                    <th>
+                        <p>B</p>
+                    </th>
+                    <th>
+                        <p>Aktiv</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="bordered-cell">
+                        <p>0x06</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0x06</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0x08 - 0x0C</p>
+                    </td>
+                    <td class="bordered-cell">&nbsp;</td>
+                    <td class="bordered-cell">&nbsp;</td>
+                    <td class="bordered-cell">&nbsp;</td>
+                    <td class="bordered-cell">&nbsp;</td>
+                    <td class="bordered-cell">&nbsp;</td>
+                    <td class="bordered-cell">&nbsp;</td>
+                </tr>
+            </tbody></table>
+            <div class="noPageBreak">
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Feld</p>
+                        </th>
+                        <th>
+                            <p>Beschreibung</p>
+                        </th>
+                        <th>
+                            <p>Wert</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Bezeichner</p>
+                        </td>
+                        <td>
+                            <p>Bezeichner</p>
+                        </td>
+                        <td>
+                            <p>0x06</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Funktion</p>
+                        </td>
+                        <td>
+                            <p>Funktionscode</p>
+                        </td>
+                        <td>
+                            <p>0x06</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Grenzwerttyp</p>
+                        </td>
+                        <td>
+                            <p>Art des Grenzwertes, bei dem die Anweisung aktiv wird</p>
+                        </td>
+                        <td>
+                            <p>0x08: kleiner</p>
+                            <p>0x09: kleiner oder gleich</p>
+                            <p>0x0A: gleich</p>
+                            <p>0x0B: grösser oder gleich</p>
+                            <p>0x0C: grösser</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Oberer GW</p>
+                        </td>
+                        <td rowspan="2">
+                            <p>Oberer bzw. unterer CO₂-Grenzwert, bei der die LED blinkt</p>
+                        </td>
+                        <td rowspan="2">
+                            <p>0 - 10000</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Unterer GW</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>R</p>
+                        </td>
+                        <td>
+                            <p>Rote LED aktivieren</p>
+                        </td>
+                        <td>
+                            <p>0x00 (aus) oder 0xFF (ein)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>G</p>
+                        </td>
+                        <td>
+                            <p>Grüne LED aktivieren</p>
+                        </td>
+                        <td>
+                            <p>0x00 (aus) oder 0xFF (ein)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>B</p>
+                        </td>
+                        <td>
+                            <p>Blaue LED aktivieren</p>
+                        </td>
+                        <td>
+                            <p>0x00 (aus) oder 0xFF (ein)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Aktiv</p>
+                        </td>
+                        <td>
+                            <p>Konfiguration aktivieren oder deaktivieren</p>
+                        </td>
+                        <td>
+                            <p>0 (inaktiv) oder 1&nbsp;(aktiv)</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <p class="p_hint">
+                    </p><ol>
+                        <li value="1">Es können mehrere Bedingungen konfiguriert werden, aber das Gerät kann jeweils nur eine Bedingung pro Farbe speichern.</li>
+                        <li value="2">Wenn zwei Bedingungen zum selben Zeitpunkt eintreffen, hat diejenige mit der höheren Priorität Vorrang.</li>
+                    </ol>
+                <p></p>
+            </div>
+            <h5>Farb- und Bedingungspriorität</h5>
+            <p>Wenn zwei Bedingungen gleichzeitig aktiv sind, wird die Bedingung mit der höchsten Priorität (niedrigste Zahl) ausgelöst.</p>
+            <table>
+                <colgroup><col>
+                <col>
+                </colgroup><tbody><tr>
+                    <th>
+                        <p>Priorität</p>
+                    </th>
+                    <th>
+                        <p>Farbe</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p>1</p>
+                    </td>
+                    <td>
+                        <p>rot</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>2</p>
+                    </td>
+                    <td>
+                        <p>magenta</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>3</p>
+                    </td>
+                    <td>
+                        <p>gelb</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>4</p>
+                    </td>
+                    <td>
+                        <p>grün</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>5</p>
+                    </td>
+                    <td>
+                        <p>cyan</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>6</p>
+                    </td>
+                    <td>
+                        <p>blau</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>7</p>
+                    </td>
+                    <td>
+                        <p>weiss</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <h4>Standardeinstellungen</h4>
+            <div class="noPageBreak">
+                <p>Die LED blinkt</p>
+                <ul>
+                    <li value="1">blau über 800 ppm</li>
+                    <li value="2">rot über 1400 ppm</li>
+                </ul>
+                <p>Nutzlast, damit die LED über 800 ppm und unter 1.400 ppm CO₂ blau blinkt:</p>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Bezeichner</p>
+                        </th>
+                        <th>
+                            <p>Funktion</p>
+                        </th>
+                        <th>
+                            <p>Grenzwerttyp</p>
+                        </th>
+                        <th>
+                            <p>Oberer GW</p>
+                        </th>
+                        <th>
+                            <p>Unterer GW</p>
+                        </th>
+                        <th>
+                            <p>R</p>
+                        </th>
+                        <th>
+                            <p>G</p>
+                        </th>
+                        <th>
+                            <p>B</p>
+                        </th>
+                        <th>
+                            <p>Aktiv</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="bordered-cell">
+                            <p>0x06</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x06</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x0B</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x03</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x20</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x00</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x00</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0xFF</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x01</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <p>Nutzlast, damit die LED über 1400 ppm CO₂ rot blinkt:</p>
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Bezeichner</p>
+                        </th>
+                        <th>
+                            <p>Funktion</p>
+                        </th>
+                        <th>
+                            <p>Grenzwerttyp</p>
+                        </th>
+                        <th>
+                            <p>Oberer GW</p>
+                        </th>
+                        <th>
+                            <p>Unterer GW</p>
+                        </th>
+                        <th>
+                            <p>R</p>
+                        </th>
+                        <th>
+                            <p>G</p>
+                        </th>
+                        <th>
+                            <p>B</p>
+                        </th>
+                        <th>
+                            <p>Aktiv</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="bordered-cell">
+                            <p>0x06</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x06</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x0B</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x05</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x78</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0xFF</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x00</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0xFF</p>
+                        </td>
+                        <td class="bordered-cell">
+                            <p>0x01</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+            </div>
+            <h3>PIR-Empfindlichkeitsschwelle (nur Wisely AllSense)</h3>
+            <p>Mit diesem Befehl wird die PIR-Empfindlichkeit eingestellt. Kleinere Werte bedeuten eine höhere Empfindlichkeit. Die Empfindlichkeit wird zur Berechnung der Raumnutzung verwendet. Zwei Ereignisse innerhalb eines Zeitfensters von 10 Minuten werden als Nutzung betrachtet.</p>
+            <h4>Datenport</h4>
+            <p>Port: 10</p>
+            <h4>Downlink-Meldung</h4>
+            <table>
+                <tbody><tr>
+                    <th>
+                        <p>Bezeichner</p>
+                    </th>
+                    <th>
+                        <p>Funktion</p>
+                    </th>
+                    <th>
+                        <p>PIR-Schwelle</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="bordered-cell">
+                        <p>0x07</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0xA1</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0x0A</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <table>
+                <tbody><tr>
+                    <th>
+                        <p>Feld</p>
+                    </th>
+                    <th>
+                        <p>Beschreibung</p>
+                    </th>
+                    <th>
+                        <p>Wert</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Bezeichner</p>
+                    </td>
+                    <td>
+                        <p> Bezeichner</p>
+                    </td>
+                    <td>
+                        <p>0x07</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Funktion</p>
+                    </td>
+                    <td>
+                        <p>Funktionscode</p>
+                    </td>
+                    <td>
+                        <p>0xA1</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>PIR-Schwelle</p>
+                    </td>
+                    <td>
+                        <p>PIR-Schwellenwert: niedrigere Werte zeigen eine höhere Empfindlichkeit an</p>
+                    </td>
+                    <td>
+                        <p>1 - 40</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <h3>Sensorauswahl (nur Wisely AllSense)</h3>
+            <p>Über dieser Befehl können Sie aus zwei unterschiedlichen Arten von Sensormessungen auswählen. Wird nur von Wisely AllSense unterstützt.</p>
+            <h4>Datenport</h4>
+            <p>Port: 10</p>
+            <h4>Downlink-Meldung</h4>
+            <table>
+                <colgroup><col>
+                <col>
+                <col>
+                </colgroup><tbody><tr>
+                    <th>
+                        <p>Bezeichner</p>
+                    </th>
+                    <th>
+                        <p>Funktion</p>
+                    </th>
+                    <th>
+                        <p>Typ der Nutzlast</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="bordered-cell">
+                        <p>0xFF</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0xFE</p>
+                    </td>
+                    <td class="bordered-cell">
+                        <p>0x0A</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <div class="noPageBreak">
+                <table>
+                    <colgroup><col>
+                    <col>
+                    <col>
+                    </colgroup><tbody><tr>
+                        <th>
+                            <p>Feld</p>
+                        </th>
+                        <th>
+                            <p>Beschreibung</p>
+                        </th>
+                        <th>
+                            <p>Wert</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Bezeichner</p>
+                        </td>
+                        <td>
+                            <p>Bezeichner</p>
+                        </td>
+                        <td>
+                            <p>0xFF</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Funktion</p>
+                        </td>
+                        <td>
+                            <p>Funktionscode</p>
+                        </td>
+                        <td>
+                            <p>0xFE</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Typ der Nutzlast</p>
+                        </td>
+                        <td>
+                            <p>Wählt das Format der Nutzlast aus.</p>
+                        </td>
+                        <td>
+                            <p>0x01:&nbsp;Einfache Nutzlast</p>
+                            <p>0x02:&nbsp;Erweiterte Nutzlast</p>
+                        </td>
+                    </tr>
+                </tbody></table>
+                <p class="p_warning">Durch die Aktivierung der erweiterten Nutzlast wird die zu übertragende Nutzlast nahezu verdoppelt. Infolgedessen sinkt die Lebensdauer der Batterie und die Anzahl der Pakete steigt.</p>
+            </div>
+            <table>
+                <colgroup><col>
+                <col>
+                <col>
+                </colgroup><tbody><tr>
+                    <th>
+                        <p>&nbsp;</p>
+                    </th>
+                    <th>
+                        <p>Einfache Nutzlast</p>
+                    </th>
+                    <th>
+                        <p>Erweiterte Nutzlast</p>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Atmosphärischer Druck</p>
+                    </td>
+                    <td style="text-align: center;">&nbsp;</td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Temperatur</p>
+                    </td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Feuchtigkeit</p>
+                    </td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>VOC</p>
+                    </td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Lichtstärke</p>
+                    </td>
+                    <td style="text-align: center;">&nbsp;</td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>CO₂</p>
+                    </td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>PIR</p>
+                    </td>
+                    <td style="text-align: center;">&nbsp;</td>
+                    <td style="text-align: center;">
+                        <p><span style="font-family:Wingdings;">ü</span>
+                        </p>
+                    </td>
+                </tr>
+            </tbody></table>
+        </div>
+    
+</body></html>
