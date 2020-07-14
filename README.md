@@ -7,9 +7,9 @@
 - In most cases the manufacturer provides this information. Nevertheless we share in this repository the payload decoder code for the devices we're working with.
 
 ## Device Overview
-| File | Manufacturer | Product | Price [CHF] | Description | Image |
+| File | Manufacturer | Product | Price [CHF] | Description |
 | --- | --- | --- | --- | --- |
-|[avelon-wisely-carbonsense](https://github.com/hslu-ige-laes/lora-devices-ttn/blob/master/avelon-wisely-carbonsense.md)| Avelon | [Wisely Carbon Sense](https://avelon.com/en/wisely/) | 263.- (2020-07) | Indoor sensor for Temperature, Humidity and CO2 | ![Product Image](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/img/avelon-wisely-carbonsense_01.png | width=50) |
+|[avelon-wisely-carbonsense](https://github.com/hslu-ige-laes/lora-devices-ttn/blob/master/avelon-wisely-carbonsense.md)| Avelon | [Wisely Carbon Sense](https://avelon.com/en/wisely/) | 263.- (2020-07) | Indoor sensor for Temperature, Humidity and CO2 |
 
 <!-- | Manufacturer | Product Name | Product-Link | Price [CHF] | Description |-->
 
