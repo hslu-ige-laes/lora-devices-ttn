@@ -5,11 +5,19 @@ parent: Sensors
 ---
 
 # Avelon Wisely Carbonsense
-<img src="images/Emoticons/cool.png" alt="hi" class="inline"/>
+{: .no_toc }
+
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_01.png" width="250" align="right" class="inline"/>
 
 - Manufacturer: <a href="https://avelon.com/" target="_blank">Avelon</a>
 - Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely Carbon Sense</a>
+
+---
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ---
 
