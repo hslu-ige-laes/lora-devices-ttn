@@ -6,6 +6,7 @@ nav_order: 2
 ---
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/dragino-lht65_01.png" width="250" align="right">
+
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
 - Product: <a href="https://www.dragino.com/products/lora-lorawan-end-node/item/151-lht65.html" target="_blank">LHT65</a>
 

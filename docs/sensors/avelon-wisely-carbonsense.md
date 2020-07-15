@@ -1,4 +1,12 @@
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/avelon-wisely-carbonsense_01.png" width="250" align="right"><br>
+---
+layout: default
+title: Avelon Wisely Carbonsense
+parent: Sensors
+nav_order: 2
+---
+
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/avelon-wisely-carbonsense_01.png" width="250" align="right">
+
 - Manufacturer: <a href="https://avelon.com/" target="_blank">Avelon</a>
 - Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely Carbon Sense</a>
 
