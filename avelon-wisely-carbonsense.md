@@ -93,7 +93,8 @@
 > We need to tell the "The Things Network" where to find e.g. the temperature in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
-2. Select the tab `Payload Formats > decoder` and copy/paste the following code:
+2. Select the tab `Payload Formats > decoder` and copy/paste the following code:<br>
+
 ```javascript
 function Decoder(bytes, port) {
 
