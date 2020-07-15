@@ -1,7 +1,2 @@
 # Site settings
-title: lora-devices-ttn
-description: LoRaWAN device integration into ttn (the things network)
-baseurl: "/lora-devices-ttn" # the subpath of your site, e.g. /blog
-url: "https://hslu-ige-laes.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-
 remote_theme: pmarsceill/just-the-docs
