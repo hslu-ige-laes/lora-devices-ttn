@@ -1,5 +1,3 @@
-# LoRaWAN device integration into ttn
-
 > This wiki gives an overview of different LoRaWAN devices our institute is working with and the corresponding steps for an integration into [The Things Network](https://www.thethingsnetwork.org/).
 
 ## Device Overview
