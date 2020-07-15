@@ -10,7 +10,8 @@ parent: Sensors
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
 - Product: <a href="https://www.dragino.com/products/lora-lorawan-end-node/item/151-lht65.html" target="_blank">LHT65</a>
 
-> The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to connect an external sensor e.g. a temperature sensor.
+The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to connect an external sensor e.g. a temperature sensor.
+{: .fs-6 .fw-300 }
 
 ---
 
