@@ -15,8 +15,6 @@ parent: Sensors
 
 The Wisely Carbonsense is an indoor room sensor to measure temperature, humidity, CO<sub>2</sub> and air pressure.
 
----
-
 ## Table of contents
 {: .no_toc .text-delta }
 
