@@ -2,7 +2,6 @@
 layout: default
 title: Avelon Wisely Carbonsense
 parent: Sensors
-nav_order: 2
 ---
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_01.png" width="250" align="right">
