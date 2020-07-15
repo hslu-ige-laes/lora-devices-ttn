@@ -1,3 +1,3 @@
 # LoRaWAN device integration into ttn
 
-Please go to the [lora-devices-ttn Wiki](https://github.com/hslu-ige-laes/lora-devices-ttn/wiki)
+Please go to  [https://hslu-ige-laes.github.io/lora-devices-ttn/](https://hslu-ige-laes.github.io/lora-devices-ttn/)
