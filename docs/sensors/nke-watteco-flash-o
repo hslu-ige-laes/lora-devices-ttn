@@ -1,4 +1,13 @@
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/nke-watteco-flash-o_01.png" width="250" align="right"></img>
+---
+layout: default
+title: nke WATTECO - Flash O
+parent: Sensors
+---
+
+# nke WATTECO - Flash O
+
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_01.png" width="250" align="right" class="inline"/>
+
 - Manufacturer: <a href="http://www.nke-watteco.com/" target="_blank">nke WATTECO</a>
 - Product: <a href="http://www.nke-watteco.com/product/flasho/" target="_blank">Flash'O</a>
 
@@ -15,7 +24,7 @@
 
 ## Documents
   - [Payload description from support.nke-watteco.com (2020-07-15)](http://support.nke-watteco.com/flasho/#HumanMachineInterface)
-  - [Datasheet from nke-watteco.fr (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/nke-watteco-flash-o_02.pdf)
+  - [Datasheet from nke-watteco.fr (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_02.pdf)
 
 ## Ordering info
 - [Ordering Link](https://smartmakers.io/en/iot-sensors-devices-overview/)
@@ -23,7 +32,7 @@
 
 ## Tested with following meters
 - Landis & Gyr ZMD120AP (1'000 impulses per kWh)<br>
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/nke-watteco-flash-o_04.png" width="250"> -> Place the sensor over the LED (yellow colored)</img>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_04.png" width="250"> -> Place the sensor over the LED (yellow colored)</img>
 
 ## Device Configuration
 ### 1. Create an Account
@@ -36,6 +45,7 @@
 3. From the top right `menu`, select `your name > Settings`. Then change the `default Handler` if the one currently selected is not where you’ll be deploying most of your devices.
 
 ### 2. Add an Application
+
 > To keep the payload decoder as simple as possible it is recommended to create an own application only for the nke watteco sensors. You can add multiple sensors from nke-watteco of different types to the application.
 
 1. Log in and open the [Console > Application](https://console.thethingsnetwork.org/).
@@ -43,16 +53,18 @@
    - For `Application ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
    - For `Application Description`, enter anything you like.
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/nke-watteco-flash-o_03.png" width="700"></img><br>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_03.png" width="700"></img><br>
 
 3. Click `Add Application` to finish.
 
 > You will be redirected to the newly added Application page.
 
 ### 3. Handler device information
+
 > The supplier should give you a csv file where you can find the `DevEUI`, `AppEUI` and `AppKey`
 
 ### 4. Device Registration
+
 > Before a device can communicate via "The Things Network" we need to register it with an application.<br>
 > The nke WATTECO sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand mentioned keys.
 
@@ -70,11 +82,13 @@
    - if not, please wait several hours and check again. The first attempt might take a while.
 
 ### 5. Device Configuration
+
 > Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
 > We need to tell the "The Things Network" where to find e.g. the counter value in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
 2. Select the tab `Payload Formats > decoder` and copy/paste the following code from [nke-WATTECO](http://support.nke-watteco.com/wp-content/uploads/2020/02/decodeZCL_svn5139.js):
+
 ```javascript
 /*
  * A command line script to decode a ZCL payload at a given port
@@ -590,12 +604,17 @@ function Decoder(bytes, port) {
 }
 
 ```
+
 3. Copy/Paste the following test payload into the field `Payload` and press `Test`
+
 > Attention: all incoming and outgoing frames have to be sent on port 125
+
 ```
 110A000F04022300000DF5
 ```
+
 4. You should see the following result
+
 ```json
 {
   "data": {
@@ -615,6 +634,7 @@ function Decoder(bytes, port) {
   }
 }
 ```
+
 > <b>counter</b> -> Counter [impulses]<br>
 > Attention, the amount of energy or water flow per impulse is meter specific. Electricity meters have e.g. 1'000 impulses per kWh.
 
