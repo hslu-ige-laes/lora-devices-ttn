@@ -1,4 +1,5 @@
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/nke-watteco-flash-o_01.png" width="250" align="right"></img>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_01.png" width="250" align="right"/>
+
 - Manufacturer: <a href="http://www.nke-watteco.com/" target="_blank">nke WATTECO</a>
 - Product: <a href="http://www.nke-watteco.com/product/flasho/" target="_blank">Flash'O</a>
 
@@ -15,7 +16,7 @@
 
 ## Documents
   - [Payload description from support.nke-watteco.com (2020-07-15)](http://support.nke-watteco.com/flasho/#HumanMachineInterface)
-  - [Datasheet from nke-watteco.fr (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/nke-watteco-flash-o_02.pdf)
+  - [Datasheet from nke-watteco.fr (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_02.pdf)
 
 ## Ordering info
 - [Ordering Link](https://smartmakers.io/en/iot-sensors-devices-overview/)
@@ -23,7 +24,7 @@
 
 ## Tested with following meters
 - Landis & Gyr ZMD120AP (1'000 impulses per kWh)<br>
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/nke-watteco-flash-o_04.png" width="250"> -> Place the sensor over the LED (yellow colored)</img>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_04.png" width="250"> -> Place the sensor over the LED (yellow colored)</img>
 
 ## Device Configuration
 ### 1. Create an Account
@@ -43,7 +44,7 @@
    - For `Application ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
    - For `Application Description`, enter anything you like.
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/nke-watteco-flash-o_03.png" width="700"></img><br>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_03.png" width="700"></img><br>
 
 3. Click `Add Application` to finish.
 
