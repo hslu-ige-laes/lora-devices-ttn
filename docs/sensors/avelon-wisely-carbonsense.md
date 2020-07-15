@@ -2,19 +2,18 @@
 layout: default
 title: Avelon Wisely Carbonsense
 parent: Sensors
-nav_order: 2
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/avelon-wisely-carbonsense_01.png" width="250" align="right">
+# Avelon Wisely Carbonsense
+<img src="images/Emoticons/cool.png" alt="hi" class="inline"/>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_01.png" width="250" align="right" class="inline"/>
 
 - Manufacturer: <a href="https://avelon.com/" target="_blank">Avelon</a>
 - Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely Carbon Sense</a>
 
-> The Wisely Carbonsense is an indoor room sensor to measure temperature, humidity, CO<sub>2</sub> and air pressure.
-
 ---
 
-# Specifications
+## Specifications
 - Indoor device
 - Price ca. CHF 263.- (14.07.2020)
 - Sensors
@@ -29,13 +28,13 @@ nav_order: 2
 
 ---
 
-# Documents
-  - [Payload description from avelon.cloud help (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/avelon-wisely-carbonsense_02.pdf)
-  - [Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/avelon-wisely-carbonsense_03.pdf)
+## Documents
+  - [Payload description from avelon.cloud help (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_02.pdf)
+  - [Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_03.pdf)
   
 ---
 
-# Ordering info
+## Ordering info
 - The sensor comes in four different "flavours"
   - <b>~~Swisscom LPN~~</b> (means that the data goes to the AVELON server via Swisscom low power network, monthly charges apply)
   - <b>~~The Things Network~~</b> (means that the data goes to the AVELON-server via ttn, no monthly charges)
@@ -45,8 +44,8 @@ nav_order: 2
 
 ---
 
-# Device Configuration
-## 1. Create an Account
+## Device Configuration
+### 1. Create an Account
 > To register your device you’ll need a "The Things Network" account.<br>
 > If you don't have one already, please follow these steps:
 
@@ -55,7 +54,7 @@ nav_order: 2
 2. Select [Console](https://console.thethingsnetwork.org/) from the menue on top right
 3. From the top right `menu`, select `your name > Settings`. Then change the `default Handler` if the one currently selected is not where you’ll be deploying most of your devices.
 
-## 2. Add an Application
+### 2. Add an Application
 > To keep the payload decoder as simple as possible it is recommended to create an own application only for the avelon wisely carbonsense sensors. You can add multiple sensor of the same type to the application.
 
 1. Log in and open the [Console > Application](https://console.thethingsnetwork.org/).
@@ -63,13 +62,13 @@ nav_order: 2
    - For `Application ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
    - For `Application Description`, enter anything you like.
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/avelon-wisely-carbonsense_04.png" width="700"><br>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_04.png" width="700" class="inline"/><br>
 
 3. Click `Add Application` to finish.
 
 > You will be redirected to the newly added Application page.
 
-## 3. Handler Change
+### 3. Handler Change
 > The Wisely sensors are per default configured for the Avelon Cloud, even if ordered as "self-managed". Thats why we have to detach the device from the avelon cloud.
 
 1. Scan the `QR-Code` with e.g. a Mobile Phone
@@ -87,7 +86,7 @@ nav_order: 2
 12. Copy the `Device EUI`, `Application EUI` and `Application Key`, we will need them later on.
 13. Now we have to `reset the device manually` approximately 1-2 minutes after closing the previous dialog by pressing the small button on the back of the device. `5 seconds -> Off` , `2 seconds -> On`
 
-## 4. Device Registration
+### 4. Device Registration
 > Before a device can communicate via "The Things Network" we need to register it with an application.<br>
 > The Avelon Wisely sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand copied keys.
 
@@ -104,7 +103,7 @@ nav_order: 2
 6. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
    - if not, please wait several hours and check again. The change of the handler can take a long time...
 
-## 5. Device Configuration
+### 5. Device Configuration
 > Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
 > We need to tell the "The Things Network" where to find e.g. the temperature in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
@@ -212,7 +211,7 @@ FE25F3010B57029325F2010B56027325F3010A56027C25F3010A5702A825F2010A56028625F2010A
 > The Wisely sends a telegram once an hour with four 15 minutes measurements.<br>
 > To keep the amount of data small the payload decoder takes these four measurements and saves the mean value with the timestamp of the last measurement.
 
-## 6. Add Storage
+### 6. Add Storage
 > Normally incoming data in the network only gets forwarded to the end user applications and does not get saved.<br>
 > "The Things Network" offers a seven day storage which is accessible through an API. To activate it, follow these steps.
 

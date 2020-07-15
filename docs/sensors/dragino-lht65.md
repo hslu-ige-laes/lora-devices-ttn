@@ -2,18 +2,16 @@
 layout: default
 title: Dragino LHT65
 parent: Sensors
-nav_order: 2
 ---
-
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/dragino-lht65_01.png" width="250" align="right">
+# Dragino LHT65
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_01.png" width="250" align="right">
 
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
 - Product: <a href="https://www.dragino.com/products/lora-lorawan-end-node/item/151-lht65.html" target="_blank">LHT65</a>
 
-> The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to connect an external sensor e.g. a temperature sensor.
+The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to connect an external sensor e.g. a temperature sensor.
 
 ---
-
 # Specifications
 - indoor device (external sensor placement possible)
 - Price ca. CHF 50.- (15.07.2020)
@@ -29,11 +27,10 @@ nav_order: 2
 - Weight: 116 g
 
 ---
-
 # Documents
   - [Payload description v1.7 (2020-07-15)](https://www.dragino.com/downloads/downloads/LHT65/payload_decode/ttn_payload_decode_v1.7.txt)
-  - [Datasheet from dragino.com (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/dragino-lht65_02.pdf)
-  - [User manual from dragino.com (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/dragino-lht65_03.pdf)
+  - [Datasheet from dragino.com (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_02.pdf)
+  - [User manual from dragino.com (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_03.pdf)
 
 ---
 
@@ -45,7 +42,6 @@ nav_order: 2
 - [Ordering Link](https://www.bastelgarage.ch/lht65-lorawan-temperatur-und-humidity-sensor)
 
 ---
-
 # Device Configuration
 ## 1. Create an Account
 > To register your device you’ll need a "The Things Network" account.<br>
@@ -64,7 +60,7 @@ nav_order: 2
    - For `Application ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
    - For `Application Description`, enter anything you like.
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/dragino-lht65_05.png" width="700"><br>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_05.png" width="700"><br>
 
 3. Click `Add Application` to finish.
 
@@ -73,7 +69,7 @@ nav_order: 2
 ## 3. Handler device information
 Each device is shipped with a sticker with the default keys on it:
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/dragino-lht65_04.png" width="400"><br>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_04.png" width="400"><br>
 
 > For an OTAA (over the air activation) only the `DEV EUI`, `APP EUI` and `APP KEY` are required.
 
