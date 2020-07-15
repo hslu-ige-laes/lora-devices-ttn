@@ -13,7 +13,7 @@ This documentation gives an overview of different LoRaWAN devices our institute 
 
 | Link | Location| Sensor(s)| Image|
 | --- | --- | --- | --- |
-|[avelon-wisely-carbonsense](/docs/sensors/avelon-wisely-carbonsense)| indoor | Temperature, Humidity, CO<sub>2</sub>, Air pressure | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_01.png" width="50" align="center">|
+|[Avelon - Wisely Carbonsense]({{ site.baseurl }}{% link docs/sensors/avelon-wisely-carbonsense.md %}) | indoor | Temperature, Humidity, CO<sub>2</sub>, Air pressure | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_01.png" width="50" align="center">|
 |[dragino-lht65.md](/docs/sensors/dragino-lht65)| indoor with outdoor sensor | Temperature, Humidity (only internal)| <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_01.png" width="50" align="center">|
 |[nke-watteco-flash-o.md](/docs/sensors/nke-watteco-flash-o)| indoor | LED Flash impulse counter | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_01.png" width="50" align="center">|
 
