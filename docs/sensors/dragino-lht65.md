@@ -4,6 +4,7 @@ title: Dragino LHT65
 parent: Sensors
 ---
 
+# Dragino LHT65
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_01.png" width="250" align="right">
 
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
