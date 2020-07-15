@@ -6,7 +6,7 @@
 - Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely Carbon Sense</a>
 
 > The Wisely Carbonsense is an indoor room sensor to measure temperature, humidity, CO<sub>2</sub> and air pressure.
-
+---
 # Specifications
 - Indoor device
 - Price ca. CHF 263.- (14.07.2020)
@@ -19,11 +19,11 @@
   - Expected life time: 3 ... 5 years at roomtemperature
 - Size: 80 × 80 × 27 mm
 - Weight: 100 g
-
+---
 # Documents
   - [Payload description from avelon.cloud help (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/avelon-wisely-carbonsense_02.pdf)
   - [Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/avelon-wisely-carbonsense_03.pdf)
-
+---
 # Ordering info
 - The sensor comes in four different "flavours"
   - <b>~~Swisscom LPN~~</b> (means that the data goes to the AVELON server via Swisscom low power network, monthly charges apply)
@@ -31,7 +31,7 @@
   - <b>~~Building Automation~~</b> (integration in the Avelon automation system, license fees system)
   - <b>Self-Managed</b> (that's what you wanna have!!! Data goes over the ttn network to the ttn server where you pick it up, no monthly charges or fees)
 - [Ordering Link](https://avelon.com/en/buy-wisesly/)
-
+---
 # Device Configuration
 ## 1. Create an Account
 > To register your device you’ll need a "The Things Network" account.<br>
