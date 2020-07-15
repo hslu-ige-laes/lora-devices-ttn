@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Avelon Wisely Carbonsense
+has_toc: true
 parent: Sensors
 ---
 
