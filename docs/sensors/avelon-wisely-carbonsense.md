@@ -13,6 +13,11 @@ parent: Sensors
 
 ---
 
+1. TOC
+{:toc}
+
+---
+
 ## Specifications
 - Indoor device
 - Price ca. CHF 263.- (14.07.2020)
