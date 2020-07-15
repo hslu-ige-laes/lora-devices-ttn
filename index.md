@@ -11,7 +11,7 @@ permalink: /
 
 | Wiki-Page | Location| Sensor(s)| Image|
 | --- | --- | --- | --- |
-|[[avelon-wisely-carbonsense.md]]| indoor | Temperature, Humidity, CO<sub>2</sub>, Air pressure | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/avelon-wisely-carbonsense_01.png" width="50" align="center"></img>|
+|[avelon-wisely-carbonsense](avelon-wisely-carbonsense.md)| indoor | Temperature, Humidity, CO<sub>2</sub>, Air pressure | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/avelon-wisely-carbonsense_01.png" width="50" align="center"></img>|
 |[[dragino-lht65.md]]| indoor with outdoor sensor | Temperature, Humidity (only internal)| <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/dragino-lht65_01.png" width="50" align="center"></img>|
 |[[nke-watteco-flash-o.md]]| indoor | LED Flash impulse counter | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/wiki-files/nke-watteco-flash-o_01.png" width="50" align="center"></img>|
 
