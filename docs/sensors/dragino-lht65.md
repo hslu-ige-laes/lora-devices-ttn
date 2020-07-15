@@ -3,9 +3,7 @@ layout: default
 title: Dragino LHT65
 parent: Sensors
 ---
-
 # Dragino LHT65
-
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_01.png" width="250" align="right">
 
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
@@ -14,7 +12,6 @@ parent: Sensors
 The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to connect an external sensor e.g. a temperature sensor.
 
 ---
-
 # Specifications
 - indoor device (external sensor placement possible)
 - Price ca. CHF 50.- (15.07.2020)
@@ -30,7 +27,6 @@ The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to co
 - Weight: 116 g
 
 ---
-
 # Documents
   - [Payload description v1.7 (2020-07-15)](https://www.dragino.com/downloads/downloads/LHT65/payload_decode/ttn_payload_decode_v1.7.txt)
   - [Datasheet from dragino.com (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_02.pdf)
@@ -46,7 +42,6 @@ The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to co
 - [Ordering Link](https://www.bastelgarage.ch/lht65-lorawan-temperatur-und-humidity-sensor)
 
 ---
-
 # Device Configuration
 ## 1. Create an Account
 > To register your device you’ll need a "The Things Network" account.<br>
