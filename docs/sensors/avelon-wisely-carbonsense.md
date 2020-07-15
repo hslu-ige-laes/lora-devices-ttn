@@ -6,6 +6,7 @@ parent: Sensors
 ---
 
 # Avelon Wisely Carbonsense
+{: .no_toc }
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_01.png" width="250" align="right">
 
@@ -13,6 +14,14 @@ parent: Sensors
 - Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely Carbon Sense</a>
 
 The Wisely Carbonsense is an indoor room sensor to measure temperature, humidity, CO<sub>2</sub> and air pressure.
+
+---
+
+# Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ---
 
