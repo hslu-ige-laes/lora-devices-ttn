@@ -1,6 +1,1 @@
-remote_theme: pmarsceill/just-the-docs
-
-url: hslu-ige-laes.github.io
-baseurl: /lora-devices-ttn
-
 theme: jekyll-theme-dinky
