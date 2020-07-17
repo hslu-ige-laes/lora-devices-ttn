@@ -10,7 +10,7 @@ This documentation gives an overview of different LoRaWAN devices our institute 
 
 ---
 
-## Sensor Overview
+# Sensor Overview
 
 | Link | Location| Sensor(s)| Image|
 | --- | --- | --- | --- |
