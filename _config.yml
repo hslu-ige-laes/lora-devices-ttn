@@ -41,7 +41,7 @@ heading_anchors: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "Just the Docs on GitHub":
+  "lora-devices-ttn on GitHub":
     - "//github.com/hslu-ige-laes/lora-devices-ttn"
 
 # Makes Aux links open in a new tab. Default is false
