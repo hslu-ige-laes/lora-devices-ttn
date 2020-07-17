@@ -5,6 +5,7 @@ parent: Sensors
 ---
 
 # nke WATTECO - Flash O
+{: .no_toc }
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_01.png" width="250" align="right" class="inline"/>
 
@@ -12,6 +13,14 @@ parent: Sensors
 - Product: <a href="http://www.nke-watteco.com/product/flasho/" target="_blank">Flash'O</a>
 
 > The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water, gas, electricity or energy meters.
+
+---
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ---
 
