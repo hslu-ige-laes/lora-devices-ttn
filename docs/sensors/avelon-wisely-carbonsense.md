@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Avelon Wisely Carbonsense
+title: Avelon - Wisely Carbonsense
 parent: Sensors
 ---
 
-# Avelon Wisely Carbonsense
+# Avelon - Wisely Carbonsense
 {: .no_toc }
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_01.png" width="250" align="right" class="inline"/>
