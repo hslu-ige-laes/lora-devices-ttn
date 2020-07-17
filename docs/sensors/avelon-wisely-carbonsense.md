@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Avelon - Wisely Carbonsense
+title: Avelon - Wisely Carbons.
 parent: Sensors
 ---
 
