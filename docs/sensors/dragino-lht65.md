@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Dragino LHT65
+title: Dragino - LHT65
 parent: Sensors
 ---
-# Dragino LHT65
+# Dragino - LHT65
 {: .no_toc }
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_01.png" width="250" align="right">
