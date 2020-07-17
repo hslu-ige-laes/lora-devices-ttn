@@ -72,9 +72,7 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 2. In the console, click [(+) add application](https://console.thethingsnetwork.org/applications/add)
    - For `Application ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
    - For `Application Description`, enter anything you like.
-
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_03.png" width="700"><br>
-
 3. Click `Add Application` to finish.
 
 > You will be redirected to the newly added Application page.
