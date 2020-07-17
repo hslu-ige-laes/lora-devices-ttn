@@ -54,7 +54,7 @@ The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to co
 
 ---
 # Device Configuration
-## 1. Create an Account
+## Create an Account
 > To register your device you’ll need a "The Things Network" account.<br>
 > If you don't have one already, please follow these steps:
 
@@ -63,7 +63,7 @@ The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to co
 2. Select [Console](https://console.thethingsnetwork.org/) from the menue on top right
 3. From the top right `menu`, select `your name > Settings`. Then change the `default Handler` if the one currently selected is not where you’ll be deploying most of your devices.
 
-## 2. Add an Application
+## Add an Application
 > To keep the payload decoder as simple as possible it is recommended to create an own application only for the dragino LHT65 sensors. You can add multiple sensor of the same type to the application.
 
 1. Log in and open the [Console > Application](https://console.thethingsnetwork.org/).
@@ -77,14 +77,14 @@ The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to co
 
 > You will be redirected to the newly added Application page.
 
-## 3. Handler device information
+## Handler device information
 Each device is shipped with a sticker with the default keys on it:
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_04.png" width="400"><br>
 
 > For an OTAA (over the air activation) only the `DEV EUI`, `APP EUI` and `APP KEY` are required.
 
-## 4. Device Registration
+## Device Registration
 > Before a device can communicate via "The Things Network" we need to register it with an application.<br>
 > The dragino sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand mentioned keys.
 
@@ -100,7 +100,7 @@ Each device is shipped with a sticker with the default keys on it:
 5. Now we have to restart the device manually by pressing the ACT button on the bottom of the device. `fast press ACT 5 times -> Off` , `press ACT for more than 3 seconds -> On`
 6. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
 
-## 5. Device Configuration
+## Device Configuration
 > Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
 > We need to tell the "The Things Network" where to find e.g. the temperature etc. in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
@@ -203,7 +203,7 @@ CC B7 0A 6C 03 9F 01 0A 85 7F FF
 > Trigger a new telegram by pressing the ACT-button on the dragino LHT65 for a short time (> 1s and < 3s).<br><br>
 > The dragino LHT65 sends a telegram once every 10 minutes.<br>
 
-## 6. Add Storage
+## Add Storage
 > Normally incoming data in the network only gets forwarded to the end user applications and does not get saved.<br>
 > "The Things Network" offers a seven day storage which is accessible through an API. To activate it, follow these steps.
 
