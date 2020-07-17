@@ -55,7 +55,7 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 ---
 
 ## Device Configuration
-### 1. Create an Account
+### Create an Account
 > To register your device you’ll need a "The Things Network" account.<br>
 > If you don't have one already, please follow these steps:
 
@@ -64,7 +64,7 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 2. Select [Console](https://console.thethingsnetwork.org/) from the menue on top right
 3. From the top right `menu`, select `your name > Settings`. Then change the `default Handler` if the one currently selected is not where you’ll be deploying most of your devices.
 
-### 2. Add an Application
+### Add an Application
 
 > To keep the payload decoder as simple as possible it is recommended to create an own application only for the nke watteco sensors. You can add multiple sensors from nke-watteco of different types to the application.
 
@@ -79,11 +79,11 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 
 > You will be redirected to the newly added Application page.
 
-### 3. Handler device information
+### Handler device information
 
 > The supplier should give you a csv file where you can find the `DevEUI`, `AppEUI` and `AppKey`
 
-### 4. Device Registration
+### Device Registration
 
 > Before a device can communicate via "The Things Network" we need to register it with an application.<br>
 > The nke WATTECO sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand mentioned keys.
@@ -101,7 +101,7 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 6. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
    - if not, please wait several hours and check again. The first attempt might take a while.
 
-### 5. Device Configuration
+### Device Configuration
 
 > Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
 > We need to tell the "The Things Network" where to find e.g. the counter value in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
@@ -663,7 +663,7 @@ function Decoder(bytes, port) {
 > Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
 > Trigger a new telegram by pressing the small button.<br><br>
 
-### 6. Change measurement interval
+### Change measurement interval
 > The Flash'O sends per default a telegram once a day with the counter value.<br>
 > If you want to change that you have to send a telegram to the device. To do so follow the instructions below.<br>
 > There are two properties of the Flash'O, the min sending interval in seconds and the impuls count.<br>
@@ -676,7 +676,7 @@ function Decoder(bytes, port) {
 
 > For details and other combinations see [Frame Examples](http://support.nke-watteco.com/flasho/#FrameExamples)
 
-### 7. Add Storage
+### Add Storage
 > Normally incoming data in the network only gets forwarded to the end user applications and does not get saved.<br>
 > "The Things Network" offers a seven day storage which is accessible through an API. To activate it, follow these steps.
 
