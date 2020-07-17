@@ -13,6 +13,8 @@ parent: Sensors
 
 > The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water, gas, electricity or energy meters.
 
+---
+
 ## Specifications
 - [IP55](https://en.wikipedia.org/wiki/IP_Code) device
 - Price ca. CHF 183.- (15.07.2020)
@@ -22,17 +24,25 @@ parent: Sensors
   - Expected life time: up to 12 years with 1 telegram per day
 - Size: 84 × 82 × 85 mm
 
+---
+
 ## Documents
   - [Payload description from support.nke-watteco.com (2020-07-15)](http://support.nke-watteco.com/flasho/#HumanMachineInterface)
   - [Datasheet from nke-watteco.fr (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_02.pdf)
+
+---
 
 ## Ordering info
 - [Ordering Link](https://smartmakers.io/en/iot-sensors-devices-overview/)
 - Product Ref 50-70-071 (FLASH’O with sensor - mounted in factory with 0.5m cable)
 
+---
+
 ## Tested with following meters
 - Landis & Gyr ZMD120AP (1'000 impulses per kWh)<br>
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_04.png" width="250"> -> Place the sensor over the LED (yellow colored)</img>
+
+---
 
 ## Device Configuration
 ### 1. Create an Account
