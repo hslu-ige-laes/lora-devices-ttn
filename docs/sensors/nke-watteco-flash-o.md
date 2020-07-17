@@ -40,7 +40,8 @@ parent: Sensors
 
 ## Tested with following meters
 - Landis & Gyr ZMD120AP (1'000 impulses per kWh)<br>
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_04.png" width="250"> -> Place the sensor over the LED (yellow colored)</img>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_04.png" width="250"><br>
+-> Place the sensor over the LED (yellow colored)
 
 ---
 
