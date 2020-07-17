@@ -4,6 +4,8 @@ title: Dragino LHT65
 parent: Sensors
 ---
 # Dragino LHT65
+{: .no_toc }
+
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_01.png" width="250" align="right">
 
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
@@ -12,6 +14,15 @@ parent: Sensors
 The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to connect an external sensor e.g. a temperature sensor.
 
 ---
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 # Specifications
 - indoor device (external sensor placement possible)
 - Price ca. CHF 50.- (15.07.2020)
