@@ -12,7 +12,7 @@ parent: Sensors
 - Manufacturer: <a href="http://www.nke-watteco.com/" target="_blank">nke WATTECO</a>
 - Product: <a href="http://www.nke-watteco.com/product/flasho/" target="_blank">Flash'O</a>
 
-> The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water, gas, electricity or energy meters.
+The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water, gas, electricity or energy meters.
 
 ---
 
