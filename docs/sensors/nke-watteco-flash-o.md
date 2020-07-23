@@ -620,7 +620,6 @@ function Decoder(bytes, port) {
 
   return decoded;
 }
-
 ```
 3. Copy/Paste the following test payload into the field `Payload` and press `Test`
 > Attention: all incoming and outgoing frames have to be sent on port 125
