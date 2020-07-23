@@ -622,17 +622,12 @@ function Decoder(bytes, port) {
 }
 
 ```
-
 3. Copy/Paste the following test payload into the field `Payload` and press `Test`
-
 > Attention: all incoming and outgoing frames have to be sent on port 125
-
 ```
 110A000F04022300000DF5
 ```
-
 4. You should see the following result
-
 ```json
 {
   "data": {
@@ -652,12 +647,9 @@ function Decoder(bytes, port) {
   }
 }
 ```
-
 > <b>counter</b> -> Counter [impulses]<br>
 > Attention, the amount of energy or water flow per impulse is meter specific. Electricity meters have e.g. 1'000 impulses per kWh.
-
 5. Press `save payload functions`
-
 > Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
 > Trigger a new telegram by pressing the small button.<br><br>
 
