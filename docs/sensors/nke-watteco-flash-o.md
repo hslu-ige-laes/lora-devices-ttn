@@ -616,7 +616,6 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 				decoded.batch.report = "batch";
 			}
 		}
-
 	  return decoded;
 	}
 	```
