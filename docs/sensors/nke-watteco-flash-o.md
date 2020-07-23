@@ -621,33 +621,34 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 	}
 	```
 3. Copy/Paste the following test payload into the field `Payload` and press `Test`
-> Attention: all incoming and outgoing frames have to be sent on port 125
-```
-110A000F04022300000DF5
-```
+	> Attention: all incoming and outgoing frames have to be sent on port 125
+	```
+	110A000F04022300000DF5
+	```
 4. You should see the following result
-```json
-{
-  "data": {
-    "counter": 3573
-  },
-  "lora": {
-    "date": "2020-07-15T01:50:23.645Z",
-    "payload": "110A000F04022300000DF5",
-    "port": 125
-  },
-  "zclheader": {
-    "attributID": "0x0402",
-    "clusterdID": "0x000F",
-    "cmdID": "0x0A",
-    "endpoint": 0,
-    "report": "standard"
-  }
-}
-```
-> <b>counter</b> -> Counter [impulses]<br>
-> Attention, the amount of energy or water flow per impulse is meter specific. Electricity meters have e.g. 1'000 impulses per kWh.
+	```json
+	{
+	  "data": {
+	    "counter": 3573
+	  },
+	  "lora": {
+	    "date": "2020-07-15T01:50:23.645Z",
+	    "payload": "110A000F04022300000DF5",
+	    "port": 125
+	  },
+	  "zclheader": {
+	    "attributID": "0x0402",
+	    "clusterdID": "0x000F",
+	    "cmdID": "0x0A",
+	    "endpoint": 0,
+	    "report": "standard"
+	  }
+	}
+	```
+	> <b>counter</b> -> Counter [impulses]<br>
+	> Attention, the amount of energy or water flow per impulse is meter specific. Electricity meters have e.g. 1'000 impulses per kWh.
 5. Press `save payload functions`
+
 > Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
 > Trigger a new telegram by pressing the small button.<br><br>
 
