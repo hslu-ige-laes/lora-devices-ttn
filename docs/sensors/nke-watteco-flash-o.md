@@ -621,12 +621,11 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 	}
 	```
 3. Copy/Paste the following test payload into the field `Payload` and press `Test`
-	> Attention: all incoming and outgoing frames have to be sent on port 125
-	
-	```
-	110A000F04022300000DF5
-	```
-	
+
+`110A000F04022300000DF5`
+
+> Attention: all incoming and outgoing frames have to be sent on port 125
+		
 4. You should see the following result
 	
 	```json
