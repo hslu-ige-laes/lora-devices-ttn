@@ -106,6 +106,7 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
 2. Select the tab `Payload Formats > decoder` and copy/paste the following code from [nke-WATTECO](http://support.nke-watteco.com/wp-content/uploads/2020/02/decodeZCL_svn5139.js):
+	
 	```javascript
 	/*
 	 * A command line script to decode a ZCL payload at a given port
@@ -621,10 +622,13 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 	```
 3. Copy/Paste the following test payload into the field `Payload` and press `Test`
 	> Attention: all incoming and outgoing frames have to be sent on port 125
+	
 	```
 	110A000F04022300000DF5
 	```
+	
 4. You should see the following result
+	
 	```json
 	{
 	  "data": {
@@ -644,6 +648,7 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 	  }
 	}
 	```
+	
 	> <b>counter</b> -> Counter [impulses]<br>
 	> Attention, the amount of energy or water flow per impulse is meter specific. Electricity meters have e.g. 1'000 impulses per kWh.
 5. Press `save payload functions`
