@@ -666,8 +666,9 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 3. Copy/paste one of the following payloads into the big field, change the `FPort to 125` and press `Send`
    - every 15 minutes and every 200 impulses: `11 06 00 0f 00 04 02 23 00 00 03 84 00 00 00 c8`
    - every 1 day: `11 06 00 0f 00 04 02 23 00 00 00 00 00 00 00 00`
+4. In the `Data` tab you should now see the scheduled telegram. The next time the device is sending data a short timeframe for the downlink-message will open and the telegram gets sent. This can be accelerated by pressing the key on the nkewattecoflasho and forcing a telegram to be sent.
 
-> For details and other combinations see [Frame Examples](http://support.nke-watteco.com/flasho/#FrameExamples)
+> For details and other configurations see [Frame Examples](http://support.nke-watteco.com/flasho/#FrameExamples)
 
 ### Add Storage
 > Normally incoming data in the network only gets forwarded to the end user applications and does not get saved.<br>
