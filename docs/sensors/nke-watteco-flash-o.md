@@ -109,7 +109,6 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 	
 ```javascript
 function Decoder(bytes, port) {
-  
   var decoded = {};
   var index = 7;
   
@@ -136,8 +135,10 @@ function Decoder(bytes, port) {
 }
 ```
 	
-	> <b>counter</b> -> Counter [impulses]<br>
-	> Attention, the amount of energy or water flow per impulse is meter specific. Electricity meters have e.g. 1'000 impulses per kWh.
+	
+<b>counter</b> -> Counter [impulses]<br>
+Attention, the amount of energy or water flow per impulse is meter specific. Electricity meters have e.g. 1'000 impulses per kWh.
+
 5. Press `save payload functions`
 
 > Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
