@@ -82,8 +82,8 @@ The Wisely Carbonsense is an indoor room sensor to measure temperature, humidity
 1. Scan the `QR-Code` with e.g. a Mobile Phone
 2. Click on the round `information (i) symbol` top right aside the sensor name
 3. Press `Register for free`
-4. Press `create new account`
-5. select `Private`, fill in the fields and register
+4. Press `create new account` or login if you already have created an account
+5. When promted select `Private` and fill in the fields, then register
 6. Assign the device and skip the `select location` as well as `alerting`
 7. Change to your computer and log in to [https://avelon.cloud/login](https://avelon.cloud/login)
 8. Click `your name > Devices` on top right
@@ -131,7 +131,7 @@ function Decoder(bytes, port) {
   DATASETLENGTH = 7;
   
   // number of data sets
-  DATASETS = (bytes.length - 2 ) / 7;
+  DATASETS = (bytes.length - 2 ) / DATASETLENGTH;
 
   // Battery status
   var BAT = bytes[0]
@@ -177,15 +177,17 @@ function Decoder(bytes, port) {
   }
   value = Math.round(value / DATASETS * 100) / 100;
   eval("decoded." + measurement + " = " + value + ";");
-    
-  // Air quality CO2 in ppm
-  measurement = "aqual";
-  value = 0;
-  for (i = 0; i < DATASETS; i++) {
-    value = value + (bytes[i * DATASETLENGTH + 6] << 8 | bytes[i * DATASETLENGTH + 7]);
+  
+  if(DATASETLENGTH != 5){
+    // Air quality CO2 in ppm
+    measurement = "aqual";
+    value = 0;
+    for (i = 0; i < DATASETS; i++) {
+	  value = value + (bytes[i * DATASETLENGTH + 6] << 8 | bytes[i * DATASETLENGTH + 7]);
+    }
+    value = value / DATASETS;
+    eval("decoded." + measurement + " = " + value + ";");
   }
-  value = value / DATASETS;
-  eval("decoded." + measurement + " = " + value + ";");
 
 return decoded;
 }
