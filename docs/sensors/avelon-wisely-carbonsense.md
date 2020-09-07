@@ -120,82 +120,75 @@ The Wisely Carbonsense is an indoor room sensor to measure temperature, humidity
 
 ```javascript
 function Decoder(bytes, port) {
-
   var decoded = {};
-
-  // Offset
-  OFFSET = bytes[bytes.length-1];
-  
-  // Data set length
-  // Wisely Standard = 5; CarbonSense = 7; AllSense = 7
-  DATASETLENGTH = 7;
-  
-  // number of data sets
-  DATASETS = (bytes.length - 2 ) / DATASETLENGTH;
-
-  // Battery status
-  var BAT = bytes[0]
-  
-  if((BAT > 0) && (BAT < 255)){
-    var batVal = BAT / 254.0 * 100.0;
-    decoded.batVal = Math.round(batVal * 10) / 10;
-    decoded.batSta = "OK";
-  }else if(BAT === 0){ // no battery inserted, external power supply
-    decoded.batVal = 100.0;
-    decoded.batSta = "OK, external power supply";
-  } else{ // device could not acquire the voltage
-    decoded.batVal = 0.0;
-    decoded.batSta = "Error, could not acquire the voltage";
-  }
-  
-  var measurement = "";
-  var value = "";
-  
-  // atmospheric pressure in hPa
-  measurement = "press";
-  value = 0;
-  for (i = 0; i < DATASETS; i++) {
-    value = value + (bytes[i * DATASETLENGTH + 1] << 8 | bytes[i * DATASETLENGTH + 2]) / 10.0;
-  }
-  value = Math.round(value / DATASETS * 100) / 100;
-  eval("decoded." + measurement + " = " + value + ";");
-  
-  // Temperature in °C
-  measurement = "temp";
-  value = 0;
-  for (i = 0; i < DATASETS; i++) {
-    value = value + (bytes[i * DATASETLENGTH + 3] << 8 | bytes[i * DATASETLENGTH + 4]) / 10.0;
-  }
-  value = Math.round(value / DATASETS * 100) / 100;
-  eval("decoded." + measurement + " = " + value + ";");
-
-  // Humidity in %rH
-  measurement = "hum";
-  value = 0;
-  for (i = 0; i < DATASETS; i++) {
-    value = value + bytes[i * DATASETLENGTH + 5] / 2.0;
-  }
-  value = Math.round(value / DATASETS * 100) / 100;
-  eval("decoded." + measurement + " = " + value + ";");
-  
-  if(DATASETLENGTH != 5){
-    // Air quality CO2 in ppm
-    measurement = "aqual";
+  if(port === 5){
+    // Offset
+    OFFSET = bytes[bytes.length-1];
+    // Data set length
+    // Wisely Standard = 5; CarbonSense = 7; AllSense = 7
+    DATASETLENGTH = 7;
+    // number of data sets
+    DATASETS = (bytes.length - 2 ) / DATASETLENGTH;
+    // Battery status
+    var BAT = bytes[0]
+    if((BAT > 0) && (BAT < 255)){
+      var batVal = BAT / 254.0 * 100.0;
+      decoded.batVal = Math.round(batVal * 10) / 10;
+      decoded.batSta = "OK";
+    }else if(BAT === 0){ // no battery inserted, external power supply
+      decoded.batVal = 100.0;
+      decoded.batSta = "OK, external power supply";
+    } else{ // device could not acquire the voltage
+      decoded.batVal = 0.0;
+      decoded.batSta = "Error, could not acquire the voltage";
+    }
+    var measurement = "";
+    var value = "";
+    // atmospheric pressure in hPa
+    measurement = "press";
     value = 0;
     for (i = 0; i < DATASETS; i++) {
-	  value = value + (bytes[i * DATASETLENGTH + 6] << 8 | bytes[i * DATASETLENGTH + 7]);
+      value = value + (bytes[i * DATASETLENGTH + 1] << 8 | bytes[i * DATASETLENGTH + 2]) / 10.0;
     }
-    value = value / DATASETS;
+    value = Math.round(value / DATASETS * 1) / 1;
     eval("decoded." + measurement + " = " + value + ";");
+    // Temperature in °C
+    measurement = "temp";
+    value = 0;
+    for (i = 0; i < DATASETS; i++) {
+      value = value + (bytes[i * DATASETLENGTH + 3] << 8 | bytes[i * DATASETLENGTH + 4]) / 10.0;
+    }
+    value = Math.round(value / DATASETS * 10) / 10;
+    eval("decoded." + measurement + " = " + value + ";");
+    // Humidity in %rH
+    measurement = "hum";
+    value = 0;
+    for (i = 0; i < DATASETS; i++) {
+      value = value + bytes[i * DATASETLENGTH + 5] / 2.0;
+    }
+    value = Math.round(value / DATASETS * 10) / 10;
+    eval("decoded." + measurement + " = " + value + ";");
+    if(DATASETLENGTH != 5){
+      // Air quality CO2 in ppm
+      measurement = "aqual";
+      value = 0;
+      for (i = 0; i < DATASETS; i++) {
+  	  value = value + (bytes[i * DATASETLENGTH + 6] << 8 | bytes[i * DATASETLENGTH + 7]);
+      }
+      value = Math.round(value / DATASETS * 1) / 1;
+      eval("decoded." + measurement + " = " + value + ";");
+    }
   }
-
 return decoded;
 }
 ```
-3. Copy/Paste the following test payload into the field `Payload` and press `Test`
+
+3. Copy/Paste the following test payload into the field `Payload`, enter **5** in the port-field on the right of the Payload and press `Test`
 ```
 FE25F3010B57029325F2010B56027325F3010A56027C25F3010A5702A825F2010A56028625F2010A56027800
 ```
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-standard_05.png" width="700" class="inline"/><br>
+
 4. You should see the following result
 ```json
 {
