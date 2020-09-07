@@ -200,12 +200,12 @@ FE25F3010B57029325F2010B56027325F3010A56027C25F3010A5702A825F2010A56028625F2010A
   "temp": 26.63
 }
 ```
-> <b>aqual</b> -> Air Quality in [ppm]<br>
-> <b>batSta</b> -> battery status ["OK";"OK, external power supply";"Error, could not acquire the voltage"]<br>
-> <b>batVal</b> -> battery value [%]<br>
-> <b>hum</b> -> Humidity [%rH]<br>
-> <b>press</b> -> air pressure [hPa]<br>
-> <b>temp</b> -> Temperature [°C]<br>
+- <b>aqual</b> -> Air Quality in [ppm]<br>
+- <b>batSta</b> -> battery status ["OK";"OK, external power supply";"Error, could not acquire the voltage"]<br>
+- <b>batVal</b> -> battery value [%]<br>
+- <b>hum</b> -> Humidity [%rH]<br>
+- <b>press</b> -> air pressure [hPa]<br>
+- <b>temp</b> -> Temperature [°C]<br>
 
 5. Press `save payload functions`
 
