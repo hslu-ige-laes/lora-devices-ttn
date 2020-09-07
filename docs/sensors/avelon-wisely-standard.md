@@ -45,13 +45,13 @@ The Wisely Standard is an indoor room sensor to measure temperature, humidity an
 
 ## Ordering info
 The sensor comes in four different "flavours"
-- <b>~~Swisscom LPN~~</b>
+- <b>~~Swisscom LPN~~</b><br>
   means that the data goes to the AVELON server via Swisscom low power network, monthly charges apply
-- <b>~~The Things Network~~</b>
+- <b>~~The Things Network~~</b><br>
   means that the data goes to the AVELON-server via ttn, no monthly charges
-- <b>~~Building Automation~~</b>
+- <b>~~Building Automation~~</b><br>
   integration in the Avelon automation system, license fees system
-- <b>Self-Managed -> that's what you wanna have!!!</b> 
+- <b>Self-Managed -> that's what you wanna have!!!</b><br>
   data goes over the ttn network to the ttn server where you pick it up, no monthly charges or fees
 
 [Ordering Link](https://avelon.com/en/buy-wisesly/)
