@@ -198,17 +198,16 @@ FE 25 37 00 E2 6D 25 37 00 E2 6D 00
   "temp": 22.6
 }
 ```
-
-- <b>batSta</b>
-  Battery status ["OK";"OK, external power supply";"Error, could not acquire the voltage"]<br>
-- <b>batVal</b>
-  Battery value [%]<br>
-- <b>hum</b>
-  Humidity [%rH]<br>
-- <b>press</b>
-  Air pressure [hPa]<br>
-- <b>temp</b>
-  Temperature [°C]<br>
+  - <b>batSta</b>
+    Battery status ["OK";"OK, external power supply";"Error, could not acquire the voltage"]<br>
+  - <b>batVal</b>
+    Battery value [%]<br>
+  - <b>hum</b>
+    Humidity [%rH]<br>
+  - <b>press</b>
+    Air pressure [hPa]<br>
+  - <b>temp</b>
+    Temperature [°C]<br>
 
 5. Press `save payload functions`
 
