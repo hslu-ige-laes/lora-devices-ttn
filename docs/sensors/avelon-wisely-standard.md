@@ -116,7 +116,6 @@ The Wisely Standard is an indoor room sensor to measure temperature, humidity an
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
 2. Select the tab `Payload Formats > decoder` and copy/paste the following code:<br>
-
 ```javascript
 function Decoder(bytes, port) {
   var decoded = {};
