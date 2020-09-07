@@ -52,8 +52,8 @@ The sensor comes in four different "flavours"
   means that the data goes to the AVELON-server via ttn, no monthly charges
 - <b>~~Building Automation~~</b>
   integration in the Avelon automation system, license fees system
-- <b>Self-Managed</b> -> **that's what you wanna have!!!**
-    data goes over the ttn network to the ttn server where you pick it up, no monthly charges or fees
+- <b>Self-Managed -> that's what you wanna have!!!</b> 
+  data goes over the ttn network to the ttn server where you pick it up, no monthly charges or fees
 	
 [Ordering Link](https://avelon.com/en/buy-wisesly/)
 
