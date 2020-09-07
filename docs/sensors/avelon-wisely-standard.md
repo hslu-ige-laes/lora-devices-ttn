@@ -169,7 +169,7 @@ function Decoder(bytes, port) {
     eval("decoded." + measurement + " = " + value + ";");
     if(DATASETLENGTH != 5){
       // Air quality CO2 in ppm
-      measurement = "aqual";
+      measurement = "co2";
       value = 0;
       for (i = 0; i < DATASETS; i++) {
   	  value = value + (bytes[i * DATASETLENGTH + 6] << 8 | bytes[i * DATASETLENGTH + 7]);
@@ -198,11 +198,17 @@ FE 25 37 00 E2 6D 25 37 00 E2 6D 00
   "temp": 22.6
 }
 ```
-- <b>batSta</b> -> battery status ["OK";"OK, external power supply";"Error, could not acquire the voltage"]<br>
-- <b>batVal</b> -> battery value [%]<br>
-- <b>hum</b> -> Humidity [%rH]<br>
-- <b>press</b> -> air pressure [hPa]<br>
-- <b>temp</b> -> Temperature [°C]<br>
+
+- <b>batSta</b>
+  Battery status ["OK";"OK, external power supply";"Error, could not acquire the voltage"]<br>
+- <b>batVal</b>
+  Battery value [%]<br>
+- <b>hum</b>
+  Humidity [%rH]<br>
+- <b>press</b>
+  Air pressure [hPa]<br>
+- <b>temp</b>
+  Temperature [°C]<br>
 
 5. Press `save payload functions`
 
