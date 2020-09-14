@@ -257,6 +257,8 @@ FE25F3010B57029325F2010B56027325F3010A56027C25F3010A5702A825F2010A56028625F2010A
 > Now the sampling interval should be changed.
 > See the payload description for more details.
 
+
+
 #### Change the led blinking behaviour
 > If an adjustable CO2 limit is exceeded, the LED on the front side of the device blinks every 60 seconds (250 ms
 lighting, 500 ms pause - repeating 4 times).
@@ -272,8 +274,10 @@ lighting, 500 ms pause - repeating 4 times).
 7. Add Payload for red led `06 06 0B 05 78 FF 00 00 00` and press send 
 8. Press again the button on the back of the sensor
 
+
 > Now the led should not blink anymore.
 > To reset the behaviour exchange the last byte with `01` instead of `00`:
   - `06 06 0B 03 20 00 00 FF 01`
   - `06 06 0B 05 78 FF 00 00 01`
+  
 > See the payload description for more details.
