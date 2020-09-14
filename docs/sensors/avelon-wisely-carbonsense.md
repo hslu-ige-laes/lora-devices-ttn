@@ -242,16 +242,16 @@ FE25F3010B57029325F2010B56027325F3010A56027C25F3010A5702A825F2010A56028625F2010A
 > You have to send the so called downlink messages to port 10
 > The device transmits its data after "CyclicTransmissionCounter" × "SensorSampleTime" starting from the last transmission.
 > The example below sends data every 20 minutes with the settings
-  - CyclicTransmissionCounter = 1
-  - SensorSampleTime = 20
+  - CyclicTransmissionCounter = 20
+  - SensorSampleTime = 1
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
 2. Select the tab `Devices` and select your device where you want to change the settings
 3. Sroll down to "Downlink"
 4. Select `FPort 10`
-5. Add Payload for SensorSampleTime `FF 02 14` and press send
+5. Add Payload for SensorSampleTime `FF 02 01` and press send
 6. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
-7. Add Payload for CyclicTransmissionCounter `FF F0 01` and press send 
+7. Add Payload for CyclicTransmissionCounter `FF F0 14` and press send 
 8. Press again the button on the back of the sensor
 
 > Now the sampling interval should be changed.
