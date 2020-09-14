@@ -233,3 +233,47 @@ FE25F3010B57029325F2010B56027325F3010A56027C25F3010A5702A825F2010A56028625F2010A
 3. Select `Data Storage` and press `Add integration`
 
 > Now we're done with the configuration :-)
+
+
+### Optional Settings
+#### Change sending interval
+> Per default the sensor measures each minute the values and sends a packet each hour.
+> To change this, you have to send the device configuration telegrams.
+> You have to send the so called downlink messages to port 10
+> The device transmits its data after "CyclicTransmissionCounter" × "SensorSampleTime" starting from the last transmission.
+> The example below sends data every 20 minutes with the settings
+  - CyclicTransmissionCounter = 4
+  - SensorSampleTime = 5
+
+1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
+2. Select the tab `Devices` and select your device where you want to change the settings
+3. Sroll down to "Downlink"
+4. Select `FPort 10`
+5. Add Payload for CyclicTransmissionCounter `FF 02 05` and press send
+6. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+7. Add Payload for SensorSampleTime `FF F0 04` and press send 
+8. Press again the button on the back of the sensor
+
+> Now the sampling interval should be changed.
+> See the payload description for more details.
+
+#### Change the led blinking behaviour
+> If an adjustable CO2 limit is exceeded, the LED on the front side of the device blinks every 60 seconds (250 ms
+lighting, 500 ms pause - repeating 4 times).
+> With the following procedure you can deactivate it.
+
+
+1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
+2. Select the tab `Devices` and select your device where you want to change the settings
+3. Sroll down to "Downlink"
+4. Select `FPort 10`
+5. Add Payload for blue led to deactivate `06 06 0B 03 20 00 00 FF 00` and press send
+6. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+7. Add Payload for red led `06 06 0B 05 78 FF 00 00 00` and press send 
+8. Press again the button on the back of the sensor
+
+> Now the led should not blink anymore.
+> To reset the behaviour exchange the last byte with `01` instead of `00`:
+  - `06 06 0B 03 20 00 00 FF 01`
+  - `06 06 0B 05 78 FF 00 00 01`
+> See the payload description for more details.
