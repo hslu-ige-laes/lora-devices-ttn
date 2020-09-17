@@ -1,4 +1,4 @@
-# lora-devices-ttn - LoRaWAN device integration into the things network
+# LoRaWAN device integration into the things network
 
 > **See [https://hslu-ige-laes.github.io/lora-devices-ttn/](https://hslu-ige-laes.github.io/lora-devices-ttn/) for documentation**
 
@@ -14,8 +14,8 @@
 <hr>
 
 **Disclaimer**<br>
-- This is an independent collection of equipment with which our institute works.
-- The authors decline any liability or responsibility in connection with the published documentation.
+- This is an independent collection of equipment with which our institute works
+- The authors decline any liability or responsibility in connection with the published documentation
 
 &copy; Lucerne University of Sciences and Arts, 2020
   
