@@ -31,8 +31,8 @@ permalink: /
 <hr>
 
 ## Installation and Configuration
-- Choose a sensor in the overview above and click on the link.
-- The opened page then includes specifications, data sheets and step by step installation- and configuration procedures.
+- Choose a sensor in the overview above and click on the link
+- The opened page then includes specifications, data sheets and step by step installation- and configuration procedures
 
 <hr>
 
