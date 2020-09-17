@@ -7,7 +7,7 @@
   - an overview of the most important specifications of the devices
   - important documents
   - ordering information
-  - step by step integration into the things network
+  - step by step integration into [The Things Network](https://www.thethingsnetwork.org/)
   - payload codes
   - device configurations
 
