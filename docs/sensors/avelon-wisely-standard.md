@@ -86,7 +86,7 @@ Other variants which don't work with lcm
 ### Handler Change
 > The Wisely sensors are per default configured for the Avelon Cloud, even if ordered as "self-managed". Thats why we have to detach the device from the avelon cloud.
 
-1. Scan the `QR-Code` with e.g. a Mobile Phone
+1. Switch the device on and scan the `QR-Code` with e.g. a Mobile Phone ([detailed information here](https://avelon.com/wp-content/uploads/2020/03/wisely-quick-guide.pdf))
 2. Click on the round `information (i) symbol` top right aside the sensor name
 3. Press `Register for free`
 4. Press `create new account` or login if you already have created an account
