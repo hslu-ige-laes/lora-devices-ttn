@@ -45,16 +45,19 @@ The Wisely Carbonsense is an indoor room sensor to measure temperature, humidity
 ---
 
 ## Ordering info
-The sensor comes in four different "flavours"
-- <b>~~Swisscom LPN~~</b><br>
-  means that the data goes to the AVELON server via Swisscom low power network, monthly charges apply
-- <b>~~The Things Network~~</b><br>
-  means that the data goes to the AVELON-server via ttn, no monthly charges
-- <b>~~Building Automation~~</b><br>
-  integration in the Avelon automation system, license fees system
-- <b>Self-Managed -> that's what you wanna have!!!</b><br>
-  data goes over the ttn network to the ttn server where you pick it up, no monthly charges or fees
-	
+Attention, there are four different versions of the same sensor which have different software loaded on them. Only the "Self-Managed" version works with the lcm application. Do not order the version "The Things Network", it will not work with the lcm application.
+
+- <b>Self-Managed -> that's what you want to have!!!</b><br>
+  Data goes over the ttn network to the ttn server where the lcm application can fetch them, no monthly charges or fees.
+
+Other variants which don't work with lcm
+- <b>Swisscom LPN</b><br>
+  Means that the data goes to the AVELON server via Swisscom low power network, monthly charges apply.
+- <b>The Things Network</b><br>
+  Means that the data goes via ttn, but to the AVELON-server! No monthly charges. In this case the lcm application can't access the data!
+- <b>Building Automation</b><br>
+  Integration in the Avelon automation system, license fees system.
+
 [Ordering Link](https://avelon.com/en/buy-wisesly/)
 
 ---
@@ -66,7 +69,7 @@ The sensor comes in four different "flavours"
 
 1. Go to [account.thethingsnetwork.org](https://account.thethingsnetwork.org/) and [click create an account](https://account.thethingsnetwork.org/register)
    - You will receive an email to confirm your email address. You have 24 hours to do so.
-2. Select [Console](https://console.thethingsnetwork.org/) from the menue on top right
+2. Select [Console](https://console.thethingsnetwork.org/) from the menu on top right
 3. From the top right `menu`, select `your name > Settings`. Then change the `default Handler` if the one currently selected is not where you’ll be deploying most of your devices.
 
 ### Add an Application
@@ -233,6 +236,7 @@ FE25F3010B57029325F2010B56027325F3010A56027C25F3010A5702A825F2010A56028625F2010A
 3. Select `Data Storage` and press `Add integration`
 
 > Now we're done with the configuration :-)
+> Info: now we have connected the sensor to our ttn account Therefore the QR code on the device does not work anymore and can be removed.
 
 
 ### Optional Settings
