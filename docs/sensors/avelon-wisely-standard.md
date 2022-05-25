@@ -25,7 +25,7 @@ The Wisely Standard is an indoor room sensor to measure temperature, humidity an
 
 ## Specifications
 - Indoor device
-- Price ca. CHF 88.- (05.09.2020)
+- Price ca. CHF 68.- (25.05.2022)
 - Sensors
   - <b>Temperature</b>, -10 ... +80 [°C], ± 0.1 °C between 20 ... 60 °C
   - <b>relative Humidity</b>, 0 ... 95[%rH], ± 1.5 %rH between 10...80 %rH
@@ -57,7 +57,7 @@ Other variants which don't work with lcm
 - <b>Building Automation</b><br>
   Integration in the Avelon automation system, license fees system.
 
-[Ordering Link](https://avelon.com/en/buy-wisesly/)
+[Ordering Link](https://avelon.com/en/wisely/)
 
 ---
 
