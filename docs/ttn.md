@@ -9,7 +9,7 @@ permalink: /docs/ttn
 # The Things Network
 ## What is LoRaWAN 
 LoRaWAN (Long Range Wide Area Network) in general is a wireless technology that allows devices like sensors, to send data over long distances.
-These devices are not directly connected to the internet. They send the data periodically over the LoRaWAN to a so called gateway antenna. This gateway then forwards the data to an internet server.
+These devices are not directly connected to the internet. They send the data periodically over the LoRaWAN.
 
 LoRaWAN is perfect for connecting devices that need to send small amounts of data, like temperature readings, air quality information, or water level measurements. These devices can be placed anywhere, no internet connection or power supply is needed.
 Normally these devices are battery powered and have a long lifetime.
@@ -21,12 +21,16 @@ In a LoRaWAN network, the setup involves the following components:
 - Gateway: Gateways act as communication hubs in the network. They receive data from the IoT devices over long distances and forward it to a central network server in the internet.
 - Network Server: The network server manages the entire LoRaWAN network. It processes data received from gateways, deduplicates telegrams, manages device registrations, handles security, and routes data to the appropriate applications.
 - Application Server: The application server is where data is sent after passing through the network server. Here, the data is processed, stored, and integrated with other systems or applications.
+- End User Application: The end user application is for example a dashboard where the transmitted data gets processed and visualized. The data can also get transmitted to a automation system which can the data as it would come from a conentional cable connected sensor.
+
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/ttn_components.PNG" width="700"><br>
 
 The data flow is as follows:
 1. The sensor sends data.
 1. The gateway(s) in reception range receive the data and forwards it to the network server.
 1. The network server validates and decrypts the data, determines the appropriate application, and sends it to the respective application server.
 1. The application server processes and stores the data, making it available for analysis or integration with other services.
+1. The End User application receives the data from the application server and may process and/or visualize it.
 
 ## Typical range of transmission
 The typical range for LoRaWAN devices is a few hundred meters to a few kilometers in urban areas and several kilometers in rural or open environments.
