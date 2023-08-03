@@ -17,15 +17,15 @@ Normally these devices are battery powered and have a long lifetime.
 ## Network Components of LoRaWAN
 In a LoRaWAN network, the setup involves the following components
 
-- Sensors/Devices
+- **Sensors/Devices**<br>
   These are the end devices equipped with sensors that collect data, such as temperature, humidity, or motion.
-- Gateway
+- **Gateway**<br>
   Gateways act as communication hubs in the network. They receive data from the IoT devices over long distances and forward it to a central network server in the internet.
-- Network Server
+- **Network Server**<br>
   The network server manages the entire LoRaWAN network. It processes data received from gateways, deduplicates telegrams, manages device registrations, handles security, and routes data to the appropriate applications.
-- Application Server
+- **Application Server**<br>
   The application server is where data is sent after passing through the network server. Here, the data is processed, stored, and integrated with other systems or applications.
-- End User Application
+- **End User Application**<br>
   The end user application is for example a dashboard where the transmitted data gets processed and visualized. The data can also get transmitted to a automation system which can the data as it would come from a conentional cable connected sensor.
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/ttn_components.PNG" width="700"><br>
@@ -42,21 +42,21 @@ The typical range for LoRaWAN devices is a few hundred meters to a few kilometer
 It is as well possible to place devices in buildings and have the next gateway somewhere outside.
 
 However, the actual range can vary depending on several factors
-- Distance to the Gateway<br>
+- **Distance to the Gateway**<br>
   The farther the sensor device is from the gateway, the weaker the signal, impacting communication reliability.
-- Obstacles and Environment
+- **Obstacles and Environment**<br>
   Physical obstacles like buildings, walls, windows and trees can weaken or block the signal, affecting signal strength and range.
-- Gateway Density
+- **Gateway Density**<br>
   More gateways nearby improve coverage and increase the chances of successful communication.
-- Transmit Power of the Device
+- **Transmit Power of the Device**<br>
   Higher transmit power allows for longer range but consumes more energy.
-- Environmental Factors
+- **Environmental Factors**<br>
   Weather, humidity, and atmospheric conditions can influence signal strength.
-- Interference
+- **Interference**<br>
   Electronic noise or interference from other devices can impact reception.
-- Antenna Quality
+- **Antenna Quality**<br>
   The quality of antennas on both the IoT device and gateway affects range and reception quality.
-- Device Orientation
+- **Device Orientation**<br>
   Each antenna has a designed orientation. Refer to the device datasheets to see how you place best the devices.
 
 ## What is TTN?
