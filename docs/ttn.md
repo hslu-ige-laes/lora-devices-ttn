@@ -7,12 +7,10 @@ permalink: /docs/ttn
 ---
 
 # The Things Network
-## Getting started with LoRaWAN
-LoRaWAN (Long Range Wide Area Network) is a wireless technology that allows devices like sensors, to send data over long distances.
+LoRaWAN (Long Range Wide Area Network) in general is a wireless technology that allows devices like sensors, to send data over long distances.
 These devices are not directly connected to the internet. They send the data periodically over the LoRaWAN to a so called gateway antenna. This gateway then forwards the data to an internet server.
 It's perfect for connecting devices that need to send small amounts of data, like temperature readings, air quality information, or water level measurements. Normally these devices are battery powered.
 
-## The Things Network (TTN)
 The `TTN` is a global, community-driven, open-source LoRaWAN network. It provides an infrastructure for connecting own devices free of charge.
 The Things Network's public network is built on the principle of shared infrastructure, meaning that users can benefit from existing gateways deployed by others in the community.
 As long as there are TTN gateways within the coverage area of your device, you can utilize the network without the need to deploy your own gateway.
