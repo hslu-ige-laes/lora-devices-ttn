@@ -2,7 +2,7 @@
 layout: default
 title: Overview
 nav_order: 1
-description: "LoRa Devices for The Things Network"
+description: "LoRa Devices for TTN"
 permalink: /
 ---
 
