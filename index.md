@@ -7,7 +7,7 @@ permalink: /
 ---
 
 # LoRaWAN device integration in TTN
-
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/docs/raw/main/ttn-logo.svg" width="128" align="right" class="inline"/>
 This documentation gives an overview of different LoRaWAN devices and describes how to integrate them into [The Things Network (TTN)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/ttn).
 
 - Choose a sensor in the overview below and click on the link
