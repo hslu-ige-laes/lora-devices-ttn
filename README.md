@@ -1,5 +1,5 @@
 # LoRaWAN device integration into The Things Network
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/docs/raw/main/ttn-logo.svg" width="128" align="right" class="inline"/>
+<img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn-logo.svg" width="128" align="right" class="inline"/>
 
 > **See [https://hslu-ige-laes.github.io/lora-devices-ttn/](https://hslu-ige-laes.github.io/lora-devices-ttn/) for documentation**
 
