@@ -50,8 +50,8 @@ The LDS02 is a LoRaWAN Window/Door sensor.
 - [Ordering Link](https://www.bastelgarage.ch/lds02-lorawan-door-fenster-sensor-node-868mhz)
 
 ---
+
 ## Adding the Device to TTN
-### Device Registration
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
 1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
@@ -73,6 +73,9 @@ The LDS02 is a LoRaWAN Window/Door sensor.
 
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
 - The payload formatter should already be preset. If not, you can copy/paste it
+
+---
+## Payload formatter
 
 ```javascript
 function decodeUplink(input) {

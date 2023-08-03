@@ -47,10 +47,11 @@ The R718N37 is a 3-Phase Current Meter with 3 x 75A Clamp-On Current Transformer
 - [Ordering Link](https://iot-shop.de/shop/nv-r718n37-netvox-r718n37-3-phasen-stromsensor-75a-4285#attr=488,489,490,496,487,491,492,493,494,495)
 
 ---
+## Device specific Information
+### Handler device information
+- The supplier sent us a pdf file with the `DevEUI`, `AppEUI` and `AppKey`
 
-## Adding the Device to TTN
-### Device specific Information
-#### On/Off
+### On/Off
 - Power on: Insert batteries
 - Turn on: Press and hold the function key for 3 seconds till the green indicator flashes once.
 - Turn off (Restore to factory setting): Press and hold the function key for 5 seconds till green indicator flashes 20 times.
@@ -59,7 +60,7 @@ The R718N37 is a 3-Phase Current Meter with 3 x 75A Clamp-On Current Transformer
 - The device will be off in default after removing the battery and insert it again.
 - It is suggested to wait for at least 10 seconds between turning the device on and off.
 
-#### Network Joining
+### Network Joining
 **Device never joined a network**
 - Turn on the device, and it will search for the network to join.
 - The green indicator light stays on for 5 seconds: joins the network successfully
@@ -73,10 +74,9 @@ The R718N37 is a 3-Phase Current Meter with 3 x 75A Clamp-On Current Transformer
 **Fail to Join the Network**
   - Suggest to check the device verification information on the gateway
 
-### Handler device information
-- The supplier sent us a pdf file with the `DevEUI`, `AppEUI` and `AppKey`
+---
 
-### Device Registration
+## Adding the Device to TTN
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
 1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
@@ -97,6 +97,10 @@ The R718N37 is a 3-Phase Current Meter with 3 x 75A Clamp-On Current Transformer
 
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
 - The payload formatter should already be preset. If not, you can copy/paste it
+
+---
+
+## Payload formatter
 
 ```javascript
 function getCfgCmd(cfgcmd){
