@@ -7,7 +7,7 @@
   - an overview of the most important specifications of the devices
   - important documents
   - ordering information
-  - step by step integration into [The Things Network](https://www.thethingsnetwork.org/)
+  - step by step integration into [The Things Network](https://www.thethingsnetwork.org/) version 3
   - payload codes
   - device configurations
 
@@ -17,5 +17,5 @@
 - This is an independent collection of equipment with which our institute works
 - The authors decline any liability or responsibility in connection with the published documentation
 
-&copy; Lucerne University of Sciences and Arts, 2020
+&copy; Lucerne University of Sciences and Arts, 2023
   
