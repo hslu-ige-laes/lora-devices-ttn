@@ -4,7 +4,7 @@ title: netvox - R718N37
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/netvox-r871n37.png" width="250" align="right" class="inline"/>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/netvox-r871n37_01.jpg" width="250" align="right" class="inline"/>
 
 # netvox - R718N37
 {: .no_toc }
