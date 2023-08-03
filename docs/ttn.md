@@ -2,7 +2,7 @@
 layout: default
 title: The Things Network
 nav_order: 3
-has_children: true
+has_children: false
 permalink: /docs/ttn
 ---
 
