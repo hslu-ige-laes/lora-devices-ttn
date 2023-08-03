@@ -8,8 +8,8 @@ permalink: /docs/ttn
 
 # The Things Network
 ## What is LoRaWAN 
-LoRaWAN (Long Range Wide Area Network) in general is a wireless technology that allows devices like sensors, to send data over long distances.
-These devices are not directly connected to the internet. They send the data periodically over the LoRaWAN.
+LoRaWAN (Long Range Wide Area Network) is generally a wireless technology that allows devices such as sensors to send data over long distances. These devices are not directly connected to the Internet.
+They send the data at regular intervals via the LoRaWAN to a so-called gateway. This gateway then forwards the data to the Internet.
 
 LoRaWAN is perfect for connecting devices that need to send small amounts of data, like temperature readings, air quality information, or water level measurements. These devices can be placed anywhere, no internet connection or power supply is needed.
 Normally these devices are battery powered and have a long lifetime.
