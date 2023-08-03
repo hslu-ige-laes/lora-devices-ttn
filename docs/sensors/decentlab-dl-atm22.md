@@ -27,15 +27,15 @@ Wind speed, wind direction and temperature sensor.
 - Outdoor device
 - Price ca. CHF 1'546.- (Sept. 2019)
 - Sensors
-  - <b>Horizontal Wind Speed</b>
+  - <b>Horizontal Wind Speed</b><br>
 	  Range: 0 … 30 [m/s], Resolution 0.01 m/s, Accuracy max(0.3 m/s;  3% of measurement)
-  - <b>Wind Gust</b>
+  - <b>Wind Gust</b><br>
 	  Range: 0 … 30 m/s, Resolution 0.01 [m/s], Accuracy max(0.3 m/s; 3% of measurement)
-  - <b>Wind Direction</b>
+  - <b>Wind Direction</b><br>
 	  Range: 0 … 359 [°], Resolution: 1°, Accuracy: ±5°
-  - <b>Tilt</b>
+  - <b>Tilt</b><br>
 	  Range: -90° … +90 [°], Resolution: 0.1°, Accuracy: ±1°
-  - <b>Temperature:</b>
+  - <b>Temperature:</b><br>
 	  Range: -50 ... +60 [°C], Resolution: 0.1 °C, Accuracy: ±0.6 °C
 		not protected from solar radiation
 - Power Supply: 2 C alkaline batteries
