@@ -6,7 +6,7 @@ parent: Sensors
 # Dragino - LDS02
 {: .no_toc }
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_01.png" width="250" align="right">
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_01.jpg" width="250" align="right">
 
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
 - Product: <a href="https://www.dragino.com/products/lorawan-nb-iot-door-sensor-water-leak/item/181-lds02.html" target="_blank">LDS02</a>
