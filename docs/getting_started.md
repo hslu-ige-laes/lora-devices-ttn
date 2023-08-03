@@ -7,6 +7,13 @@ permalink: /docs/getting_started
 ---
 
 # Getting started with TTN
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
 ## Account and Console
 > The `Console` is the place where you can add sensor devices and gateways.
 > First of all you need a "The Things Network" account.<br>
