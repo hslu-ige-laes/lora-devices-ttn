@@ -8,7 +8,7 @@ permalink: /docs/ttn
 
 # The Things Network
 {: .no_toc }
-The Things Network (TTN) is a global, community-driven, open-source LoRaWAN network. It provides an infrastructure for connecting own devices free of charge. 
+The Things Network (TTN) is a global, community-driven and open-source LoRaWAN network. It provides an infrastructure for connecting own devices free of charge. 
 
 ---
 ## Table of contents
@@ -26,10 +26,10 @@ They send the data at regular intervals via the LoRaWAN to a so-called gateway. 
 LoRaWAN is perfect for connecting devices that need to send small amounts of data, like temperature readings, air quality information, or water level measurements. These devices can be placed anywhere, no internet connection or power supply is needed.
 Normally these devices are battery powered and have a long lifetime.
 
-## Network Components of LoRaWAN
-In a LoRaWAN network, the setup involves the following components
+## Network Components of a LoRaWAN
+In a LoRaWAN, the setup involves the following components
 
-- **Sensors/Devices**<br>
+- **Sensors/Devices/Nodes**<br>
   These are the end devices equipped with sensors that collect data, such as temperature, humidity, or motion. They are also called LoRa Nodes.
 - **Gateway**<br>
   Gateways act as communication hubs in the network. They receive data from the devices over long distances and forward it to a central network server in the internet.
@@ -38,7 +38,7 @@ In a LoRaWAN network, the setup involves the following components
 - **Application Server**<br>
   The application server is where data is sent after passing through the network server. Here, the data is processed, stored, and integrated with other systems or applications.
 - **End User Application**<br>
-  The end user application is for example a dashboard where the transmitted data gets processed and visualized. The data can also get transmitted to a automation system which can the data as it would come from a conentional cable connected sensor.
+  The end user application is for example a dashboard where the transmitted data gets processed and visualized. The data can also get transmitted to a automation system.
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/ttn_components.PNG" width="700"><br>
 
@@ -68,17 +68,17 @@ However, the actual range can vary depending on several factors
 - **Obstacles and Environment**<br>
   Physical obstacles like buildings, walls, windows and trees can weaken or block the signal, affecting signal strength and range.
 - **Gateway Density**<br>
-  More gateways nearby improve coverage and increase the chances of successful communication.
+  More gateways nearby improve coverage and increase the chances of successful communication. That has as well an effect on battery life. The better the reception, the faster the device can transmit, the shorter its airtime.
 - **Transmit Power of the Sensor Device**<br>
   Higher transmit power allows for longer range but consumes more energy.
 - **Environmental Factors**<br>
   Weather, humidity, and atmospheric conditions can influence signal strength.
 - **Interference**<br>
-  Electronic noise or interference from other devices can impact reception.
+  Electronic noise or interference from other devices can impact reception and as well battery life.
 - **Antenna Quality**<br>
   The quality of antennas on both the sensor device and gateway affects range and reception quality.
 - **Sensor Device Orientation**<br>
-  Each antenna has a designed orientation. Refer to the sensor device datasheets to see how you place best the devices.
+  Each antenna has a designed orientation. Refer to the sensor device datasheets to see how you orient best the devices.
 
 ## Security
 LoRaWAN networks are designed with robust security measures, for example including encryption, device authentication and message integrity checks.
