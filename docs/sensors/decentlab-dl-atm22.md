@@ -77,7 +77,7 @@ Wind speed, wind direction and temperature sensor.
 
 ![Switching between active and test mode](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_04.png "Switching between active and test mode")
 
-**HINT**
+**HINT**<br>
 To check whether the device is active or in sleep mode (on or off), push the button twice
 - if the blue LED goes on and off, the device is in active mode
 - otherwise, the device is in sleep mode
