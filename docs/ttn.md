@@ -42,7 +42,7 @@ The typical range for LoRaWAN devices is a few hundred meters to a few kilometer
 It is as well possible to place devices in buildings and have the next gateway somewhere outside.
 
 However, the actual range can vary depending on several factors
-- Distance to the Gateway
+- Distance to the Gateway<br>
   The farther the sensor device is from the gateway, the weaker the signal, impacting communication reliability.
 - Obstacles and Environment
   Physical obstacles like buildings, walls, windows and trees can weaken or block the signal, affecting signal strength and range.
