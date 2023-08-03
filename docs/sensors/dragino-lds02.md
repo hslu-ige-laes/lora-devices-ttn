@@ -65,7 +65,7 @@ The LDS02 is a LoRaWAN Window/Door sensor.
 	 - `Profile (Region)` select `EU_863_870`
 5. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
 6. Under `JoinEUI` enter the `App EUI` from the sticker
-7. Enter as well the `DevEUI` and the `AppKey` from the sticker`
+7. Enter as well the `DevEUI` and the `AppKey` from the sticker
 8. Set an end-device name
 9. Press `Register end device`
 10. Open the case and take out the batteries
