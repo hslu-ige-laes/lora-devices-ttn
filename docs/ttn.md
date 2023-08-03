@@ -38,7 +38,7 @@ In a LoRaWAN, the setup involves the following components
 - **Application Server**<br>
   The application server is where data is sent after passing through the network server. Here, the data is processed, stored, and integrated with other systems or applications.
 - **End User Application**<br>
-  The end user application is for example a dashboard where the transmitted data gets processed and visualized. The data can also get transmitted to a automation system.
+  The end user application is for example a dashboard where the transmitted data gets processed and visualized. The data can also get transmitted to an automation system.
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/ttn_components.PNG" width="700"><br>
 
