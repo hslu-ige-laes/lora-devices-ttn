@@ -35,7 +35,7 @@ In a LoRaWAN network, the setup involves the following components
 The data flow is as follows
 1. The sensor sends data
 1. The gateway(s) in the receiving area receive the data and forward them to the network server
-1. The network server validates and decrypts the data, determines the appropriate application, and sends it to the respective application server
+1. The network server validates, deduplicate and decrypts the data, determines the appropriate application, and sends it to the respective application server
 1. The application server processes and stores the data, making it available for analysis or integration with other services
 1. The End User application receives the data from the application server and may process and/or visualize it
 
