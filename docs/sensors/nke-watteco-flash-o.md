@@ -4,10 +4,10 @@ title: nke WATTECO - Flash O
 parent: Sensors
 ---
 
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_01.png" width="250" align="right" class="inline"/>
+
 # nke WATTECO - Flash O
 {: .no_toc }
-
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_01.png" width="250" align="right" class="inline"/>
 
 - Manufacturer: <a href="http://www.nke-watteco.com/" target="_blank">nke WATTECO</a>
 - Product: <a href="http://www.nke-watteco.com/product/flasho/" target="_blank">Flash'O</a>
