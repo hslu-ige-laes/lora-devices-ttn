@@ -49,7 +49,7 @@ Attention, there are four different versions of the same sensor which have diffe
 - <b>Self-Managed -> that's what you want to have!!!</b><br>
   Data goes over the ttn network to the ttn server where the lcm application can fetch them, no monthly charges or fees.
 
-**Other variants which don't work with lcm**
+**Other variants which don't work with TTN**
 - <b>Swisscom LPN</b><br>
   Means that the data goes to the AVELON server via Swisscom low power network, monthly charges apply.
 - <b>The Things Network</b><br>
