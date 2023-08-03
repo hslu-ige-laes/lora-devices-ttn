@@ -6,7 +6,7 @@ parent: Sensors
 # Dragino - LDS02
 {: .no_toc }
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_01.png" width="250" align="right">
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_01.png" width="250" align="right">
 
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
 - Product: <a href="https://www.dragino.com/products/lorawan-nb-iot-door-sensor-water-leak/item/181-lds02.html" target="_blank">LDS02</a>
@@ -25,7 +25,7 @@ The LDS02 is a LoRaWAN Window/Door Sensor.
 
 # Specifications
 - indoor device
-- Price ca. CHF 20.- (03.08.2023)
+- Price ca. CHF 30.- (03.08.2023)
 - Built-in sensors
   - <b>Staus</b>, [open/close]
 - Power Supply: 2 common AAA batteries, 1.5 V
@@ -50,39 +50,10 @@ The LDS02 is a LoRaWAN Window/Door Sensor.
 
 ---
 # Device Configuration
-## Create an Account
-> To register your device you’ll need a "The Things Network" account.<br>
-> If you don't have one already, please follow these steps:
-
-1. Go to [account.thethingsnetwork.org](https://account.thethingsnetwork.org/) and [click create an account](https://account.thethingsnetwork.org/register)
-   - You will receive an email to confirm your email address. You have 24 hours to do so.
-2. Select [Console](https://console.thethingsnetwork.org/) from the menue on top right
-3. From the top right `menu`, select `your name > Settings`. Then change the `default Handler` if the one currently selected is not where you’ll be deploying most of your devices.
-
-## Add an Application
-> To keep the payload decoder as simple as possible it is recommended to create an own application only for the dragino LHT65 sensors. You can add multiple sensor of the same type to the application.
-
-1. Log in and open the [Console > Application](https://console.thethingsnetwork.org/).
-2. In the console, click [(+) add application](https://console.thethingsnetwork.org/applications/add)
-   - For `Application ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
-   - For `Application Description`, enter anything you like.
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_05.png" width="700"><br>
-3. Click `Add Application` to finish.
-
-> You will be redirected to the newly added Application page.
-
-## Handler device information
-Each device is shipped with a sticker with the default keys on it:
-
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_04.png" width="400"><br>
-
-> For an OTAA (over the air activation) only the `DEV EUI`, `APP EUI` and `APP KEY` are required.
-
 ## Device Registration
-> Before a device can communicate via "The Things Network" we need to register it with an application.<br>
-> The dragino sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand mentioned keys.
+> Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
-1. [Log in](https://console.thethingsnetwork.org/applications) and `open the application` to which you wish to add a device
+1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
 2. Under `Settings > EUIs`  click `(+) add EUI`
 3. Click the `pen symbol` and paste the before copied `APP EUI` from the sticker and hit the button `Add EUI`
 4. Click `Devices > register device`
@@ -194,15 +165,7 @@ CC B7 0A 6C 03 9F 01 0A 85 7F FF
 5. Press `save payload functions`
 
 > Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
-> Trigger a new telegram by pressing the ACT-button on the dragino LHT65 for a short time (> 1s and < 3s).<br><br>
-> The dragino LHT65 sends a telegram once every 10 minutes.<br>
+> Trigger a new telegram by pressing the ACT-button on the device for a short time (> 1s and < 3s).<br><br>
+> The device sends a telegram once every 10 minutes.<br>
 
-## Add Storage
-> Normally incoming data in the network only gets forwarded to the end user applications and does not get saved.<br>
-> "The Things Network" offers a seven day storage which is accessible through an API. To activate it, follow these steps.
 
-1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
-2. Select the tab `Integrations > (+) add integration`
-3. Select `Data Storage` and press `Add integration`
-
-> Now we're done with the configuration :-)
