@@ -27,14 +27,21 @@ Wind speed, wind direction and temperature sensor.
 - Outdoor device
 - Price ca. CHF 1'546.- (Sept. 2019)
 - Sensors
-  - <b>Horizontal Wind Speed:</b>: 0 … 30 [m/s], resolution of 0.01 m/s, Accuracy max(0.3 m/s;  3% of measurement)
-  - <b>Wind Gust:</b> 0 … 30 m/s, resolution 0.01 [m/s], Accuracy max(0.3 m/s; 3% of measurement)
-  - <b>Wind Direction:</b> 0 … 359 [°], Resolution: 1°, Accuracy: ±5°
-  - <b>Tilt:</b> -90° … +90 [°], Resolution: 0.1°, Accuracy: ±1°
-  - <b>Temperature:</b> -50 ... +60 [°C], Resolution: 0.1 °C, Accuracy: ±0.6 °C, not protected from solar radiation
+  - <b>Horizontal Wind Speed</b>
+	  Range: 0 … 30 [m/s], Resolution 0.01 m/s, Accuracy max(0.3 m/s;  3% of measurement)
+  - <b>Wind Gust</b>
+	  Range: 0 … 30 m/s, Resolution 0.01 [m/s], Accuracy max(0.3 m/s; 3% of measurement)
+  - <b>Wind Direction</b>
+	  Range: 0 … 359 [°], Resolution: 1°, Accuracy: ±5°
+  - <b>Tilt</b>
+	  Range: -90° … +90 [°], Resolution: 0.1°, Accuracy: ±1°
+  - <b>Temperature:</b>
+	  Range: -50 ... +60 [°C], Resolution: 0.1 °C, Accuracy: ±0.6 °C
+		not protected from solar radiation
 - Power Supply: 2 C alkaline batteries
-  - Expected life time: 3 ... 5 years at roomtemperature
-- Size: Device 135 × 81 × 70 mm, Sensor: 100 x 100 x 160 mm
+- Size:
+  Device 135 × 81 × 70 mm
+	Sensor: 100 x 100 x 160 mm
 - Weight: 1020 g including batteries and sensor (890 g without batteries)
 - Operating conditions: -20 ... 50 °C, 0 ... 100 % RH
 - Cable length: 5 m
@@ -65,11 +72,12 @@ Wind speed, wind direction and temperature sensor.
 - The user button allows to switch between the operating modes as shown in the two llustrations below.
 - To perform a device reset, switch to sleep mode first (if necessary) by pushing and holding the button for 3 seconds until the LEDs flash three times; wait 3 seconds; then push and hold the button for 3 seconds until the LEDs fade in and out.
 - To switch between active and test mode, push the button for 1 second (blue LED on / off). If the blue LED is off, the device is in active or sleep mode. If the blue LED is on, the device is in test mode.
-
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_03.png" width="500" align="left"/>
+<br>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_03.png" width="500" align="left"/><br>
 Switching between active and sleep mode (switch off / on, reset)
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_04.png" width="500" align="left"/>
+<br>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_04.png" width="500" align="left"/><br>
 Switching between active and test mode
 
 **HINT**
