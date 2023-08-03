@@ -55,20 +55,22 @@ The R718N37 is a 3-Phase Current Meter with 3 x 75A Clamp-On Current Transformer
 - Turn on: Press and hold the function key for 3 seconds till the green indicator flashes once.
 - Turn off (Restore to factory setting): Press and hold the function key for 5 seconds till green indicator flashes 20 times.
 - Power off: Remove Batteries
-- Note
-  - The device will be off in default after removing the battery and insert it again.
-  - It is suggested to wait for at least 10 seconds between turning the device on and off.
+**Note**
+- The device will be off in default after removing the battery and insert it again.
+- It is suggested to wait for at least 10 seconds between turning the device on and off.
 
 #### Network Joining
-- Device never joined a network
-	- Turn on the device, and it will search for the network to join.
-  - The green indicator light stays on for 5 seconds: joins the network successfully
-  - The green indicator light remains off: fail to join the network
-- Device had joined already a network
-  - Turn on the device, and it will search for the previous network to join.
-  - The green indicator light stays on for 5 seconds: joins the network successfully
-  - The green indicator light remains off: fail to join the network
-- Fail to Join the Network
+**Device never joined a network**
+- Turn on the device, and it will search for the network to join.
+- The green indicator light stays on for 5 seconds: joins the network successfully
+- The green indicator light remains off: fail to join the network
+
+**Device had joined already a network**
+- Turn on the device, and it will search for the previous network to join.
+- The green indicator light stays on for 5 seconds: joins the network successfully
+- The green indicator light remains off: fail to join the network
+
+**Fail to Join the Network**
   - Suggest to check the device verification information on the gateway
 
 ### Handler device information
