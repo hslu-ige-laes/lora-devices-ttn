@@ -30,15 +30,10 @@ The R718N37 is a 3-Phase Current Meter with 3 x 75A Clamp-On Current Transformer
 - Protection: [Body IP53](https://en.wikipedia.org/wiki/IP_Code), [Sensor IP30](https://en.wikipedia.org/wiki/IP_Code) 
 - Power Supply: 2 batteries, 3.6 V, 3600mAh, saft Li-SOCl2
   - Expected life time: not available
-	- Low Voltage Threshold: 3.2V
-- Size
-  - Body: 112 × 65 × 32 mm
-	- Sensors: 42.5 × 27.5 × 25 mm
-- Weight
-  - Body: ca. 141g
-	- Sensors: ca. 50g * 3
-	- Total: ca. 291g
-Operating Temperature Range: -20°C ... 55°C
+- Low Voltage Threshold: 3.2V
+- Size: Body: 112 × 65 × 32 mm, Sensors: 42.5 × 27.5 × 25 mm
+- Weight: Body: ca. 141g, Sensors: ca. 50g * 3, Total: ca. 291g
+- Operating Temperature Range: -20°C ... 55°C
 
 ---
 
