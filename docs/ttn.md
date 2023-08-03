@@ -26,6 +26,8 @@ They send the data at regular intervals via the LoRaWAN to a so-called gateway. 
 LoRaWAN is perfect for connecting devices that need to send small amounts of data, like temperature readings, air quality information, or water level measurements. These devices can be placed anywhere, no internet connection or power supply is needed.
 Normally these devices are battery powered and have a long lifetime.
 
+---
+
 ## Network Components of a LoRaWAN
 In a LoRaWAN, the setup involves the following components
 
@@ -49,14 +51,20 @@ The data flow is as follows
 1. The application server processes and stores the data, making it available for analysis or integration with other services
 1. The End User application receives the data from the application server and may process and/or visualize it
 
+---
+
 ## Whats special about TTN?
 This public network is free of charge and built on the principle of shared infrastructure, meaning that users can benefit from existing gateways deployed by others in the community.
 As long as there are TTN gateways within the reception range of your sensor device, you can utilize the network without the need to deploy your own gateway.
+
+---
 
 ## Differences to other LoRaWAN networks
 In Switzerland, for example, the company Swisscom offers a similar network, although there is a charge for it.
 Here, Swisscom maintains the entire network infrastructure and you only have to integrate your own sensor devices. With the TTN, every individual can contribute to this infrastructure and 
 install a gateway at home, for example. This gateway then not only forwards LoRa telegrams from one's own devices, but also from other users to the Internet.
+
+---
 
 ## Typical range of transmission
 The typical range for LoRaWAN devices is a few hundred meters to a few kilometers in urban areas and several kilometers in rural or open environments.
@@ -79,6 +87,8 @@ However, the actual range can vary depending on several factors
   The quality of antennas on both the sensor device and gateway affects range and reception quality.
 - **Sensor Device Orientation**<br>
   Each antenna has a designed orientation. Refer to the sensor device datasheets to see how you orient best the devices.
+
+---
 
 ## Security
 LoRaWAN networks are designed with robust security measures, for example including encryption, device authentication and message integrity checks.
