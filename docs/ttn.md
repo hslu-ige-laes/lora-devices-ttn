@@ -53,7 +53,7 @@ The data flow is as follows
 This public network is free of charge and built on the principle of shared infrastructure, meaning that users can benefit from existing gateways deployed by others in the community.
 As long as there are TTN gateways within the reception range of your sensor device, you can utilize the network without the need to deploy your own gateway.
 
-## Difference to other LoRaWAN networks
+## Differences to other LoRaWAN networks
 In Switzerland, for example, the company Swisscom offers a similar network, although there is a charge for it.
 Here, Swisscom maintains the entire network infrastructure and you only have to integrate your own sensor devices. With the TTN, every individual can contribute to this infrastructure and 
 install a gateway at home, for example. This gateway then not only forwards LoRa telegrams from one's own devices, but also from other users to the Internet.
