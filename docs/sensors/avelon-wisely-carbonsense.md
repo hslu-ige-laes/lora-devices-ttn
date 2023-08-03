@@ -58,7 +58,7 @@ Other variants which don't work with lcm
 - **Building Automation**<br>
   Integration in the Avelon automation system, license fees system.
 
-[Ordering Link](https://avelon.com/en/wisely/)
+[Ordering Link](https://avelon.com/en/buy-wisely/)
 
 ---
 
@@ -107,6 +107,7 @@ Other variants which don't work with lcm
 ---
 
 ## Optional Settings
+
 ### Change sending interval
 - Per default the sensor measures each minute the values and sends a packet each hour.
 - To change this, you have to send the device configuration telegrams.
