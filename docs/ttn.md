@@ -19,14 +19,14 @@ The Things Network (TTN) is a global, community-driven, open-source LoRaWAN netw
 
 ---
 
-## 1. What is LoRaWAN 
+## What is LoRaWAN 
 LoRaWAN (Long Range Wide Area Network) is generally a wireless technology that allows devices such as sensors to send data over long distances. These devices are not directly connected to the Internet.
 They send the data at regular intervals via the LoRaWAN to a so-called gateway. This gateway then forwards the data to the Internet.
 
 LoRaWAN is perfect for connecting devices that need to send small amounts of data, like temperature readings, air quality information, or water level measurements. These devices can be placed anywhere, no internet connection or power supply is needed.
 Normally these devices are battery powered and have a long lifetime.
 
-## 2. Network Components of LoRaWAN
+## Network Components of LoRaWAN
 In a LoRaWAN network, the setup involves the following components
 
 - **Sensors/Devices**<br>
@@ -49,16 +49,16 @@ The data flow is as follows
 1. The application server processes and stores the data, making it available for analysis or integration with other services
 1. The End User application receives the data from the application server and may process and/or visualize it
 
-## 3. Whats special about TTN?
+## Whats special about TTN?
 This public network is free of charge and built on the principle of shared infrastructure, meaning that users can benefit from existing gateways deployed by others in the community.
 As long as there are TTN gateways within the reception range of your sensor device, you can utilize the network without the need to deploy your own gateway.
 
-## 4. Differences to other LoRaWAN networks
+## Differences to other LoRaWAN networks
 In Switzerland, for example, the company Swisscom offers a similar network, although there is a charge for it.
 Here, Swisscom maintains the entire network infrastructure and you only have to integrate your own sensor devices. With the TTN, every individual can contribute to this infrastructure and 
 install a gateway at home, for example. This gateway then not only forwards LoRa telegrams from one's own devices, but also from other users to the Internet.
 
-## 5. Typical range of transmission
+## Typical range of transmission
 The typical range for LoRaWAN devices is a few hundred meters to a few kilometers in urban areas and several kilometers in rural or open environments.
 It is as well possible to place devices in buildings and have the next gateway somewhere outside.
 
@@ -80,6 +80,6 @@ However, the actual range can vary depending on several factors
 - **Sensor Device Orientation**<br>
   Each antenna has a designed orientation. Refer to the sensor device datasheets to see how you place best the devices.
 
-## 6. Security
+## Security
 LoRaWAN networks are designed with robust security measures, for example including encryption, device authentication and message integrity checks.
 Overall LoRaWAN networks are considered secure for various IoT applications.
