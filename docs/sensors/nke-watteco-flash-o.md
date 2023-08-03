@@ -63,12 +63,12 @@ The device was successfully tested with the following products.
 ## Adding the Device to TTN
 ### Handler device information
 
-> The supplier should give you a csv file where you can find the `DevEUI`, `AppEUI` and `AppKey`
+- The supplier should give you a csv file where you can find the `DevEUI`, `AppEUI` and `AppKey`
 
 ### Device Registration
 
-> Before a device can communicate via "The Things Network" we need to register it with an application.<br>
-> The nke WATTECO sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand mentioned keys.
+- Before a device can communicate via "The Things Network" we need to register it with an application.<br>
+- The nke WATTECO sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand mentioned keys.
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and `open the application` to which you wish to add a device
 2. Under `Settings > EUIs`  click `(+) add EUI`
@@ -85,8 +85,8 @@ The device was successfully tested with the following products.
 
 ### Device Configuration
 
-> Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
-> We need to tell the "The Things Network" where to find e.g. the counter value in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
+- Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
+- We need to tell the "The Things Network" where to find e.g. the counter value in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
 2. Select the tab `Payload Formats > decoder` and copy/paste the following code from [nke-WATTECO](http://support.nke-watteco.com/wp-content/uploads/2020/02/decodeZCL_svn5139.js):
@@ -109,7 +109,7 @@ function Decoder(bytes, port) {
 
 `110A000F04022300000DF5`
 
-> Attention: all incoming and outgoing frames have to be sent on port 125
+- Attention: all incoming and outgoing frames have to be sent on port 125
 		
 4. You should see the following result
 	
@@ -125,13 +125,13 @@ Attention, the amount of energy or water flow per impulse is meter specific. Ele
 
 5. Press `save payload functions`
 
-> Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
-> Trigger a new telegram by pressing the small button.<br><br>
+- Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
+- Trigger a new telegram by pressing the small button.<br><br>
 
 ### Change measurement interval
-> The Flash'O sends per default a telegram once a day with the counter value.<br>
-> If you want to change that you have to send a telegram to the device. To do so follow the instructions below.<br>
-> There are two properties of the Flash'O, the min sending interval in seconds and the impuls count.<br>
+- The Flash'O sends per default a telegram once a day with the counter value.<br>
+- If you want to change that you have to send a telegram to the device. To do so follow the instructions below.<br>
+- There are two properties of the Flash'O, the min sending interval in seconds and the impuls count.<br>
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
 2. Select the device in the tab `Devices` and scroll down to `Downlink`
@@ -140,14 +140,4 @@ Attention, the amount of energy or water flow per impulse is meter specific. Ele
    - every 1 day: `11 06 00 0f 00 04 02 23 00 00 00 00 00 00 00 00`
 4. In the `Data` tab you should now see the scheduled telegram. The next time the device is sending data a short timeframe for the downlink-message will open and the telegram gets sent. This can be accelerated by pressing the key on the nkewattecoflasho and forcing a telegram to be sent.
 
-> For details and other configurations see [Frame Examples](http://support.nke-watteco.com/flasho/#FrameExamples)
-
-### Add Storage
-> Normally incoming data in the network only gets forwarded to the end user applications and does not get saved.<br>
-> "The Things Network" offers a seven day storage which is accessible through an API. To activate it, follow these steps.
-
-1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
-2. Select the tab `Integrations > (+) add integration`
-3. Select `Data Storage` and press `Add integration`
-
-> Now we're done with the configuration :-)
+- For details and other configurations see [Frame Examples](http://support.nke-watteco.com/flasho/#FrameExamples)

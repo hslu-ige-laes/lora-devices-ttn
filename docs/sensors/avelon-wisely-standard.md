@@ -63,7 +63,7 @@ Other variants which don't work with lcm
 
 ## Adding the Device to TTN
 ### Handler Change
-> The Wisely sensors are per default configured for the Avelon Cloud, even if ordered as "self-managed". Thats why we have to detach the device from the avelon cloud.
+- The Wisely sensors are per default configured for the Avelon Cloud, even if ordered as "self-managed". Thats why we have to detach the device from the avelon cloud.
 
 1. Switch the device on and scan the `QR-Code` with e.g. a Mobile Phone ([detailed information here](https://avelon.com/wp-content/uploads/2020/03/wisely-quick-guide.pdf))
 2. Click on the round `information (i) symbol` top right aside the sensor name
@@ -81,8 +81,8 @@ Other variants which don't work with lcm
 13. Now we have to `reset the device manually` approximately 1-2 minutes after closing the previous dialog by pressing the small button on the back of the device. `5 seconds -> Off` , `2 seconds -> On`
 
 ### Device Registration
-> Before a device can communicate via "The Things Network" we need to register it with an application.<br>
-> The Avelon Wisely sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand copied keys.
+- Before a device can communicate via "The Things Network" we need to register it with an application.<br>
+- The Avelon Wisely sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand copied keys.
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and `open the application` to which you wish to add a device
 2. Under `Settings > EUIs`  click `(+) add EUI`
@@ -98,8 +98,8 @@ Other variants which don't work with lcm
    - if not, please wait several hours and check again. The change of the handler can take a long time...
 
 ### Device Configuration
-> Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
-> We need to tell the "The Things Network" where to find e.g. the temperature in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
+- Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
+- We need to tell the "The Things Network" where to find e.g. the temperature in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
 2. Select the tab `Payload Formats > decoder` and copy/paste the following code:<br>
@@ -197,30 +197,18 @@ FE 25 37 00 E2 6D 25 37 00 E2 6D 00
 
 5. Press `save payload functions`
 
-> Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
-> Trigger a new telegram by pressing the reset-button on the Wisely for a short time (<2 seconds).<br><br>
-> The Wisely sends a telegram once an hour with four 15 minutes measurements.<br>
-> To keep the amount of data small the payload decoder takes these four measurements and saves the mean value with the timestamp of the last measurement.
-
-### Add Storage
-> Normally incoming data in the network only gets forwarded to the end user applications and does not get saved.<br>
-> "The Things Network" offers a seven day storage which is accessible through an API. To activate it, follow these steps.
-
-1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
-2. Select the tab `Integrations > (+) add integration`
-3. Select `Data Storage` and press `Add integration`
-
-> Now we're done with the configuration :-)
-> Info: now we have connected the sensor to our ttn account Therefore the QR code on the device does not work anymore and can be removed.
-
+- Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
+- Trigger a new telegram by pressing the reset-button on the Wisely for a short time (<2 seconds).<br><br>
+- The Wisely sends a telegram once an hour with four 15 minutes measurements.<br>
+- To keep the amount of data small the payload decoder takes these four measurements and saves the mean value with the timestamp of the last measurement.
 
 ### Optional Settings
 #### Change sending interval
-> Per default the sensor measures each minute the values and sends a packet each hour.
-> To change this, you have to send the device configuration telegrams.
-> You have to send the so called downlink messages to port 10
-> The device transmits its data after "CyclicTransmissionCounter" × "SensorSampleTime" starting from the last transmission.
-> The example below sends data every 20 minutes with the settings
+- Per default the sensor measures each minute the values and sends a packet each hour.
+- To change this, you have to send the device configuration telegrams.
+- You have to send the so called downlink messages to port 10
+- The device transmits its data after "CyclicTransmissionCounter" × "SensorSampleTime" starting from the last transmission.
+- The example below sends data every 20 minutes with the settings
   - CyclicTransmissionCounter = 20
   - SensorSampleTime = 1
 
@@ -233,7 +221,7 @@ FE 25 37 00 E2 6D 25 37 00 E2 6D 00
 7. Add Payload for CyclicTransmissionCounter `FF F0 14` and press send 
 8. Press again the button on the back of the sensor
 
-> Now the sampling interval should be changed.
-> See the payload description for more details.
+- Now the sampling interval should be changed.
+- See the payload description for more details.
 
 

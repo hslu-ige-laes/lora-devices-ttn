@@ -26,7 +26,7 @@ The LDS02 is a LoRaWAN Window/Door Sensor.
 
 ## Specifications
 - indoor device
-- Price ca. CHF 30.- (03.08.2023)
+- Price ca. CHF 22.- (03.08.2023)
 - Built-in sensors
   - <b>Magnetic reed switch</b>, [open/close]
 - Power Supply: 2 common AAA batteries, 1.5 V
@@ -39,7 +39,9 @@ The LDS02 is a LoRaWAN Window/Door Sensor.
 ---
 ## Documents
   - [Payload description ttn v1.5 (2023-08-03)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_04.txt)
+	
   - [Datasheet from dragino.com (2023-08-03)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_02.pdf)
+	
 	- <a href="http://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20LoRaWAN%20End%20Nodes/LDS02%20-%20LoRaWAN%20Door%20Sensor%20User%20Manual/" target="_blank">User Manual (online)</a>
 
 ---
@@ -52,7 +54,7 @@ The LDS02 is a LoRaWAN Window/Door Sensor.
 ---
 ## Adding the Device to TTN
 ### Device Registration
-> Before a device can communicate via "The Things Network" we have to add it to an application.<br>
+- Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
 1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
 2. Under `Settings > EUIs`  click `(+) add EUI`
@@ -67,8 +69,8 @@ The LDS02 is a LoRaWAN Window/Door Sensor.
 6. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
 
 ### Device Configuration
-> Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
-> We need to tell the "The Things Network" where to find e.g. the temperature etc. in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
+- Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
+- We need to tell the "The Things Network" where to find e.g. the temperature etc. in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
 2. Select the tab `Payload Formats > decoder` and copy/paste the following code:
@@ -157,16 +159,16 @@ CC B7 0A 6C 03 9F 01 0A 85 7F FF
   "TempC_SHT": "26.68"
 }
 ```
-> <b>BatV</b> -> battery voltage [V]<br>
-> <b>Ext_sensor</b> -> connected external sensor<br>
-> <b>Hum_SHT</b> -> Humidity internal sensor [%rH]<br>
-> <b>TempC_DS</b> -> Temperature external sensor [°C]<br>
-> <b>TempC_SHT</b> -> Temperature internal sensor [°C]<br>
+- <b>BatV</b> -> battery voltage [V]<br>
+- <b>Ext_sensor</b> -> connected external sensor<br>
+- <b>Hum_SHT</b> -> Humidity internal sensor [%rH]<br>
+- <b>TempC_DS</b> -> Temperature external sensor [°C]<br>
+- <b>TempC_SHT</b> -> Temperature internal sensor [°C]<br>
 
 5. Press `save payload functions`
 
-> Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
-> Trigger a new telegram by pressing the ACT-button on the device for a short time (> 1s and < 3s).<br><br>
-> The device sends a telegram once every 10 minutes.<br>
+- Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
+- Trigger a new telegram by pressing the ACT-button on the device for a short time (> 1s and < 3s).<br><br>
+- The device sends a telegram once every 10 minutes.<br>
 
 

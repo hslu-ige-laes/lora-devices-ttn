@@ -60,11 +60,11 @@ Each device is shipped with a sticker with the default keys on it:
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_04.png" width="400"><br>
 
-> For an OTAA (over the air activation) only the `DEV EUI`, `APP EUI` and `APP KEY` are required.
+- For an OTAA (over the air activation) only the `DEV EUI`, `APP EUI` and `APP KEY` are required.
 
 ### Device Registration
-> Before a device can communicate via "The Things Network" we need to register it with an application.<br>
-> The dragino sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand mentioned keys.
+- Before a device can communicate via "The Things Network" we need to register it with an application.<br>
+- The dragino sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand mentioned keys.
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and `open the application` to which you wish to add a device
 2. Under `Settings > EUIs`  click `(+) add EUI`
@@ -79,8 +79,8 @@ Each device is shipped with a sticker with the default keys on it:
 6. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
 
 ### Device Configuration
-> Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
-> We need to tell the "The Things Network" where to find e.g. the temperature etc. in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
+- Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
+- We need to tell the "The Things Network" where to find e.g. the temperature etc. in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
 2. Select the tab `Payload Formats > decoder` and copy/paste the following code:
@@ -169,24 +169,15 @@ CC B7 0A 6C 03 9F 01 0A 85 7F FF
   "TempC_SHT": "26.68"
 }
 ```
-> <b>BatV</b> -> battery voltage [V]<br>
-> <b>Ext_sensor</b> -> connected external sensor<br>
-> <b>Hum_SHT</b> -> Humidity internal sensor [%rH]<br>
-> <b>TempC_DS</b> -> Temperature external sensor [°C]<br>
-> <b>TempC_SHT</b> -> Temperature internal sensor [°C]<br>
+- <b>BatV</b> -> battery voltage [V]<br>
+- <b>Ext_sensor</b> -> connected external sensor<br>
+- <b>Hum_SHT</b> -> Humidity internal sensor [%rH]<br>
+- <b>TempC_DS</b> -> Temperature external sensor [°C]<br>
+- <b>TempC_SHT</b> -> Temperature internal sensor [°C]<br>
 
 5. Press `save payload functions`
 
-> Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
-> Trigger a new telegram by pressing the ACT-button on the dragino LHT65 for a short time (> 1s and < 3s).<br><br>
-> The dragino LHT65 sends a telegram once every 10 minutes.<br>
+- Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
+- Trigger a new telegram by pressing the ACT-button on the dragino LHT65 for a short time (> 1s and < 3s).<br><br>
+- The dragino LHT65 sends a telegram once every 10 minutes.<br>
 
-## Add Storage
-> Normally incoming data in the network only gets forwarded to the end user applications and does not get saved.<br>
-> "The Things Network" offers a seven day storage which is accessible through an API. To activate it, follow these steps.
-
-1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
-2. Select the tab `Integrations > (+) add integration`
-3. Select `Data Storage` and press `Add integration`
-
-> Now we're done with the configuration :-)
