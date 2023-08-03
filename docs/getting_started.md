@@ -30,7 +30,7 @@ permalink: /docs/getting_started
 1. Select [Console](https://console.thethingsnetwork.org/) from the menue on top right, that will bring you to [console.cloud.thethings.network/](https://console.cloud.thethings.network/)
 1. Choose the cluster, for Europe thats `Europe 1`
 
-## 1. Create a new Application
+## 2. Create a new Application
 
 - Each device must be assigned to an application which you let organize and manage them.
 - It is recommended to create an own application for each project and sensor model.
@@ -46,5 +46,5 @@ permalink: /docs/getting_started
 
 You will be redirected to an application page where you can add and manage devices.
 
-## 1. Adding Sensor Devices
+## 3. Adding Sensor Devices
 Refer to the indiviual [sensor pages](https://hslu-ige-laes.github.io/lora-devices-ttn/#sensor-overview). There you'll find step by step guides on how to add and configure each device.
