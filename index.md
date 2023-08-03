@@ -8,7 +8,7 @@ permalink: /
 
 # LoRaWAN device integration in ttn
 
-This documentation gives an overview of different LoRaWAN devices and describes how to integrate them into [The Things Network (ttn)](https://www.thethingsnetwork.org/).
+This documentation gives an overview of different LoRaWAN devices and describes how to integrate them into [The Things Network (ttn)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/ttn).
 
 - Choose a sensor in the overview below and click on the link
 - The following page then includes specifications, data sheets and step by step installation- and configuration procedures
