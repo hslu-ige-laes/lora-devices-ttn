@@ -6,7 +6,7 @@ description: "LoRa Devices for The Things Network"
 permalink: /
 ---
 <img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn-logo.svg" width="128" align="right" class="inline"/>
-# LoRa Devices for The Things Network
+# LoRa Devices for TTN
 
 This documentation gives an overview of different LoRaWAN devices and describes how to integrate them into [The Things Network (TTN)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/ttn).
 
