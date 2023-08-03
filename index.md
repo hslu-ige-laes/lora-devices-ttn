@@ -8,14 +8,10 @@ permalink: /
 
 # LoRaWAN device integration in ttn
 
-- This documentation gives an overview of different LoRaWAN devices
-- It includes
-  - an overview of the most important specifications of the devices
-  - important documents
-  - ordering information
-  - step by step integration into [The Things Network (ttn)](https://www.thethingsnetwork.org/)
-  - payload codes
-  - device configurations
+This documentation gives an overview of different LoRaWAN devices and describes how to integrate them into [The Things Network (ttn)](https://www.thethingsnetwork.org/).
+
+- Choose a sensor in the overview below and click on the link
+- The following page then includes specifications, data sheets and step by step installation- and configuration procedures
 
 <hr>
 
@@ -31,15 +27,14 @@ permalink: /
 
 <hr>
 
-## Installation and Configuration
-- Choose a sensor in the overview above and click on the link
-- The opened page then includes specifications, data sheets and step by step installation- and configuration procedures
-
-<hr>
-
 **Disclaimer**<br>
-- This is an independent collection of equipment with which our institute works with
-- The authors decline any liability or responsibility in connection with the published documentation
+- This is an independent collection of devices that have already been used or tested by our institute for research projects.
+- This website is not endorsed or sponsored by any manufacturer or supplier.
+- All products listed were obtained and paid for through freely available channels at the normal price.
+- The products were chosen either for their low price or their functionalities.
+- There are no affiliate links implemented on this website.
+- Neither the Lucerne University of Applied Sciences and Arts, nor the Institute IGE nor any of its employees profit from the purchase of any of the listed products.
+- The authors disclaim any liability or responsibility in connection with the published information.
 
 &copy; Lucerne University of Sciences and Arts, 2023
 
