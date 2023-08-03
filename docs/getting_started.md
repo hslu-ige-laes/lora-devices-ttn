@@ -25,12 +25,16 @@ permalink: /docs/getting_started
 1. Go to [www.thethingsnetwork.org/login/](https://www.thethingsnetwork.org/login/) and log in
 	 - If you don't have an account, click `Sign up for free` to create one
    - You will receive an email to confirm your email address. You have 24 hours to do so.
+	 
+---
 
 ## Console
 - The `Console` is the place where you can add sensor devices and gateways.
  
 1. Once logged in, select [Console](https://console.thethingsnetwork.org/) from the menue on top right, that will bring you to [console.cloud.thethings.network/](https://console.cloud.thethings.network/)
 1. Choose the cluster, for Europe thats `Europe 1`
+
+---
 
 ## Create a new Application
 - Each device must be assigned to an application which you let organize and manage them.
@@ -47,8 +51,12 @@ permalink: /docs/getting_started
 
 You will be redirected to an application page where you can add and manage devices.
 
+---
+
 ## Adding Sensor Devices
 Refer to the indiviual [sensor pages](https://hslu-ige-laes.github.io/lora-devices-ttn/#sensor-overview). There you'll find step by step guides on how to add and configure each device.
+
+---
 
 ## Fetching the Data via MQTT
 - MQTT (Message Queuing Telemetry Transport) is a lightweight and efficient messaging protocol commonly used in IoT.
@@ -56,6 +64,8 @@ Refer to the indiviual [sensor pages](https://hslu-ige-laes.github.io/lora-devic
 - For that its required to create an API key, refer to this [documentation](https://www.thethingsindustries.com/docs/integrations/mqtt/) for details.
 - Be aware of, that this is a fire and forget principle. That means, in The Things Network Community you are responsible for saving the data.
 - If your end user application or database is down e.g. because of maintenance, the data gets per default not saved. Refer to the [Add Storage](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#add-storage) section below for a short time storage option.
+
+---
 
 ## Add Storage
 - The Storage Integration allows storing received upstream messages in a persistent database, and retrieving them at a later time.
