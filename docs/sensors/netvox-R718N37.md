@@ -96,7 +96,7 @@ The R718N37 is a 3-Phase Current Meter with 3 x 75A Clamp-On Current Transformer
 10. Replace the batteries and close the case
 
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
-- The payload formatter should already be preset. If not, you can copy/paste it
+- The payload formatter should already be preset. If not, you can copy/paste it from below
 
 ---
 

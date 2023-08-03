@@ -27,10 +27,10 @@ The Wisely Carbonsense is an indoor room sensor to measure temperature, humidity
 - Indoor device
 - Price ca. CHF 191.- (25.05.2022)
 - Sensors
-  - <b>Temperature</b>, -10 ... +80 [°C], ± 0.1 °C between 20 ... 60 °C
-  - <b>relative Humidity</b>, 0 ... 95[%rH], ± 1.5 %rH between 10...80 %rH
-  - <b>CO<sub>2</sub></b>, 400 ... 5'000 [ppm], ± 30 ppm + 3 % of measurement value
-  - <b>atmosheric pressure</b>, [hPa], ± 1 hPa
+  - **Temperature**, -10 ... +80 [°C], ± 0.1 °C between 20 ... 60 °C
+  - **relative Humidity**, 0 ... 95[%rH], ± 1.5 %rH between 10...80 %rH
+  - **CO<sub>2</sub>**, 400 ... 5'000 [ppm], ± 30 ppm + 3 % of measurement value
+  - **atmosheric pressure**, [hPa], ± 1 hPa
 - Power Supply: 1 battery, 3.6 V, 3600 mAh, (A), Li-SOCl₂
   - Expected life time: 3 ... 5 years at roomtemperature
 - Size: 80 × 80 × 27 mm
@@ -39,30 +39,30 @@ The Wisely Carbonsense is an indoor room sensor to measure temperature, humidity
 ---
 
 ## Documents
-  - [Payload description from avelon.cloud help (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_02.pdf)
-  - [Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_03.pdf)
+- [Payload description from avelon.cloud help (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_02.pdf)
+- [Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_03.pdf)
   
 ---
 
 ## Ordering Info
 Attention, there are four different versions of the same sensor which have different software loaded on them. Only the "Self-Managed" version works with the lcm application. Do not order the version "The Things Network", it will not work with the lcm application.
 
-- <b>Self-Managed -> that's what you want to have!!!</b><br>
+- **Self-Managed -> that's what you want to have!!!**<br>
   Data goes over the ttn network to the ttn server where the lcm application can fetch them, no monthly charges or fees.
 
 Other variants which don't work with lcm
-- <b>Swisscom LPN</b><br>
+- **Swisscom LPN**<br>
   Means that the data goes to the AVELON server via Swisscom low power network, monthly charges apply.
-- <b>The Things Network</b><br>
+- **The Things Network**<br>
   Means that the data goes via ttn, but to the AVELON-server! No monthly charges. In this case the lcm application can't access the data!
-- <b>Building Automation</b><br>
+- **Building Automation**<br>
   Integration in the Avelon automation system, license fees system.
 
 [Ordering Link](https://avelon.com/en/wisely/)
 
 ---
 
-## Adding the Device to TTN
+## Device specific Information
 ### Handler Change
 - The Wisely sensors are per default configured for the Avelon Cloud, even if ordered as "self-managed". Thats why we have to detach the device from the avelon cloud.
 
@@ -81,29 +81,76 @@ Other variants which don't work with lcm
 12. Copy the `Device EUI`, `Application EUI` and `Application Key`, we will need them later on.
 13. Now we have to `reset the device manually` approximately 1-2 minutes after closing the previous dialog by pressing the small button on the back of the device. `5 seconds -> Off` , `2 seconds -> On`
 
-### Device Registration
+---
+
+## Adding the Device to TTN
 - Before a device can communicate via "The Things Network" we need to register it with an application.<br>
 - The Avelon Wisely sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand copied keys.
 
-1. [Log in](https://console.thethingsnetwork.org/applications) and `open the application` to which you wish to add a device
-2. Under `Settings > EUIs`  click `(+) add EUI`
-3. Click the `pen symbol` and paste the before copied `Application EUI` from avelon.cloud and hit the button `Add EUI`
-4. Click `Devices > register device`
-   - For `Device ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
-   - For `Device EUI` paste the copied "`Device EUI from avelon.cloud`
-   - For `App Key` press the `pen icon` and paste the `Application Key from avelon.cloud`
-   - Select the correct `App EUI` which we entered in step 3
-   - press the button `Register`
-5. Now we have to reset the device manually by pressing the small button on the back of the device. `5 seconds -> Off` , `2 seconds -> On`
-6. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
-   - if not, please wait several hours and check again. The change of the handler can take a long time...
+1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
+2. Under `Overview` click `(+) Register device`
+3. Under `Input method` select `Enter end device specifics manually`
+4. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
+5. Under `LoRaWAN version` select `LoRaWAN Specification 1.0.3`
+6. As `JoinEUI` enter the `Application EUI`, fill in as well the `Device EUI` and the `Application Key`
+7. Set an end-device name
+8. Press `Register end device`
+9. Add the payload formatter
+   - Switch to the tab `Payload formatters`
+   - As `Formatter type` select `Custom Javascript formatter`   
+   - Copy/Paste the code from the payload Formatter section below
+   - Click `Save changes`
+10. Now we have to reset the device manually by pressing the small button on the back of the device. `5 seconds -> Off` , `2 seconds -> On`
+11. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
+    - if not, please wait several hours and check again. The change of the handler can take a long time...
 
-### Device Configuration
-- Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
-- We need to tell the "The Things Network" where to find e.g. the temperature in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
+---
 
-1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
-2. Select the tab `Payload Formats > decoder` and copy/paste the following code:<br>
+## Optional Settings
+### Change sending interval
+- Per default the sensor measures each minute the values and sends a packet each hour.
+- To change this, you have to send the device configuration telegrams.
+- You have to send the so called downlink messages to port 10
+- The device transmits its data after "CyclicTransmissionCounter" × "SensorSampleTime" starting from the last transmission.
+- The example below sends data every 20 minutes with the settings
+  - CyclicTransmissionCounter = 20
+  - SensorSampleTime = 1
+
+1. Select the device and change to the tab `Messaging`, select `Downlink`
+2. Change the `FPort to 10`
+3. Copy/paste `FF 02 01` into the `Payload` field for changing SensorSampleTime
+4. Press `Send`
+5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+6. Copy/paste `FF F0 14` into the `Payload` field for changing CyclicTransmissionCounter
+7. Press `Send`
+8. Press again the button on the back of the sensor
+
+- Now the sampling interval should be changed.
+- See the payload description for more details.
+
+
+### Change the led blinking behaviour
+- If an adjustable CO2 limit is exceeded, the LED on the front side of the device blinks every 60 seconds (250 ms lighting, 500 ms pause - repeating 4 times).
+- With the following procedure you can deactivate it.
+
+1. Select the device and change to the tab `Messaging`, select `Downlink`
+2. Change the `FPort to 10`
+3. Copy/paste `06 06 0B 03 20 00 00 FF 00` into the `Payload` field for deactivating the blue led
+4. Press `Send`
+5. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+6. Copy/paste `06 06 0B 05 78 FF 00 00 00` into the `Payload` field for deactivating the red led
+7. Press `Send`
+8. Press again the button on the back of the sensor
+
+- Now the led should not blink anymore.
+- To reset the behaviour exchange the last byte with `01` instead of `00`:
+  - `06 06 0B 03 20 00 00 FF 01`
+  - `06 06 0B 05 78 FF 00 00 01`
+
+---
+
+## Payload formatter
+
 ```javascript
 function Decoder(bytes, port) {
   var decoded = {};
@@ -168,85 +215,3 @@ function Decoder(bytes, port) {
 return decoded;
 }
 ```
-
-3. Copy/Paste the following test payload into the field `Payload`, enter **5** in the port-field on the right of the Payload and press `Test`
-```
-FE25F3010B57029325F2010B56027325F3010A56027C25F3010A5702A825F2010A56028625F2010A56027800
-```
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-standard_05.png" width="700" class="inline"/><br>
-
-4. You should see the following result
-```json
-{
-  "batSta": "OK",
-  "batVal": 100,
-  "co2": 647,
-  "hum": 43.2,
-  "press": 971,
-  "temp": 26.6
-}
-```
-  - <b>batSta</b>
-    Battery status ["OK";"OK, external power supply";"Error, could not acquire the voltage"]<br>
-  - <b>batVal</b>
-    Battery value [%]<br>
-  - <b>co2</b>
-    Air Quality CO2 [ppm]<br>
-  - <b>hum</b>
-    Humidity [%rH]<br>
-  - <b>press</b>
-    Air pressure [hPa]<br>
-  - <b>temp</b>
-    Temperature [°C]<br>
-
-5. Press `save payload functions`
-
-- Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
-- Trigger a new telegram by pressing the reset-button on the Wisely for a short time (<2 seconds).<br><br>
-- The Wisely sends a telegram once an hour with four 15 minutes measurements.<br>
-- To keep the amount of data small the payload decoder takes these four measurements and saves the mean value with the timestamp of the last measurement.
-
-### Optional Settings
-#### Change sending interval
-- Per default the sensor measures each minute the values and sends a packet each hour.
-- To change this, you have to send the device configuration telegrams.
-- You have to send the so called downlink messages to port 10
-- The device transmits its data after "CyclicTransmissionCounter" × "SensorSampleTime" starting from the last transmission.
-- The example below sends data every 20 minutes with the settings
-  - CyclicTransmissionCounter = 20
-  - SensorSampleTime = 1
-
-1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
-2. Select the tab `Devices` and select your device where you want to change the settings
-3. Sroll down to "Downlink"
-4. Select `FPort 10`
-5. Add Payload for SensorSampleTime `FF 02 01` and press send
-6. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
-7. Add Payload for CyclicTransmissionCounter `FF F0 14` and press send 
-8. Press again the button on the back of the sensor
-
-- Now the sampling interval should be changed.
-- See the payload description for more details.
-
-
-#### Change the led blinking behaviour
-- If an adjustable CO2 limit is exceeded, the LED on the front side of the device blinks every 60 seconds (250 ms lighting, 500 ms pause - repeating 4 times).
-- With the following procedure you can deactivate it.
-
-
-1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
-2. Select the tab `Devices` and select your device where you want to change the settings
-3. Sroll down to "Downlink"
-4. Select `FPort 10`
-5. Add Payload for blue led to deactivate `06 06 0B 03 20 00 00 FF 00` and press send
-6. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
-7. Add Payload for red led `06 06 0B 05 78 FF 00 00 00` and press send 
-8. Press again the button on the back of the sensor
-
-
-- Now the led should not blink anymore.
-- To reset the behaviour exchange the last byte with `01` instead of `00`:
-  - `06 06 0B 03 20 00 00 FF 01`
-  - `06 06 0B 05 78 FF 00 00 01`
-  
-- See the payload description for more details.

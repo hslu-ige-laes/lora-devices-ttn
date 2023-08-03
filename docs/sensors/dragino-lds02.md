@@ -60,8 +60,8 @@ The LDS02 is a LoRaWAN Window/Door sensor.
 4. Enter the following device information
    - `End device brand` select `Dragino Technology Co., Limited`
    - `Model` select `LDS02`
-   - `Hardware Ver.` select `Unknown Ver.`
-   - `Firmware` select `1.5`
+   - `Hardware Ver.` select `Unknown Ver.` or whatever is possible or on the sticker
+   - `Firmware` select `1.5` or whatever is possible or on the sticker
 	 - `Profile (Region)` select `EU_863_870`
 5. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
 6. Under `JoinEUI` enter the `App EUI` from the sticker
@@ -72,7 +72,7 @@ The LDS02 is a LoRaWAN Window/Door sensor.
 11. Replace the batteries and close the case
 
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
-- The payload formatter should already be preset. If not, you can copy/paste it
+- The payload formatter should already be preset. If not, you can copy/paste it from below
 
 ---
 ## Payload formatter
