@@ -1,4 +1,4 @@
-# LoRa Devices for The Things Network
+# LoRa Devices for TTN
 <img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn-logo.svg" width="128" align="right" class="inline"/>
 
 > **See [https://hslu-ige-laes.github.io/lora-devices-ttn/](https://hslu-ige-laes.github.io/lora-devices-ttn/) for documentation**
