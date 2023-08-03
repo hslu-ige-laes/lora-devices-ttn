@@ -18,9 +18,9 @@ Normally these devices are battery powered and have a long lifetime.
 In a LoRaWAN network, the setup involves the following components
 
 - **Sensors/Devices**<br>
-  These are the end devices equipped with sensors that collect data, such as temperature, humidity, or motion.
+  These are the end devices equipped with sensors that collect data, such as temperature, humidity, or motion. They are also called LoRa Nodes.
 - **Gateway**<br>
-  Gateways act as communication hubs in the network. They receive data from the IoT devices over long distances and forward it to a central network server in the internet.
+  Gateways act as communication hubs in the network. They receive data from the devices over long distances and forward it to a central network server in the internet.
 - **Network Server**<br>
   The network server manages the entire LoRaWAN network. It processes data received from gateways, deduplicates telegrams, manages device registrations, handles security, and routes data to the appropriate applications.
 - **Application Server**<br>
@@ -48,30 +48,30 @@ However, the actual range can vary depending on several factors
   Physical obstacles like buildings, walls, windows and trees can weaken or block the signal, affecting signal strength and range.
 - **Gateway Density**<br>
   More gateways nearby improve coverage and increase the chances of successful communication.
-- **Transmit Power of the Device**<br>
+- **Transmit Power of the Sensor Device**<br>
   Higher transmit power allows for longer range but consumes more energy.
 - **Environmental Factors**<br>
   Weather, humidity, and atmospheric conditions can influence signal strength.
 - **Interference**<br>
   Electronic noise or interference from other devices can impact reception.
 - **Antenna Quality**<br>
-  The quality of antennas on both the IoT device and gateway affects range and reception quality.
-- **Device Orientation**<br>
-  Each antenna has a designed orientation. Refer to the device datasheets to see how you place best the devices.
+  The quality of antennas on both the sensor device and gateway affects range and reception quality.
+- **Sensor Device Orientation**<br>
+  Each antenna has a designed orientation. Refer to the sensor device datasheets to see how you place best the devices.
 
 ## What is TTN?
 `The Things Network - TTN` is a global, community-driven, open-source LoRaWAN network. It provides an infrastructure for connecting own devices free of charge. 
 This public network is built on the principle of shared infrastructure, meaning that users can benefit from existing gateways deployed by others in the community.
-As long as there are TTN gateways within the reception range of your device, you can utilize the network without the need to deploy your own gateway.
+As long as there are TTN gateways within the reception range of your sensor device, you can utilize the network without the need to deploy your own gateway.
 
 ## Difference to other LoRaWAN networks
 In Switzerland, for example, the company Swisscom offers a similar network, although there is a charge for it.
-Here, Swisscom maintains the entire network infrastructure and you only have to integrate your own devices. With the TTN, every individual can contribute to this infrastructure and 
+Here, Swisscom maintains the entire network infrastructure and you only have to integrate your own sensor devices. With the TTN, every individual can contribute to this infrastructure and 
 install a gateway at home, for example. This gateway then not only forwards LoRa telegrams from one's own devices, but also from other users to the Internet.
 
 ## Getting started with TTN
 ### Account and Console
-> The `Console` is the place where you can add devices and gateways.
+> The `Console` is the place where you can add sensor devices and gateways.
 > First of all you need a "The Things Network" account.<br>
 > The account and usage is free of charge.
 
@@ -81,7 +81,7 @@ install a gateway at home, for example. This gateway then not only forwards LoRa
 1. Select [Console](https://console.thethingsnetwork.org/) from the menue on top right, that will bring you to [console.cloud.thethings.network/](https://console.cloud.thethings.network/)
 1. Choose the cluster, for Europe thats `Europe 1`
 
-### Create a new application
+### Create a new Application
 > Each device must be assigned to an application which you let organize and manage them.
 > It is recommended to create an own application for each project and sensor model.
 > You can add multiple sensor of the same type to the application.
@@ -96,5 +96,5 @@ install a gateway at home, for example. This gateway then not only forwards LoRa
 
 You will be redirected to an application page where you can add and manage devices.
 
-### Adding devices
+### Adding Sensor Devices
 Refer to the indiviual [sensor pages](https://hslu-ige-laes.github.io/lora-devices-ttn/#sensor-overview). There you'll find step by step guides on how to add and configure each device.
