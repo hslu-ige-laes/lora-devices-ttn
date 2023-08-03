@@ -51,15 +51,17 @@ You will be redirected to an application page where you can add and manage devic
 Refer to the indiviual [sensor pages](https://hslu-ige-laes.github.io/lora-devices-ttn/#sensor-overview). There you'll find step by step guides on how to add and configure each device.
 
 ## Fetching the Data via MQTT
-MQTT (Message Queuing Telemetry Transport) is a lightweight and efficient messaging protocol commonly used in IoT.
-The Things Network exposes the data via such an [MQTT Server](https://www.thethingsindustries.com/docs/integrations/mqtt/). Your End User application simply can subscribe to it and receives all sensor data updates in real time.
-For that its required to create an API key, refer to this [documentation](https://www.thethingsindustries.com/docs/integrations/mqtt/) for details.
+- MQTT (Message Queuing Telemetry Transport) is a lightweight and efficient messaging protocol commonly used in IoT.
+- The Things Network exposes the data via such an [MQTT Server](https://www.thethingsindustries.com/docs/integrations/mqtt/). Your End User application simply can subscribe to it and receives all sensor data updates in real time.
+- For that its required to create an API key, refer to this [documentation](https://www.thethingsindustries.com/docs/integrations/mqtt/) for details.
+- Be aware of, that this is a fire and forget principle. That means, in The Things Network Community you are responsible for saving the data.
+- If your end user application or database is down e.g. because of maintenance, the data gets per default not saved. Refer to the [Add Storage](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#add-storage) section below for a short time storage option.
 
 ## Add Storage
 - The Storage Integration allows storing received upstream messages in a persistent database, and retrieving them at a later time.
-- Normally incoming data in the network only gets forwarded to the end user applications and does not get saved.
-- "The Things Network" offers a [24h storage](https://www.thethingsindustries.com/docs/integrations/storage/) which is accessible through an API.
-- If the end user application or database is down for maintenance reasons, its possible to fetch the missed data from this storage.
+- Normally incoming data in the network only gets forwarded to the end user applications via the [MQTT Server](https://www.thethingsindustries.com/docs/integrations/mqtt/) and does not get saved. Fire and forget.
+- The Things Network Community offers a [24h storage](https://www.thethingsindustries.com/docs/integrations/storage/) which is accessible through an API.
+- Use case: If the end user application or database is down for maintenance reasons, its possible to fetch the missed data from this storage.
 - To activate it, follow these steps.
 
 1. [Log in](https://eu1.cloud.thethings.network/console/applications) and go to `applications`
