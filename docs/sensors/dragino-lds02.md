@@ -3,10 +3,11 @@ layout: default
 title: Dragino - LDS02
 parent: Sensors
 ---
-# Dragino - LDS02
-{: .no_toc }
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_01.jpg" width="250" align="right">
+
+# Dragino - LDS02
+{: .no_toc }
 
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
 - Product: <a href="https://www.dragino.com/products/lorawan-nb-iot-door-sensor-water-leak/item/181-lds02.html" target="_blank">LDS02</a>
@@ -27,7 +28,7 @@ The LDS02 is a LoRaWAN Window/Door Sensor.
 - indoor device
 - Price ca. CHF 30.- (03.08.2023)
 - Built-in sensors
-  - <b>Staus</b>, [open/close]
+  - <b>Magnetic reed switch</b>, [open/close]
 - Power Supply: 2 common AAA batteries, 1.5 V
   - Expected life time: depending on usage, 16'000 ~ 70'000 state changes
 - LoRaWAN version: 1.0.3
