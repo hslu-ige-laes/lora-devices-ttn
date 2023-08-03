@@ -32,7 +32,7 @@ In a LoRaWAN network, the setup involves the following components
 
 The data flow is as follows
 1. The sensor sends data
-1. The gateway(s) in reception range receive the data and forwards it to the network server
+1. The gateway(s) in the receiving area receive the data and forward them to the network server
 1. The network server validates and decrypts the data, determines the appropriate application, and sends it to the respective application server
 1. The application server processes and stores the data, making it available for analysis or integration with other services
 1. The End User application receives the data from the application server and may process and/or visualize it
@@ -68,6 +68,10 @@ As long as there are TTN gateways within the reception range of your sensor devi
 In Switzerland, for example, the company Swisscom offers a similar network, although there is a charge for it.
 Here, Swisscom maintains the entire network infrastructure and you only have to integrate your own sensor devices. With the TTN, every individual can contribute to this infrastructure and 
 install a gateway at home, for example. This gateway then not only forwards LoRa telegrams from one's own devices, but also from other users to the Internet.
+
+## Security
+LoRaWAN networks are designed with robust security measures, for example including encryption, device authentication and message integrity checks.
+Overall LoRaWAN networks are considered secure for various IoT applications.
 
 ## Getting started with TTN
 ### Account and Console
