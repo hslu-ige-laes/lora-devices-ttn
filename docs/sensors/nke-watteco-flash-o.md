@@ -25,10 +25,10 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 ---
 
 ## Specifications
-- [IP55](https://en.wikipedia.org/wiki/IP_Code) device
 - Price ca. CHF 183.- (15.07.2020)
 - Up to 500 pulses/second Flash LED rate counting
 - Cable length approx. 0.5m
+- Protection: [IP55](https://en.wikipedia.org/wiki/IP_Code)
 - Power Supply: 1 battery, 3.6 V, 3600mAh, Lithium
   - Expected life time: up to 12 years with 1 telegram per day
 - Size: 84 × 82 × 85 mm
