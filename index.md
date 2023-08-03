@@ -2,11 +2,11 @@
 layout: default
 title: Overview
 nav_order: 1
-description: "LoRaWAN device integration into ttn (the things network)"
+description: "LoRaWAN device integration in TTN"
 permalink: /
 ---
 
-# LoRaWAN device integration in ttn
+# LoRaWAN device integration in TTN
 
 This documentation gives an overview of different LoRaWAN devices and describes how to integrate them into [The Things Network (TTN)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/ttn).
 
