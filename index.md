@@ -28,7 +28,7 @@ This documentation gives an overview of different LoRaWAN devices and describes 
 <hr>
 
 **Disclaimer**<br>
-
+{: .important }
 > This is an independent collection of devices that have already been used or tested by our institute for research projects.
 > This website is not endorsed or sponsored by any manufacturer or supplier.
 > All products listed were obtained and paid for through freely available channels at the normal price.
