@@ -41,7 +41,7 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 
 ---
 
-## Ordering info
+## Ordering Info
 - [Ordering Link](https://smartmakers.io/en/iot-sensors-devices-overview/)
 - Product Ref 50-70-071 (FLASH’O with sensor - mounted in factory with 0.5m cable)
 
@@ -56,29 +56,7 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
   - Place the sensor over the LED (yellow colored)
 ---
 
-## Device Configuration
-### Create an Account
-> To register your device you’ll need a "The Things Network" account.<br>
-> If you don't have one already, please follow these steps:
-
-1. Go to [account.thethingsnetwork.org](https://account.thethingsnetwork.org/) and [click create an account](https://account.thethingsnetwork.org/register)
-   - You will receive an email to confirm your email address. You have 24 hours to do so.
-2. Select [Console](https://console.thethingsnetwork.org/) from the menue on top right
-3. From the top right `menu`, select `your name > Settings`. Then change the `default Handler` if the one currently selected is not where you’ll be deploying most of your devices.
-
-### Add an Application
-
-> To keep the payload decoder as simple as possible it is recommended to create an own application only for the nke watteco sensors. You can add multiple sensors from nke-watteco of different types to the application.
-
-1. Log in and open the [Console > Application](https://console.thethingsnetwork.org/).
-2. In the console, click [(+) add application](https://console.thethingsnetwork.org/applications/add)
-   - For `Application ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
-   - For `Application Description`, enter anything you like.
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_03.png" width="700"><br>
-3. Click `Add Application` to finish.
-
-> You will be redirected to the newly added Application page.
-
+## Adding the Device to TTN
 ### Handler device information
 
 > The supplier should give you a csv file where you can find the `DevEUI`, `AppEUI` and `AppKey`

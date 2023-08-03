@@ -43,7 +43,7 @@ The Wisely Standard is an indoor room sensor to measure temperature, humidity an
   
 ---
 
-## Ordering info
+## Ordering Info
 Attention, there are four different versions of the same sensor which have different software loaded on them. Only the "Self-Managed" version works with the lcm application. Do not order the version "The Things Network", it will not work with the lcm application.
 
 - <b>Self-Managed -> that's what you want to have!!!</b><br>
@@ -61,28 +61,7 @@ Other variants which don't work with lcm
 
 ---
 
-## Device Configuration
-### Create an Account
-> To register your device you’ll need a "The Things Network" account.<br>
-> If you don't have one already, please follow these steps:
-
-1. Go to [account.thethingsnetwork.org](https://account.thethingsnetwork.org/) and [click create an account](https://account.thethingsnetwork.org/register)
-   - You will receive an email to confirm your email address. You have 24 hours to do so.
-2. Select [Console](https://console.thethingsnetwork.org/) from the menu on top right
-3. From the top right `menu`, select `your name > Settings`. Then change the `default Handler` if the one currently selected is not where you’ll be deploying most of your devices.
-
-### Add an Application
-> To keep the payload decoder as simple as possible it is recommended to create an own application only for the avelon wisely standard sensors. You can add multiple sensor of the same type to the application.
-
-1. Log in and open the [Console > Application](https://console.thethingsnetwork.org/).
-2. In the console, click [(+) add application](https://console.thethingsnetwork.org/applications/add)
-   - For `Application ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
-   - For `Application Description`, enter anything you like.
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-standard_04.png" width="700" class="inline"/><br>
-3. Click `Add Application` to finish.
-
-> You will be redirected to the newly added Application page.
-
+## Adding the Device to TTN
 ### Handler Change
 > The Wisely sensors are per default configured for the Avelon Cloud, even if ordered as "self-managed". Thats why we have to detach the device from the avelon cloud.
 

@@ -24,7 +24,7 @@ The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to co
 
 ---
 
-# Specifications
+## Specifications
 - indoor device (external sensor placement possible)
 - Price ca. CHF 50.- (15.07.2020)
 - Built-in sensors
@@ -39,14 +39,14 @@ The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to co
 - Weight: 116 g
 
 ---
-# Documents
+## Documents
   - [Payload description v1.7 (2020-07-15)](https://www.dragino.com/downloads/downloads/LHT65/payload_decode/ttn_payload_decode_v1.7.txt)
   - [Datasheet from dragino.com (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_02.pdf)
   - [User manual from dragino.com (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_03.pdf)
 
 ---
 
-# Ordering info
+## Ordering Info
 - Part Number: LHT65-XX-YY
   - XX is frequency band
   - YY is external sensor
@@ -54,36 +54,15 @@ The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to co
 - [Ordering Link](https://www.bastelgarage.ch/lht65-lorawan-temperatur-und-humidity-sensor)
 
 ---
-# Device Configuration
-## Create an Account
-> To register your device you’ll need a "The Things Network" account.<br>
-> If you don't have one already, please follow these steps:
-
-1. Go to [account.thethingsnetwork.org](https://account.thethingsnetwork.org/) and [click create an account](https://account.thethingsnetwork.org/register)
-   - You will receive an email to confirm your email address. You have 24 hours to do so.
-2. Select [Console](https://console.thethingsnetwork.org/) from the menue on top right
-3. From the top right `menu`, select `your name > Settings`. Then change the `default Handler` if the one currently selected is not where you’ll be deploying most of your devices.
-
-## Add an Application
-> To keep the payload decoder as simple as possible it is recommended to create an own application only for the dragino LHT65 sensors. You can add multiple sensor of the same type to the application.
-
-1. Log in and open the [Console > Application](https://console.thethingsnetwork.org/).
-2. In the console, click [(+) add application](https://console.thethingsnetwork.org/applications/add)
-   - For `Application ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
-   - For `Application Description`, enter anything you like.
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_05.png" width="700"><br>
-3. Click `Add Application` to finish.
-
-> You will be redirected to the newly added Application page.
-
-## Handler device information
+## Adding the Device to TTN
+### Handler device information
 Each device is shipped with a sticker with the default keys on it:
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_04.png" width="400"><br>
 
 > For an OTAA (over the air activation) only the `DEV EUI`, `APP EUI` and `APP KEY` are required.
 
-## Device Registration
+### Device Registration
 > Before a device can communicate via "The Things Network" we need to register it with an application.<br>
 > The dragino sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand mentioned keys.
 
@@ -99,7 +78,7 @@ Each device is shipped with a sticker with the default keys on it:
 5. Now we have to restart the device manually by pressing the ACT button on the bottom of the device. `fast press ACT 5 times -> Off` , `press ACT for more than 3 seconds -> On`
 6. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
 
-## Device Configuration
+### Device Configuration
 > Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
 > We need to tell the "The Things Network" where to find e.g. the temperature etc. in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 

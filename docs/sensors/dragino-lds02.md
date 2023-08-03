@@ -24,7 +24,7 @@ The LDS02 is a LoRaWAN Window/Door Sensor.
 
 ---
 
-# Specifications
+## Specifications
 - indoor device
 - Price ca. CHF 30.- (03.08.2023)
 - Built-in sensors
@@ -37,21 +37,21 @@ The LDS02 is a LoRaWAN Window/Door Sensor.
 - Weight: 55 g
 
 ---
-# Documents
+## Documents
   - [Payload description ttn v1.5 (2023-08-03)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_04.txt)
   - [Datasheet from dragino.com (2023-08-03)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_02.pdf)
 	- <a href="http://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20LoRaWAN%20End%20Nodes/LDS02%20-%20LoRaWAN%20Door%20Sensor%20User%20Manual/" target="_blank">User Manual (online)</a>
 
 ---
 
-# Ordering info
+## Ordering Info
 - Part Number: LDS02-XX
   - XX is frequency band, for ttn in Europe choose EU868
 - [Ordering Link](https://www.bastelgarage.ch/lds02-lorawan-door-fenster-sensor-node-868mhz)
 
 ---
-# Device Configuration
-## Device Registration
+## Adding the Device to TTN
+### Device Registration
 > Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
 1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
@@ -66,7 +66,7 @@ The LDS02 is a LoRaWAN Window/Door Sensor.
 5. Now we have to restart the device manually by pressing the ACT button on the bottom of the device. `fast press ACT 5 times -> Off` , `press ACT for more than 3 seconds -> On`
 6. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
 
-## Device Configuration
+### Device Configuration
 > Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
 > We need to tell the "The Things Network" where to find e.g. the temperature etc. in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
