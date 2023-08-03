@@ -6,6 +6,8 @@ has_children: false
 permalink: /docs/ttn
 ---
 
+<img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn-logo.svg" width="128" align="right" class="inline"/>
+
 # The Things Network
 {: .no_toc }
 The Things Network (TTN) is a global, community-driven and open-source LoRaWAN network. It provides an infrastructure for connecting own devices free of charge. 
