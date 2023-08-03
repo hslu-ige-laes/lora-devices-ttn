@@ -49,9 +49,11 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 
 ## Tested with following meters
 - Landis & Gyr ZMD120AP (1'000 impulses per kWh)<br>
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_04.png" width="250"><br>
--> Place the sensor over the LED (yellow colored)
-
+  <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_04.png" width="250"><br>
+  - Place the sensor over the LED (yellow colored)
+- Kamstrup DK-8660 Omnipower (1'000 impulses per kWh)<br>
+  <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_05.png" width="250"><br>
+  - Place the sensor over the LED (yellow colored)
 ---
 
 ## Device Configuration
