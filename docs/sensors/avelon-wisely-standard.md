@@ -12,7 +12,7 @@ parent: Sensors
 - Manufacturer: <a href="https://avelon.com/" target="_blank">Avelon</a>
 - Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely Carbon Sense</a>
 
-The Wisely Standard is an indoor room sensor to measure temperature, humidity and air pressure.
+The Wisely Standard is an indoor room sensor to measure temperature and humidity.
 
 ---
 ## Table of contents
