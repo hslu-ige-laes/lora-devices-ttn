@@ -72,11 +72,10 @@ Wind speed, wind direction and temperature sensor.
 - The user button allows to switch between the operating modes as shown in the two llustrations below.
 - To perform a device reset, switch to sleep mode first (if necessary) by pushing and holding the button for 3 seconds until the LEDs flash three times; wait 3 seconds; then push and hold the button for 3 seconds until the LEDs fade in and out.
 - To switch between active and test mode, push the button for 1 second (blue LED on / off). If the blue LED is off, the device is in active or sleep mode. If the blue LED is on, the device is in test mode.
-<hr>
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_03.png" width="500" align="left"/>
-<hr>
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_04.png" width="500" align="left"/>
-<hr>
+
+![Switching between active and sleep mode (switch off / on, reset)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_03.png "Switching between active and sleep mode (switch off / on, reset)")
+
+![Switching between active and test mode](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_04.png "Switching between active and test mode")
 
 **HINT**
 To check whether the device is active or in sleep mode (on or off), push the button twice
