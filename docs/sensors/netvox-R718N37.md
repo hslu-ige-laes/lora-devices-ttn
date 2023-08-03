@@ -55,7 +55,7 @@ Operating Temperature Range: -20°C ... 55°C
 
 ## Adding the Device to TTN
 ### Handler device information
-- The supplier sent us a csv file with the `DevEUI`, `AppEUI` and `AppKey`
+- The supplier sent us a pdf file with the `DevEUI`, `AppEUI` and `AppKey`
 
 ### Device Registration
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>
