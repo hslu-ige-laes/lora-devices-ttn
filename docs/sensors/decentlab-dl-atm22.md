@@ -63,10 +63,14 @@ Wind speed, wind direction and temperature sensor.
 ## Device specific Information
 ### Operating Modes
 **The device has four operating modes**
-- Reset: System (re-)start; both LEDs fade in and out.
-- Active mode (ON): Periodic measurements and data transmissions; green LED flashes for each measurement.
-- Sleep mode (OFF): No measurements and data transmissions (power save mode, for shelf storage). LEDs are off.
-- Test mode: Measurements and data transmissions at fastest possible rates; blue LED is on.
+- **Reset**<br>
+  System (re-)start; both LEDs fade in and out.
+- **Active mode (ON)**<br>
+  Periodic measurements and data transmissions; green LED flashes for each measurement.
+- **Sleep mode (OFF)**<br>
+  No measurements and data transmissions (power save mode, for shelf storage). LEDs are off.
+- **Test mode**<br>
+  Measurements and data transmissions at fastest possible rates; blue LED is on.
 
 **Switching between operating modes**
 - The user button allows to switch between the operating modes as shown in the two llustrations below.
