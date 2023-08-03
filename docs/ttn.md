@@ -7,7 +7,17 @@ permalink: /docs/ttn
 ---
 
 # The Things Network
+{: .no_toc }
 The Things Network (TTN) is a global, community-driven, open-source LoRaWAN network. It provides an infrastructure for connecting own devices free of charge. 
+
+---
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
 
 ## What is LoRaWAN 
 LoRaWAN (Long Range Wide Area Network) is generally a wireless technology that allows devices such as sensors to send data over long distances. These devices are not directly connected to the Internet.
