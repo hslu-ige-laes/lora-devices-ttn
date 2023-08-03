@@ -18,20 +18,21 @@ permalink: /docs/getting_started
 
 ---
 
-## Account and Console
-
-- The `Console` is the place where you can add sensor devices and gateways.
-- First of all you need a "The Things Network" account.<br>
-- The account and usage is free of charge.
+## Account
+- First of all you need a "The Things Network" account<br>
+- The account and usage is free of charge
 
 1. Go to [www.thethingsnetwork.org/login/](https://www.thethingsnetwork.org/login/) and log in
 	 - If you don't have an account, click `Sign up for free` to create one
    - You will receive an email to confirm your email address. You have 24 hours to do so.
-1. Select [Console](https://console.thethingsnetwork.org/) from the menue on top right, that will bring you to [console.cloud.thethings.network/](https://console.cloud.thethings.network/)
+
+## Console
+- The `Console` is the place where you can add sensor devices and gateways.
+ 
+1. Once logged in, select [Console](https://console.thethingsnetwork.org/) from the menue on top right, that will bring you to [console.cloud.thethings.network/](https://console.cloud.thethings.network/)
 1. Choose the cluster, for Europe thats `Europe 1`
 
 ## Create a new Application
-
 - Each device must be assigned to an application which you let organize and manage them.
 - It is recommended to create an own application for each project and sensor model.
 - You can add multiple sensor of the same type to the application.
