@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Getting started with ttn
+title: Getting started with TTN
 nav_order: 4
-has_children: true
+has_children: false
 permalink: /docs/getting_started
 ---
 
