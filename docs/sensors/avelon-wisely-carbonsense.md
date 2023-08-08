@@ -274,7 +274,7 @@ function decodeUplink(input) {
     data.datasetCount = (input.bytes.length - 2) / data.datasetLength;
     
     if(!Number.isInteger(data.datasetCount)) {
-      errors.push("Error: datasetLength is not a whole number!");
+      errors.push("Error: datasetCount is not a whole number!");
     }
     
     for (const [key, value] of Object.entries(byteIndices[deviceType])) {
