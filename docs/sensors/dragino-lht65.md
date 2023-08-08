@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Dragino :: LHT65
+title: Dragino - LHT65
 parent: Sensors
 ---
 

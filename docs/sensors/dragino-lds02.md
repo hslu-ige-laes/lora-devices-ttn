@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Dragino :: LDS02
+title: Dragino - LDS02
 parent: Sensors
 ---
 

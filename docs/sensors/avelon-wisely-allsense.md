@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Avelon :: Wisely AllSense
+title: Avelon - Wisely AllSense
 parent: Sensors
 ---
 

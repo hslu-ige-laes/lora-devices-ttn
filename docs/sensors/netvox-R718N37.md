@@ -1,6 +1,6 @@
 ---
 layout: default
-title: netvox :: R718N37
+title: netvox - R718N37
 parent: Sensors
 ---
 
