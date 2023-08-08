@@ -48,7 +48,7 @@ The Wisely AllSense is an indoor room sensor to measure temperature, humidity, C
 ---
 
 ## Wisely Product Overview
-|                      | Wisely Standard | Wisely CarbonSense | Wisely AllSense (Simple Payload) | Wisely AllSense (Extended Payload) |
+| Sensor               | Wisely Standard | Wisely CarbonSense | Wisely AllSense (Simple Payload) | Wisely AllSense (Extended Payload) |
 |----------------------|:---------------:|:------------------:|:--------------------------------:|:----------------------------------:|
 | Atmospheric pressure |        ✓        |          ✓         |                 *                |                 ✓ *                |
 | Temperature          |        ✓        |          ✓         |                 ✓                |                  ✓                 |
@@ -140,7 +140,7 @@ Per default the Wisely AllSense is transmitting a reduced set of measurements, t
 Only with the "Extended Payload", the Wisely AllSense is transmitting the Pressure, Brighntess and Presence information.
 
 | Sensor               | Simple Payload | Extended Payload |
-|:--------------------:|:--------------:|:----------------:|
+|----------------------|:--------------:|:----------------:|
 | Atmospheric pressure |                |         ✓        |
 | Temperature          |        ✓       |         ✓        |
 | Humidity             |        ✓       |         ✓        |
