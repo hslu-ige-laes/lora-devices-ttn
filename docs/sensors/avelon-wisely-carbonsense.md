@@ -1,18 +1,18 @@
 ---
 layout: default
-title: Avelon - Wisely Carbons.
+title: Avelon - Wisely CarbonSense
 parent: Sensors
 ---
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_01.png" width="250" align="right" class="inline"/>
 
-# Avelon - Wisely Carbonsense
+# Avelon - Wisely CarbonSense
 {: .no_toc }
 
 - Manufacturer: <a href="https://avelon.com/" target="_blank">Avelon</a>
-- Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely Carbon Sense</a>
+- Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely CarbonSense</a>
 
-The Wisely Carbonsense is an indoor room sensor to measure temperature, humidity and CO2.
+The Wisely CarbonSense is an indoor room sensor to measure temperature, humidity and CO2.
 
 ---
 ## Table of contents
@@ -63,6 +63,15 @@ Attention, there are four different versions of the same sensor which have diffe
 ---
 
 ## Device specific Information
+### CO2 Sensor ABC Algorithm
+The ABC algorithm in CO2 sensors uses automatic base correction to reduce fluctuations and drifts in CO2 measurements.
+It continuously determines the zero point of the CO2 signal and adjusts it to 400 ppm (more or less the outside level) to ensure accurate and stable detection of CO2 concentrations in ambient air.
+This improves the long-term stability and reliability of CO2 sensors.
+
+However, this means that the sensor must be exposed to clean air from time to time. Otherwise the CO2 value will drift.
+
+The sensor determines this base value during the first 2 weeks of operation and only provides usable values after this time. It is therefore important that the sensor has been exposed to the outside air for more than 2 hours during this time. If you want to accelerate this process, you can expose the sensor to the outside air and then send a downlink payload 0xB2. This is how you end the 2 weeks period.
+
 ### Handler Change
 - The Wisely sensors are per default configured for the Avelon Cloud, even if ordered as "self-managed". Thats why we have to detach the device from the avelon cloud.
 
@@ -153,66 +162,117 @@ Attention, there are four different versions of the same sensor which have diffe
 ## Payload formatter
 
 ```javascript
-function Decoder(bytes, port) {
-  var decoded = {};
-  if(port === 5){
-    // Offset
-    OFFSET = bytes[bytes.length-1];
-    // Data set length
-    // Wisely Standard = 5; CarbonSense = 7; AllSense = 7
-    DATASETLENGTH = 7;
-    // number of data sets
-    DATASETS = (bytes.length - 2 ) / DATASETLENGTH;
-    // Battery status
-    var BAT = bytes[0]
-    if((BAT > 0) && (BAT < 255)){
-      var batVal = BAT / 254.0 * 100.0;
-      decoded.batVal = Math.round(batVal * 10) / 10;
-      decoded.batSta = "OK";
-    }else if(BAT === 0){ // no battery inserted, external power supply
-      decoded.batVal = 100.0;
-      decoded.batSta = "OK, external power supply";
-    } else{ // device could not acquire the voltage
-      decoded.batVal = 0.0;
-      decoded.batSta = "Error, could not acquire the voltage";
+function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, datasetLength, payloadOffset) {
+	var payload = [];
+	var measurementByteLengths = {"pressure": 2, "temperature": 2, "humidity": 1, "voc": 2, "brightness": 2, "co2": 2, "presence": 2};
+  var divFactors = {"pressure": 10.0, "temperature": 10.0, "humidity": 2.0, "voc": 1.0, "brightness": 1.0, "co2": 1.0, "presence": 1.0};
+
+	if (measurement in byteIndices[deviceType]){
+		byteIndexValue = byteIndices[deviceType][measurement];
+
+		for (i = 0; i < datasetCount; i++) {
+			byteIndex = i * datasetLength + byteIndexValue + payloadOffset;
+			if (measurementByteLengths[measurement] === 2) {
+				payload.push((bytes[byteIndex] << 8 | bytes[byteIndex + 1]) / divFactors[measurement]);
+			}
+			else {
+				payload.push((bytes[byteIndex]) / divFactors[measurement]);
+			}
+		}
+	}
+	return payload;
+}
+
+function decodeUplink(input) {
+  var deviceType = "CarbonSense";
+  var datasetLengthDict = {
+    "Standard": 5,
+    "CarbonSense": 7,
+    "AllSense": 7,
+    "AllSenseExt": 13
+  };
+  var byteIndices = {
+    "Standard": {"pressure": 0, "temperature": 2, "humidity": 4},
+    "CarbonSense": {"pressure": 0, "temperature": 2, "humidity": 4, "co2": 5},
+    "AllSense": {"temperature": 0, "humidity": 2, "voc": 3, "co2": 5},
+    "AllSenseExt": {"pressure": 0, "temperature": 2, "humidity": 4, "voc": 5, "brightness": 7, "co2": 9, "presence": 11}
+  };
+  var payloadOffset = 1; // Offset of battery information, offset before datasets
+  var data = {};
+  data.payload = {};
+  var payload = [];
+  var byteIndex = 0;
+  var byteIndexValue = 0;
+  var i = 0;
+  var measurement = "";
+  
+  var warnings = [];
+  var errors = [];
+  
+  if(datasetLengthDict[deviceType] === undefined){
+    errors.push("Error: Typo in deviceType configuration in payload decoder");
+  }
+  
+  if((input.fPort === 5) || (input.fPort === 6)){
+    data.deviceName = "Wisely " + deviceType;
+    data.dataOffset = input.bytes[input.bytes.length-1];
+    
+    // Battery status and percent
+    var batVal = input.bytes[0];
+    if((batVal >= 30) && (batVal < 254)){
+      data.batteryPerc = Math.round(batVal / 254.0 * 100.0 *10) / 10;
+      data.batteryStatus = "OK";
+    }else if((batVal < 30) && (batVal > 1)){
+      data.batteryPerc = Math.round(batVal / 254.0 * 100.0 *10) / 10;
+      data.batteryStatus = "Low battery state";
+      warnings.push("Battery Warning: Low state");
+    }else if((batVal === 1)){
+      data.batteryPerc = 1;
+      data.batteryStatus = "No further battery capacity available";
+      warnings.push("Battery Warning: No further battery capacity available");
+    }else if(batVal === 254){
+      data.batteryPerc = 100.0;
+      data.batteryStatus = "Battery at maximum capacity";
+    } else{
+      data.batteryPerc = 0.0;
+      data.batteryStatus = "Could not acquire the battery voltage";
+      warnings.push("Battery Warning: Could not acquire the voltage");
     }
-    var measurement = "";
-    var value = "";
-    // atmospheric pressure in hPa
-    measurement = "press";
-    value = 0;
-    for (i = 0; i < DATASETS; i++) {
-      value = value + (bytes[i * DATASETLENGTH + 1] << 8 | bytes[i * DATASETLENGTH + 2]) / 10.0;
-    }
-    value = Math.round(value / DATASETS * 1) / 1;
-    eval("decoded." + measurement + " = " + value + ";");
-    // Temperature in °C
-    measurement = "temp";
-    value = 0;
-    for (i = 0; i < DATASETS; i++) {
-      value = value + (bytes[i * DATASETLENGTH + 3] << 8 | bytes[i * DATASETLENGTH + 4]) / 10.0;
-    }
-    value = Math.round(value / DATASETS * 10) / 10;
-    eval("decoded." + measurement + " = " + value + ";");
-    // Humidity in %rH
-    measurement = "hum";
-    value = 0;
-    for (i = 0; i < DATASETS; i++) {
-      value = value + bytes[i * DATASETLENGTH + 5] / 2.0;
-    }
-    value = Math.round(value / DATASETS * 10) / 10;
-    eval("decoded." + measurement + " = " + value + ";");
-    if(DATASETLENGTH != 5){
-      // Air quality CO2 in ppm
-      measurement = "co2";
-      value = 0;
-      for (i = 0; i < DATASETS; i++) {
-  	  value = value + (bytes[i * DATASETLENGTH + 6] << 8 | bytes[i * DATASETLENGTH + 7]);
+      
+    if(input.fPort === 5){
+      data.payloadFormat = "Standard uplink payload";
+    }else{ // fPort === 6
+      data.payloadFormat = "Extended uplink payload";
+      if(deviceType !== "AllSense"){
+        warnings.push("Warning: deviceType in payload decoder is no set to allsense");
       }
-      value = Math.round(value / DATASETS * 1) / 1;
-      eval("decoded." + measurement + " = " + value + ";");
+      deviceType = "AllSenseExt";
+      data.deviceName = "Wisely AllSense (Extended Payload)";
+    }
+  }else{
+    errors.push("Unknown fPort");
+  }
+  
+  if((input.fPort === 5) || (input.fPort === 6)){
+    data.datasetLength = datasetLengthDict[deviceType];
+    data.datasetCount = (input.bytes.length - 2) / data.datasetLength;
+    
+    if(!Number.isInteger(data.datasetCount)) {
+      errors.push("Error: datasetLength is not a whole number!");
+    }
+    
+    for (const [key, value] of Object.entries(byteIndices[deviceType])) {
+    	payload = getValues(input.bytes, key, byteIndices, deviceType, data.datasetCount, data.datasetLength, payloadOffset);
+    	if (payload.length > 0) {
+    		data.payload[key] = payload;
+    	}
     }
   }
-return decoded;
+
+  return {
+    data: data,
+    warnings: warnings,
+    errors: errors
+  };
 }
 ```
