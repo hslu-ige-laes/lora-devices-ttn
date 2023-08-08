@@ -12,7 +12,7 @@ parent: Sensors
 - Manufacturer: <a href="https://avelon.com/" target="_blank">Avelon</a>
 - Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely AllSense</a>
 
-The Wisely AllSense is an indoor room sensor to measure temperature, humidity, CO2 and occupancy.
+The Wisely AllSense is an indoor room sensor to measure temperature, humidity, CO2, VOC, brightness, occupancy and atmosperic pressure.
 
 ---
 ## Table of contents
@@ -30,10 +30,10 @@ The Wisely AllSense is an indoor room sensor to measure temperature, humidity, C
   - **Temperature**, -10 ... +80 [°C], ± 0.1 °C between 20 ... 60 °C
   - **relative Humidity**, 0 ... 95[%rH], ± 1.5 %rH between 10...80 %rH
   - **CO<sub>2</sub>**, 400 ... 5'000 [ppm], ± 30 ppm + 3 % of measurement value, NDIR, ABC Correction
-	- **VOC**, IAQ 0-500 [-], ±15 % ±1
-	- **Occupancy**, 0...60 [min], detection range up to 5 meters
-	- **Brightness**, 1-32'000 [lux]
-  - **atmosheric pressure**, [hPa], ± 1 hPa
+  - **VOC**, IAQ 0-500 [-], ±15 % ±1
+  - **Occupancy**, 0...60 [min], detection range up to 5 meters
+  - **Brightness**, 1-32'000 [lux]
+  - **atmospheric pressure**, [hPa], ± 1 hPa
 - Power Supply: 1 battery, 3.6 V, 3600 mAh, (A), Li-SOCl₂
   - Expected life time: 3 ... 5 years at roomtemperature, depends on payload size and settings
 - Size: 80 × 80 × 27 mm
@@ -44,7 +44,22 @@ The Wisely AllSense is an indoor room sensor to measure temperature, humidity, C
 ## Documents
 - [Payload description from avelon (online)](https://avelon.cloud/docs/de/appendix/wisely-payload.html)
 - [Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_03.pdf)
-  
+
+---
+
+## Wisely Product Overview
+|                      | Wisely Standard | Wisely CarbonSense | Wisely AllSense (Simple Payload) | Wisely AllSense (Extended Payload) |
+|----------------------|:---------------:|:------------------:|:--------------------------------:|:----------------------------------:|
+| Atmospheric pressure |        ✓        |          ✓         |                 *                |                 ✓ *                |
+| Temperature          |        ✓        |          ✓         |                 ✓                |                  ✓                 |
+| Humidity             |        ✓        |          ✓         |                 ✓                |                  ✓                 |
+| VOC                  |                 |                    |                 ✓                |                  ✓                 |
+| Brightness           |                 |                    |                 *                |                 ✓ *                |
+| CO₂                  |                 |          ✓         |                 ✓                |                  ✓                 |
+| PIR/Presence         |                 |                    |                 *                |                 ✓ *                |
+
+* Due to limitations in payload length, these channels are not activated by default  
+
 ---
 
 ## Ordering Info
@@ -125,7 +140,7 @@ Per default the Wisely AllSense is transmitting a reduced set of measurements, t
 Only with the "Extended Payload", the Wisely AllSense is transmitting the Pressure, Brighntess and Presence information.
 
 |                      | Simple Payload | Extended Payload |
-|:--------------------:|:--------------:|------------------|
+|:--------------------:|:--------------:|:----------------:|
 | Atmospheric pressure |                |         ✓        |
 | Temperature          |        ✓       |         ✓        |
 | Humidity             |        ✓       |         ✓        |

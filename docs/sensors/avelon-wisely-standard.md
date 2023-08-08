@@ -12,7 +12,7 @@ parent: Sensors
 - Manufacturer: <a href="https://avelon.com/" target="_blank">Avelon</a>
 - Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely Standard</a>
 
-The Wisely Standard is an indoor room sensor to measure temperature and humidity.
+The Wisely Standard is an indoor room sensor to measure temperature, humidity and atmospheric pressure.
 
 ---
 ## Table of contents
@@ -41,6 +41,21 @@ The Wisely Standard is an indoor room sensor to measure temperature and humidity
   - [Payload description from avelon.cloud help (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-standard_02.pdf)
   - [Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-standard_03.pdf)
   
+---
+
+## Wisely Product Overview
+|                      | Wisely Standard | Wisely CarbonSense | Wisely AllSense (Simple Payload) | Wisely AllSense (Extended Payload) |
+|----------------------|:---------------:|:------------------:|:--------------------------------:|:----------------------------------:|
+| Atmospheric pressure |        ✓        |          ✓         |                 *                |                 ✓ *                |
+| Temperature          |        ✓        |          ✓         |                 ✓                |                  ✓                 |
+| Humidity             |        ✓        |          ✓         |                 ✓                |                  ✓                 |
+| VOC                  |                 |                    |                 ✓                |                  ✓                 |
+| Brightness           |                 |                    |                 *                |                 ✓ *                |
+| CO₂                  |                 |          ✓         |                 ✓                |                  ✓                 |
+| PIR/Presence         |                 |                    |                 *                |                 ✓ *                |
+
+* Due to limitations in payload length, these channels are not activated by default
+
 ---
 
 ## Ordering Info
