@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Avelon - Wisely Standard
+title: Avelon :: Wisely Standard
 parent: Sensors
 ---
 

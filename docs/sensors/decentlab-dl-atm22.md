@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Decentlab - dl-atm22
+title: Decentlab :: DL-ATM22
 parent: Sensors
 ---
 
