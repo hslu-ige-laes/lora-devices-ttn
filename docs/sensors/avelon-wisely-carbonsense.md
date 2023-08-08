@@ -179,7 +179,7 @@ Per default the `CyclicTransmissionCounter` is set to 60, so every 1h a set of 6
 5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
 
 #### Example configurations
-**Example 1 (default config)**
+**Example 1 (default config)**<br>
 This configuration makes sense if the LED is used, so the occupant gets every minute a flashing LED.
 If the LED gets deactivated anyway, the sampling rate is unecessary high.
 
@@ -188,7 +188,7 @@ If the LED gets deactivated anyway, the sampling rate is unecessary high.
 - CyclicTransmissionCounter = 60 (HEX 3C -> `FF F0 3C`)
   After 60 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 60 minutes.
 
-**Example 2**
+**Example 2**<br>
 This configuration makes sense if the LED is used and the values should arrive faster than every hour. This has an impact on battery life!
 If the LED gets deactivated anyway, the sampling rate is unecessary high.
 
@@ -197,7 +197,7 @@ If the LED gets deactivated anyway, the sampling rate is unecessary high.
 - CyclicTransmissionCounter = 20 (HEX 14 -> `FF F0 14`)
   After 20 samples a data transmission, that means 2 averaged measurements in the payload, transmitted every 20 minutes.
 
-**Example 3**
+**Example 3**<br>
 This configuration makes sense if the smallest possible measuring rate is required and the LED gets deactivated. 
 
 - SensorSampleTime = 10 (HEX 0A -> `FF 01 0A`)
@@ -205,7 +205,7 @@ This configuration makes sense if the smallest possible measuring rate is requir
 - CyclicTransmissionCounter = 6 (HEX 06 -> `FF F0 06`)
   After 6 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 60 minutes.
 
-**Example 4**
+**Example 4**<br>
 This configuration makes sense if a long battery life is required and the LED gets deactivated.
 The sensor acts as a logger and the data is not real time, but battery life is optimized. Small changes in sensor values cannot get detected, so the accuracy is slightly lower. E.g. the impact of an opened window might not be visible in the temperature data.
 
