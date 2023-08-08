@@ -27,7 +27,7 @@ The Wisely AllSense is an indoor room sensor to measure temperature, humidity, C
 - Indoor device
 - Price ca. CHF 236.- (03.08.2023)
 - Sensors
-  - **Temperature**, -10 ... +80 [°C], ± 0.1 °C between 20 ... 60 °C
+  - **Temperature**, -10 ... +80 [°C], ± 0.2 °C between 20 ... 65 °C
   - **relative Humidity**, 0 ... 95[%rH], ± 1.5 %rH between 10...80 %rH
   - **CO<sub>2</sub>**, 400 ... 5'000 [ppm], ± 30 ppm + 3 % of measurement value, NDIR, ABC Correction
   - **VOC**, IAQ 0-500 [-], ±15 % ±1
@@ -41,9 +41,14 @@ The Wisely AllSense is an indoor room sensor to measure temperature, humidity, C
 
 ---
 
-## Documents
-- [Payload description from avelon (online)](https://avelon.cloud/docs/de/appendix/wisely-payload.html)
-- [Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_03.pdf)
+## Documents / Links
+- [Payload description from avelon](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-payload.pdf)
+- [Wisely Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_03.pdf)
+- [FAQ on avelon.com](https://avelon.com/support/wisely-faq/)
+- [Temp- and Humidity Sensor Datasheet - Sensirion SHT3x](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-sensirion-sht3x.pdf)
+- [Atmospheric Pressure Sensor Datasheet - Bosch BMP380](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-bosch-bmp280.pdf)
+- [CO<sub>2</sub> Sensor Datasheet - Senseair Sunrise](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-senseair-sunrise.pdf)
+- [VOC Sensor Datasheet - Bosch BME680](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-bosch-bme680.pdf)
 
 ---
 
@@ -59,7 +64,7 @@ The Wisely AllSense is an indoor room sensor to measure temperature, humidity, C
 | CO<sub>2</sub>       |                 |          ✓         |                 ✓                |                  ✓                 |
 | PIR/Presence         |                 |                    |                 *                |                 ✓ *                |
 
-* Due to limitations in payload length, these channels are not activated by default  
+* Due to limitations in payload length, these sensors are not activated by default, see chapter "Optional Settings" to change that.  
 
 ---
 
@@ -82,6 +87,18 @@ Attention, there are four different versions of the same sensor which have diffe
 ---
 
 ## Device specific Information
+### IAQ - Indoor Air Quality Index (VOC Sensor)
+
+| IAQ| Description |
+|-----------|--------------------------|
+| 0 - 50 | excellent |
+| 51 - 100 | good |
+| 101 - 150 | light load |
+| 151 - 200 | moderate load |
+| 201 - 250 | heavy load |
+| 251 - 350 | severe stress |
+| > 350 | extreme load |
+
 ### CO<sub>2</sub> Sensor ABC Algorithm
 The ABC algorithm in CO<sub>2</sub> sensors uses automatic base correction to reduce fluctuations and drifts in CO<sub>2</sub> measurements.
 It continuously determines the zero point of the CO<sub>2</sub> signal and adjusts it to 400 ppm (more or less the outside level) to ensure accurate and stable detection of CO<sub>2</sub> concentrations in ambient air.
@@ -159,30 +176,84 @@ To change the payload type the device has to be configured accordingly:
 
 To change the format back to "Simple Payload", send `FF FE 01`
 
-### Change sending interval
-- Per default the sensor measures each minute the values and sends a packet each hour.
-- To change this, you have to send the device configuration telegrams.
-- You have to send the so called downlink messages to port 10
-- The device transmits its data after "CyclicTransmissionCounter" × "SensorSampleTime" starting from the last transmission.
-- The example below sends data every 20 minutes with the settings
-  - CyclicTransmissionCounter = 20 (HEX 14)
-  - SensorSampleTime = 1 (HEX 01)
+### Change sampling and transmission intervals
+There are two configuration values, `SensorSampleTime` and `CyclicTransmissionCounter`. 
+To change these two values, you have to send the device configuration telegrams (Downlink-Messages)
 
-1. Select the device and change to the tab `Messaging`, select `Downlink`
+#### SensorSampleTime
+The time interval in minutes at which the sensor queries the current values.
+
+1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
 2. Change the `FPort to 10`
-3. Copy/paste `FF 02 01` into the `Payload` field for changing SensorSampleTime
+3. Copy/paste the payload from the examples below, e.g. `FF 01 0A` into the `Payload` field
 4. Press `Send`
 5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
-6. Copy/paste `FF F0 14` into the `Payload` field for changing CyclicTransmissionCounter
-7. Press `Send`
-8. Press again the button on the back of the sensor
 
-- Now the sampling interval should be changed.
-- See the payload description for more details.
+#### CyclicTransmissionTime and CyclicTransmissionCounter
+The time interval at which the sensor transmits the recorded measurement values. Must be a multiple of the sampling period.
 
+To avoid overburdening the battery of the device, the smallest permissible time interval is 10 minutes.
 
-### Change the led blinking behaviour
-- If an adjustable CO<sub>2</sub> limit is exceeded, the LED on the front side of the device blinks every 60 seconds (250 ms lighting, 500 ms pause - repeating 4 times).
+The CyclicTransmissionTime cannot be configured. Instead, a counter can be configured.
+
+`CyclicTransmissionTime = CyclicTransmissionCounter × SensorSampleTime`
+
+This setting cannot be configured. But instead the value `CyclicTransmissionCounter` can be set.
+
+#### CyclicTransmissionCounter
+Per default the CyclicTransmissionCounter is set to 60, which means the device in default configuration sends data every 60 minutes (60 × 1 min = 60 min).
+
+The device sends the data cyclically. When a certain number of samples has been taken, the measured values are sent.
+The `CyclicTransmissionCounter` is therefore the number of samples that are to be sent together.
+
+`CyclicTransmissionCounter = CyclicTransmissionTime / SensorSampleTime`
+
+Per default the `CyclicTransmissionCounter` is set to 60, so every 1h a set of 6 measurements of all sensors gets transmitted.
+
+1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
+2. Change the `FPort to 10`
+3. Copy/paste the payload from the examples below, e.g. `FF F0 06` into the `Payload` field
+4. Press `Send`
+5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+
+#### Example configurations
+**Example 1 (default config)**
+This configuration makes sense if the LED is used, so the occupant gets every minute a flashing LED.
+If the LED gets deactivated anyway, the sampling rate is unecessary high.
+
+- SensorSampleTime = 1 (HEX 01 -> `FF 01 01`)
+  Every 1 min a sensor sample, every 10 min an averaged measurement.
+- CyclicTransmissionCounter = 60 (HEX 3C -> `FF F0 3C`)
+  After 60 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 60 minutes.
+
+**Example 2**
+This configuration makes sense if the LED is used and the values should arrive faster than every hour. This has an impact on battery life!
+If the LED gets deactivated anyway, the sampling rate is unecessary high.
+
+- SensorSampleTime = 1 (HEX 01 -> `FF 01 01`)
+  Every 1 min a sensor sample, every 10 min an averaged measurement.
+- CyclicTransmissionCounter = 20 (HEX 14 -> `FF F0 14`)
+  After 20 samples a data transmission, that means 2 averaged measurements in the payload, transmitted every 20 minutes.
+
+**Example 3**
+This configuration makes sense if the smallest possible measuring rate is required and the LED gets deactivated. 
+
+- SensorSampleTime = 10 (HEX 0A -> `FF 01 0A`)
+  Every 10 min a sensor sample, every 10 min an averaged measurement.
+- CyclicTransmissionCounter = 6 (HEX 06 -> `FF F0 06`)
+  After 6 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 60 minutes.
+
+**Example 4**
+This configuration makes sense if a long battery life is required and the LED gets deactivated.
+The sensor acts as a logger and the data is not real time, but battery life is optimized. Small changes in sensor values cannot get detected, so the accuracy is slightly lower. E.g. the impact of an opened window might not be visible in the temperature data.
+
+- SensorSampleTime = 60 (HEX 3C -> `FF 01 3C`)
+  Every 60 min a sensor sample, every 60 min an averaged measurement.
+- CyclicTransmissionCounter = 24 (HEX 18 -> `FF F0 18`)
+  After 6 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 360 minutes (6 hours).
+
+### Change the LED blinking behaviour
+- If an adjustable CO<sub>2</sub> limit is exceeded, the LED on the front side of the device blinks every `SensorSampleTime` (250 ms lighting, 500 ms pause - repeating 4 times).
 - With the following procedure you can deactivate it.
 
 1. Select the device and change to the tab `Messaging`, select `Downlink`
@@ -198,6 +269,8 @@ To change the format back to "Simple Payload", send `FF FE 01`
 - To reset the behaviour exchange the last byte with `01` instead of `00`:
   - `06 06 0B 03 20 00 00 FF 01`
   - `06 06 0B 05 78 FF 00 00 01`
+
+See the [payload description ](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-payload.pdf) to change the LED colors and thresholds.
 
 ---
 
