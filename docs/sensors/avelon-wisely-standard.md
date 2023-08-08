@@ -44,6 +44,7 @@ The Wisely Standard is an indoor room sensor to measure temperature, humidity an
 ---
 
 ## Wisely Product Overview
+
 | Sensor               | Wisely Standard | Wisely CarbonSense | Wisely AllSense (Simple Payload) | Wisely AllSense (Extended Payload) |
 |----------------------|:---------------:|:------------------:|:--------------------------------:|:----------------------------------:|
 | Atmospheric pressure |        ✓        |          ✓         |                 *                |                 ✓ *                |
@@ -51,7 +52,7 @@ The Wisely Standard is an indoor room sensor to measure temperature, humidity an
 | Humidity             |        ✓        |          ✓         |                 ✓                |                  ✓                 |
 | VOC                  |                 |                    |                 ✓                |                  ✓                 |
 | Brightness           |                 |                    |                 *                |                 ✓ *                |
-| CO₂                  |                 |          ✓         |                 ✓                |                  ✓                 |
+| CO<sub>2</sub>       |                 |          ✓         |                 ✓                |                  ✓                 |
 | PIR/Presence         |                 |                    |                 *                |                 ✓ *                |
 
 * Due to limitations in payload length, these channels are not activated by default

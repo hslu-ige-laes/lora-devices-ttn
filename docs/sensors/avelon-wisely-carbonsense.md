@@ -45,6 +45,7 @@ The Wisely CarbonSense is an indoor room sensor to measure temperature, humidity
 ---
 
 ## Wisely Product Overview
+
 | Sensor               | Wisely Standard | Wisely CarbonSense | Wisely AllSense (Simple Payload) | Wisely AllSense (Extended Payload) |
 |----------------------|:---------------:|:------------------:|:--------------------------------:|:----------------------------------:|
 | Atmospheric pressure |        ✓        |          ✓         |                 *                |                 ✓ *                |
@@ -52,7 +53,7 @@ The Wisely CarbonSense is an indoor room sensor to measure temperature, humidity
 | Humidity             |        ✓        |          ✓         |                 ✓                |                  ✓                 |
 | VOC                  |                 |                    |                 ✓                |                  ✓                 |
 | Brightness           |                 |                    |                 *                |                 ✓ *                |
-| CO₂                  |                 |          ✓         |                 ✓                |                  ✓                 |
+| CO<sub>2</sub>       |                 |          ✓         |                 ✓                |                  ✓                 |
 | PIR/Presence         |                 |                    |                 *                |                 ✓ *                |
 
 * Due to limitations in payload length, these channels are not activated by default
