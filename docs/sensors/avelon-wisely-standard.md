@@ -168,9 +168,6 @@ Per default the `CyclicTransmissionCounter` is set to 60, so every 1h a set of 6
 
 #### Example configurations
 **Example 1 (default config)**<br>
-This configuration makes sense if the LED is used, so the occupant gets every minute a flashing LED.
-If the LED gets deactivated anyway, the sampling rate is unecessary high.
-
 - SensorSampleTime = 1 (HEX 01 -> `FF 01 01`)
   Every 1 min a sensor sample, every 10 min an averaged measurement.
 - CyclicTransmissionCounter = 60 (HEX 3C -> `FF F0 3C`)
