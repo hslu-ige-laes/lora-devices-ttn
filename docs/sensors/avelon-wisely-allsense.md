@@ -12,7 +12,7 @@ parent: Sensors
 - Manufacturer: <a href="https://avelon.com/" target="_blank">Avelon</a>
 - Product: <a href="https://avelon.com/en/wisely/" target="_blank">Wisely AllSense</a>
 
-The Wisely AllSense is an indoor room sensor to measure temperature, humidity, CO2, VOC, brightness, occupancy and atmosperic pressure.
+The Wisely AllSense is an indoor room sensor to measure temperature, humidity, CO<sub>2</sub>, VOC, brightness, occupancy and atmosperic pressure.
 
 ---
 ## Table of contents
@@ -81,12 +81,12 @@ Attention, there are four different versions of the same sensor which have diffe
 ---
 
 ## Device specific Information
-### CO2 Sensor ABC Algorithm
-The ABC algorithm in CO2 sensors uses automatic base correction to reduce fluctuations and drifts in CO2 measurements.
-It continuously determines the zero point of the CO2 signal and adjusts it to 400 ppm (more or less the outside level) to ensure accurate and stable detection of CO2 concentrations in ambient air.
-This improves the long-term stability and reliability of CO2 sensors.
+### CO<sub>2</sub> Sensor ABC Algorithm
+The ABC algorithm in CO<sub>2</sub> sensors uses automatic base correction to reduce fluctuations and drifts in CO<sub>2</sub> measurements.
+It continuously determines the zero point of the CO<sub>2</sub> signal and adjusts it to 400 ppm (more or less the outside level) to ensure accurate and stable detection of CO<sub>2</sub> concentrations in ambient air.
+This improves the long-term stability and reliability of CO<sub>2</sub> sensors.
 
-However, this means that the sensor must be exposed to clean air from time to time. Otherwise the CO2 value will drift.
+However, this means that the sensor must be exposed to clean air from time to time. Otherwise the CO<sub>2</sub> value will drift.
 
 The sensor determines this base value during the first 2 weeks of operation and only provides usable values after this time. It is therefore important that the sensor has been exposed to the outside air for more than 2 hours during this time. If you want to accelerate this process, you can expose the sensor to the outside air and then send a downlink payload 0xB2. This is how you end the 2 weeks period.
 
@@ -146,7 +146,7 @@ Only with the "Extended Payload", the Wisely AllSense is transmitting the Pressu
 | Humidity             |        ✓       |         ✓        |
 | VOC                  |        ✓       |         ✓        |
 | Brightness           |                |         ✓        |
-| CO2                  |        ✓       |         ✓        |
+| CO<sub>2</sub>       |        ✓       |         ✓        |
 | PIR/Presence         |                |         ✓        |
 
 To change the payload type the device has to be configured accordingly:
@@ -181,7 +181,7 @@ To change the format back to "Simple Payload", send `FF FE 01`
 
 
 ### Change the led blinking behaviour
-- If an adjustable CO2 limit is exceeded, the LED on the front side of the device blinks every 60 seconds (250 ms lighting, 500 ms pause - repeating 4 times).
+- If an adjustable CO<sub>2</sub> limit is exceeded, the LED on the front side of the device blinks every 60 seconds (250 ms lighting, 500 ms pause - repeating 4 times).
 - With the following procedure you can deactivate it.
 
 1. Select the device and change to the tab `Messaging`, select `Downlink`
