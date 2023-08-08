@@ -139,7 +139,7 @@ The sensor determines this base value during the first 2 weeks of operation and 
 Per default the Wisely AllSense is transmitting a reduced set of measurements, the so called "Simple Payload".
 Only with the "Extended Payload", the Wisely AllSense is transmitting the Pressure, Brighntess and Presence information.
 
-|                      | Simple Payload | Extended Payload |
+| Sensor               | Simple Payload | Extended Payload |
 |:--------------------:|:--------------:|:----------------:|
 | Atmospheric pressure |                |         ✓        |
 | Temperature          |        ✓       |         ✓        |
