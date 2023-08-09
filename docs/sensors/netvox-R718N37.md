@@ -93,7 +93,8 @@ The seller Alliot provisioned the device with default AppEUI and AppKey.
 - Turn on: Press and hold the function key for 3 seconds till the green indicator flashes once.
 - Turn off (Restore to factory setting): Press and hold the function key for 5 seconds till green indicator flashes 20 times.
 - Power off: Remove Batteries
-**Note**
+<br>
+**Note**<br>
 - The device will be off in default after removing the battery and insert it again.
 - It is suggested to wait for at least 10 seconds between turning the device on and off.
 
