@@ -174,50 +174,23 @@ Per default the `CyclicTransmissionCounter` is set to 60, so every 1h a set of 6
   After 60 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 60 minutes.
 
 **Example 2**<br>
-This configuration makes sense if the LED is used and the values should arrive faster than every hour. This has an impact on battery life!
-If the LED gets deactivated anyway, the sampling rate is unecessary high.
-
-- SensorSampleTime = 1 (HEX 01 -> `FF 01 01`)
-  Every 1 min a sensor sample, every 10 min an averaged measurement.
-- CyclicTransmissionCounter = 20 (HEX 14 -> `FF F0 14`)
-  After 20 samples a data transmission, that means 2 averaged measurements in the payload, transmitted every 20 minutes.
-
-**Example 3**<br>
-This configuration makes sense if the smallest possible measuring rate is required and the LED gets deactivated. 
+This configuration makes sense if the smallest possible measuring rate is required, but battery life should get optimized a little bit. 
 
 - SensorSampleTime = 10 (HEX 0A -> `FF 01 0A`)
   Every 10 min a sensor sample, every 10 min an averaged measurement.
 - CyclicTransmissionCounter = 6 (HEX 06 -> `FF F0 06`)
   After 6 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 60 minutes.
 
-**Example 4**<br>
-This configuration makes sense if a long battery life is required and the LED gets deactivated.
-The sensor acts as a logger and the data is not real time, but battery life is optimized. Small changes in sensor values cannot get detected, so the accuracy is slightly lower. E.g. the impact of an opened window might not be visible in the temperature data.
+**Example 3**<br>
+This configuration makes sense if a long battery life is required .
+The sensor acts as a logger and the data is not real time, but battery life is maximized.
+Small changes in sensor values cannot get detected, so the accuracy is slightly lower.
+E.g. the impact of an opened window might not be visible in the temperature data.
 
 - SensorSampleTime = 60 (HEX 3C -> `FF 01 3C`)
   Every 60 min a sensor sample, every 60 min an averaged measurement.
 - CyclicTransmissionCounter = 24 (HEX 18 -> `FF F0 18`)
   After 6 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 360 minutes (6 hours).
-
-### Change the led blinking behaviour
-- If an adjustable CO2 limit is exceeded, the LED on the front side of the device blinks every 60 seconds (250 ms lighting, 500 ms pause - repeating 4 times).
-- With the following procedure you can deactivate it.
-
-1. Select the device and change to the tab `Messaging`, select `Downlink`
-2. Change the `FPort to 10`
-3. Copy/paste `06 06 0B 03 20 00 00 FF 00` into the `Payload` field for deactivating the blue led
-4. Press `Send`
-5. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
-6. Copy/paste `06 06 0B 05 78 FF 00 00 00` into the `Payload` field for deactivating the red led
-7. Press `Send`
-8. Press again the button on the back of the sensor
-
-- Now the led should not blink anymore.
-- To reset the behaviour exchange the last byte with `01` instead of `00`:
-  - `06 06 0B 03 20 00 00 FF 01`
-  - `06 06 0B 05 78 FF 00 00 01`
-	
-See the [payload description ](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-payload.pdf) to change the LED colors and thresholds.
 
 ---
 
