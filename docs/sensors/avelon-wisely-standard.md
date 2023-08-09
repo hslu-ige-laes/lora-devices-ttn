@@ -80,8 +80,7 @@ Attention, there are four different versions of the same sensor which have diffe
 
 ---
 
-## Device specific Information
-### Handler Change
+## Handler Change
 - The Wisely sensors are per default configured for the Avelon Cloud, even if ordered as "self-managed". Thats why we have to detach the device from the avelon cloud.
 
 1. Switch the device on and scan the `QR-Code` with e.g. a Mobile Phone 
