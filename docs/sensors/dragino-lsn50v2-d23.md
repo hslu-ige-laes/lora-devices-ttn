@@ -72,9 +72,9 @@ Out of the factory the device is switched off. To power on the LSN50v2-D20, open
 3. Under `Input method` select `Select the end device in the LoRaWAN Device Repository`
 4. Enter the following device information
    - `End device brand` select `Dragino Technology Co., Limited`
-   - `Model` select `LDS02`
+   - `Model` select `LSN50v2-D20-D22-D23`
    - `Hardware Ver.` select `Unknown Ver.` or whatever is possible or on the sticker
-   - `Firmware` select `1.5` or whatever is possible or on the sticker
+   - `Firmware` select `1.7.5` or whatever is possible or on the sticker
 	 - `Profile (Region)` select `EU_863_870`
 5. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
 6. Under `JoinEUI` enter the `App EUI` from the sticker
