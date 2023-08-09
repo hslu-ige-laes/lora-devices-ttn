@@ -51,15 +51,14 @@ The R718N37 is a 3-Phase Current Meter with 3 x 75A Clamp-On Current Transformer
 
 ### Handler device information
 - The supplier Alliot sent us a pdf file with a default `AppEUI` and `AppKey`. The `DevEUI` is printed on a sticker on the devise.
-- **It's important to change the `AppEUI` and `AppKey` for security reasons**, see chapter below for detailed instructions...
+- **It's important to change the AppEUI and AppKey for security reasons**, see chapter below for detailed instructions...
 
 ### Change the default AppEUI and AppKey
-The seller Alliot provisioned the device with default AppEUI and AppKey. 
+The seller Alliot provisioned the device with default `AppEUI` and `AppKey`. 
 
-1. Add the sensor to your LoRaWAN platform using the DevEUI on the box or device label and the following App settings
-  - Activation mode: OTAA
-  - AppEUI: 70B3D57ED001148C
-  - AppKey: D9DE989A000F4D590AD6CABC0F98500C
+1. Add the sensor to your LoRaWAN platform using the `DevEUI` on the box or device label and the following App settings
+  - AppEUI: `70B3D57ED001148C`
+  - AppKey: `D9DE989A000F4D590AD6CABC0F98500C`
 
 2. Power on the sensor (insert batteries and hold the button until the LED lights up). Observe uplink messages coming from the sensor to your Network Server to confirm it is operating.
 
@@ -68,8 +67,8 @@ The seller Alliot provisioned the device with default AppEUI and AppKey.
   - HEX payload to send on fPort 8: `0340B3D37ED0027GFB0000000000000000`
 
 4. Once the sensor receives this it will respond with an uplink of:
-  - `8300000000000000000000000000000000` -> OK
-  - `8301000000000000000000000000000000` -> not successful
+  - 8300000000000000000000000000000000 -> OK
+  - 8301000000000000000000000000000000 -> not successful
     - If unsuccessful, try resending
 
 5. Send a downlink to change the AppKey, also on fport 8. The first byte is 05, followed by the new AppKey.
@@ -77,8 +76,8 @@ The seller Alliot provisioned the device with default AppEUI and AppKey.
   - HEX payload to send on fport 8: `054F27583D49C434AA02F3F67F85573C9A`
 
 6. The sensor will respond with:
-  - `8500000000000000000000000000000000` -> OK
-  - `8501000000000000000000000000000000` -> not successful
+  - 8500000000000000000000000000000000 -> OK
+  - 8501000000000000000000000000000000 -> not successful
     - If unsuccessful, try resending
 
 7. Reset the sensor by holding down the button(s) on it for around 10 seconds until the LED starts to flash.
@@ -88,12 +87,14 @@ The seller Alliot provisioned the device with default AppEUI and AppKey.
 
 8. Re-insert the batteries and power the sensor up by holding the button and it will attempt to Join using the new AppEUI and AppKey.
 
+9. Delete the device and create the new one according to chapter [Adding the Device to TTN](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/netvox-R718N37/#adding-the-device-to-ttn)
+
 ### On/Off
 - Power on: Insert batteries
 - Turn on: Press and hold the function key for 3 seconds till the green indicator flashes once.
 - Turn off (Restore to factory setting): Press and hold the function key for 5 seconds till green indicator flashes 20 times.
 - Power off: Remove Batteries
-<br>
+<br><br>
 **Note**<br>
 - The device will be off in default after removing the battery and insert it again.
 - It is suggested to wait for at least 10 seconds between turning the device on and off.
