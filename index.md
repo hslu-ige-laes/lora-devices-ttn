@@ -34,7 +34,6 @@ This documentation gives an overview of different LoRaWAN devices and describes 
 | [Seedstudio - SenseCap-S2102](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seedstudio-sensecap-s2102/) | Light intensity sensor | indoor/outdoor | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2102_01.jpg" width="50" align="center"> |
 | [Seedstudio - SenseCap-S2103](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seedstudio-sensecap-s2103/) | Temperature, humidity and CO<sub>2</sub> sensor | indoor/outdoor | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_01.jpg" width="50" align="center"> |
 
-
 <hr>
 
 **Disclaimer**<br>
