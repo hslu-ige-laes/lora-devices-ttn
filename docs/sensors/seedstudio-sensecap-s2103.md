@@ -59,7 +59,7 @@ The SenseCap S2103 is a LoRaWAN indoor/outdoor sensor to measure temperature, hu
 
 ### LED States
 
-![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_04.png "Power on the LSN50v2-D20")
+![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
 | Action | Description | Green LED Status |
 |--------|-------------|------------------|
