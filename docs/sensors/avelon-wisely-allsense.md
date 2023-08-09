@@ -106,11 +106,11 @@ See the [payload description ](https://github.com/hslu-ige-laes/lora-devices-ttn
 |-----------|--------------------------|
 | 0 ... 50 | excellent |
 | 51 ... 100 | good |
-| 101 ... 150 | light load |
-| 151 ... 200 | moderate load |
-| 201 ... 250 | heavy load |
-| 251 ... 350 | severe stress |
-| > 350 | extreme load |
+| 101 ... 150 | lightly polluted |
+| 151 ... 200 | moderately polluted |
+| 201 ... 250 | heavily polluted |
+| 251 ... 350 | severely polluted |
+| > 350 | extremely polluted |
 
 ### CO<sub>2</sub> Sensor ABC Algorithm
 The ABC algorithm in CO<sub>2</sub> sensors uses automatic base correction to reduce fluctuations and drifts in CO<sub>2</sub> measurements.
