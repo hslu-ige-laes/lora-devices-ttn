@@ -44,5 +44,5 @@ This documentation gives an overview of different LoRaWAN devices and describes 
 - Neither the Lucerne University of Applied Sciences and Arts, nor the Institute IGE nor any of its employees profit from the purchase of any of the listed products.
 - The authors disclaim any liability or responsibility in connection with the published information.
 
-&copy; Lucerne University of Sciences and Arts, 2023
+&copy; Lucerne University of Sciences and Arts, [Institute of Building Technology and Energy](https://www.hslu.ch/laes)
 
