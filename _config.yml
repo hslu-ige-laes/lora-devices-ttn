@@ -72,3 +72,6 @@ compress_html:
   profile: false
 
 theme: jekyll-theme-cayman
+
+# For copy button on code
+enable_copy_code_button: true
