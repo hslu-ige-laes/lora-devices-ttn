@@ -64,8 +64,8 @@ The SenseCap S2103 is a LoRaWAN indoor/outdoor sensor to measure temperature, hu
 | Action | Description | Green LED Status |
 |--------|-------------|------------------|
 | First power up, press and hold for 3s      | Power on and activate the Bluetooth           | LED flashes at 1s frequency, waiting for Bluetooth connection. If Bluetooth not connected within 1 minute, the device will shut downagain |
-| Press once      | Reboot device and join LoRa network           | 1. The LEDw ill be onfor 5 seconds for initialization 2. Waiting to joinLoRa network: breathing light flashing 3. Join LoRa network success: LED flashes fast for 2s 4. LoRa network joinfailure: LEDsuddenlystop.                |
-| Press and hold for 3s      | Activate Bluetooth again           | 1. Waiting for Bluetooth connection: LEDflashes at 1s frequency 2. Enter configurationmode after Bluetooth connection is successful: LED flashes at 2s frequency <br>If Bluetooth is not connected within 1 minute, the device will reboot and join Lora network.                |
+| Press once      | Reboot device and join LoRa network           | 1. The LEDw ill be onfor 5 seconds for initialization <br>2. Waiting to joinLoRa network: breathing light flashing <br>3. Join LoRa network success: LED flashes fast for 2s <br>4. LoRa network joinfailure: LEDsuddenlystop.                |
+| Press and hold for 3s      | Activate Bluetooth again           | 1. Waiting for Bluetooth connection: LEDflashes at 1s frequency <br>2. Enter configurationmode after Bluetooth connection is successful: LED flashes at 2s frequency <br><br>If Bluetooth is not connected within 1 minute, the device will reboot and join Lora network.                |
 | Press and hold for 9s      |  Power off           | In the 3rd seconds will start flashing at 1s frequency, until the light is steady on, release the button, the light will go out.                |
 
 **Note**<br>
