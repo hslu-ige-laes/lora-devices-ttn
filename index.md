@@ -39,7 +39,7 @@ This documentation gives an overview of different LoRaWAN devices and describes 
 - This is an independent collection of devices that have already been used or tested by our institute for research projects.
 - This website is not endorsed or sponsored by any manufacturer or supplier.
 - All products listed were obtained and paid for through freely available channels at the normal price.
-- The products were chosen either for their low price or their functionalities.
+- The products were chosen either for their low price, quality, design or their functionalities.
 - There are no affiliate links implemented on this website.
 - Neither the Lucerne University of Applied Sciences and Arts, nor the Institute IGE nor any of its employees profit from the purchase of any of the listed products.
 - The authors disclaim any liability or responsibility in connection with the published information.
