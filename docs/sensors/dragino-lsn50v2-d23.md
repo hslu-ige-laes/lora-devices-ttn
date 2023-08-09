@@ -44,8 +44,8 @@ The LSN50v2-D23 is a LoRaWAN Waterproof Outdoor Temperature Sensor with 3 extern
 ## Documents/Links
 - [Payload description (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d23_04.txt)
 - [Datasheet from dragino.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d23_03.pdf)
-- <http://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20LoRaWAN%20End%20Nodes/LSN50v2-D20-D22-D23%20LoRaWAN%20Temperature%20Sensor%20User%20Manual/" target="_blank">User Manual (online)</a>
-- [Datasheet Temperaturesensor DS18B20](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d23_01.pdf)
+- [User Manual (online)](http://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20LoRaWAN%20End%20Nodes/LSN50v2-D20-D22-D23%20LoRaWAN%20Temperature%20Sensor%20User%20Manual)
+- [Datasheet Temperaturesensor DS18B20](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d23_02.pdf)
 
 ---
 
