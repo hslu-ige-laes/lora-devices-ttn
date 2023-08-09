@@ -93,8 +93,8 @@ If a CO<sub>2</sub> limit is exceeded, the LED on the front side of the device c
 
 | CO<sub>2</sub> value | LED Color |
 |----------------------|-----------|
-| 0 - 800              | green     |
-| 801 - 1400           | blue      |
+| 0 ... 800              | green     |
+| 801 ... 1400           | blue      |
 | > 1400               | red       |
 
 See [Change the LED blinking behaviour](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-allsense/#change-the-led-blinking-behaviour)
@@ -104,12 +104,12 @@ See the [payload description ](https://github.com/hslu-ige-laes/lora-devices-ttn
 
 | IAQ| Description |
 |-----------|--------------------------|
-| 0 - 50 | excellent |
-| 51 - 100 | good |
-| 101 - 150 | light load |
-| 151 - 200 | moderate load |
-| 201 - 250 | heavy load |
-| 251 - 350 | severe stress |
+| 0 ... 50 | excellent |
+| 51 ... 100 | good |
+| 101 ... 150 | light load |
+| 151 ... 200 | moderate load |
+| 201 ... 250 | heavy load |
+| 251 ... 350 | severe stress |
 | > 350 | extreme load |
 
 ### CO<sub>2</sub> Sensor ABC Algorithm
@@ -119,7 +119,16 @@ This improves the long-term stability and reliability of CO<sub>2</sub> sensors.
 
 However, this means that the sensor must be exposed to clean air from time to time. Otherwise the CO<sub>2</sub> value will drift.
 
-The sensor determines this base value during the first 2 weeks of operation and only provides usable values after this time. It is therefore important that the sensor has been exposed to the outside air for more than 2 hours during this time. If you want to accelerate this process, you can expose the sensor to the outside air and then send a downlink payload 0xB2. This is how you end the 2 weeks period.
+The sensor determines this base value during the first 2 weeks of operation and only provides usable values after this time.
+It is therefore important that the sensor has been exposed to the outside air for more than 2 hours during this time.
+If you want to accelerate this process, you can expose the sensor to the outside air and then send a downlink payload `B2`.
+This is how you end the 2 weeks period.
+
+1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
+2. Change the `FPort to 10`
+3. Copy/paste the payload from the examples below, e.g. `FB2` into the `Payload` field
+4. Press `Send`
+5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
 
 ---
 
