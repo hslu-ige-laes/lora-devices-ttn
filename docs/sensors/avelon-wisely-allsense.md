@@ -87,6 +87,19 @@ Attention, there are four different versions of the same sensor which have diffe
 ---
 
 ## Device specific Information
+
+### LED blinking behaviour
+If a CO<sub>2</sub> limit is exceeded, the LED on the front side of the device changes color. It blinks every [SensorSampleTime](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-allsense/#sensorsampletime) (250 ms lighting, 500 ms pause - repeating 4 times).
+
+| CO<sub>2</sub> value | LED Color |
+|----------------------|-----------|
+| 0 - 800              | green     |
+| 801 - 1400           | blue      |
+| > 1400               | red       |
+
+See [Change the LED blinking behaviour](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-allsense/#change-the-led-blinking-behaviour)
+See the [payload description ](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-payload.pdf) to change the LED colors and thresholds.
+
 ### IAQ - Indoor Air Quality Index (VOC Sensor)
 
 | IAQ| Description |
@@ -108,7 +121,9 @@ However, this means that the sensor must be exposed to clean air from time to ti
 
 The sensor determines this base value during the first 2 weeks of operation and only provides usable values after this time. It is therefore important that the sensor has been exposed to the outside air for more than 2 hours during this time. If you want to accelerate this process, you can expose the sensor to the outside air and then send a downlink payload 0xB2. This is how you end the 2 weeks period.
 
-### Handler Change
+---
+
+## Handler Change
 - The Wisely sensors are per default configured for the Avelon Cloud, even if ordered as "self-managed". Thats why we have to detach the device from the avelon cloud.
 
 1. Switch the device on and scan the `QR-Code` with e.g. a Mobile Phone.
@@ -253,8 +268,7 @@ The sensor acts as a logger and the data is not real time, but battery life is o
   After 6 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 360 minutes (6 hours).
 
 ### Change the LED blinking behaviour
-- If an adjustable CO<sub>2</sub> limit is exceeded, the LED on the front side of the device blinks every `SensorSampleTime` (250 ms lighting, 500 ms pause - repeating 4 times).
-- With the following procedure you can deactivate it.
+With the following procedure you can deactivate the LED
 
 1. Select the device and change to the tab `Messaging`, select `Downlink`
 2. Change the `FPort to 10`
