@@ -31,6 +31,7 @@ This documentation gives an overview of different LoRaWAN devices and describes 
 | [Dragino - LSN50v2-D23](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-lsn50v2-d23/) | Temperature sensor with 3 external probes | indoor/outdoor | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d23_01.jpg" width="50" align="center"> |
 | [netvox - R718N37](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/netvox-R718N37/) | 3-Phase Current Meter with 3 Clamp-On CT | indoor | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/netvox-r871n37_01.jpg" width="50" align="center"> |
 | [nke WATTECO - Flash'O](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/nke-watteco-flash-o/) | LED flash impulse counter | indoor | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_01.png" width="50" align="center"> |
+| [Seedstudio - SenseCap-S2103](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seedstudio-sensecap-s2103/) | Temperature, humidity and CO<sub>2</sub> sensor | indoor/outdoor | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_01.jpg" width="50" align="center"> |
 
 
 <hr>
