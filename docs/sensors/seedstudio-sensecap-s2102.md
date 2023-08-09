@@ -57,7 +57,7 @@ The SenseCap S2102 is a LoRaWAN indoor/outdoor sensor to measure light intensity
 
 ### LED States
 
-![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_04.png "Power on the LSN50v2-D20")
+![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
 | Action | Description | Green LED Status |
 |--------|-------------|------------------|
@@ -81,7 +81,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 3. Under `Input method` select `Select the end device in the LoRaWAN Device Repository`
 4. Enter the following device information
    - `End device brand` select `SenseCAP`
-   - `Model` select `SenseCAP S2103...`
+   - `Model` select `SenseCAP S2102...`
    - `Hardware Ver.` select `1.0` or whatever is possible or on the sticker
    - `Firmware` select `1.0` or whatever is possible or on the sticker
 	 - `Profile (Region)` select `EU_863_870`
@@ -90,7 +90,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 7. Enter as well the `DevEUI` and the `AppKey` from the sticker
 8. Set an end-device name
 9. Press `Register end device`
-10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seedstudio-sensecap-s2103#led-states)
+10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seedstudio-sensecap-s2102#led-states)
 
 - After Configuration, the device restarts automatically and tries to join the network
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
