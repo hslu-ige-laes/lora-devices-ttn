@@ -302,7 +302,7 @@ See the [payload description ](https://github.com/hslu-ige-laes/lora-devices-ttn
 
 ```javascript
 function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, datasetLength, payloadOffset) {
-	var payload = [];
+	var decoded = [];
 	var measurementByteLengths = {"pressure": 2, "temperature": 2, "humidity": 1, "voc": 2, "brightness": 2, "co2": 2, "presence": 2};
   var divFactors = {"pressure": 10.0, "temperature": 10.0, "humidity": 2.0, "voc": 1.0, "brightness": 1.0, "co2": 1.0, "presence": 1.0};
 
@@ -312,14 +312,14 @@ function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, da
 		for (i = 0; i < datasetCount; i++) {
 			byteIndex = i * datasetLength + byteIndexValue + payloadOffset;
 			if (measurementByteLengths[measurement] === 2) {
-				payload.push((bytes[byteIndex] << 8 | bytes[byteIndex + 1]) / divFactors[measurement]);
+				decoded.push((bytes[byteIndex] << 8 | bytes[byteIndex + 1]) / divFactors[measurement]);
 			}
 			else {
-				payload.push((bytes[byteIndex]) / divFactors[measurement]);
+				decoded.push((bytes[byteIndex]) / divFactors[measurement]);
 			}
 		}
 	}
-	return payload;
+	return decoded;
 }
 
 function decodeUplink(input) {
@@ -338,7 +338,6 @@ function decodeUplink(input) {
   };
   var payloadOffset = 1; // Offset of battery information, offset before datasets
   var data = {};
-  data.payload = {};
   var payload = [];
   var byteIndex = 0;
   var byteIndexValue = 0;
@@ -401,9 +400,9 @@ function decodeUplink(input) {
     }
     
     for (const [key, value] of Object.entries(byteIndices[deviceType])) {
-    	payload = getValues(input.bytes, key, byteIndices, deviceType, data.datasetCount, data.datasetLength, payloadOffset);
-    	if (payload.length > 0) {
-    		data.payload[key] = payload;
+    	decoded = getValues(input.bytes, key, byteIndices, deviceType, data.datasetCount, data.datasetLength, payloadOffset);
+    	if (decoded.length > 0) {
+    		data[key] = decoded;
     	}
     }
   }
