@@ -4,7 +4,7 @@ title: WATTECO - Flash O
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_01.png" width="250" align="right" class="inline"/>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_01.jpg" width="250" align="right" class="inline"/>
 
 # nke WATTECO - Flash O
 {: .no_toc }
