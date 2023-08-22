@@ -9,7 +9,7 @@ parent: Sensors
 # Alpha Omega Technology - Klax 2.0
 {: .no_toc }
 
-- Manufacturer: <a href="https://alpha-omega-technology.de/" target="_blank">Seedstudio</a>
+- Manufacturer: <a href="https://alpha-omega-technology.de/" target="_blank">Alpha Omega Technology</a>
 - Product: <a href="https://iot-shop.de/en/shop/klax-2-0-lorawan-sml-opto-head-for-modern-electricity-meters-4365" target="_blank">Klax 2.0</a>
 
 The Klax 2.0 is a LoRaWAN indoor SML Opto Head for modern electricity meters
@@ -28,15 +28,16 @@ The Klax 2.0 is a LoRaWAN indoor SML Opto Head for modern electricity meters
 
 - indoor device
 - Price ca. CHF 160.- (22.08.2023)
-- Sensors/Devices/Interfaces
-  - **IR Interface Protocols**
-    - IEC 62056-21 B & C
-    - SML 1.04
-    - Logarex 
+- **IR Interface Protocols**
+	- IEC 62056-21 B & C
+	- SML 1.04
+	- Logarex 
+- Battery
+  - 1 x AA Lithium 3.0 Volt, 1500 mAh
   - Expected life time: depending on usage, 3.5 years with a 15min sampling and 1h transmission
-- Battery 1 x AA Lithium 3.0 Volt, 1500 mAh
-- LoRaWAN version: 1.0.x
-- LoRaWAN device class: A
+- LoRaWAN
+  - Version: 1.0.x
+  - Device class: A
 - Protection: [IP20](https://en.wikipedia.org/wiki/IP_Code)
 - Operating Temperature: 0 ... +60 °C
 - Size: 96 × 35 × 40 mm
@@ -50,7 +51,7 @@ The Klax 2.0 is a LoRaWAN indoor SML Opto Head for modern electricity meters
 ---
 
 ## Ordering Info
-- Details: SML 1.04, Model Klax 2.0
+- SML 1.04, Model Klax 2.0
 - [Ordering Link](https://iot-shop.de/en/shop/klax-2-0-lorawan-sml-opto-head-for-modern-electricity-meters-4365)
 
 ---
@@ -111,7 +112,7 @@ Alpha-Omega Tech has tested the Klax with the following meters (2023-08-22)
 8. Set an end-device name
 9. Press `Register end device`
 10. Put in the battery
-11. Place the KLAX without the cover on the electricity meter so that the LED display is visible (see https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/alphaomega-klax2#led-states)
+11. Place the KLAX without the cover on the electricity meter so that the LED display is visible (see [LED States table above](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/alphaomega-klax2#led-states))
 12. After a successful test ( 1 x 2s flashing) you can put on the cover
 
 - Now the device should be joined to the network and you can see the incoming telegrams in the `Live data` section
