@@ -1,16 +1,16 @@
 ---
 layout: default
-title: nke WATTECO - Flash O
+title: WATTECO - Flash O
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_01.png" width="250" align="right" class="inline"/>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_01.png" width="250" align="right" class="inline"/>
 
 # nke WATTECO - Flash O
 {: .no_toc }
 
-- Manufacturer: <a href="http://www.nke-watteco.com/" target="_blank">nke WATTECO</a>
-- Product: <a href="http://www.nke-watteco.com/product/flasho/" target="_blank">Flash'O</a>
+- Manufacturer: <a href="http://www.watteco.com/" target="_blank">WATTECO</a>
+- Product: <a href="https://www.watteco.com/product/flasho-sensor-lorawan/" target="_blank">Flash'O</a>
 
 The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water, gas, electricity or energy meters.
 
@@ -36,8 +36,8 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 ---
 
 ## Documents
-  - [Payload description from support.nke-watteco.com (2020-07-15)](http://support.nke-watteco.com/flasho/#HumanMachineInterface)
-  - [Datasheet from nke-watteco.fr (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_02.pdf)
+  - [Payload description from support.watteco.com (2020-07-15)](http://support.watteco.com/flasho/#HumanMachineInterface)
+  - [Datasheet from watteco.fr (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_02.pdf)
 
 ---
 
@@ -51,11 +51,11 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 The device was successfully tested with the following products.
 
 - **Landis & Gyr ZMD120AP** (1'000 impulses per kWh)<br>
-  <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_04.png" width="250"><br>
+  <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_04.png" width="250"><br>
   - Place the sensor over the LED (yellow colored)
 
 - **Kamstrup DK-8660 Omnipower** (1'000 impulses per kWh)<br>
-  <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/nke-watteco-flash-o_05.png" width="250"><br>
+  <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_05.png" width="250"><br>
   - Place the sensor over the LED (yellow colored)
 	
 ---
@@ -107,7 +107,7 @@ The device was successfully tested with the following products.
 3. Press `Send`
 4. In the `Data` tab you should now see the scheduled telegram. The next time the device is sending data, a short timeframe for the downlink-message will open and the telegram gets sent. This can be accelerated by pressing the key on the nkewattecoflasho and forcing a telegram to be sent.
 
-- For details and other configurations see [Frame Examples](http://support.nke-watteco.com/flasho/#FrameExamples)
+- For details and other configurations see [Frame Examples](http://support.watteco.com/flasho/#FrameExamples)
 
 ---
 
