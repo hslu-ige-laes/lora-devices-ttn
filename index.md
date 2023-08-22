@@ -22,7 +22,7 @@ This documentation gives an overview of different LoRaWAN devices and describes 
 
 | Name | Description | Location | Image|
 | --- | --- | --- | --- | --- |
-| [Alpha Omega Tech - Klax 2.0](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/alphaomgega-klax2/) | SML Opto Head for modern electricity meters | indoor  | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/alphaomega-klax2_01.png" width="50" align="center"> |
+| [Alpha Omega Tech - Klax 2.0](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/alphaomega-klax2/) | SML Opto Head for modern electricity meters | indoor  | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/alphaomega-klax2_01.png" width="50" align="center"> |
 | [Avelon - Wisely Standard](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-standard/) | Temperature- and humidity sensor| indoor  | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-standard_01.png" width="50" align="center"> |
 | [Avelon - Wisely Carbonsense](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-carbonsense/) | Temperature, humidity and CO<sub>2</sub> sensor | indoor | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_01.png" width="50" align="center"> |
 | [Avelon - Wisely AllSense](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-allsense/) | Temperature, humidity,CO<sub>2</sub>, VOC, brightness and presence sensor | indoor | <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-allsense_01.png" width="50" align="center"> |
