@@ -77,6 +77,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 ## Adding the Device to TTN
 - Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_03.pdf)
 - In the Basic settings, select the Platform 'The Things Network' (not SenseCAP for The Things Network!)
+- Configure the device to your needs, select Frequency Plan 'EU868'
 - Copy the `JoinEUI`, `App EUI` and the `DevEUI` and send it from the smartphone via E-Mail to your computer.
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
