@@ -56,9 +56,7 @@ The Klax 2.0 is a LoRaWAN indoor SML Opto Head for modern electricity meters
 
 ---
 
-## Device specific Information
-
-### Electricity Meter Compatibility
+## Compatibility of Electricity Meters
 
 Alpha-Omega Tech has tested the Klax with the following meters (2023-08-22)
 - Holley DTZ541-ZEBA
@@ -76,6 +74,10 @@ Alpha-Omega Tech has tested the Klax with the following meters (2023-08-22)
 - UltraHeat 50 (Landis+Gyr, Siemens & neovac)
 - eBZ DD3 BZ06 ETA - ODZ1
 - DZG DVS74, DVS76, WS74
+
+---
+
+## Device specific Information
 
 ### LED States
 
