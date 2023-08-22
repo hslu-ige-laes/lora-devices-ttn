@@ -12,7 +12,7 @@ parent: Sensors
 - Manufacturer: <a href="https://www.seeedstudio.com/" target="_blank">Seedstudio</a>
 - Product: <a href="https://www.seeedstudio.com/SenseCAP-S2100-LoRaWAN-Data-Logger-p-5361.html" target="_blank">SenseCap S2100</a>
 
-The SenseCap S2100 is a LoRaWAN indoor/outdoor node to connect RS485/Analog/GPIO devices/sensors
+The SenseCap S2100 is a LoRaWAN indoor/outdoor Data Logger for RS485/Analog/GPIO devices/sensors
 
 ---
 
