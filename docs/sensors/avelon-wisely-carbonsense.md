@@ -46,6 +46,7 @@ The Wisely CarbonSense is an indoor room sensor to measure temperature, humidity
 - [Temp- and Humidity Sensor Datasheet - Sensirion SHT3x](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-sensirion-sht3x.pdf)
 - [Atmospheric Pressure Sensor Datasheet - Bosch BMP380](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-bosch-bmp280.pdf)
 - [CO<sub>2</sub> Sensor Datasheet - Senseair Sunrise](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-senseair-sunrise.pdf)
+- [Wisely LED Payload Creator Excel(2023-10-19)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-ledPayload.xlsx)
 
 ---
 
@@ -90,13 +91,11 @@ If a CO<sub>2</sub> limit is exceeded, the LED on the front side of the device c
 
 | CO<sub>2</sub> value | LED Color |
 |----------------------|-----------|
-| 0 ... 800              | green     |
+| 0 ... 800              | green (on some devices this is deactivated)  |
 | 801 ... 1400           | blue      |
 | > 1400               | red       |
 
-To deactivate the led see [Change the LED blinking behaviour](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-carbonsense/#change-the-led-blinking-behaviour)
-
-To change the LED colors and thresholds see [payload description ](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-payload.pdf)
+To deactivate or change the led behaviour see [Change the LED blinking behaviour](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-carbonsense/#change-the-led-blinking-behaviour)
 
 ### CO<sub>2</sub> Sensor ABC Algorithm
 The ABC algorithm in CO<sub>2</sub> sensors uses automatic base correction to reduce fluctuations and drifts in CO<sub>2</sub> measurements.
@@ -256,7 +255,9 @@ With the following procedure you can deactivate the LED
   - `06 06 0B 03 20 00 00 FF 01`
   - `06 06 0B 05 78 FF 00 00 01`
 
-See the [payload description ](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-payload.pdf) to change the LED colors and thresholds.
+Look at the [Wisely LED Payload Creator Excel](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-ledPayload.xlsx) to create the payload information.
+
+Further info in the [payload description ](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-payload.pdf).
 
 ---
 
