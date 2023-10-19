@@ -54,6 +54,7 @@ The LHT65 includes a built-in SHT20 temperature/humidity sensor and a jack to co
 - [Ordering Link](https://www.bastelgarage.ch/lht65-lorawan-temperatur-und-humidity-sensor)
 
 ---
+
 ## Adding the Device to TTN
 ### Handler device information
 Each device is shipped with a sticker with the default keys on it:
@@ -181,3 +182,23 @@ CC B7 0A 6C 03 9F 01 0A 85 7F FF
 - Trigger a new telegram by pressing the ACT-button on the dragino LHT65 for a short time (> 1s and < 3s).<br><br>
 - The dragino LHT65 sends a telegram once every 10 minutes.<br>
 
+---
+
+## Optional Settings
+
+### Change sampling interval
+To change the sampling interval, you have to send the device configuration telegrams (Downlink-Messages)
+The time interval in minutes at which the sensor queries the current values.
+
+1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
+2. Change the `FPort to 2`
+3. Copy/paste the payload, e.g. `0100012C` into the `Payload` field to set interval to 5 minutes
+4. Press `Send`
+5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+
+#### Examples
+'0100' is an identifier, the rest represents the sampling interval in hex
+
+-	5 Minutes Interval:  '0100**012C**' (300s in hex are '012C')
+-	15 Minutes Interval: '0100**0384**' (900s in hex are '0384')
+-	60 Minutes Interval: '0100**0E10**' (3600s in hex are '0E10')

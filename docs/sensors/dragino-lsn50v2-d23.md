@@ -89,6 +89,27 @@ Out of the factory the device is switched off. To power on the LSN50v2-D20, open
 
 ---
 
+## Optional Settings
+
+### Change sampling interval
+To change the sampling interval, you have to send the device configuration telegrams (Downlink-Messages)
+The time interval in minutes at which the sensor queries the current values.
+
+1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
+2. Change the `FPort to 2`
+3. Copy/paste the payload, e.g. `0100012C` into the `Payload` field to set interval to 5 minutes
+4. Press `Send`
+5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+
+#### Examples
+'0100' is an identifier, the rest represents the sampling interval in hex
+
+-	5 Minutes Interval:  '0100**012C**' (300s in hex are '012C')
+-	15 Minutes Interval: '0100**0384**' (900s in hex are '0384')
+-	60 Minutes Interval: '0100**0E10**' (3600s in hex are '0E10')
+
+---
+
 ## Payload formatter
 
 ```javascript
