@@ -92,6 +92,38 @@ However, the actual range can vary depending on several factors
 
 ---
 
+## RSSI and SNR
+
+In the LoRaWAN network, the Received Signal Strength Indicator (RSSI) and the Signal-to-Noise Ratio (SNR) are important metrics for evaluating the communication quality between LoRa devices and gateways.
+
+### RSSI (Received Signal Strength Indicator)
+
+RSSI measures the strength of the received signal in decibels relative to 1 milliwatt (dBm).
+The values for RSSI in the LoRaWAN can typically range from around -120 dBm to -40 dBm. A value of -120 dBm indicates a very weak signal that is close to the reception limit, while a value of -40 dBm indicates a very strong signal.
+
+
+### SNR (Signal-to-Noise Ratio)
+
+SNR is a measure of how much stronger the signal is than the background noise. It is measured in decibels (dB).
+The SNR values in the LoRaWAN can range from around -20 dB to +10 dB.
+- A negative SNR means that the noise is stronger than the signal, which typically occurs at very long distances or in poor environmental conditions.
+- A positive SNR indicates that the signal is stronger than the noise, which is necessary for effective communication.
+
+### What are good values?
+
+To assess the quality, the two values must be considered together!
+
+- The radio link can be described as **GOOD** if RSSI > -115dB and SNR > -7dB
+- The radio link is **POOR** (range limit) if RSSI <= -120 dB or SNR <= -13dB
+
+If RSSI is good (> -115dB), but SNR is poor (<= -13dB), this means that the environment is very noisy
+
+The SNR must be checked over several days to be sure that the radio link is stable enough to receive all messages.
+
+If RSSI is poor (<=-120dB) but SNR is good (> -7dB), this means that the device is probably far away from the gateway.
+
+---
+
 ## Security
 LoRaWAN networks are designed with robust security measures, for example including encryption, device authentication and message integrity checks.
 Overall LoRaWAN networks are considered secure for various IoT applications.
