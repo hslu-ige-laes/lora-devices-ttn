@@ -304,8 +304,8 @@ Further info in the [payload description ](https://github.com/hslu-ige-laes/lora
 ```javascript
 function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, datasetLength, payloadOffset) {
 	var decoded = [];
-	var measurementByteLengths = {"pressure_hPa": 2, "temp_degrC": 2, "hum_relH": 1, "voc_index": 2, "brgt_lux": 2, "co2": 2, "presence_min": 2};
-  var divFactors = {"pressure_hPa": 10.0, "temp_degrC": 10.0, "hum_relH": 2.0, "voc_index": 1.0, "brgt_lux": 1.0, "co2": 1.0, "presence_min": 1.0};
+	var measurementByteLengths = {"pressure_hPa": 2, "temp_degrC": 2, "hum_relHum": 1, "voc_index": 2, "brgt_lux": 2, "co2_ppm": 2, "presence_min": 2};
+  var divFactors = {"pressure_hPa": 10.0, "temp_degrC": 10.0, "hum_relHum": 2.0, "voc_index": 1.0, "brgt_lux": 1.0, "co2_ppm": 1.0, "presence_min": 1.0};
 
 	if (measurement in byteIndices[deviceType]){
 		byteIndexValue = byteIndices[deviceType][measurement];
@@ -332,10 +332,10 @@ function decodeUplink(input) {
     "AllSenseExt": 13
   };
   var byteIndices = {
-    "Standard": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relH": 4},
-    "CarbonSense": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relH": 4, "co2": 5},
-    "AllSense": {"temp_degrC": 0, "hum_relH": 2, "voc_index": 3, "co2": 5},
-    "AllSenseExt": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relH": 4, "voc_index": 5, "brgt_lux": 7, "co2": 9, "presence_min": 11}
+    "Standard": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relHum": 4},
+    "CarbonSense": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relHum": 4, "co2_ppm": 5},
+    "AllSense": {"temp_degrC": 0, "hum_relHum": 2, "voc_index": 3, "co2_ppm": 5},
+    "AllSenseExt": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relHum": 4, "voc_index": 5, "brgt_lux": 7, "co2_ppm": 9, "presence_min": 11}
   };
   var payloadOffset = 1; // Offset of battery information, offset before datasets
   var data = {};
