@@ -324,7 +324,7 @@ function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, da
 }
 
 function decodeUplink(input) {
-  var deviceType = "AllSenseExt";
+  var deviceType = "AllSense";
   var datasetLengthDict = {
     "Standard": 5,
     "CarbonSense": 7,
