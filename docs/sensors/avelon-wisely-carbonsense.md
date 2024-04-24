@@ -266,8 +266,8 @@ Further info in the [payload description ](https://github.com/hslu-ige-laes/lora
 ```javascript
 function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, datasetLength, payloadOffset) {
 	var decoded = [];
-	var measurementByteLengths = {"pressure": 2, "temperature": 2, "humidity": 1, "voc": 2, "brightness": 2, "co2": 2, "presence": 2};
-  var divFactors = {"pressure": 10.0, "temperature": 10.0, "humidity": 2.0, "voc": 1.0, "brightness": 1.0, "co2": 1.0, "presence": 1.0};
+	var measurementByteLengths = {"pressure_hPa": 2, "temp_degrC": 2, "hum_relH": 1, "voc_index": 2, "brgt_lux": 2, "co2": 2, "presence_min": 2};
+  var divFactors = {"pressure_hPa": 10.0, "temp_degrC": 10.0, "hum_relH": 2.0, "voc_index": 1.0, "brgt_lux": 1.0, "co2": 1.0, "presence_min": 1.0};
 
 	if (measurement in byteIndices[deviceType]){
 		byteIndexValue = byteIndices[deviceType][measurement];
@@ -294,10 +294,10 @@ function decodeUplink(input) {
     "AllSenseExt": 13
   };
   var byteIndices = {
-    "Standard": {"pressure": 0, "temperature": 2, "humidity": 4},
-    "CarbonSense": {"pressure": 0, "temperature": 2, "humidity": 4, "co2": 5},
-    "AllSense": {"temperature": 0, "humidity": 2, "voc": 3, "co2": 5},
-    "AllSenseExt": {"pressure": 0, "temperature": 2, "humidity": 4, "voc": 5, "brightness": 7, "co2": 9, "presence": 11}
+    "Standard": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relH": 4},
+    "CarbonSense": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relH": 4, "co2": 5},
+    "AllSense": {"temp_degrC": 0, "hum_relH": 2, "voc_index": 3, "co2": 5},
+    "AllSenseExt": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relH": 4, "voc_index": 5, "brgt_lux": 7, "co2": 9, "presence_min": 11}
   };
   var payloadOffset = 1; // Offset of battery information, offset before datasets
   var data = {};
@@ -321,22 +321,22 @@ function decodeUplink(input) {
     // Battery status and percent
     var batVal = input.bytes[0];
     if((batVal >= 30) && (batVal < 254)){
-      data.batteryPerc = Math.round(batVal / 254.0 * 100.0 *10) / 10;
-      data.batteryStatus = "OK";
+      data.battery_perc = Math.round(batVal / 254.0 * 100.0 *10) / 10;
+      data.battery_status = "OK";
     }else if((batVal < 30) && (batVal > 1)){
-      data.batteryPerc = Math.round(batVal / 254.0 * 100.0 *10) / 10;
-      data.batteryStatus = "Low battery state";
+      data.battery_perc = Math.round(batVal / 254.0 * 100.0 *10) / 10;
+      data.battery_status = "Low battery state";
       warnings.push("Battery Warning: Low state");
     }else if((batVal === 1)){
-      data.batteryPerc = 1;
-      data.batteryStatus = "No further battery capacity available";
+      data.battery_perc = 1;
+      data.battery_status = "No further battery capacity available";
       warnings.push("Battery Warning: No further battery capacity available");
     }else if(batVal === 254){
-      data.batteryPerc = 100.0;
-      data.batteryStatus = "Battery at maximum capacity";
+      data.battery_perc = 100.0;
+      data.battery_status = "Battery at maximum capacity";
     } else{
-      data.batteryPerc = 0.0;
-      data.batteryStatus = "Could not acquire the battery voltage";
+      data.battery_perc = 0.0;
+      data.battery_status = "Could not acquire the battery voltage";
       warnings.push("Battery Warning: Could not acquire the voltage");
     }
       
