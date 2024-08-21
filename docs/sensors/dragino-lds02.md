@@ -75,6 +75,22 @@ The LDS02 is a LoRaWAN Window/Door sensor.
 - The payload formatter should already be preset. If not, you can copy/paste it from below
 
 ---
+
+## Optional Settings
+
+### Change TDC (Transmit Time Interval resp. Keep Alive Interval)
+In some cases, the sensor has sent incorrect values. This can be remedied by reducing the TDC.
+
+By default, the sensor sends a status message every day. This interval can be reduced to 1 hour (3600s -> HEX E10) as follows:
+
+1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
+2. Change the `FPort to 1`
+3. Copy/paste the payload from the examples below, e.g. `01 00 0E 10` into the `Payload` field
+4. Press `Send`
+5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore wait max 1 day or manually open/close the window to trigger a new transmission.
+
+---
+
 ## Payload formatter
 
 ```javascript
