@@ -303,28 +303,28 @@ Further info in the [payload description ](https://github.com/hslu-ige-laes/lora
 
 ```javascript
 function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, datasetLength, payloadOffset) {
-	var decoded = [];
-	var measurementByteLengths = {"pressure_hPa": 2, "temp_degrC": 2, "hum_relHum": 1, "voc_index": 2, "brgt_lux": 2, "co2_ppm": 2, "presence_min": 2};
-  var divFactors = {"pressure_hPa": 10.0, "temp_degrC": 10.0, "hum_relHum": 2.0, "voc_index": 1.0, "brgt_lux": 1.0, "co2_ppm": 1.0, "presence_min": 1.0};
+  var decoded = [];
+  var measurementByteLengths = {"pressure_hPa": 2, "temperature_degrC": 2, "humidity_perc": 1, "voc_index": 2, "brightness_lux": 2, "co2_ppm": 2, "presence_min": 2};
+  var divFactors = {"pressure_hPa": 10.0, "temperature_degrC": 10.0, "humidity_perc": 2.0, "voc_index": 1.0, "brightness_lux": 1.0, "co2_ppm": 1.0, "presence_min": 1.0};
 
-	if (measurement in byteIndices[deviceType]){
-		byteIndexValue = byteIndices[deviceType][measurement];
+  if (measurement in byteIndices[deviceType]) {
+    var byteIndexValue = byteIndices[deviceType][measurement];
 
-		for (i = 0; i < datasetCount; i++) {
-			byteIndex = i * datasetLength + byteIndexValue + payloadOffset;
-			if (measurementByteLengths[measurement] === 2) {
-				decoded.push((bytes[byteIndex] << 8 | bytes[byteIndex + 1]) / divFactors[measurement]);
-			}
-			else {
-				decoded.push((bytes[byteIndex]) / divFactors[measurement]);
-			}
-		}
-	}
-	return decoded;
+    for (var i = 0; i < datasetCount; i++) {
+      var byteIndex = i * datasetLength + byteIndexValue + payloadOffset;
+      if (measurementByteLengths[measurement] === 2) {
+        decoded.push((bytes[byteIndex] << 8 | bytes[byteIndex + 1]) / divFactors[measurement]);
+      } else {
+        decoded.push((bytes[byteIndex]) / divFactors[measurement]);
+      }
+    }
+  }
+  return decoded;
 }
 
 function decodeUplink(input) {
   var deviceType = "AllSense";
+  var samplingRate = 10; //minutes
   var datasetLengthDict = {
     "Standard": 5,
     "CarbonSense": 7,
@@ -332,19 +332,12 @@ function decodeUplink(input) {
     "AllSenseExt": 13
   };
   var byteIndices = {
-    "Standard": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relHum": 4},
-    "CarbonSense": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relHum": 4, "co2_ppm": 5},
-    "AllSense": {"temp_degrC": 0, "hum_relHum": 2, "voc_index": 3, "co2_ppm": 5},
-    "AllSenseExt": {"pressure_hPa": 0, "temp_degrC": 2, "hum_relHum": 4, "voc_index": 5, "brgt_lux": 7, "co2_ppm": 9, "presence_min": 11}
+    "Standard": {"pressure_hPa": 0, "temperature_degrC": 2, "humidity_perc": 4},
+    "CarbonSense": {"pressure_hPa": 0, "temperature_degrC": 2, "humidity_perc": 4, "co2_ppm": 5},
+    "AllSense": {"temperature_degrC": 0, "humidity_perc": 2, "voc_index": 3, "co2_ppm": 5},
+    "AllSenseExt": {"pressure_hPa": 0, "temperature_degrC": 2, "humidity_perc": 4, "voc_index": 5, "brightness_lux": 7, "co2_ppm": 9, "presence_min": 11}
   };
   var payloadOffset = 1; // Offset of battery information, offset before datasets
-  var data = {};
-  var payload = [];
-  var byteIndex = 0;
-  var byteIndexValue = 0;
-  var i = 0;
-  var measurement = "";
-  
   var warnings = [];
   var errors = [];
   
@@ -353,63 +346,54 @@ function decodeUplink(input) {
   }
   
   if((input.fPort === 5) || (input.fPort === 6)){
-    data.deviceName = "Wisely " + deviceType;
-    data.dataOffset = input.bytes[input.bytes.length-1];
-    
     // Battery status and percent
     var batVal = input.bytes[0];
+    var batteryPerc;
     if((batVal >= 30) && (batVal < 254)){
-      data.battery_perc = Math.round(batVal / 254.0 * 100.0 *10) / 10;
-      data.battery_status = "OK";
+      batteryPerc = Math.round(batVal / 254.0 * 100.0 * 10) / 10;
     }else if((batVal < 30) && (batVal > 1)){
-      data.battery_perc = Math.round(batVal / 254.0 * 100.0 *10) / 10;
-      data.battery_status = "Low battery state";
+      batteryPerc = Math.round(batVal / 254.0 * 100.0 * 10) / 10;
       warnings.push("Battery Warning: Low state");
     }else if((batVal === 1)){
-      data.battery_perc = 1;
-      data.battery_status = "No further battery capacity available";
+      batteryPerc = 1;
       warnings.push("Battery Warning: No further battery capacity available");
     }else if(batVal === 254){
-      data.battery_perc = 100.0;
-      data.battery_status = "Battery at maximum capacity";
+      batteryPerc = 100.0;
     } else{
-      data.battery_perc = 0.0;
-      data.battery_status = "Could not acquire the battery voltage";
+      batteryPerc = 0.0;
       warnings.push("Battery Warning: Could not acquire the voltage");
     }
       
-    if(input.fPort === 5){
-      data.payloadFormat = "Standard uplink payload";
-    }else{ // fPort === 6
-      data.payloadFormat = "Extended uplink payload";
-      if(deviceType !== "AllSense"){
-        warnings.push("Warning: deviceType in payload decoder is no set to allsense");
-      }
-      deviceType = "AllSenseExt";
-      data.deviceName = "Wisely AllSense (Extended Payload)";
+    if(input.fPort === 6 && deviceType !== "AllSense"){
+      warnings.push("Warning: deviceType in payload decoder is not set to AllSense");
     }
-  }else{
-    errors.push("Unknown fPort");
-  }
-  
-  if((input.fPort === 5) || (input.fPort === 6)){
-    data.datasetLength = datasetLengthDict[deviceType];
-    data.datasetCount = (input.bytes.length - 2) / data.datasetLength;
     
-    if(!Number.isInteger(data.datasetCount)) {
+    var datasetLength = datasetLengthDict[deviceType];
+    var datasetCount = (input.bytes.length - 2) / datasetLength;
+    var readings = [];
+    
+    if(!Number.isInteger(datasetCount)) {
       errors.push("Error: datasetCount is not a whole number!");
+    } else {
+      for (var i = 0; i < datasetCount; i++) {
+        var reading = { battery_perc: batteryPerc };
+        
+        for (const [key, value] of Object.entries(byteIndices[deviceType])) {
+          var decoded = getValues(input.bytes, key, byteIndices, deviceType, 1, datasetLength, payloadOffset + i * datasetLength);
+          if (decoded.length > 0) {
+            reading[key] = decoded[0];
+          }
+        }
+        reading["offset"] = (datasetCount - i - 1) * samplingRate * (-1); 
+        readings.push(reading);
+      }
     }
-    
-    for (const [key, value] of Object.entries(byteIndices[deviceType])) {
-    	decoded = getValues(input.bytes, key, byteIndices, deviceType, data.datasetCount, data.datasetLength, payloadOffset);
-    	if (decoded.length > 0) {
-    		data[key] = decoded;
-    	}
-    }
+  } else {
+    errors.push("Unknown fPort");
   }
 
   return {
-    data: data,
+    data: readings,
     warnings: warnings,
     errors: errors
   };
