@@ -95,67 +95,46 @@ By default, the sensor sends a status message every day. This interval can be re
 
 ```javascript
 function decodeUplink(input) {
-  var port = input.fPort;
-  var bytes = input.bytes;
-  var value=(bytes[0]<<8 | bytes[1])&0x3FFF;
-  var bat=value/1000;//Battery,units:V
+    const bytes = input.bytes;
+    const batteryVoltage = ((bytes[0] << 8 | bytes[1]) & 0x3FFF) / 1000;
+    const doorStatus = (bytes[0] & 0x80) ? 1 : 0; // 1: open, 0: close
+    const waterLeakStatus = (bytes[0] & 0x40) ? 1 : 0;
+    const mode = bytes[2];
+    const alarm = bytes[9] & 0x01;
   
-  var door_open_status=bytes[0]&0x80?1:0;//1:open,0:close
-  var water_leak_status=bytes[0]&0x40?1:0;
-  
-  var mod=bytes[2];
-  var alarm=bytes[9]&0x01;
-  var data = {};
-  	 switch (input.fPort) {
-		 case 10:
-  if(mod==1){
-    var open_times=bytes[3]<<16 | bytes[4]<<8 | bytes[5];
-    var open_duration=bytes[6]<<16 | bytes[7]<<8 | bytes[8];//units:min
-    
-      data.BAT_V=bat,
-      data.MOD=mod,
-      data.DOOR_OPEN_STATUS=door_open_status,
-      data.DOOR_OPEN_TIMES=open_times,
-      data.LAST_DOOR_OPEN_DURATION=open_duration,
-     data.ALARM=alarm
-    
-  
-}
-  else if(mod==2)
-  {
-  var leak_times=bytes[3]<<16 | bytes[4]<<8 | bytes[5];
-  var leak_duration=bytes[6]<<16 | bytes[7]<<8 | bytes[8];//units:min
-  
-      data.BAT_V=bat,
-      data.MOD=mod,
-      data.WATER_LEAK_STATUS=water_leak_status,
-      data.WATER_LEAK_TIMES=leak_times,
-      data.LAST_WATER_LEAK_DURATION=leak_duration
-  
-}
-  else if(mod==3)
-  
-  {
-      data.BAT_V=bat,
-      data.MOD=mod,
-      data.DOOR_OPEN_STATUS=door_open_status,
-      data.WATER_LEAK_STATUS=water_leak_status,
-      data.ALARM=alarm
+    let data = {
+        battery_volt: batteryVoltage
+    };
 
-  }
+    switch (input.fPort) {
+        case 10:
+            const times = bytes[3] << 16 | bytes[4] << 8 | bytes[5];
+            const duration = bytes[6] << 16 | bytes[7] << 8 | bytes[8]; // units: min
 
-  else{
-      data.BAT_V=bat,
-      data.MOD=mod
-  }
-  return {
-      data: data,
+            switch (mode) {
+                case 1: 
+                    data.open_state = doorStatus;
+                    data.counter = times;
+                    data.openDuration_min = duration;
+                    data.alarm_state = alarm;
+                    break;
+                case 2: 
+                    data.waterLeak_state = waterLeakStatus;
+                    data.counter = times;
+                    data.waterDuration_minutes = duration;
+                    break;
+                case 3: 
+                    data.waterLeak_state = doorStatus || waterLeakStatus;
+                    data.alarm_state = alarm;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            return { errors: ["unknown FPort"] };
     }
-	default:
-    return {
-      errors: ["unknown FPort"]
-    }
-}
-}
 
+    return { data: data };
+}
 ```
