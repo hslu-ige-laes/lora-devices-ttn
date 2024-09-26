@@ -6,7 +6,7 @@ parent: Sensors
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65n-e3_01.png" width="250" align="right">
 
-# Dragino - LHT65-E3
+# Dragino - LHT65N-E3
 {: .no_toc }
 
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
