@@ -1,16 +1,16 @@
 ---
 layout: default
-title: Dragino - LHT65-E3
+title: Dragino - LHT65N-E3
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_01.png" width="250" align="right">
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65n-e3_01.png" width="250" align="right">
 
 # Dragino - LHT65-E3
 {: .no_toc }
 
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
-- Product: <a href="https://www.dragino.com/products/lora-lorawan-end-node/item/151-lht65.html" target="_blank">LHT65-E3</a>
+- Product: <a href="https://www.dragino.com/products/lora-lorawan-end-node/item/151-lht65.html" target="_blank">LHT65N-E3</a>
 
 The LHT65-E3 includes a built-in SHT20 temperature/humidity sensor and a jack to connect an external sensor e.g. a temperature sensor.
 
