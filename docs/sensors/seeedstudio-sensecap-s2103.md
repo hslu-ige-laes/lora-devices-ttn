@@ -106,7 +106,8 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 6. Under `Frequency Plan` choose `EU868`
 7. Under `Upling Interval (min)` choose `10`
 8. Under `Activation Type` choose `OTAA` (Over the air activation)
-9. Press `Send`
+9. Under `Packet Policy` choose `2C+1N` (Over the air activation)
+10. Press `Send`
 
 - After Configuration, the device restarts automatically and tries to join the network
 
