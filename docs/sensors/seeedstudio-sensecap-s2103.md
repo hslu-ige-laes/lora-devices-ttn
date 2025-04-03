@@ -156,13 +156,13 @@ function decodeUplink(input) {
         // Temperature (010110 ... /1000)
         const tempVal = extractValue(payloadRaw, "010110", "010210", 4);
         if (tempVal !== null) {
-            decoded.temp_degrC = tempVal / 1000;
+            decoded.temperature_degrC = tempVal / 1000;
         }
 
         // Humidity (010210 ... /1000)
         const humVal = extractValue(payloadRaw, "010210", "0700", 4);
         if (humVal !== null) {
-            decoded.hum_relHum = humVal / 1000;
+            decoded.humidity_perc = humVal / 1000;
         }
 
         // Battery (000700 ... %, 2 bytes)
