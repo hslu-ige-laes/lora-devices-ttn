@@ -1,15 +1,15 @@
 ---
 layout: default
-title: Seedstudio - SenseCap-S2102
+title: Seeedstudio - SenseCap-S2102
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2102_01.jpg" width="250" align="right">
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2102_01.jpg" width="250" align="right">
 
-# Seedstudio - SenseCap-S2102
+# Seeedstudio - SenseCap-S2102
 {: .no_toc }
 
-- Manufacturer: <a href="https://www.seeedstudio.com/" target="_blank">Seedstudio</a>
+- Manufacturer: <a href="https://www.seeedstudio.com/" target="_blank">Seeedstudio</a>
 - Product: <a href="https://www.seeedstudio.com/SenseCAP-S2102-LoRaWAN-Light-Intensity-Sensor-p-5355.html" target="_blank">SenseCap S2102</a>
 
 The SenseCap S2102 is a LoRaWAN indoor/outdoor sensor to measure light intensity in lux.
@@ -42,8 +42,8 @@ The SenseCap S2102 is a LoRaWAN indoor/outdoor sensor to measure light intensity
 ---
 
 ## Documents/Links
-- [S210X Sensor User Guide from seedstudio.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_03.pdf)
-- [Battery Life Prediction Table (Excel document)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_02.xlsx)
+- [S210X Sensor User Guide from seeedstudio.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
+- [Battery Life Prediction Table (Excel document)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_02.xlsx)
 
 ---
 
@@ -57,7 +57,7 @@ The SenseCap S2102 is a LoRaWAN indoor/outdoor sensor to measure light intensity
 
 ### LED States
 
-![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_04.png "Power on the SenseCap")
+![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
 | Action | Description | Green LED Status |
 |--------|-------------|------------------|
@@ -72,7 +72,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 ---
 
 ## Adding the Device to TTN
-- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_03.pdf)
+- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
 - Copy the `JoinEUI`, `App EUI` and the `DevEUI` and send it from the smartphone via E-Mail to your computer.
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
@@ -90,7 +90,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 7. Enter as well the `DevEUI` and the `AppKey` from the sticker
 8. Set an end-device name
 9. Press `Register end device`
-10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seedstudio-sensecap-s2102#led-states)
+10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seeedstudio-sensecap-s2102#led-states)
 
 - After Configuration, the device restarts automatically and tries to join the network
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section

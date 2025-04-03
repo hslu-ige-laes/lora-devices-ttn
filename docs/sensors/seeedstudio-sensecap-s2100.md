@@ -1,15 +1,15 @@
 ---
 layout: default
-title: Seedstudio - SenseCap-S2100
+title: Seeedstudio - SenseCap-S2100
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2100_01.jpg" width="250" align="right">
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2100_01.jpg" width="250" align="right">
 
-# Seedstudio - SenseCap-S2100
+# Seeedstudio - SenseCap-S2100
 {: .no_toc }
 
-- Manufacturer: <a href="https://www.seeedstudio.com/" target="_blank">Seedstudio</a>
+- Manufacturer: <a href="https://www.seeedstudio.com/" target="_blank">Seeedstudio</a>
 - Product: <a href="https://www.seeedstudio.com/SenseCAP-S2100-LoRaWAN-Data-Logger-p-5361.html" target="_blank">SenseCap S2100</a>
 
 The SenseCap S2100 is a LoRaWAN indoor/outdoor Data Logger for RS485/Analog/GPIO devices/sensors
@@ -46,7 +46,7 @@ The SenseCap S2100 is a LoRaWAN indoor/outdoor Data Logger for RS485/Analog/GPIO
 ---
 
 ## Documents/Links
-- [S2100 Sensor User Guide from seedstudio.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2100_03.pdf)
+- [S2100 Sensor User Guide from seeedstudio.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2100_03.pdf)
 
 ---
 
@@ -60,7 +60,7 @@ The SenseCap S2100 is a LoRaWAN indoor/outdoor Data Logger for RS485/Analog/GPIO
 
 ### LED States
 
-![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_04.png "Power on the SenseCap")
+![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
 | Action | Description | Green LED Status |
 |--------|-------------|------------------|
@@ -75,7 +75,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 ---
 
 ## Adding the Device to TTN
-- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seedstudio-sensecap-s2103_03.pdf)
+- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
 - In the Basic settings, select the Platform 'The Things Network' (not SenseCAP for The Things Network!)
 - Configure the device to your needs, select Frequency Plan 'EU868'
 - Copy the `JoinEUI`, `App EUI` and the `DevEUI` and send it from the smartphone via E-Mail to your computer.
@@ -95,7 +95,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 7. Enter as well the `DevEUI` and the `AppKey` from the sticker
 8. Set an end-device name
 9. Press `Register end device`
-10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seedstudio-sensecap-s2103#led-states)
+10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seeedstudio-sensecap-s2103#led-states)
 
 - After Configuration, the device restarts automatically and tries to join the network
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
