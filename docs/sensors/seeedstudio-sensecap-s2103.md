@@ -79,27 +79,38 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
 1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
-2. Under `Overview` click `(+) Register device`
-3. Under `Input method` select `Select the end device in the LoRaWAN Device Repository`
-4. Enter the following device information
-   - `End device brand` select `SenseCAP`
-   - `Model` select `SenseCAP S2103...`
-   - `Hardware Ver.` select `1.0` or whatever is possible or on the sticker
-   - `Firmware` select `1.0` or whatever is possible or on the sticker
-	 - `Profile (Region)` select `EU_863_870`
-5. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
-6. Under `JoinEUI` enter the `App EUI` from the App
-7. Enter as well the `DevEUI` and the `AppKey` from the sticker
-8. Set an end-device name
-9. Press `Register end device`
-10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seeedstudio-sensecap-s2103#led-states)
+2. Under `End devices` in the application click `(+) Register end device`
+3. Under `Input method` select `Enter end device specifics manually`
+4. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
+5. Under `LoRaWAN version` select `1.0.3`
+5. Under `JoinEUI` enter the `App EUI` from the App and press `Confirm`
+6. Enter as well the `DevEUI` and the `AppKey` from the App
+7. Set an end-device name
+8. Press `Register end device`
+9. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seeedstudio-sensecap-s2103#led-states)
 
 - After Configuration, the device restarts automatically and tries to join the network
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
-- The payload formatter should already be preset. If not, you can copy/paste it from below
+- The payload formatter you can copy/paste from below
 
 ---
 
+## Change Device Settings
+- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
+
+1. Connect to the device
+2. Choose configuration mode `Device Firmware Update` and Update the Firmware
+3. Connect again after update and choose under configuration mode `Advanced Configuration`
+4. Go to tab `Settings`
+5. Under `Platform` choose `The Things Network` (Attention, dont choose "SenceCAP for The Things Network")
+6. Under `Frequency Plan` choose `EU868`
+7. Under `Upling Interval (min)` choose `10`
+8. Under `Activation Type` choose `OTAA` (Over the air activation)
+9. Press `Send`
+
+- After Configuration, the device restarts automatically and tries to join the network
+
+---
 ## Payload formatter
 
 ```javascript
@@ -107,86 +118,63 @@ function hexToDec(hex) {
     return parseInt(hex, 16);
 }
 
-function isObjectEmpty(objectName) {
-    return Object.keys(objectName).length === 0;
+function extractValue(payloadRaw, tag, nextTag = null, byteLength = 4) {
+    if (!payloadRaw.includes(tag)) return null;
+
+    let segment = payloadRaw.split(tag)[1];
+    if (nextTag && segment.includes(nextTag)) {
+        segment = segment.split(nextTag)[0];
+    }
+
+    const expectedLength = byteLength * 2;
+    segment = segment.substring(0, expectedLength);
+
+    const bytePairs = segment.match(/[a-fA-F0-9]{2}/g);
+    if (!bytePairs || bytePairs.length !== byteLength) return null;
+
+    const reversed = bytePairs.reverse().join('');
+    return hexToDec(reversed);
 }
 
-function stringToHex(str) {
-    var result = '';
-    for (var i = 0; i < str.length; i++) {
-        result += str.charCodeAt(i).toString(16);
-    }
-    return result;
-}
-
-function bytes2HexString(arrBytes) {
-    var str = '';
-    for (var i = 0; i < arrBytes.length; i++) {
-        var tmp;
-        var num = arrBytes[i];
-        if (num < 0) {
-            tmp = (255 + num + 1).toString(16);
-        } else {
-            tmp = num.toString(16);
-        }
-        if (tmp.length === 1) {
-            tmp = '0' + tmp;
-        }
-        str += tmp;
-    }
-    return str;
+function bytesToHexString(bytes) {
+    return bytes.map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
 }
 
 function decodeUplink(input) {
     try {
-        var bytes = input['bytes'];
-        let payload_raw = bytes2HexString(bytes).toUpperCase();
-        var decoded = {};
-        let payload = "";
+        const bytes = input.bytes;
+        const payloadRaw = bytesToHexString(bytes);
+        const decoded = {};
 
-        // CO2 value
-        if (payload_raw.includes("010410")) {
-            payload = payload_raw.split('010410')[1];
-            if (payload.includes('010110')) {
-                payload = payload.split('010110')[0];
-            }
-            payload = payload.substring(0, 8);
-            payload = payload.match(/[a-fA-F0-9]{2}/g).reverse().join('');
-            decoded.co2_ppm = Number(hexToDec(payload)) / 1000;
+        // CO2 (010410 ... /1000)
+        const co2Val = extractValue(payloadRaw, "010410", "010110", 4);
+        if (co2Val !== null) {
+            decoded.co2_ppm = co2Val / 1000;
         }
-        // Temperature
-        if (payload_raw.includes("010110")) {
-            payload = payload_raw.split('010110')[1];
-            if (payload.includes('010210')) {
-                payload = payload.split('010210')[0];
-            }
-            payload = payload.substring(0, 8);
-            payload = payload.match(/[a-fA-F0-9]{2}/g).reverse().join('');
-            decoded.temp_degrC = Number(hexToDec(payload)) / 1000;
+
+        // Temperature (010110 ... /1000)
+        const tempVal = extractValue(payloadRaw, "010110", "010210", 4);
+        if (tempVal !== null) {
+            decoded.temp_degrC = tempVal / 1000;
         }
-        // Humidity
-        if (payload_raw.includes("010210")) {
-            payload = payload_raw.split('010210')[1];
-            if (payload_raw.length > 50) {
-                if (payload.includes('0700')) {
-                    payload = payload.split('0700')[0];
-                }
-            }
-            payload = payload.substring(0, 8);
-            payload = payload.match(/[a-fA-F0-9]{2}/g).reverse().join('');
-            decoded.hum_relHum = Number(hexToDec(payload)) / 1000;
+
+        // Humidity (010210 ... /1000)
+        const humVal = extractValue(payloadRaw, "010210", "0700", 4);
+        if (humVal !== null) {
+            decoded.hum_relHum = humVal / 1000;
         }
-        // Battery
-        if ((payload_raw.includes("000700")) && (payload_raw.length > 18)) {
-            payload = payload_raw.split('000700')[1];
-            payload = payload.substring(0, 4);
-            payload = payload.match(/[a-fA-F0-9]{2}/g).reverse().join('');
-            decoded.battery_perc = Number(hexToDec(payload));
+
+        // Battery (000700 ... %, 2 bytes)
+        const battVal = extractValue(payloadRaw, "000700", null, 2);
+        if (battVal !== null) {
+            decoded.battery_perc = battVal;
         }
+
+        // Optional: Debug raw payload (for dev/console)
+        // decoded._debug_payloadRaw = payloadRaw;
 
         return { data: decoded };
     } catch (e) {
-        // Handle error appropriately if needed
         return { data: null, error: e.message };
     }
 }
