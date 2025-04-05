@@ -157,21 +157,19 @@ This is how you end the 2 weeks period.
 - The Avelon Wisely sensors use the so called "Over The Air Activation" (OTAA) and for a secure communication we will need to register the beforehand copied keys.
 
 1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
-2. Under `Overview` click `(+) Register device`
+2. Under `End devices` in the application click `(+) Register end device`
 3. Under `Input method` select `Enter end device specifics manually`
 4. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
-5. Under `LoRaWAN version` select `LoRaWAN Specification 1.0.3`
-6. As `JoinEUI` enter the `Application EUI`, fill in as well the `Device EUI` and the `Application Key`
+5. Under `LoRaWAN version` select `1.0.3`
+5. Under `JoinEUI` enter the `App EUI` from the App and press `Confirm`
+6. Enter as well the `DevEUI` and the `AppKey` from the App
 7. Set an end-device name
 8. Press `Register end device`
-9. Add the payload formatter
-   - Switch to the tab `Payload formatters`
-   - As `Formatter type` select `Custom Javascript formatter`   
-   - Copy/Paste the code from the payload Formatter section below
-   - Click `Save changes`
+9. Add the payload formatter from below, either to the device itself or if all devices in the app are from the same type, to the application
 10. Now we have to reset the device manually by pressing the small button on the back of the device. `5 seconds -> Off` , `2 seconds -> On`
-11. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
-    - if not, please wait several hours and check again. The change of the handler can take a long time...
+
+- Now the device should join the network and you can see the incoming telegrams in the `Live data` section
+  - if not, please wait several hours and check again. The change of the handler can take a long time...
 
 ---
 
