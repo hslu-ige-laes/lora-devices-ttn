@@ -87,11 +87,11 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 6. Enter as well the `DevEUI` and the `AppKey` from the App
 7. Set an end-device name
 8. Press `Register end device`
-9. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seeedstudio-sensecap-s2103#led-states)
+9. Add the payload formatter from below, either to the device itself or if all devices in the app are from the same type, to the application
+10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seeedstudio-sensecap-s2103#led-states)
 
 - After Configuration, the device restarts automatically and tries to join the network
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
-- The payload formatter you can copy/paste from below
 
 ---
 
