@@ -84,9 +84,8 @@ Attention, there are four different versions of the same sensor which have diffe
 
 ---
 
-## Device specific Information
+## LED States
 
-### LED blinking behaviour
 If a CO<sub>2</sub> limit is exceeded, the LED on the front side of the device changes color. It blinks every [SensorSampleTime](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-carbonsense/#sensorsampletime) (250 ms lighting, 500 ms pause - repeating 4 times).
 
 | CO<sub>2</sub> value | LED Color |
@@ -259,7 +258,7 @@ Further info in the [payload description ](https://github.com/hslu-ige-laes/lora
 
 ---
 
-## Payload formatter
+## Payload Decoder
 
 ```javascript
 function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, datasetLength, payloadOffset) {

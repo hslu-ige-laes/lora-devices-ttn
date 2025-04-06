@@ -191,7 +191,7 @@ E.g. the impact of an opened window might not be visible in the temperature data
 
 ---
 
-## Payload formatter
+## Payload Decoder
 
 ```javascript
 function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, datasetLength, payloadOffset) {

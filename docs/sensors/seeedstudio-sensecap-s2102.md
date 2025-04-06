@@ -53,9 +53,7 @@ The SenseCap S2102 is a LoRaWAN indoor/outdoor sensor to measure light intensity
 
 ---
 
-## Device specific Information
-
-### Button Actions and LED States
+## Button Actions, Modes and LED States
 
 ![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
@@ -94,7 +92,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 
 ---
 
-## Change Device Settings
+## Settings (mandatory!)
 - Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
 
 1. Connect to the device
@@ -112,7 +110,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 
 ---
 
-## Payload formatter
+## Payload Decoder
 
 ```javascript
 function hexToDec(hex) {

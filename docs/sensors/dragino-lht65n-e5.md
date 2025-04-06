@@ -55,14 +55,12 @@ The LHT65N-E5 includes a built-in SHT20 temperature/humidity sensor and a jack t
 
 ---
 
-## Device specific Information
+## Button Actions, Modes and LED States
 
 The LHT65N-E5 has two operating modes: Deep Sleep Mode and Working Mode.
 - In **Deep Sleep Mode**, which is the default mode used for storage and shipping, the device does not perform any LoRaWAN activity to conserve battery life.
 - In **Working Mode**, the device joins a LoRaWAN network and sends sensor data to the server.
 - Between each sampling, transmission, and reception cycle, it enters **STOP mode** (also known as IDLE mode), which consumes the same low power as Deep Sleep Mode.
-
-### Button Actions and LED States
 
 The ACT button on the device is used to switch between the above mentioned modes.
 
@@ -94,8 +92,31 @@ The ACT button on the device is used to switch between the above mentioned modes
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
 - The payload formatter should already be preset. If not, you can copy/paste it from below
 
+---
 
-### Device Configuration
+## Optional Settings
+
+### Change sampling interval
+To change the sampling interval, you have to send the device configuration telegrams (Downlink-Messages)
+The time interval in minutes at which the sensor queries the current values.
+
+1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
+2. Change the `FPort to 2`
+3. Copy/paste the payload, e.g. `01000258` into the `Payload` field to set interval to 10 minutes
+4. Press `Send`
+5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+
+#### Example configurations
+'0100' is an identifier, the rest represents the sampling interval in hex
+
+-	5 Minutes Interval:  '0100**012C**' (300s in hex are '012C')
+-	10 Minutes Interval:  '0100**0258**' (300s in hex are '0258')
+-	15 Minutes Interval: '0100**0384**' (900s in hex are '0384')
+-	60 Minutes Interval: '0100**0E10**' (3600s in hex are '0E10')
+
+---
+
+## Payload Decoder
 - Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
 - We need to tell the "The Things Network" where to find e.g. the temperature etc. in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
@@ -314,26 +335,3 @@ CC 15 09 8C 02 7B 05 00 06 7F FF
 
 - Now you should be able to see the decoded data of your sensor in the tab `Data`.<br>
 - Trigger a new telegram by pressing the ACT-button on the dragino LHT65 for a short time (> 1s and < 3s).<br><br>
-- The dragino LHT65 sends a telegram once every 10 minutes.<br>
-
----
-
-## Optional Settings
-
-### Change sampling interval
-To change the sampling interval, you have to send the device configuration telegrams (Downlink-Messages)
-The time interval in minutes at which the sensor queries the current values.
-
-1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
-2. Change the `FPort to 2`
-3. Copy/paste the payload, e.g. `01000258` into the `Payload` field to set interval to 10 minutes
-4. Press `Send`
-5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
-
-#### Examples
-'0100' is an identifier, the rest represents the sampling interval in hex
-
--	5 Minutes Interval:  '0100**012C**' (300s in hex are '012C')
--	10 Minutes Interval:  '0100**0258**' (300s in hex are '0258')
--	15 Minutes Interval: '0100**0384**' (900s in hex are '0384')
--	60 Minutes Interval: '0100**0E10**' (3600s in hex are '0E10')

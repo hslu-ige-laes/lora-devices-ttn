@@ -55,9 +55,7 @@ The SenseCap S2103 is a LoRaWAN indoor/outdoor sensor to measure temperature, hu
 
 ---
 
-## Device specific Information
-
-### Button Actions and LED States
+## Button Actions, Modes and LED States
 
 ![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
@@ -95,7 +93,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 
 ---
 
-## Change Device Settings
+## Settings (mandatory!)
 - Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
   -> you don't have to create an account, simply click `Skip` on top right
 - Copy the `JoinEUI`, `App EUI` and the `DevEUI` and send it from the smartphone via E-Mail to your computer.
@@ -115,7 +113,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 - After Configuration, the device restarts automatically and tries to join the network
 
 ---
-## Payload formatter
+## Payload Decoder
 
 ```javascript
 function hexToDec(hex) {
