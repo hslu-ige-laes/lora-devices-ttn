@@ -97,6 +97,9 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 
 ## Change Device Settings
 - Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
+  -> you don't have to create an account, simply click `Skip` on top right
+- Copy the `JoinEUI`, `App EUI` and the `DevEUI` and send it from the smartphone via E-Mail to your computer.
+- Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
 1. Connect to the device
 2. Choose configuration mode `Device Firmware Update` and Update the Firmware
