@@ -77,24 +77,37 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
 1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
-2. Under `Overview` click `(+) Register device`
-3. Under `Input method` select `Select the end device in the LoRaWAN Device Repository`
-4. Enter the following device information
-   - `End device brand` select `SenseCAP`
-   - `Model` select `SenseCAP S2102...`
-   - `Hardware Ver.` select `1.0` or whatever is possible or on the sticker
-   - `Firmware` select `1.0` or whatever is possible or on the sticker
-	 - `Profile (Region)` select `EU_863_870`
-5. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
-6. Under `JoinEUI` enter the `App EUI` from the App
-7. Enter as well the `DevEUI` and the `AppKey` from the sticker
-8. Set an end-device name
-9. Press `Register end device`
-10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seeedstudio-sensecap-s2102#led-states)
+2. Under `End devices` in the application click `(+) Register end device`
+3. Under `Input method` select `Enter end device specifics manually`
+4. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
+5. Under `LoRaWAN version` select `1.0.3`
+5. Under `JoinEUI` enter the `App EUI` from the App and press `Confirm`
+6. Enter as well the `DevEUI` and the `AppKey` from the App
+7. Set an end-device name
+8. Press `Register end device`
+9. Add the payload formatter from below, either to the device itself or if all devices in the app are from the same type, to the application
+10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/seeedstudio-sensecap-s2103#led-states)
 
 - After Configuration, the device restarts automatically and tries to join the network
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
-- The payload formatter should already be preset. If not, you can copy/paste it from below
+
+---
+
+## Change Device Settings
+- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
+
+1. Connect to the device
+2. Choose configuration mode `Device Firmware Update` and Update the Firmware
+3. Connect again after update and choose under configuration mode `Advanced Configuration`
+4. Go to tab `Settings`
+5. Under `Platform` choose `The Things Network` (Attention, dont choose "SenceCAP for The Things Network")
+6. Under `Frequency Plan` choose `EU868`
+7. Under `Upling Interval (min)` choose `10`
+8. Under `Activation Type` choose `OTAA` (Over the air activation)
+9. Under `Packet Policy` choose `2C+1N` (Over the air activation)
+10. Press `Send`
+
+- After Configuration, the device restarts automatically and tries to join the network
 
 ---
 
