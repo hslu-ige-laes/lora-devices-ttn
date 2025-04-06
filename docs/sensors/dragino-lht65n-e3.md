@@ -55,6 +55,25 @@ The LHT65-E3 includes a built-in SHT20 temperature/humidity sensor and a jack to
 
 ---
 
+## Device specific Information
+
+The LHT65N-E5 has two operating modes: Deep Sleep Mode and Working Mode.
+- In **Deep Sleep Mode**, which is the default mode used for storage and shipping, the device does not perform any LoRaWAN activity to conserve battery life.
+- In **Working Mode**, the device joins a LoRaWAN network and sends sensor data to the server.
+- Between each sampling, transmission, and reception cycle, it enters **STOP mode** (also known as IDLE mode), which consumes the same low power as Deep Sleep Mode.
+
+### Button Actions and LED States
+
+The ACT button on the device is used to switch between the above mentioned modes.
+
+| Action                          | Description                                                                                                       | LED Status                                                                                      |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| Press and hold **between 1–3s** | Test uplink status <br>Sends an uplink if already joined                                                      | - **Blue LED blinks once** → external sensor connected<br>- **Red LED blinks once** → no external sensor |
+| Press and hold **> 3s**         | Activate device <br>Starts join procedure to LoRaWAN network                                                     | - **Green LED blinks fast 5 times** (activation)<br>- Then **solid green for 5 seconds** after join |
+| Fast press **5 times**          | Deactivate device <br>Put into Deep Sleep Mode                                                                    | - **Red LED solid on for 5 seconds**                                                           |
+
+---
+
 ### Device Configuration
 - Now you can see the incoming telegrams in the tab Data, but their content, the payload, is cryptic...!<br>
 - We need to tell the "The Things Network" where to find e.g. the temperature etc. in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
@@ -280,7 +299,7 @@ The time interval in minutes at which the sensor queries the current values.
 
 1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
 2. Change the `FPort to 2`
-3. Copy/paste the payload, e.g. `0100012C` into the `Payload` field to set interval to 5 minutes
+3. Copy/paste the payload, e.g. `01000258` into the `Payload` field to set interval to 10 minutes
 4. Press `Send`
 5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
 
@@ -288,5 +307,6 @@ The time interval in minutes at which the sensor queries the current values.
 '0100' is an identifier, the rest represents the sampling interval in hex
 
 -	5 Minutes Interval:  '0100**012C**' (300s in hex are '012C')
+-	10 Minutes Interval:  '0100**0258**' (300s in hex are '0258')
 -	15 Minutes Interval: '0100**0384**' (900s in hex are '0384')
 -	60 Minutes Interval: '0100**0E10**' (3600s in hex are '0E10')
