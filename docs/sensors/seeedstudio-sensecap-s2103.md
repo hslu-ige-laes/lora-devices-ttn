@@ -57,7 +57,7 @@ The SenseCap S2103 is a LoRaWAN indoor/outdoor sensor to measure temperature, hu
 
 ## Device specific Information
 
-### LED States
+### Button Actions and LED States
 
 ![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
