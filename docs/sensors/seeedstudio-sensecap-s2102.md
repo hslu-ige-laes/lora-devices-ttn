@@ -165,7 +165,7 @@ function decodeUplink(input) {
             }
             payload = payload.substring(0, Math.min(payload.length, 8));
             payload = payload.match(/[a-fA-F0-9]{2}/g).reverse().join('');
-            decoded.brgt_lux = Number(hexToDec(payload)) / 1000;
+            decoded.brightness_lux = Number(hexToDec(payload)) / 1000;
         }
 
         // Battery
