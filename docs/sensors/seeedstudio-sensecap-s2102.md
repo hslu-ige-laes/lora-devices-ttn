@@ -55,7 +55,7 @@ The SenseCap S2102 is a LoRaWAN indoor/outdoor sensor to measure light intensity
 
 ## Device specific Information
 
-### LED States
+### Button Actions and LED States
 
 ![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
