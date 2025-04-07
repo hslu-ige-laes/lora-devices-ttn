@@ -4,7 +4,7 @@ title: Dragino - LTC2-LB
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-ltc2-lb.PNG" width="250" align="right">
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-ltc2-lb_01.PNG" width="250" align="right">
 
 # Dragino - LTC2-LB
 {: .no_toc }
