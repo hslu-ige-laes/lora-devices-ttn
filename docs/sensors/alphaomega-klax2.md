@@ -10,9 +10,9 @@ parent: Sensors
 {: .no_toc }
 
 - Manufacturer: <a href="https://alpha-omega-technology.de/" target="_blank">Alpha Omega Technology</a>
-- Product: <a href="https://iot-shop.de/en/shop/klax-2-0-lorawan-sml-opto-head-for-modern-electricity-meters-4365" target="_blank">Klax 2.0</a>
+- Product: <a href="https://alpha-omega-technology.de/klax-der-lorawan-faehige-optokopf" target="_blank">Klax 2.0</a>
 
-The Klax 2.0 is a LoRaWAN indoor SML Opto Head for modern electricity meters
+The Klax 2.0 is a LoRaWAN indoor SML Opto Head for modern electricity/heat meters
 
 ---
 
@@ -52,7 +52,7 @@ The Klax 2.0 is a LoRaWAN indoor SML Opto Head for modern electricity meters
 
 ## Ordering Info
 - SML 1.04, Model Klax 2.0
-- [Ordering Link](https://iot-shop.de/en/shop/klax-2-0-lorawan-sml-opto-head-for-modern-electricity-meters-4365)
+- [Ordering Link](https://iot.zenner.shop/KLAX-2.0-LoRaWAN-SML-Optokopf-fuer-Stromzaehler-p-173293)
 
 ---
 
