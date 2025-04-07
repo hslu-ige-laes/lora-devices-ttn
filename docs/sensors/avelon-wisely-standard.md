@@ -215,7 +215,7 @@ function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, da
 }
 
 function decodeUplink(input) {
-  var deviceType = "Standard";
+  var deviceType = "Standard"; // manually defined: "Standard", "CarbonSense", or "AllSense"
   var samplingRate = 10; //minutes
   var datasetLengthDict = {
     "Standard": 5,
@@ -256,8 +256,9 @@ function decodeUplink(input) {
       warnings.push("Battery Warning: Could not acquire the voltage");
     }
       
-    if(input.fPort === 6 && deviceType !== "AllSense"){
+    if(input.fPort === 6 && deviceType === "AllSense"){
       warnings.push("Warning: deviceType in payload decoder is not set to AllSense");
+      deviceType = "AllSenseExt";
     }
     
     var datasetLength = datasetLengthDict[deviceType];
