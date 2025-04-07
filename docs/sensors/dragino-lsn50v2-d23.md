@@ -62,30 +62,32 @@ Out of the factory the device is switched off. To power on the LSN50v2-D20, open
 
 ![Switching between active and sleep mode (switch off / on, reset)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d23_05.png "Power on the LSN50v2-D20")
 
+### Channel Mapping
+- Channel 1: Red
+- Channel 2: White
+- Channel 3: Black
+
 ---
 
 ## Adding the Device to TTN
+- The `JoinEUI`, `App EUI` and the `DevEUI` should be on a sticker on the cardboard box.
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
 1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
-2. Under `Overview` click `(+) Register device`
-3. Under `Input method` select `Select the end device in the LoRaWAN Device Repository`
-4. Enter the following device information
-   - `End device brand` select `Dragino Technology Co., Limited`
-   - `Model` select `LSN50v2-D20-D22-D23`
-   - `Hardware Ver.` select `Unknown Ver.` or whatever is possible or on the sticker
-   - `Firmware` select `1.7.5` or whatever is possible or on the sticker
-	 - `Profile (Region)` select `EU_863_870`
-5. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
-6. Under `JoinEUI` enter the `App EUI` from the sticker
-7. Enter as well the `DevEUI` and the `AppKey` from the sticker
-8. Set an end-device name
-9. Press `Register end device`
+2. Under `End devices` in the application click `(+) Register end device`
+3. Under `Input method` select `Enter end device specifics manually`
+4. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
+5. Under `LoRaWAN version` select `1.0.3`
+5. Under `JoinEUI` enter the `App EUI` from the App and press `Confirm`
+6. Enter as well the `DevEUI` and the `AppKey` from the App
+7. Set an end-device name
+8. Press `Register end device`
+9. Add the payload formatter from below, either to the device itself or if all devices in the app are from the same type, to the application
 10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/dragino-lsn50v2-d23#switch-on-the-device)
 11. Close the case
 
+- After Configuration, the device restarts automatically and tries to join the network
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
-- The payload formatter should already be preset. If not, you can copy/paste it from below
 
 ---
 
@@ -97,87 +99,65 @@ The time interval in minutes at which the sensor queries the current values.
 
 1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
 2. Change the `FPort to 2`
-3. Copy/paste the payload, e.g. `0100012C` into the `Payload` field to set interval to 5 minutes
+3. Copy/paste the payload, e.g. `01000258` into the `Payload` field to set interval to 10 minutes
 4. Press `Send`
-5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+5. In the `Data` tab you should now see the scheduled telegram. The device only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
 
 #### Examples
 '0100' is an identifier, the rest represents the sampling interval in hex
 
 -	5 Minutes Interval:  '0100**012C**' (300s in hex are '012C')
+-	10 Minutes Interval:  '0100**0258**' (600s in hex are '0258')
 -	15 Minutes Interval: '0100**0384**' (900s in hex are '0384')
 -	60 Minutes Interval: '0100**0E10**' (3600s in hex are '0E10')
 
 ---
 
-## Payload formatter
+## Payload Decoder
 
 ```javascript
-function Decoder(bytes, port) {
+function decodeUplink(input) {
+  var port = input.fPort;
+  var bytes = input.bytes;
   var mode = (bytes[6] & 0x7C) >> 2;
-  var decode = {};
-  if ((mode != 2) && (mode != 31)) {
-    decode.BatV = (bytes[0] << 8 | bytes[1]) / 1000;
-    decode.TempC1 = parseFloat(((bytes[2] << 24 >> 16 | bytes[3]) / 10).toFixed(2));
-    decode.ADC_CH0V = (bytes[4] << 8 | bytes[5]) / 1000;
-    decode.Digital_IStatus = (bytes[6] & 0x02) ? "H" : "L";
-    if (mode != 6) {
-      decode.EXTI_Trigger = (bytes[6] & 0x01) ? "TRUE" : "FALSE";
-      decode.Door_status = (bytes[6] & 0x80) ? "CLOSE" : "OPEN";
-    }
-  }
-  if (mode == '0') {
-    decode.Work_mode = "IIC";
-    if ((bytes[9] << 8 | bytes[10]) === 0) {
-      decode.Illum = (bytes[7] << 24 >> 16 | bytes[8]);
-    } else {
-      decode.TempC_SHT = parseFloat(((bytes[7] << 24 >> 16 | bytes[8]) / 10).toFixed(2));
-      decode.Hum_SHT = parseFloat(((bytes[9] << 8 | bytes[10]) / 10).toFixed(1));
-    }
-  } else if (mode == '1') {
-    decode.Work_mode = " Distance";
-    decode.Distance_cm = parseFloat(((bytes[7] << 8 | bytes[8]) / 10).toFixed(1));
-    if ((bytes[9] << 8 | bytes[10]) != 65535) {
-      decode.Distance_signal_strength = parseFloat((bytes[9] << 8 | bytes[10]).toFixed(0));
-    }
-  } else if (mode == '2') {
-    decode.Work_mode = " 3ADC";
-    decode.BatV = bytes[11] / 10;
-    decode.ADC_CH0V = (bytes[0] << 8 | bytes[1]) / 1000;
-    decode.ADC_CH1V = (bytes[2] << 8 | bytes[3]) / 1000;
-    decode.ADC_CH4V = (bytes[4] << 8 | bytes[5]) / 1000;
-    decode.Digital_IStatus = (bytes[6] & 0x02) ? "H" : "L";
-    decode.EXTI_Trigger = (bytes[6] & 0x01) ? "TRUE" : "FALSE";
-    decode.Door_status = (bytes[6] & 0x80) ? "CLOSE" : "OPEN";
-    if ((bytes[9] << 8 | bytes[10]) === 0) {
-      decode.Illum = (bytes[7] << 24 >> 16 | bytes[8]);
-    } else {
-      decode.TempC_SHT = parseFloat(((bytes[7] << 24 >> 16 | bytes[8]) / 10).toFixed(2));
-      decode.Hum_SHT = parseFloat(((bytes[9] << 8 | bytes[10]) / 10).toFixed(1));
-    }
-  } else if (mode == '3') {
-    decode.Work_mode = "3DS18B20";
-    decode.TempC2 = parseFloat(((bytes[7] << 24 >> 16 | bytes[8]) / 10).toFixed(2));
-    decode.TempC3 = parseFloat(((bytes[9] << 24 >> 16 | bytes[10]) / 10).toFixed(1));
-  } else if (mode == '4') {
-    decode.Work_mode = "Weight";
-    decode.Weight = (bytes[7] << 24 >> 16 | bytes[8]);
-  } else if (mode == '5') {
-    decode.Work_mode = "Count";
-    decode.Count = (bytes[7] << 24 | bytes[8] << 16 | bytes[9] << 8 | bytes[10]);
-  } else if (mode == '31') {
-    decode.Work_mode = "ALARM";
-    decode.BatV = (bytes[0] << 8 | bytes[1]) / 1000;
-    decode.TempC1 = parseFloat(((bytes[2] << 24 >> 16 | bytes[3]) / 10).toFixed(2));
-    decode.TempC1MIN = bytes[4] << 24 >> 24;
-    decode.TempC1MAX = bytes[5] << 24 >> 24;
-    decode.SHTEMPMIN = bytes[7] << 24 >> 24;
-    decode.SHTEMPMAX = bytes[8] << 24 >> 24;
-    decode.SHTHUMMIN = bytes[9];
-    decode.SHTHUMMAX = bytes[10];
-  }
-  if ((bytes.length == 11) || (bytes.length == 12)) {
-    return decode;
+  var data = {};
+
+  switch (port) {
+    case 2:
+      if (mode == '3') {
+        data.battery_volt = (bytes[0] << 8 | bytes[1]) / 1000;
+        data.alarm_state = (bytes[6] & 0x01) ? 1 : 0;
+
+        if ((bytes[2] == 0xff) && (bytes[3] == 0xff)) {
+          data["temperature_degrC@channel1"] = 32767.0;
+        } else {
+          data["temperature_degrC@channel1"] = parseFloat(((bytes[2] << 24 >> 16 | bytes[3]) / 10).toFixed(1));
+        }
+
+        if ((bytes[7] == 0xff) && (bytes[8] == 0xff)) {
+          data["temperature_degrC@channel2"] = 32767.0;
+        } else {
+          data["temperature_degrC@channel2"] = parseFloat(((bytes[7] << 24 >> 16 | bytes[8]) / 10).toFixed(1));
+        }
+
+        if ((bytes[9] == 0xff) && (bytes[10] == 0xff)) {
+          data["temperature_degrC@channel3"] = 32767.0;
+        } else {
+          data["temperature_degrC@channel3"] = parseFloat(((bytes[9] << 24 >> 16 | bytes[10]) / 10).toFixed(1));
+        }
+      }
+
+      if (bytes.length == 11) {
+        return {
+          data: data,
+        };
+      }
+      break;
+
+    default:
+      return {
+        errors: ["unknown FPort"]
+      };
   }
 }
 ```

@@ -90,7 +90,6 @@ The ACT button on the device is used to switch between the above mentioned modes
 
 - After Configuration, the device restarts automatically and tries to join the network
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
-- The payload formatter should already be preset. If not, you can copy/paste it from below
 
 ---
 
@@ -104,13 +103,13 @@ The time interval in minutes at which the sensor queries the current values.
 2. Change the `FPort to 2`
 3. Copy/paste the payload, e.g. `01000258` into the `Payload` field to set interval to 10 minutes
 4. Press `Send`
-5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+5. In the `Data` tab you should now see the scheduled telegram. The device only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
 
 #### Example configurations
 '0100' is an identifier, the rest represents the sampling interval in hex
 
 -	5 Minutes Interval:  '0100**012C**' (300s in hex are '012C')
--	10 Minutes Interval:  '0100**0258**' (300s in hex are '0258')
+-	10 Minutes Interval:  '0100**0258**' (600s in hex are '0258')
 -	15 Minutes Interval: '0100**0384**' (900s in hex are '0384')
 -	60 Minutes Interval: '0100**0E10**' (3600s in hex are '0E10')
 

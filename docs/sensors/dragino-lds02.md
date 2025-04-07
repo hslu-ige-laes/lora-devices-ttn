@@ -52,27 +52,24 @@ The LDS02 is a LoRaWAN Window/Door sensor.
 ---
 
 ## Adding the Device to TTN
+- The `JoinEUI`, `App EUI` and the `DevEUI` should be on a sticker on the cardboard box.
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
 1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
-2. Under `Overview` click `(+) Register device`
-3. Under `Input method` select `Select the end device in the LoRaWAN Device Repository`
-4. Enter the following device information
-   - `End device brand` select `Dragino Technology Co., Limited`
-   - `Model` select `LDS02`
-   - `Hardware Ver.` select `Unknown Ver.` or whatever is possible or on the sticker
-   - `Firmware` select `1.5` or whatever is possible or on the sticker
-	 - `Profile (Region)` select `EU_863_870`
-5. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
-6. Under `JoinEUI` enter the `App EUI` from the sticker
-7. Enter as well the `DevEUI` and the `AppKey` from the sticker
-8. Set an end-device name
-9. Press `Register end device`
+2. Under `End devices` in the application click `(+) Register end device`
+3. Under `Input method` select `Enter end device specifics manually`
+4. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
+5. Under `LoRaWAN version` select `1.0.3`
+5. Under `JoinEUI` enter the `App EUI` from the App and press `Confirm`
+6. Enter as well the `DevEUI` and the `AppKey` from the App
+7. Set an end-device name
+8. Press `Register end device`
+9. Add the payload formatter from below, either to the device itself or if all devices in the app are from the same type, to the application
 10. Open the case and take out the batteries
 11. Replace the batteries and close the case
 
+- After Configuration, the device restarts automatically and tries to join the network
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
-- The payload formatter should already be preset. If not, you can copy/paste it from below
 
 ---
 
@@ -91,7 +88,7 @@ By default, the sensor sends a status message every day. This interval can be re
 
 ---
 
-## Payload formatter
+## Payload Decoder
 
 ```javascript
 function decodeUplink(input) {
