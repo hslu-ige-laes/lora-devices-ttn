@@ -57,7 +57,7 @@ The LHT65N-E5 includes a built-in SHT20 temperature/humidity sensor and a jack t
 
 ## Button Actions, Modes and LED States
 
-The LHT65N-E5 has two operating modes: Deep Sleep Mode and Working Mode.
+The LHT65N-E5 has two operating modes:
 - In **Deep Sleep Mode**, which is the default mode used for storage and shipping, the device does not perform any LoRaWAN activity to conserve battery life.
 - In **Working Mode**, the device joins a LoRaWAN network and sends sensor data to the server.
 - Between each sampling, transmission, and reception cycle, it enters **STOP mode** (also known as IDLE mode), which consumes the same low power as Deep Sleep Mode.
