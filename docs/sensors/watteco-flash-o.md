@@ -12,7 +12,7 @@ parent: Sensors
 - Manufacturer: <a href="http://www.watteco.com/" target="_blank">WATTECO</a>
 - Product: <a href="https://www.watteco.com/product/flasho-sensor-lorawan/" target="_blank">Flash'O</a>
 
-The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water, gas, electricity or energy meters.
+The Flash'O is a LoRaWAN meter interface that transmits the accumulated number of LED flashes from any pulse meter, including water, gas, electricity, and energy meters.
 
 ---
 
@@ -26,18 +26,26 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 
 ## Specifications
 - Price ca. CHF 183.- (15.07.2020)
-- Up to 500 pulses/second Flash LED rate counting
+- Sensors:
+  - **Optical Probe**: Compatible with meters emitting LED pulses up to 500 pulses per second
 - Cable length approx. 0.5m
 - Protection: [IP55](https://en.wikipedia.org/wiki/IP_Code)
 - Power Supply: 1 battery, 3.6 V, 3600mAh, Lithium
   - Expected life time: up to 12 years with 1 telegram per day
-- Size: 84 × 82 × 85 mm
+	- Up to 8 years with one measurement per hour and one transmission per day
+- LoRaWAN Version 1.0.2 Region Parameter rev B
+- LoRaWAN Device Class Class A
+- Protection Rating IP55
+- Operating Temperature -20°C to +50°C
+- Dimensions 84 x 82 x 85 mm
 
 ---
 
 ## Documents
   - [Payload description from support.watteco.com (2020-07-15)](http://support.watteco.com/flasho/#HumanMachineInterface)
   - [Datasheet from watteco.fr (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_02.pdf)
+	- [Quick Start Guide from watteco.fr (2025-04-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_06.pdf)
+  - [Online Device Support Page](https://support.nke-watteco.com/flasho/)
 
 ---
 
@@ -46,6 +54,17 @@ The Flash'O detects the impulses of flashin LED's from pulse meters: e.g. water,
 - Product Ref 50-70-071 (FLASH’O with sensor - mounted in factory with 0.5m cable)
 
 ---
+
+## Button Actions, Modes and LED States
+The device does not have a physical button, but a magnetic contact. Hold a magnet to the device wall where the sticker `ILS` is.
+
+| Action               | Description                    | LED Status       |
+|----------------------|--------------------------------|------------------|
+| Hold magnet > 1s on ILS sticker    | Power on and join network      | 1. LED will flash red during this 1s period <br>2. Waiting to join LoRa network: LED blinks shortly red every 5s <br>3. Join LoRa network success: green LED solid on for 3s |
+| Hold magnet > 5s on ILS sticker     | Power off           | 1. LED will flash red during this 5s period<br>2. Before device turns of it flashes red 5 times in 3s      |
+| Pass magnet over ILS sticker     | Switch on/off configuration mode  | 1. The LED blinks  red (3s off, 3s on) while in config mode <br>2. The device sends an uplink frame every minute. <br>3. The configuration mode lasts 10 minutes |
+| Quick passage and long hold over ILS sticker     | Factory reset  | All the applicative settings gets deleted and set to factory default |
+
 
 ## Compatibility of Electricity Meters
 The device was successfully tested with the following products.
@@ -58,54 +77,54 @@ The device was successfully tested with the following products.
   <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_05.png" width="250"><br>
   - Place the sensor over the LED (yellow colored)
 	
+	
+- Further supported meters according to the manufacturer:
+  - 	
 ---
 
-## Device specific Information
-### Handler device information
-
-- The supplier should give you a csv file where you can find the `DevEUI`, `AppEUI` and `AppKey`
+## Installation & Placement Guidelines
+To ensure optimal sensor performance
+- minimize the number of physical obstacles between the device and the LoRaWAN gateway
+- place the sensor as far as possible away from electrical cables
+- mount the sensor as high as possible
+- ensure that the cable gland is oriented downward to have the antenna oriented correctly
 
 ---
 
 ## Adding the Device to TTN
-- Before a device can communicate via "The Things Network" we have to add it to an application.<br>
+- The supplier should give you a csv file where you can find the `DevEUI`, `AppEUI` and `AppKey`<br>
 
 1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
-2. Under `Overview` click `(+) Register device`
-3. Under `Input method` select `Select the end device in the LoRaWAN Device Repository`
-4. Enter the following device information
-   - `End device brand` select `nke WATTECO`
-   - `Model` select `Flash'O`
-   - `Hardware Ver.` select `50-70-071` or whatever the sticker says
-   - `Firmware` select `3.5.2` or whatever the sticker says
-	 - `Profile (Region)` select `EU_863_870`
-5. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
-6. Under `JoinEUI` enter the `App EUI`
-7. Enter as well the `DevEUI` and the `AppKey`
-8. Set an end-device name
-9. Press `Register end device`
-10. Now we have to reset the device manually by switching the small button under the cover from `Off` to `On`
-11. The device should log in and you should see a green circle as `Status` in the tab `Device Overview`.
+2. Under `End devices` in the application click `(+) Register end device`
+3. Under `Input method` select `Enter end device specifics manually`
+4. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
+5. Under `LoRaWAN version` select `1.0.3`
+5. Under `JoinEUI` enter the `App EUI` from the App and press `Confirm`
+6. Enter as well the `DevEUI` and the `AppKey` from the App
+7. Set an end-device name
+8. Press `Register end device`
+9. Add the payload formatter from below, either to the device itself or if all devices in the app are from the same type, to the application
+10. Now put a magnet longer than 1s on the `ILS` sticker and the device should switch on
+11. The device should log in and you should see in TTN a green circle as `Status` in the tab `Device Overview`.
    - if not, please wait several hours and check again. The first attempt might take a while.
+12. Change the sampling rate and battery reporting, as described below. Per default the device only sends one message a day!
 
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
-- The payload formatter should already be preset. If not, you can copy/paste it from below
 
 ---
 
 ## Optional settings
-### Change measurement interval
+### Change sampling rate and battery reporting
 - The Flash'O sends per default a telegram once a day with the counter value.<br>
 - If you want to change that you have to send a telegram to the device. To do so follow the instructions below.<br>
-- There are two properties of the Flash'O, the min sending interval in seconds and the impuls count.<br>
 
-1. Select the device and change to the tab `Messaging`, select `Downlink`
-2. Change the `FPort to 125`
-2. Copy/paste one of the following payloads into the `Payload` field
-   - every 15 minutes and/or every 200 impulses: `11 06 00 0f 00 04 02 23 00 00 03 84 00 00 00 c8`
-   - every 1 day: `11 06 00 0f 00 04 02 23 00 00 00 00 00 00 00 00`
-3. Press `Send`
-4. In the `Data` tab you should now see the scheduled telegram. The next time the device is sending data, a short timeframe for the downlink-message will open and the telegram gets sent. This can be accelerated by pressing the key on the nkewattecoflasho and forcing a telegram to be sent.
+1. In TTN, select the device in `End devices` and change to the tab `Messaging`, select `Schedule Downlink`
+2. Put the device in `Configuration Mode` (see table above). In this mode, the device sends a telegram every minute and opens a window for receiving Downlink messages for configuration.
+3. Change the `FPort` to `125`
+4. Copy/paste the following payloads step by step into the `Payload` field and press `Schedule downlink`. Open a second tab with the `Live data` view, to see whether the command got transmitted.
+   - deactivate standard report: `11 06 00 0f 00 04 02 23 00 00 00 00 00 00 00 00`
+	 - activate battery report every 24 hours or 0.1V at min 10 minutes: `11 06 00 50 15 00 06 04 80 0a 85 a0 00 64 00 64 09`
+	 - activate batch report at least every 15min samples or 200 impulses: `11 06 00 0f 1d 04 02 00 00 00 80 0f 00 00 00 c8 00 00 00 01 01`
 
 - For details and other configurations see [Frame Examples](http://support.watteco.com/flasho/#FrameExamples)
 
@@ -114,6 +133,12 @@ The device was successfully tested with the following products.
 ## Payload formatter
 
 ```javascript
+/*
+ * JavaScript implementation of brUncompress.
+ */
+
+// {{{ Constants
+
 var ST_UNDEF = 0
 var ST_BL = 1
 var ST_U4 = 2
@@ -203,6 +228,9 @@ var HUFF = [
   ]
 ]
 
+// }}}
+
+// {{{ Polyfills
 Math.trunc =
   Math.trunc ||
   function(x) {
@@ -214,7 +242,11 @@ Math.trunc =
     }
     return Math.ceil(x)
   }
+// }}}
 
+/**
+ * brUncompress main function
+ */
 function brUncompress(tagsz, argList, hexString, batch_absolute_timestamp) {
   var out = initResult()
   var buffer = createBuffer(parseHexString(hexString))
@@ -248,6 +280,9 @@ function brUncompress(tagsz, argList, hexString, batch_absolute_timestamp) {
 
 /////////////// Sub functions ///////////////
 
+/**
+ * Init br_uncompress result data structure
+ */
 function initResult() {
   var series = [],
     i = 0
@@ -267,8 +302,14 @@ function initResult() {
   }
 }
 
+/**
+ * Function to create a buffer from a byteArray. Allow to read sample from the
+ * byteArray to extract data.
+ */
 function createBuffer(byteArray) {
-
+  /**
+   * Retrieve the pattern for HUFF table lookup
+   */
   function bitsBuf2HuffPattern(byteArray, index, nb_bits) {
     var sourceBitStart = index
     var sz = nb_bits - 1
@@ -354,6 +395,9 @@ function createBuffer(byteArray) {
   }
 }
 
+/**
+ * Convert the hex string given as parameter to a ByteArray
+ */
 function parseHexString(str) {
   str = str
     .split("")
@@ -369,6 +413,9 @@ function parseHexString(str) {
   return result
 }
 
+/**
+ * Generate a flag object from an integer value.
+ */
 function generateFlag(flagAsInt) {
   var binbase = flagAsInt.toString(2)
 
@@ -385,6 +432,10 @@ function generateFlag(flagAsInt) {
   }
 }
 
+/**
+ * Prepopulate output with relative timestamp and measure of the first sample
+ * for each series.
+ */
 function prePopulateOutput(out, buffer, argList, flag, tagsz) {
   var currentTimestamp = 0
   var index_of_the_first_sample = 0
@@ -417,6 +468,9 @@ function prePopulateOutput(out, buffer, argList, flag, tagsz) {
   }
 }
 
+/**
+ * Initialize next series from buffer
+ */
 function computeSeries(buffer, sampletype, label, currentTimestamp) {
   return {
     uncompressSamples: [
@@ -434,6 +488,9 @@ function computeSeries(buffer, sampletype, label, currentTimestamp) {
   }
 }
 
+/**
+ * Return the index of tag lbl in the argument list
+ */
 function findIndexFromArgList(argList, tag) {
   for (var i = 0; i < argList.length; i++) {
     if (argList[i].taglbl === tag.lbl) {
@@ -443,6 +500,9 @@ function findIndexFromArgList(argList, tag) {
   throw "Cannot find index in argList"
 }
 
+/**
+ * Extract a new time stamp using Huff table, optionnaly from a baseTimestamp
+ */
 function extractTimestampFromBuffer(buffer, baseTimestamp) {
   if (baseTimestamp) {
     var bi = buffer.getNextBifromHi(1)
@@ -451,6 +511,9 @@ function extractTimestampFromBuffer(buffer, baseTimestamp) {
   return buffer.getNextSample(ST_U32)
 }
 
+/**
+ * Compute a new timestamp from a previous one, regarding bi value
+ */
 function computeTimestampFromBi(buffer, baseTimestamp, bi) {
   if (bi > BR_HUFF_MAX_INDEX_TABLE) {
     return buffer.getNextSample(ST_U32)
@@ -461,15 +524,25 @@ function computeTimestampFromBi(buffer, baseTimestamp, bi) {
   return baseTimestamp
 }
 
+/**
+ * Compute a new timestamp from a previous one, regarding posotive bi value
+ */
 function computeTimestampFromPositiveBi(buffer, baseTimestamp, bi) {
   return buffer.getNextSample(ST_U32, bi) + baseTimestamp + Math.pow(2, bi) - 1
 }
+
+/**
+ * Extract the measure from the buffer, handling float case
+ */
 
 function getMeasure(buffer, sampletype) {
   var v = buffer.getNextSample(sampletype)
   return sampletype === ST_FL ? bytes2Float32(v) : v
 }
 
+/**
+ * Convert bytes to a float32 representation.
+ */
 function bytes2Float32(bytes) {
   var sign = bytes & 0x80000000 ? -1 : 1,
     exponent = ((bytes >> 23) & 0xff) - 127,
@@ -492,6 +565,9 @@ function bytes2Float32(bytes) {
   return sign * significand * Math.pow(2, exponent)
 }
 
+/**
+ * Uncompress samples data presenting common timestamp or separate timestamp
+ */
 function uncompressSamplesData(
   out,
   buffer,
@@ -521,6 +597,9 @@ function uncompressSamplesData(
   )
 }
 
+/**
+ * Uncompress data in case of common timestamp
+ */
 function handleCommonTimestamp(
   out,
   buffer,
@@ -593,6 +672,9 @@ function handleCommonTimestamp(
   return lastTimestamp
 }
 
+/**
+ * Initialize common timestamp table. Returns the table and last calculated timestamp
+ */
 function initTimestampCommonTable(
   out,
   buffer,
@@ -635,6 +717,9 @@ function initTimestampCommonTable(
   }
 }
 
+/**
+ * Complete current measure from the preceding one
+ */
 function completeCurrentMeasure(buffer, precedingValue, codingType, resol, bi) {
   var currentValue = buffer.getNextSample(ST_U16, bi)
   if (codingType === 0) {
@@ -659,6 +744,9 @@ function computeAdlcValue(currentValue, resol, precedingValue, bi) {
   return (currentValue + 1 - Math.pow(2, bi)) * resol + precedingValue
 }
 
+/**
+ * Uncompress data in case of separate timestamp
+ */
 function handleSeparateTimestamp(
   out,
   buffer,
@@ -723,6 +811,9 @@ function handleSeparateTimestamp(
   return last_timestamp
 }
 
+/**
+ * Translate brUncompress output data to expected structure
+ */
 function adaptToExpectedFormat(out, argList, batchAbsoluteTimestamp) {
   var returnedGlobalObject = {
     //batch_counter: out.batch_counter,
@@ -765,6 +856,10 @@ function adaptToExpectedFormat(out, argList, batchAbsoluteTimestamp) {
   return returnedGlobalObject
 }
 
+/**
+ * Compute data absolute timestamp from batch absolute timestamp (bat), batch
+ * relative timestamp (brt) and data relative timestamp (drt)
+ */
 function computeDataAbsoluteTimestamp(bat, brt, drt) {
   return new Date(new Date(bat) - (brt - drt) * 1000).toISOString()
 }
@@ -807,6 +902,8 @@ function decimalToHex(d, padding) {
 
   return "0x" + hex;
 }
+
+
 
 function Bytes2Float32(bytes) {
 
@@ -866,17 +963,19 @@ function Decoder(bytes, port) {
         //trame standard
         if (decodedBatch === false){
 
-            decoded.zclheader = {};
-            decoded.zclheader.report =  "standard";
+            //decoded.zclheader = {};
+            //decoded.zclheader.report =  "standard";
             attributID = -1;
             cmdID = -1;
             clusterdID = -1;
             //endpoint
-            decoded.zclheader.endpoint = ((bytes[0]&0xE0)>>5) | ((bytes[0]&0x06)<<2);
+            //decoded.zclheader.endpoint = ((bytes[0]&0xE0)>>5) | ((bytes[0]&0x06)<<2);
             //command ID
-            cmdID =  bytes[1]; decoded.zclheader.cmdID = decimalToHex(cmdID,2);
+            cmdID =  bytes[1];
+						//decoded.zclheader.cmdID = decimalToHex(cmdID,2);
             //Cluster ID
-            clusterdID = bytes[2]*256 + bytes[3]; decoded.zclheader.clusterdID = decimalToHex(clusterdID,4);
+            clusterdID = bytes[2]*256 + bytes[3];
+						//decoded.zclheader.clusterdID = decimalToHex(clusterdID,4);
             
         
             // decode report and read atrtribut response
@@ -886,13 +985,14 @@ function Decoder(bytes, port) {
                 var tab=[];
 
                 //Attribut ID
-                attributID = bytes[4]*256 + bytes[5]; decoded.zclheader.attributID = decimalToHex(attributID,4);
+                attributID = bytes[4]*256 + bytes[5];
+								//decoded.zclheader.attributID = decimalToHex(attributID,4);
 
                 if (cmdID === 0x8a) {
-                    decoded.zclheader.alarm = 1;
+                    decoded.alarm = 1;
                 }
                 else {
-                    decoded.zclheader.alarm = 0;
+                    decoded.alarm = 0;
                 }
                     
                 //data index start
@@ -902,10 +1002,12 @@ function Decoder(bytes, port) {
 
                 //binary input counter
                 if (  (clusterdID === 0x000f ) & (attributID === 0x0402)) {
-                    stdData.label = "Index1";
-                    stdData.value = (bytes[index]*256*256*256+bytes[index+1]*256*256+bytes[index+2]*256+bytes[index+3]); 
-                    stdData.date = lDate;
-                    tab.push(stdData);
+                    //stdData.label = "counter";
+                    //stdData.value = (bytes[index]*256*256*256+bytes[index+1]*256*256+bytes[index+2]*256+bytes[index+3]); 
+                    //stdData.date = lDate;
+                    stdData["counter"] = (bytes[index]*256*256*256+bytes[index+1]*256*256+bytes[index+2]*256+bytes[index+3]); 
+										stdData["offset_milliseconds"] = 0.0;
+										tab.push(stdData);
                 };
             
                 // binary input present value
@@ -917,9 +1019,10 @@ function Decoder(bytes, port) {
                     // if ((decoded.zclheader.endpoint >= 3)&&(decoded.zclheader.endpoint < 6)){
                     //   stdData.label = "State"+(decoded.zclheader.endpoint-2) ;
                     // }
-                    stdData.label = "Index1";
-                    stdData.value =bytes[index]; 
-                    stdData.date = lDate;
+                    //stdData.label = "counter";
+                    //stdData.value = bytes[index]; 
+                    //stdData.date = lDate;
+										stdData[label] = bytes[index]; 
                     tab.push(stdData);
                 };
 
@@ -948,83 +1051,51 @@ function Decoder(bytes, port) {
                 if (   (clusterdID === 0x0050 ) & (attributID === 0x0006)) {
                     index2 = index + 3;
                     if ((bytes[index+2] &0x01) === 0x01) {
-                        tab.push({label:"ExternalPowerVoltage" ,value:(bytes[index2]*256+bytes[index2+1])/1000, date:lDate}) ;
+                        tab.push({battery_volt:(bytes[index2]*256+bytes[index2+1])/1000}) ;
                         index2=index2+2;
                     }
                     if ((bytes[index+2] &0x04) === 0x04) {
-                        tab.push({label:"BatteryVoltage" ,value:(bytes[index2]*256+bytes[index2+1])/1000, date:lDate}) ;
+                        tab.push({battery_volt:(bytes[index2]*256+bytes[index2+1])/1000}) ;
                         index2=index2+2;
                     }
-                    if ((bytes[index+2] &0x02) === 0x02) {decoded.data.rechargeable_battery_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
-                    if ((bytes[index+2] &0x08) === 0x08) {decoded.data.solar_harvesting_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
-                    if ((bytes[index+2] &0x10) === 0x10) {decoded.data.tic_harvesting_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
+                    //if ((bytes[index+2] &0x02) === 0x02) {decoded.data.rechargeable_battery_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
+                    //if ((bytes[index+2] &0x08) === 0x08) {decoded.data.solar_harvesting_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
+                    //if ((bytes[index+2] &0x10) === 0x10) {decoded.data.tic_harvesting_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
                 }
                 decoded.data = tab;
-            }
-            
-            // decode configuration response
-            if(cmdID === 0x07){
-                //AttributID
-                attributID = bytes[6]*256 + bytes[7];decoded.zclheader.attributID = decimalToHex(attributID,4);
-                //status
-                decoded.zclheader.status = bytes[4];
-                //batch
-                decoded.zclheader.decodedBatch = bytes[5];
-            }
-
-            //decode read configuration response
-            if(cmdID === 0x09){
-                //AttributID
-                attributID = bytes[6]*256 + bytes[7];decoded.zclheader.attributID = decimalToHex(attributID,4);
-                //status
-                decoded.zclheader.status = bytes[4];
-                //batch
-                decoded.zclheader.decodedBatch = bytes[5];
-                //AttributType
-                decoded.zclheader.attribut_type = bytes[8];
-                //min
-                decoded.zclheader.min = {}
-                if ((bytes[9] & 0x80) === 0x80) {
-                    decoded.zclheader.min.value = (bytes[9]-0x80)*256+bytes[10];
-                    decoded.zclheader.min.unity = "minutes";
-                } 
-                else {
-                    decoded.zclheader.min.value = bytes[9]*256+bytes[10];
-                    decoded.zclheader.min.unity = "seconds";
-                }
-                //max
-                decoded.zclheader.max = {}
-                if ((bytes[9] & 0x80) === 0x80) {
-                    decoded.zclheader.max.value = (bytes[9]-0x80)*256+bytes[10];
-                    decoded.zclheader.max.unity = "minutes";
-                } 
-                else {
-                    decoded.zclheader.max.value = bytes[9]*256+bytes[10];
-                    decoded.zclheader.max.unity = "seconds";
-                }
-
-            }   
+            }  
         }
 
         else{
 
             var decoded = {};
-            brData = (brUncompress(1,[{taglbl: 0,resol: 1, sampletype: 10,lblname: "Index", divide: 1},{ taglbl: 1, resol: 100, sampletype: 6,lblname: "BatteryVoltage", divide: 1000}], lora.payload, lDate))
+            brData = (brUncompress(1,[{taglbl: 0,resol: 1, sampletype: 10,lblname: "counter", divide: 1},{ taglbl: 1, resol: 100, sampletype: 6,lblname: "battery_volt", divide: 1000}], lora.payload, lDate))
 
             var data_length = brData["datas"].length;
             var tab=[];
-            for (var i = 0; i < data_length; i++) {               
-                tab.push({label:brData["datas"][i]["data"]["label"] ,value:brData["datas"][i]["data"]["value"], date:brData["datas"][i]["date"]}) ;
+            for (var i = 0; i < data_length; i++) {
+                var label = brData["datas"][i]["data"]["label"];
+                var value = brData["datas"][i]["data"]["value"];
+                var date = brData["datas"][i]["date"];
+								var dateObj = new Date(date);
+								var batchDateObj = new Date(lDate);
+								var offset_milliseconds = batchDateObj - dateObj;
+                
+								var obj = {
+                    offset_milliseconds: offset_milliseconds
+                };
+                obj[label] = value;
+            
+                tab.push(obj);
             }
 
             decoded.data = tab;
 
-            decoded.zclheader = {};
-            decoded.zclheader.report = "batch";
+            //decoded.zclheader = {};
+            //decoded.zclheader.report = "batch";
         }
-
     }
-  return decoded;
+  return decoded.data;
 }
 
 
