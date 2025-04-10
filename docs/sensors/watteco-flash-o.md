@@ -65,6 +65,7 @@ The device does not have a physical button, but a magnetic contact. Hold a magne
 | Pass magnet over ILS sticker     | Switch on/off configuration mode  | 1. The LED blinks  red (3s off, 3s on) while in config mode <br>2. The device sends an uplink frame every minute. <br>3. The configuration mode lasts 10 minutes |
 | Quick passage and long hold over ILS sticker     | Factory reset  | All the applicative settings gets deleted and set to factory default |
 
+---
 
 ## Compatibility of Electricity Meters
 The device was successfully tested with the following products.
@@ -76,10 +77,7 @@ The device was successfully tested with the following products.
 - **Kamstrup DK-8660 Omnipower** (1'000 impulses per kWh)<br>
   <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_05.png" width="250"><br>
   - Place the sensor over the LED (yellow colored)
-	
-	
-- Further supported meters according to the manufacturer:
-  - 	
+
 ---
 
 ## Installation & Placement Guidelines
@@ -114,6 +112,7 @@ To ensure optimal sensor performance
 ---
 
 ## Optional settings
+
 ### Change sampling rate and battery reporting
 - The Flash'O sends per default a telegram once a day with the counter value.<br>
 - If you want to change that you have to send a telegram to the device. To do so follow the instructions below.<br>
