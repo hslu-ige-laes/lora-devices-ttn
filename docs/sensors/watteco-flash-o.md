@@ -14,6 +14,8 @@ parent: Sensors
 
 The Flash'O is a LoRaWAN meter interface that transmits the accumulated number of LED flashes from any pulse meter, including water, gas, electricity, and energy meters.
 
+The counter value can later be converted into an energy unit, such as kilowatt-hours (kWh), within the dashboard or during data analysis. The conversion depends on the number of impulses per kWh, which varies by meter model.
+
 ---
 
 ## Table of contents
