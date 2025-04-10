@@ -381,7 +381,7 @@ function decodeUplink(input) {
             reading[key] = decoded[0];
           }
         }
-        reading["offset"] = (datasetCount - i - 1) * samplingRate * (-1); 
+        reading["offset_milliseconds"] = (datasetCount - i - 1) * samplingRate * (-1) * 60 * 1000.0; 
         readings.push(reading);
       }
     }
