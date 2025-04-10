@@ -132,10 +132,13 @@ To ensure optimal sensor performance
 
 ## Payload formatter
 
+{% raw %}
 ```javascript
 /*
  * JavaScript implementation of brUncompress.
  */
+
+// {{{ Constants
 
 var ST_UNDEF = 0
 var ST_BL = 1
@@ -240,6 +243,7 @@ Math.trunc =
     }
     return Math.ceil(x)
   }
+// }}}
 
 /**
  * brUncompress main function
@@ -1106,3 +1110,4 @@ function decodeUplink(input) {
   };
 }
 ```
+{% endraw %}
