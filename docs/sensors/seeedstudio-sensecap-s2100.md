@@ -58,7 +58,7 @@ The SenseCap S2100 is a LoRaWAN indoor/outdoor Data Logger for RS485/Analog/GPIO
 
 ## Device specific Information
 
-### LED States
+## Button Actions, Modes and LED States
 
 ![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
