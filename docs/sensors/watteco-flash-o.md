@@ -52,7 +52,7 @@ The counter value can later be converted into an energy unit, such as kilowatt-h
 ---
 
 ## Ordering Info
-- [Ordering Link](https://smartmakers.io/en/iot-sensors-devices-overview/)
+- [Ordering Link](https://shop.swiss-domotique.ch/de/smart-city-/2121-watteco-flash-o-sensor-lorawan.html?gad_source=1&gclid=Cj0KCQjw2N2_BhCAARIsAK4pEkWlROWPYxQnha3CkZl7Z5W9YQRGCqI6zIElCHFsPhSg4rGWqrg3-xIaAkjuEALw_wcB)
 - Product Ref 50-70-071 (FLASH’O with sensor - mounted in factory with 0.5m cable)
 
 ---
