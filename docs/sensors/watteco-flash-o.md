@@ -6,7 +6,7 @@ parent: Sensors
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_01.jpg" width="250" align="right" class="inline"/>
 
-# nke WATTECO - Flash O
+# WATTECO - Flash O
 {: .no_toc }
 
 - Manufacturer: <a href="http://www.watteco.com/" target="_blank">WATTECO</a>
