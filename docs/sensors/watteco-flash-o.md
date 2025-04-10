@@ -137,8 +137,6 @@ To ensure optimal sensor performance
  * JavaScript implementation of brUncompress.
  */
 
-// {{{ Constants
-
 var ST_UNDEF = 0
 var ST_BL = 1
 var ST_U4 = 2
@@ -242,7 +240,6 @@ Math.trunc =
     }
     return Math.ceil(x)
   }
-// }}}
 
 /**
  * brUncompress main function
