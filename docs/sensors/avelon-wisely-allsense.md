@@ -298,6 +298,18 @@ Further info in the [payload description ](https://github.com/hslu-ige-laes/lora
 ## Payload Decoder
 
 ```javascript
+function mapBatteryLevelPerc(batteryPercent) {
+  if (batteryPercent <= 15) {
+    return 0; // Critical
+  } else if (batteryPercent <= 30) {
+    return 1; // Warning
+  } else if (batteryPercent <= 70) {
+    return 2; // Good
+  } else {
+    return 3; // Very Good
+  }
+}
+
 function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, datasetLength, payloadOffset) {
   var decoded = [];
   var measurementByteLengths = {"pressure_hPa": 2, "temperature_degrC": 2, "humidity_perc": 1, "voc_index": 2, "brightness_lux": 2, "co2_ppm": 2, "presence_min": 2};
@@ -359,7 +371,9 @@ function decodeUplink(input) {
       batteryPerc = 0.0;
       warnings.push("Battery Warning: Could not acquire the voltage");
     }
-      
+		
+		const batteryState = mapBatteryLevelPerc(batteryPerc); 
+        
     if(input.fPort === 6 && deviceType === "AllSense"){
       warnings.push("Warning: deviceType in payload decoder is not set to AllSense");
       deviceType = "AllSenseExt";
@@ -373,7 +387,7 @@ function decodeUplink(input) {
       errors.push("Error: datasetCount is not a whole number!");
     } else {
       for (var i = 0; i < datasetCount; i++) {
-        var reading = { battery_perc: batteryPerc };
+        var reading = { battery_perc: batteryPerc , battery_state: batteryState };
         
         for (const [key, value] of Object.entries(byteIndices[deviceType])) {
           var decoded = getValues(input.bytes, key, byteIndices, deviceType, 1, datasetLength, payloadOffset + i * datasetLength);
