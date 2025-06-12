@@ -149,9 +149,9 @@ function decodeUplink(input) {
   }
 
   if (port === 2) {
-    data.battery_volt = (bytes[0] << 8 | bytes[1]) / 1000;
-    data["temperature_degrC@channel1"] = toTemperature(bytes[3], bytes[4]);
-    data["temperature_degrC@channel2"] = toTemperature(bytes[5], bytes[6]);
+    data.battery_volt_abs = (bytes[0] << 8 | bytes[1]) / 1000;
+    data["temperature_degrC_abs@channel1"] = toTemperature(bytes[3], bytes[4]);
+    data["temperature_degrC_abs@channel2"] = toTemperature(bytes[5], bytes[6]);
     return { data };
   }
 

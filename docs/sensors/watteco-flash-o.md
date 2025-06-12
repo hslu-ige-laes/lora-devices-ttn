@@ -1007,7 +1007,7 @@ function Decoder(bytes, port) {
                     //stdData.label = "counter";
                     //stdData.value = (bytes[index]*256*256*256+bytes[index+1]*256*256+bytes[index+2]*256+bytes[index+3]); 
                     //stdData.date = lDate;
-                    stdData["counter"] = (bytes[index]*256*256*256+bytes[index+1]*256*256+bytes[index+2]*256+bytes[index+3]); 
+                    stdData["counter_impulse_inc"] = (bytes[index]*256*256*256+bytes[index+1]*256*256+bytes[index+2]*256+bytes[index+3]); 
 										stdData["offset_milliseconds"] = 0.0;
 										tab.push(stdData);
                 };
@@ -1053,11 +1053,11 @@ function Decoder(bytes, port) {
                 if (   (clusterdID === 0x0050 ) & (attributID === 0x0006)) {
                     index2 = index + 3;
                     if ((bytes[index+2] &0x01) === 0x01) {
-                        tab.push({battery_volt:(bytes[index2]*256+bytes[index2+1])/1000}) ;
+                        tab.push({battery_volt_abs:(bytes[index2]*256+bytes[index2+1])/1000}) ;
                         index2=index2+2;
                     }
                     if ((bytes[index+2] &0x04) === 0x04) {
-                        tab.push({battery_volt:(bytes[index2]*256+bytes[index2+1])/1000}) ;
+                        tab.push({battery_volt_abs:(bytes[index2]*256+bytes[index2+1])/1000}) ;
                         index2=index2+2;
                     }
                     //if ((bytes[index+2] &0x02) === 0x02) {decoded.data.rechargeable_battery_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}

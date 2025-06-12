@@ -164,7 +164,7 @@ function decodeUplink(input) {
             }
             payload = payload.substring(0, Math.min(payload.length, 8));
             payload = payload.match(/[a-fA-F0-9]{2}/g).reverse().join('');
-            decoded.brightness_lux = Number(hexToDec(payload)) / 1000;
+            decoded.brightness_lux_abs = Number(hexToDec(payload)) / 1000;
         }
 
         // Battery
@@ -172,7 +172,7 @@ function decodeUplink(input) {
             payload = payload_raw.split('000700')[1];
             payload = payload.substring(0, 4);
             payload = payload.match(/[a-fA-F0-9]{2}/g).reverse().join('');
-            decoded.battery_perc = Number(hexToDec(payload));
+            decoded.battery_perc_abs = Number(hexToDec(payload));
         }
 
         return { data: decoded };

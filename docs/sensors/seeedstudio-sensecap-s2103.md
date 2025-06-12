@@ -151,25 +151,25 @@ function decodeUplink(input) {
         // CO2 (010410 ... /1000)
         const co2Val = extractValue(payloadRaw, "010410", "010110", 4);
         if (co2Val !== null) {
-            decoded.co2_ppm = co2Val / 1000;
+            decoded.co2_ppm_abs = co2Val / 1000;
         }
 
         // Temperature (010110 ... /1000)
         const tempVal = extractValue(payloadRaw, "010110", "010210", 4);
         if (tempVal !== null) {
-            decoded.temperature_degrC = tempVal / 1000;
+            decoded.temperature_degrC_abs = tempVal / 1000;
         }
 
         // Humidity (010210 ... /1000)
         const humVal = extractValue(payloadRaw, "010210", "0700", 4);
         if (humVal !== null) {
-            decoded.humidity_perc = humVal / 1000;
+            decoded.humidity_perc_abs = humVal / 1000;
         }
 
         // Battery (000700 ... %, 2 bytes)
         const battVal = extractValue(payloadRaw, "000700", null, 2);
         if (battVal !== null) {
-            decoded.battery_perc = battVal;
+            decoded.battery_perc_abs = battVal;
         }
 
         // Optional: Debug raw payload (for dev/console)
@@ -180,4 +180,5 @@ function decodeUplink(input) {
         return { data: null, error: e.message };
     }
 }
+
 ```

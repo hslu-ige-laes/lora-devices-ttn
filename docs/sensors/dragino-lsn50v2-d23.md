@@ -125,25 +125,25 @@ function decodeUplink(input) {
   switch (port) {
     case 2:
       if (mode == '3') {
-        data.battery_volt = (bytes[0] << 8 | bytes[1]) / 1000;
-        data.alarm_state = (bytes[6] & 0x01) ? 1 : 0;
+        data.battery_volt_abs = (bytes[0] << 8 | bytes[1]) / 1000;
+        data.alarm_state_abs = (bytes[6] & 0x01) ? 1 : 0;
 
         if ((bytes[2] == 0xff) && (bytes[3] == 0xff)) {
-          data["temperature_degrC@channel1"] = 32767.0;
+          data["temperature_degrC_abs@channel1"] = 32767.0;
         } else {
-          data["temperature_degrC@channel1"] = parseFloat(((bytes[2] << 24 >> 16 | bytes[3]) / 10).toFixed(1));
+          data["temperature_degrC_abs@channel1"] = parseFloat(((bytes[2] << 24 >> 16 | bytes[3]) / 10).toFixed(1));
         }
 
         if ((bytes[7] == 0xff) && (bytes[8] == 0xff)) {
-          data["temperature_degrC@channel2"] = 32767.0;
+          data["temperature_degrC_abs@channel2"] = 32767.0;
         } else {
-          data["temperature_degrC@channel2"] = parseFloat(((bytes[7] << 24 >> 16 | bytes[8]) / 10).toFixed(1));
+          data["temperature_degrC_abs@channel2"] = parseFloat(((bytes[7] << 24 >> 16 | bytes[8]) / 10).toFixed(1));
         }
 
         if ((bytes[9] == 0xff) && (bytes[10] == 0xff)) {
-          data["temperature_degrC@channel3"] = 32767.0;
+          data["temperature_degrC_abs@channel3"] = 32767.0;
         } else {
-          data["temperature_degrC@channel3"] = parseFloat(((bytes[9] << 24 >> 16 | bytes[10]) / 10).toFixed(1));
+          data["temperature_degrC_abs@channel3"] = parseFloat(((bytes[9] << 24 >> 16 | bytes[10]) / 10).toFixed(1));
         }
       }
 

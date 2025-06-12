@@ -257,29 +257,29 @@ function Decoder(bytes, port) {
         switch (pollMessageStatus) {
             case 0:
                 if (ext === 0x09) {
-                    decode["temperature_degrC@external"] = parseFloat(((bytes[0] << 24 >> 16 | bytes[1]) / 100).toFixed(2));
-                    decode.battery_state = bytes[4] >> 6;
+                    decode["temperature_degrC_abs@external"] = parseFloat(((bytes[0] << 24 >> 16 | bytes[1]) / 100).toFixed(2));
+                    decode.battery_state_abs = bytes[4] >> 6;
                 } else {
-                    decode.battery_volt = ((bytes[0] << 8 | bytes[1]) & 0x3FFF) / 1000;
-                    decode.battery_state = bytes[0] >> 6;
+                    decode.battery_volt_abs = ((bytes[0] << 8 | bytes[1]) & 0x3FFF) / 1000;
+                    decode.battery_state_abs = bytes[0] >> 6;
                 }
                 if (ext !== 0x0f) {
-                    decode["temperature_degrC@internal"] = parseFloat(((bytes[2] << 24 >> 16 | bytes[3]) / 100).toFixed(2));
-                    decode["humidity_perc@internal"] = parseFloat((((bytes[4] << 8 | bytes[5]) & 0xFFF) / 10).toFixed(1));
+                    decode["temperature_degrC_abs@internal"] = parseFloat(((bytes[2] << 24 >> 16 | bytes[3]) / 100).toFixed(2));
+                    decode["humidity_perc_abs@internal"] = parseFloat((((bytes[4] << 8 | bytes[5]) & 0xFFF) / 10).toFixed(1));
                 }
                 if (ext === 1 || ext === 2) {
 									if ((bytes[7] !== 0xFF) && (bytes[8] !== 0xFF)) {
 										let value = parseFloat(((bytes[7] << 24 >> 16 | bytes[8]) / 100).toFixed(2));
-                    decode["temperature_degrC@external"] = value;
+                    decode["temperature_degrC_abs@external"] = value;
 									}
                 } else if (ext === 5) {	
 									if ((bytes[7] !== 0xFF) && (bytes[8] !== 0xFF)) {
 										let value = bytes[7] << 8 | bytes[8];
-									  decode["brightness_lux@external"] = value;
+									  decode["brightness_lux_abs@external"] = value;
 									}
                 } else if (ext === 11) {
-                    decode["temperature_degrC@external"] = parseFloat(((bytes[7] << 24 >> 16 | bytes[8]) / 100).toFixed(2));
-                    decode["humidity_perc@external"] = parseFloat((((bytes[9] << 8 | bytes[10]) & 0xFFF) / 10).toFixed(1));
+                    decode["temperature_degrC_abs@external"] = parseFloat(((bytes[7] << 24 >> 16 | bytes[8]) / 100).toFixed(2));
+                    decode["humidity_perc_abs@external"] = parseFloat((((bytes[9] << 8 | bytes[10]) & 0xFFF) / 10).toFixed(1));
                 }
                 if ((bytes.length === 11) || (bytes.length === 15)) {
                     return decode;

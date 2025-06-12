@@ -236,10 +236,10 @@ function decodeUplink(input) {
     "AllSenseExt": 13
   };
   var byteIndices = {
-    "Standard": {"pressure_hPa": 0, "temperature_degrC": 2, "humidity_perc": 4},
-    "CarbonSense": {"pressure_hPa": 0, "temperature_degrC": 2, "humidity_perc": 4, "co2_ppm": 5},
-    "AllSense": {"temperature_degrC": 0, "humidity_perc": 2, "voc_index": 3, "co2_ppm": 5},
-    "AllSenseExt": {"pressure_hPa": 0, "temperature_degrC": 2, "humidity_perc": 4, "voc_index": 5, "brightness_lux": 7, "co2_ppm": 9, "presence_min": 11}
+    "Standard": {"pressure_hPa_abs": 0, "temperature_degrC_abs": 2, "humidity_perc_abs": 4},
+    "CarbonSense": {"pressure_hPa_abs": 0, "temperature_degrC_abs": 2, "humidity_perc_abs": 4, "co2_ppm_abs": 5},
+    "AllSense": {"temperature_degrC_abs": 0, "humidity_perc_abs": 2, "voc_index_abs": 3, "co2_ppm_abs": 5},
+    "AllSenseExt": {"pressure_hPa_abs": 0, "temperature_degrC_abs": 2, "humidity_perc_abs": 4, "voc_index_abs": 5, "brightness_lux_abs": 7, "co2_ppm_abs": 9, "presence_min_inc": 11}
   };
   var payloadOffset = 1; // Offset of battery information, offset before datasets
   var warnings = [];

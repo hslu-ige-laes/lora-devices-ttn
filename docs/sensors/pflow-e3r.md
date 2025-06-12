@@ -76,5 +76,49 @@ tbd
 ## Payload Decoder
 
 ```javascript
-tbd
+function decodeUplink(input) {
+    var bytes = input.bytes;
+    var fPort = input.fPort;
+    
+    var decoded = {};
+
+    // Uplink payload decoding
+    decoded.uplink = readUplinkInfo(bytes);
+    
+    return {
+        data: decoded
+    };
+}
+
+function readUplinkInfo(bytes) {
+    var uplink = {};
+    
+    uplink["volumeFlow_m3perh"] = readUInt32(0, bytes) / 100;
+    uplink["volume_m3_inc"] = readUInt32(4, bytes) / 100;
+    uplink["energy_kWh_inc@heating"] = readUInt32(13,bytes) /100;
+    uplink["energy_kWh_inc@cooling"] = readUInt32(19,bytes) / 100;
+    uplink["temperature_degrC_abs@return"] = readUInt16(11,bytes) / 100;
+    uplink["temperature_degrC_abs@flow"] = readUInt16(17,bytes) / 100;
+    uplink["velocity_mpers_abs"] = readUInt16(8, bytes) / 100;
+    uplink["signalQuality_perc_abs"] = readUInt8(10, bytes);
+
+    return uplink;
+}
+
+// helper functions
+
+function readUInt32(index, bytes) {
+    var value = (bytes[index] << 24 & 0xff000000) | (bytes[index + 1] << 16 & 0x00ff0000)  | (bytes[index + 2] << 8 & 0x0000ff00) | (bytes[index + 3] & 0x000000ff);
+    return value & 0xffffffff;
+}
+
+function readUInt16(index, bytes) {
+    var value = ((bytes[index] << 8) & 0xff00) | ((bytes[index + 1]) & 0x00ff);
+    return value & 0xffff;
+}
+
+function readUInt8(index, bytes) {
+    var value = ((bytes[index]) & 0xff);
+    return value & 0xff;
+}
 ```

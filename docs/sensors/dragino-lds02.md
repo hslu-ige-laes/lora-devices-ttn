@@ -110,19 +110,20 @@ function decodeUplink(input) {
 
             switch (mode) {
                 case 1: 
-                    data.open_state = doorStatus;
-                    data.counter = times;
+                    data.open_state_abs = doorStatus;
+                    data.counter_impulse_inc = times;
                     data.openDuration_min = duration;
-                    data.alarm_state = alarm;
+                    data.alarm_state_abs = alarm;
                     break;
                 case 2: 
-                    data.waterLeak_state = waterLeakStatus;
-                    data.counter = times;
-                    data.waterDuration_minutes = duration;
+                    data.waterleak_state_abs = waterLeakStatus;
+                    data.counter_impulse_inc = times;
+                    data.waterleaknDuration_min = duration;
+                    data.alarm_state_abs = alarm;
                     break;
                 case 3: 
-                    data.waterLeak_state = doorStatus || waterLeakStatus;
-                    data.alarm_state = alarm;
+                    data.waterleak_state_abs = doorStatus || waterLeakStatus;
+                    data.alarm_state_abs = alarm;
                     break;
                 default:
                     break;
@@ -134,4 +135,5 @@ function decodeUplink(input) {
 
     return { data: data };
 }
+
 ```
