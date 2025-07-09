@@ -10,7 +10,7 @@ permalink: /docs/field_testing_guideline
 
 # LoRaWAN Field Testing Guideline
 {: .no_toc }
-This guide helps you **test LoRaWAN coverage** and **decide when to install a gateway**. Perfect for beginners testing in and around buildings, with any LoRaWAN tester and either The Things Network (TTN) or your own LTE LoRaWAN gateway.
+This guide helps you test LoRaWAN coverage and decide when to install a gateway.
 
 ---
 ## Table of contents
@@ -23,16 +23,16 @@ This guide helps you **test LoRaWAN coverage** and **decide when to install a ga
 
 ## What You Need
 - A LoRaWAN connection tester (e.g., RAK10701)
-- LoRaWAN gateway(s) (public TTN gateways, or your own LTE gateways)
+- LoRaWAN gateway(s) - public TTN gateways, or your own LTE gateways
 
 ---
 
 ## How to Test Coverage
 
-1. Charge your tester.
-1. Mount the antenna on your tester.
-1. Switch on the tester by pressing the button on the right side for at least five seconds.
-   <img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/rak10701-p_02.png" width="128" align="left" class="inline"/>
+1. Charge your tester
+1. Mount the antenna on your tester
+1. Switch on the tester by pressing the button on the right side for at least five seconds
+   <img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/rak10701-p_02.png" width="128" align="left">
 1. Take your tester to the first test location (e.g., office, basement, outdoors)
    > **Note:** If you are indoors, there will be no reception of the GPS signal. The latitude and longitude data will be empty.
 1. Send a test uplink/join:
@@ -45,7 +45,14 @@ This guide helps you **test LoRaWAN coverage** and **decide when to install a ga
     - Spreading Factor (SF)
     - Packet loss / failed sends
 
-    > **Important:** Note your location and results.
+    > **Important:** Note your location and results like that:
+		
+		| Location    | RSSI    | SNR   | GW Count | SF  | Join | Notes         |
+		|-------------|---------|-------|----------|-----|------|---------------|
+		| Entrance    | -75 dBm | +7 dB | 3        | 7   | Yes  | Great         |
+		| Basement    | -115 dBm| -3 dB | 0        | —   | No   | Needs gateway |
+		| Hallway 2F  | -105 dBm| +1 dB | 1        | 11  | Yes  | Marginal      |
+		| Parking Lot | -95 dBm | +4 dB | 2        | 9   | Yes  | Good          |
 
 1. Repeat at all locations where you need coverage: every floor, corner, room, or outdoor spot.
 
@@ -73,11 +80,11 @@ This guide helps you **test LoRaWAN coverage** and **decide when to install a ga
 ## When to Install (or Move) a Gateway
 
 ### Install a new gateway if:
-- **Many locations show weak or no coverage:** (RSSI < -110 dBm, SNR < 0 dB, SF12, join failures)
-- **Important areas (e.g., basement, far office) get 0 packets received.**
-- **Only one gateway receives your tester in key spots:** (GW count = 1 or 0)
-- **You have high packet loss or messages don’t reach the network.**
-- **You want reliable indoor coverage across large or dense buildings.**
+- Many locations show weak or no coverage: (RSSI < -110 dBm, SNR < 0 dB, SF12, join failures)
+- Important areas (e.g., basement, far office) get 0 packets received.
+- Only one gateway receives your tester in key spots: (GW count = 1 or 0)
+- You have high packet loss or messages don’t reach the network.
+- You want reliable indoor coverage across large or dense buildings.
 
 ### How to Position the Gateway
 - Place the gateway as **high** and **central** as possible.
@@ -95,17 +102,6 @@ This guide helps you **test LoRaWAN coverage** and **decide when to install a ga
 - Test at different times of day (buildings can affect signal depending on occupancy).
 - Walk slowly and wait for test results in each location.
 - Note obstacles (concrete, metal) that may block the signal.
-
----
-
-## Sample Test Table
-
-| Location    | RSSI    | SNR   | GW Count | SF  | Join | Notes         |
-|-------------|---------|-------|----------|-----|------|---------------|
-| Entrance    | -75 dBm | +7 dB | 3        | 7   | Yes  | Great         |
-| Basement    | -115 dBm| -3 dB | 0        | —   | No   | Needs gateway |
-| Hallway 2F  | -105 dBm| +1 dB | 1        | 11  | Yes  | Marginal      |
-| Parking Lot | -95 dBm | +4 dB | 2        | 9   | Yes  | Good          |
 
 ---
 
