@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Field Tester
+title: Field Testing Guideline
 nav_order: 5
 has_children: false
 permalink: /docs/field_testing_guideline
@@ -71,18 +71,18 @@ However, the actual range can vary depending on several factors
     - Spreading Factor (SF)
     - Packet loss / failed sends
 
-    > **Important:** Note your location and results like that:
-		
+    > **Important:** Note your location and results, see example table below
+
+7. Repeat at all locations where you need coverage: every floor, corner, room, or outdoor spot.
+
+8. If done, power off the device by pressing the button on the right side for at least five seconds.
+
 | Location    | RSSI    | SNR   | GW Count | SF  | Join | Notes         |
 |-------------|---------|-------|----------|-----|------|---------------|
 | Entrance    | -75 dBm | +7 dB | 3        | 7   | Yes  | Great         |
 | Basement    | -115 dBm| -3 dB | 0        | —   | No   | Needs gateway |
 | Hallway 2F  | -105 dBm| +1 dB | 1        | 11  | Yes  | Marginal      |
 | Parking Lot | -95 dBm | +4 dB | 2        | 9   | Yes  | Good          |
-
-7. Repeat at all locations where you need coverage: every floor, corner, room, or outdoor spot.
-
-8. If done, power off the device by pressing the button on the right side for at least five seconds.
 
 ---
 
@@ -107,20 +107,20 @@ However, the actual range can vary depending on several factors
 
 In the LoRaWAN network, the Received Signal Strength Indicator (RSSI) and the Signal-to-Noise Ratio (SNR) are important metrics for evaluating the communication quality between LoRa devices and gateways.
 
-#### RSSI (Received Signal Strength Indicator)
+#### **RSSI** (Received Signal Strength Indicator)
 
 RSSI measures the strength of the received signal in decibels relative to 1 milliwatt (dBm).
 The values for RSSI in the LoRaWAN can typically range from around -120 dBm to -40 dBm. A value of -120 dBm indicates a very weak signal that is close to the reception limit, while a value of -40 dBm indicates a very strong signal.
 
 
-#### SNR (Signal-to-Noise Ratio)
+#### **SNR** (Signal-to-Noise Ratio)
 
 SNR is a measure of how much stronger the signal is than the background noise. It is measured in decibels (dB).
 The SNR values in the LoRaWAN can range from around -20 dB to +10 dB.
 - A negative SNR means that the noise is stronger than the signal, which typically occurs at very long distances or in poor environmental conditions.
 - A positive SNR indicates that the signal is stronger than the noise, which is necessary for effective communication.
 
-#### What are good values?
+#### **What are good values?**
 
 **To assess the quality, the two values must be considered together!**
 
@@ -169,4 +169,5 @@ If RSSI is poor (<=-120dB) but SNR is good (> -7dB), this means that the device 
 - <a href="https://ttnmapper.org/heatmap/" target="_blank">The Things Network Mapper – for outdoor mapping coverage</a>
 - <a href="https://www.thethingsnetwork.org/docs/" target="_blank">LoRaWAN Knowledge Base</a>  
 - <a href="https://docs.rakwireless.com/Product-Categories/WisBlock/RAK10701/Quickstart/" target="_blank">LoRaWAN Tester Quick Start Guides</a>
+
 ---
