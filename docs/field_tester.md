@@ -97,9 +97,9 @@ However, the actual range can vary depending on several factors
 | **Join Success** | Yes   | No          | Failed joins = no coverage or wrong keys |
 
 ### Quick Rules
-- **Good Coverage:** RSSI > -100 dBm, SNR > 0 dB, GW ≥2, SF ≤9
-- **Weak Coverage:** RSSI < -110 dBm, SNR < 0 dB, GW 0–1, SF ≥11
-- **No Coverage:** No join or uplink; nothing in console
+- **GOOD coverage:** RSSI > -115 dBm, SNR > -7 dB, GW ≥2, SF ≤9
+- **FAIR coverage:** RSSI > -126 dBm, SNR > -15 dB, GW 0–1, SF ≥11
+- **BAD coverage:** No join or uplink; nothing in console
 
 ---
 
@@ -124,31 +124,39 @@ The SNR values in the LoRaWAN can range from around -20 dB to +10 dB.
 
 **To assess the quality, the two values must be considered together!**
 
+<img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn_rssi_vs_snr.png" width="600" align="left"/>
+
 - The radio link can be described as **GOOD** if RSSI > -115dB and SNR > -7dB
-- The radio link is **POOR** (range limit) if RSSI <= -120 dB or SNR <= -13dB
+- The radio link is **FAIR** (range limit) if RSSI <= -115 dB or SNR <= -7dB
+- The radio link is **BAD** (range limit) if RSSI <= -126 dB or SNR <= -15dB
 
-If RSSI is good (> -115dB), but SNR is poor (<= -13dB), this means that the environment is very noisy
+If RSSI is **GOOD** (> -115dB), but SNR is **BAD** (<= -15dB), this means that the environment is very noisy
 
-The SNR must be checked over several days to be sure that the radio link is stable enough to receive all messages.
+**Note:** The SNR must be checked theoretically over several days to be sure that the radio link is stable enough to receive all messages.
 
-If RSSI is poor (<=-120dB) but SNR is good (> -7dB), this means that the device is probably far away from the gateway.
-
+If RSSI is **BAD** (<=-126dB) but SNR is **GOOD** (> -7dB), this means that the device is probably far away from the gateway.
 
 ---
 
 ## When to Install (or move) a Gateway
 
 ### Install a new gateway if:
-- Many locations show weak or no coverage: (RSSI < -110 dBm, SNR < 0 dB, SF12, join failures)
+- Many locations show weak or no coverage: (RSSI < -115 dBm, SNR < -7 dB, SF12, join failures)
 - Important areas (e.g., basement, far office) get 0 packets received.
 - Only one gateway receives your tester in key spots: (GW count = 1 or 0)
 - You have high packet loss or messages don’t reach the network.
 - You want reliable indoor coverage across large or dense buildings.
 
 ### How to Position the Gateway
-- Place the gateway as **high** and **central** as possible.
+- Place the gateway as **high** and **central** as possible. That means, place it in a high floor and centralized in the location.
 - Avoid metal enclosures or dense walls.
 - Use an external antenna if possible for more range.
+- In case of a LTE Gateway, make shure that you have a good LTE reception of the used network provider.
+
+### How to Position the sensors
+- Sensor at least 1 meter of the gateway antenna
+- Sensor antenna vertical aligned and in the open air, not on a wall or metal construction
+- Mount the sensor/device anteanna vertically, imagine, its antenna should create a donut-shape. See device manual for detailed mounting instructions.
 
 ### After Gateway Install
 - Repeat tests in previous weak spots to verify coverage improved.
