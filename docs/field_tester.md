@@ -10,7 +10,9 @@ permalink: /docs/field_testing_guideline
 
 # LoRaWAN Field Testing Guideline
 {: .no_toc }
-This guide helps you test LoRaWAN coverage and decide when to install a gateway.
+This guide helps you test LoRaWAN coverage and decide when to install a gateway
+
+
 
 ---
 ## Table of contents
@@ -47,12 +49,12 @@ This guide helps you test LoRaWAN coverage and decide when to install a gateway.
 
     > **Important:** Note your location and results like that:
 		
-		| Location    | RSSI    | SNR   | GW Count | SF  | Join | Notes         |
-		|-------------|---------|-------|----------|-----|------|---------------|
-		| Entrance    | -75 dBm | +7 dB | 3        | 7   | Yes  | Great         |
-		| Basement    | -115 dBm| -3 dB | 0        | —   | No   | Needs gateway |
-		| Hallway 2F  | -105 dBm| +1 dB | 1        | 11  | Yes  | Marginal      |
-		| Parking Lot | -95 dBm | +4 dB | 2        | 9   | Yes  | Good          |
+| Location    | RSSI    | SNR   | GW Count | SF  | Join | Notes         |
+|-------------|---------|-------|----------|-----|------|---------------|
+| Entrance    | -75 dBm | +7 dB | 3        | 7   | Yes  | Great         |
+| Basement    | -115 dBm| -3 dB | 0        | —   | No   | Needs gateway |
+| Hallway 2F  | -105 dBm| +1 dB | 1        | 11  | Yes  | Marginal      |
+| Parking Lot | -95 dBm | +4 dB | 2        | 9   | Yes  | Good          |
 
 1. Repeat at all locations where you need coverage: every floor, corner, room, or outdoor spot.
 
@@ -77,7 +79,7 @@ This guide helps you test LoRaWAN coverage and decide when to install a gateway.
 
 ---
 
-## When to Install (or Move) a Gateway
+## When to Install (or move) a Gateway
 
 ### Install a new gateway if:
 - Many locations show weak or no coverage: (RSSI < -110 dBm, SNR < 0 dB, SF12, join failures)
@@ -107,8 +109,7 @@ This guide helps you test LoRaWAN coverage and decide when to install a gateway.
 
 ## Further Resources
 
-- [The Things Network Mapper](https://ttnmapper.org/heatmap/) – for outdoor mapping coverage
-- [LoRaWAN Knowledge Base](https://www.thethingsnetwork.org/docs/)
-- [LoRaWAN Tester Quick Start Guides](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK10701/Quickstart/)
-
+- <a href="https://ttnmapper.org/heatmap/" target="_blank">The Things Network Mapper – for outdoor mapping coverage</a>
+- <a href="https://www.thethingsnetwork.org/docs/" target="_blank">LoRaWAN Knowledge Base</a>  
+- <a href="https://docs.rakwireless.com/Product-Categories/WisBlock/RAK10701/Quickstart/" target="_blank">LoRaWAN Tester Quick Start Guides</a>
 ---
