@@ -124,7 +124,7 @@ The SNR values in the LoRaWAN can range from around -20 dB to +10 dB.
 
 **To assess the quality, the two values must be considered together!**
 
-<img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn_rssi_vs_snr.png" width="600" align="left"/>
+<img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn_rssi_vs_snr.png" width="600"/>><br>
 
 - The radio link can be described as **GOOD** if RSSI > -115dB and SNR > -7dB
 - The radio link is **FAIR** (range limit) if RSSI <= -115 dB or SNR <= -7dB
