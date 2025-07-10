@@ -93,7 +93,7 @@ function decodeUplink(input) {
 function readUplinkInfo(bytes) {
     var uplink = {};
     
-    uplink["volumeFlow_m3perh"] = readUInt32(0, bytes) / 100;
+    uplink["volumeFlow_m3perh_abs"] = readUInt32(0, bytes) / 100;
     uplink["volume_m3_inc"] = readUInt32(4, bytes) / 100;
     uplink["energy_kWh_inc@heating"] = readUInt32(13,bytes) /100;
     uplink["energy_kWh_inc@cooling"] = readUInt32(19,bytes) / 100;
