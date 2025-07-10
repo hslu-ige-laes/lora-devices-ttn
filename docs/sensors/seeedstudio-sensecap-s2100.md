@@ -12,7 +12,7 @@ parent: Sensors
 - Manufacturer: <a href="https://www.seeedstudio.com/" target="_blank">Seeedstudio</a>
 - Product: <a href="https://www.seeedstudio.com/SenseCAP-S2100-LoRaWAN-Data-Logger-p-5361.html" target="_blank">SenseCap S2100</a>
 
-The SenseCap S2100 is a LoRaWAN indoor/outdoor Data Logger for RS485/Analog/GPIO devices/sensors
+The SenseCap S2100 is a LoRaWAN indoor/outdoor Data Logger for RS485-Modbus/Analog/GPIO devices/sensors
 
 ---
 
@@ -34,6 +34,9 @@ The SenseCap S2100 is a LoRaWAN indoor/outdoor Data Logger for RS485/Analog/GPIO
   - **GPIO**, Level and Pulse Count
   - **Switchable 5V and 3V output for feeding the connected sensor**
   - Each Data logger can only be connected to one type of sensor
+  - In Modbus mode...
+    - it is only possible to fetch data from a single device.
+    - the device operates exclusively as a master; functioning as a slave and listening for incoming telegrams is not supported.
   - Expected life time: depending on usage, 5 ... 10 years
 - Battery Li-SOCl2, ER34615, 19Ah, 3.6V
 - LoRaWAN version: 1.0.3

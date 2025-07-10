@@ -29,6 +29,9 @@ There is as well a function to listen only to a modbus network and send the list
 - Price ca. CHF 55.- (09.07.2025)
 - LoRaWAN Class A & Class C
 - Max 15 RS485 slave Modbus queries per uplink
+- In Modbus mode...
+  - it is only possible to fetch data from a single device.
+  - the device can operate as master and slave (listening for incoming telegrams is supported)
 - RS485 interface, Modbus RTU supported
 - Power Supply: 7~24V DC
 - Power Consumption: Idle 32 mA @12V, TX 65 mA @12V
