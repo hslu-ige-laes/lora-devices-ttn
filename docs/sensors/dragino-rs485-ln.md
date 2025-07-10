@@ -131,7 +131,7 @@ function decodeUplink(input) {
   // Sensor data on FPort 2 (PAYVER + device-major sensor order)
   if (port === 2 && bytes.length >= 31) {
     var devs = [3,4,5,6,7];
-    var names = ["temperature_degrC", "humidity_perc", "co2_ppm"];
+    var names = ["temperature_degrC_abs", "humidity_perc_abs", "co2_ppm_abs"];
     var scales = [0.1, 0.1, 1];
 
     for (var d=0; d<devs.length; d++) { // device
