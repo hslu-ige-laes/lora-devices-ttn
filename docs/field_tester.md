@@ -24,7 +24,7 @@ This guide helps you test LoRaWAN coverage and decide when to install a gateway
 ---
 
 ## What You Need
-- A LoRaWAN connection tester (e.g., RAK10701)
+- A LoRaWAN connection tester (e.g., RAK10701-P)
 - LoRaWAN gateway(s) - public TTN gateways, or your own LTE gateways
 
 ---
@@ -252,6 +252,6 @@ If RSSI is **BAD** (<=-126dB) but SNR is **GOOD** (> -7dB), this means that the 
 
 - <a href="https://ttnmapper.org/heatmap/" target="_blank">The Things Network Mapper – for outdoor mapping coverage</a>
 - <a href="https://www.thethingsnetwork.org/docs/" target="_blank">LoRaWAN Knowledge Base</a>  
-- <a href="https://docs.rakwireless.com/Product-Categories/WisBlock/RAK10701/Quickstart/" target="_blank">LoRaWAN Tester Quick Start Guides</a>
+- <a href="https://docs.rakwireless.com/product-categories/wisgate/rak10701-p/quickstart/" target="_blank">LoRaWAN Tester Quick Start Guides</a>
 
 ---
