@@ -108,7 +108,7 @@ More power = longer range, but also more battery consumption and possibly violat
 
 ---
 
-### ⚠️ Tips
+### Tips
 
 - Use **lowest TX power** and **highest DR** that still gives reliable communication.
 - **Avoid DR0** unless necessary – very slow and uses a lot of airtime.
@@ -117,7 +117,7 @@ More power = longer range, but also more battery consumption and possibly violat
 
 ---
 
-### 🧪 Sample Test Scenarios
+### Sample Test Scenarios
 
 | Scenario        | TX Index | DR  | Notes                          |
 |-----------------|----------|-----|--------------------------------|
