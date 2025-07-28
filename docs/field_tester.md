@@ -55,6 +55,80 @@ However, the actual range can vary depending on several factors
 
 ## How to Test Coverage
 
+### Data Rates (DR) for EU868
+DR = Data Rate, which in LoRa modulation is a combination of Spreading Factor (SF) and Bandwidth (BW).
+It can be set in the device settings.
+
+It determines:
+- How fast data is sent
+- How far the signal can reach
+- How robust the connection is to noise
+
+| DR  | Spreading Factor | Bandwidth (kHz) | Bitrate (approx) | Range      | Airtime Usage |
+|-----|------------------|------------------|------------------|------------|----------------|
+| DR0 | SF12             | 125              | ~250 bps         | Longest    | Highest        |
+| DR1 | SF11             | 125              | ~440 bps         | Very Long  | High           |
+| DR2 | SF10             | 125              | ~980 bps         | Long       | Medium         |
+| DR3 | SF9              | 125              | ~1760 bps        | Medium     | Medium         |
+| DR4 | SF8              | 125              | ~3125 bps        | Short      | Low            |
+| DR5 | SF7              | 125              | ~5470 bps        | Shortest   | Lowest         |
+
+> **Higher DR = Faster but shorter range.**
+
+> **Lower DR = Slower, longer range.**
+
+---
+
+### TX Power Index Mapping (RAK10701-P, EU868)
+This represents the transmit power.
+More power = longer range, but also more battery consumption and possibly violating regional limits
+
+| TX Power Index | Output Power (dBm) |
+|----------------|---------------------|
+| 0              | 14 dBm (Max legal for EU/CH)  |
+| 1              | 13 dBm              |
+| 2              | 12 dBm              |
+| 3              | 11 dBm              |
+| 4              | 10 dBm              |
+| 5              | 9 dBm               |
+| 6              | 8 dBm               |
+| 7              | 7 dBm               |
+
+---
+
+### Recommended Settings for Testing
+
+#### Close to Gateway (Urban / Strong Signal)
+- **Data Rate**: `DR5 (SF7)`
+- **TX Power Index**: `3–5` (11–9 dBm)
+
+#### Long Range / Weak Signal
+- **Data Rate**: `DR2` or `DR3`
+- **TX Power Index**: `0` (14 dBm)
+
+---
+
+### ⚠️ Tips
+
+- Use **lowest TX power** and **highest DR** that still gives reliable communication.
+- **Avoid DR0** unless necessary – very slow and uses a lot of airtime.
+- Don't flood TTN with test packets – it's a **shared, fair-use network**.
+- **ADR should be disabled** when the tester is moving between locations.
+
+---
+
+### 🧪 Sample Test Scenarios
+
+| Scenario        | TX Index | DR  | Notes                          |
+|-----------------|----------|-----|--------------------------------|
+| Close Range     | 4        | DR5 | Low power, fast transmission  |
+| Medium Range    | 2        | DR3 | Balanced speed and range      |
+| Long Range Test | 0        | DR2 | Max power, extended coverage  |
+
+---
+
+### Test Procedure
+
 1. Charge your tester
 2. Mount the antenna on your tester
 3. Switch on the tester by pressing the button on the right side for at least five seconds
@@ -62,7 +136,7 @@ However, the actual range can vary depending on several factors
 4. Take your tester to the first test location (e.g., office, basement, outdoors)
    > **Note:** If you are indoors, there will be no reception of the GPS signal. The latitude and longitude data will be empty.
 5. Send a test uplink/join:
-    - On most testers, this is a button press or auto-sends at intervals.
+    - The device sends automatically every 30s (can be changed in Settings). You can force an uplink by pressing the button on the side twice.
     - Watch for join success (for OTAA) and uplink send.
 6. Observe and record the results:
     - RSSI (signal strength)
@@ -72,6 +146,8 @@ However, the actual range can vary depending on several factors
     - Packet loss / failed sends
 
     > **Important:** Note your location and results, see example table below
+		
+		> **Hints:** If the screen shows a lock icon on bottom right, then you can press the side button once to leave the locked mode.
 
 7. Repeat at all locations where you need coverage: every floor, corner, room, or outdoor spot.
 
