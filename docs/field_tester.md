@@ -73,9 +73,9 @@ It determines:
 | DR4 | SF8              | 125              | ~3125 bps        | Short      | Low            |
 | DR5 | SF7              | 125              | ~5470 bps        | Shortest   | Lowest         |
 
-> **Higher DR = Faster but shorter range.**
+> **Higher DR = Faster but shorter range. Smaller sampling rates possible like 5 min**
 
-> **Lower DR = Slower, longer range.**
+> **Lower DR = Slower, longer range. Higher sampling rates like every 1 hour**
 
 ---
 
@@ -103,7 +103,7 @@ More power = longer range, but also more battery consumption and possibly violat
 - **TX Power Index**: `3–5` (11–9 dBm)
 
 #### Long Range / Weak Signal
-- **Data Rate**: `DR2` or `DR3`
+- **Data Rate**: `DR2`
 - **TX Power Index**: `0` (14 dBm)
 
 ---
@@ -119,11 +119,11 @@ More power = longer range, but also more battery consumption and possibly violat
 
 ### Sample Test Scenarios
 
-| Scenario        | TX Index | DR  | Notes                          |
+| Scenario        | TX Power | DR  | Notes                          |
 |-----------------|----------|-----|--------------------------------|
-| Close Range     | 4        | DR5 | Low power, fast transmission  |
-| Medium Range    | 2        | DR3 | Balanced speed and range      |
-| Long Range Test | 0        | DR2 | Max power, extended coverage  |
+| Close Range     | 4        | DR5 (SF7)| Low power, fast transmission  |
+| Medium Range    | 2        | DR3 (SF9) | Balanced speed and range      |
+| Long Range Test | 0        | DR0 (SF12) | Max power, extended coverage  |
 
 ---
 
@@ -133,12 +133,13 @@ More power = longer range, but also more battery consumption and possibly violat
 2. Mount the antenna on your tester
 3. Switch on the tester by pressing the button on the right side for at least five seconds
    <img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/rak10701-p_02.png" width="128" align="left">
-4. Take your tester to the first test location (e.g., office, basement, outdoors)
+4. Set the DR and TX Power according to your test scenario (see description above). For Indoor testing with own gateways set it to `TX Power 4` and `DR5` (SF7).
+5. Take your tester to the first test location (e.g., office, basement, outdoors)
    > **Note:** If you are indoors, there will be no reception of the GPS signal. The latitude and longitude data will be empty.
-5. Send a test uplink/join:
+6. Send a test uplink/join:
     - The device sends automatically every 30s (can be changed in Settings). You can force an uplink by pressing the button on the side twice.
     - Watch for join success (for OTAA) and uplink send.
-6. Observe and record the results:
+7. Observe and record the results:
     - RSSI (signal strength)
     - SNR (signal clarity)
     - Gateway count (number of gateways receiving your signal)
@@ -149,9 +150,9 @@ More power = longer range, but also more battery consumption and possibly violat
 		
 		> **Hints:** If the screen shows a lock icon on bottom right, then you can press the side button once to leave the locked mode.
 
-7. Repeat at all locations where you need coverage: every floor, corner, room, or outdoor spot.
+8. Repeat at all locations where you need coverage: every floor, corner, room, or outdoor spot.
 
-8. If done, power off the device by pressing the button on the right side for at least five seconds.
+9. If done, power off the device by pressing the button on the right side for at least five seconds.
 
 | Location    | RSSI    | SNR   | GW Count | SF  | Join | Notes         |
 |-------------|---------|-------|----------|-----|------|---------------|
@@ -192,7 +193,7 @@ The values for RSSI in the LoRaWAN can typically range from around -120 dBm to -
 #### **SNR** (Signal-to-Noise Ratio)
 
 SNR is a measure of how much stronger the signal is than the background noise. It is measured in decibels (dB).
-The SNR values in the LoRaWAN can range from around -20 dB to +10 dB.
+The SNR values in the LoRaWAN can range from around -20 dB to +14 dB.
 - A negative SNR means that the noise is stronger than the signal, which typically occurs at very long distances or in poor environmental conditions.
 - A positive SNR indicates that the signal is stronger than the noise, which is necessary for effective communication.
 
@@ -253,5 +254,7 @@ If RSSI is **BAD** (<=-126dB) but SNR is **GOOD** (> -7dB), this means that the 
 - <a href="https://ttnmapper.org/heatmap/" target="_blank">The Things Network Mapper – for outdoor mapping coverage</a>
 - <a href="https://www.thethingsnetwork.org/docs/" target="_blank">LoRaWAN Knowledge Base</a>  
 - <a href="https://docs.rakwireless.com/product-categories/wisgate/rak10701-p/quickstart/" target="_blank">LoRaWAN Tester Quick Start Guides</a>
+- <a href="https://www.youtube.com/watch?v=RpTw1fGhI68" target="_blank">RSSI and SNR Youtube Video</a>
+- <a href="https://www.youtube.com/watch?v=BOc3N3Yl38o" target="_blank">Lora Propagation, Range, Antennas, and Link Budget Youtube Video</a>
 
 ---
