@@ -308,5 +308,7 @@ Install or move a gateway if:
 - <a href="https://docs.rakwireless.com/product-categories/wisgate/rak10701-p/quickstart/" target="_blank">LoRaWAN Tester Quick Start Guides</a>
 - <a href="https://www.youtube.com/watch?v=RpTw1fGhI68" target="_blank">RSSI and SNR Youtube Video</a>
 - <a href="https://www.youtube.com/watch?v=BOc3N3Yl38o" target="_blank">Lora Propagation, Range, Antennas, and Link Budget Youtube Video</a>
+- <a href="https://avbentem.github.io/airtime-calculator/ttn/eu868/51" target="_blank">Airtime calculator for LoRAWAN</a>
+- <a href="https://www.thethingsnetwork.org/airtime-calculator" target="_blank">TTN's Airtime calculator for LoRAWAN</a>
 
 ---
