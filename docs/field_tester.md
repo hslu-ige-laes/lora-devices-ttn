@@ -29,7 +29,7 @@ This guide helps you test LoRaWAN coverage and decide when to install a gateway
 
 ---
 
-## Typical range of transmission
+## Typical Range of Transmission
 The typical range for LoRaWAN devices is a few hundred meters to a few kilometers in urban areas and several kilometers in rural or open environments.
 In some cases it is possible to place devices in buildings and have the next gateway somewhere outside. But that depends on multiple factors:
 
@@ -184,7 +184,7 @@ More power = longer range, but also more battery consumption and possibly violat
 
 ---
 
-## How to interpret the results in detail
+## How to Interpret the Results in Detail
 
 Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (Signal-to-Noise Ratio) readings is essential for reliable LoRaWAN operation. Use the tables and troubleshooting tips below to assess results and improve your network.
 
