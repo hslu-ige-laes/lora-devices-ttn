@@ -158,7 +158,8 @@ More power = longer range, but also more battery consumption and possibly violat
 3. **Select test locations**: Include every floor, corner, and difficult area.
 4. Switch on the tester by pressing the button on the right side for at least five seconds
    <img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/rak10701-p_02.png" width="128" align="left">
-5. **Set DR and TX Power and other settins**: 
+
+5. **Set DR and TX Power and other settings**: 
    - **Close/urban/indoor:** DR5 (SF7), lower TX power to e.g. `3–5` (11–9 dBm).
    - **Long-range/obstructed/outdoor:** DR2 (SF10) or lower, higher TX power to `0` (14 dBm). Keep in mind that it has an effect on battery life!
    - **TX Interval:** Set it to 3600s, then the ttn network does not get flodded by periodic transmissions. You manually trigger a transmission by pressing the side button twice.
