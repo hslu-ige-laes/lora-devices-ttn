@@ -24,7 +24,8 @@ This guide helps you test LoRaWAN coverage and decide when to install a gateway
 ## What You Need
 - A LoRaWAN connection tester (e.g., RAK10701-P)
 - LoRaWAN gateway(s) - public TTN gateways, or your own LTE gateways
-- Notebook or Excel/CSV for recording results
+- Notebook with Excel for recording results or oldstyle printed table:
+  - [LoRaWAN Field Testing Excel](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/field_tester_table.xlsx)
 
 ---
 
@@ -174,6 +175,8 @@ More power = longer range, but also more battery consumption and possibly violat
 |----------|----|----|----------------|--------------------|----------------|------------|----------|--------------|---------------------------|
 | Office   | 1  | 11 | 14             | 1h 16min           | -17.5          | -100       | 2        | 1            | Obstacles, machinery, etc.|
 
+- [LoRaWAN Field Testing Excel](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/field_tester_table.xlsx)
+
 ---
 
 ## Interpreting and Troubleshooting RSSI & SNR
@@ -265,6 +268,7 @@ Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (S
   - Space out sensors.  
   - Stagger transmissions if possible.  
   - Enable ADR for auto-optimization.
+	
 ---
 
 ## When to Install or Move a Gateway
