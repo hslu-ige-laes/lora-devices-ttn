@@ -12,8 +12,6 @@ permalink: /docs/field_testing_guideline
 {: .no_toc }
 This guide helps you test LoRaWAN coverage and decide when to install a gateway
 
-
-
 ---
 ## Table of contents
 {: .no_toc .text-delta }
@@ -26,24 +24,27 @@ This guide helps you test LoRaWAN coverage and decide when to install a gateway
 ## What You Need
 - A LoRaWAN connection tester (e.g., RAK10701-P)
 - LoRaWAN gateway(s) - public TTN gateways, or your own LTE gateways
+- Notebook or Excel/CSV for recording results
 
 ---
 
 ## Typical range of transmission
 The typical range for LoRaWAN devices is a few hundred meters to a few kilometers in urban areas and several kilometers in rural or open environments.
-It is as well possible to place devices in buildings and have the next gateway somewhere outside.
+In some cases it is possible to place devices in buildings and have the next gateway somewhere outside. But that depends on multiple factors:
 
-However, the actual range can vary depending on several factors
 - **Distance to the Gateway**<br>
   The farther the sensor device is from the gateway, the weaker the signal, impacting communication reliability.
+- **Gateway placement**
+  The higher and more central a gateway is, the better. But unfortunately signals often have more difficulties to traverse floors than walls.
+	Do not place a gateway close to other machinery and electrical lines.
 - **Obstacles and Environment**<br>
   Physical obstacles like buildings, walls, windows and trees can weaken or block the signal, affecting signal strength and range.
 - **Gateway Density**<br>
-  More gateways nearby improve coverage and increase the chances of successful communication. That has as well an effect on battery life. The better the reception, the faster the device can transmit, the shorter its airtime.
+  More gateways -> better coverage, less packet loss, and improved battery life
 - **Transmit Power of the Sensor Device**<br>
-  Higher transmit power allows for longer range but consumes more energy.
+  Higher transmit power allows for longer range but consumes more energy - so less battery life...
 - **Environmental Factors**<br>
-  Weather, humidity, and atmospheric conditions can influence signal strength.
+  Weather, humidity, and atmospheric conditions can influence signal strength. Indoors open and closed doors can affect as well the signal.
 - **Interference**<br>
   Electronic noise or interference from other devices can impact reception and as well battery life.
 - **Antenna Quality**<br>
@@ -53,29 +54,62 @@ However, the actual range can vary depending on several factors
 
 ---
 
-## How to Test Coverage
+## Key Parameters: RSSI & SNR
 
-### Data Rates (DR) for EU868
-DR = Data Rate, which in LoRa modulation is a combination of Spreading Factor (SF) and Bandwidth (BW).
-It can be set in the device settings.
+Understanding **RSSI** (Received Signal Strength Indicator) and **SNR** (Signal-to-Noise Ratio) is crucial for evaluating LoRaWAN radio links. Use the tables below to quickly assess the signal quality at your test points.
 
-It determines:
-- How fast data is sent
-- How far the signal can reach
-- How robust the connection is to noise
+### RSSI
+RSSI measures the strength of the received signal in decibels relative to 1 milliwatt (dBm).
+The values for RSSI in the LoRaWAN can typically range from around -120 dBm to -40 dBm. A value of -120 dBm indicates a very weak signal that is close to the reception limit, while a value of -40 dBm indicates a very strong signal.
 
-| DR  | Spreading Factor | Bandwidth (kHz) | Bitrate (approx) | Range      | Airtime Usage |
-|-----|------------------|------------------|------------------|------------|----------------|
-| DR0 | SF12             | 125              | ~250 bps         | Longest    | Highest        |
-| DR1 | SF11             | 125              | ~440 bps         | Very Long  | High           |
-| DR2 | SF10             | 125              | ~980 bps         | Long       | Medium         |
-| DR3 | SF9              | 125              | ~1760 bps        | Medium     | Medium         |
-| DR4 | SF8              | 125              | ~3125 bps        | Short      | Low            |
-| DR5 | SF7              | 125              | ~5470 bps        | Shortest   | Lowest         |
+| RSSI (dBm)   | Range            | Label      | Meaning                             |
+|--------------|------------------|------------|-------------------------------------|
+| > -90        | > -90            | Excellent  | Very strong signal                  |
+| -90 ... -100 | -90 to -100      | Good       | Strong signal                       |
+| -100 ... -115| -100 to -115     | Fair       | Usable, maybe unreliable            |
+| -115 ...-125 | -115 to -125     | Bad        | Weak, only works at high SF, add additional gateway |
+| < -125       | < -125           | Limit      | Unusable; add additional gateway    |
 
-> **Higher DR = Faster but shorter range. Smaller sampling rates possible like 5 min**
+### SNR Thresholds
 
-> **Lower DR = Slower, longer range. Higher sampling rates like every 1 hour**
+SNR is a measure of how much stronger the signal is than the background noise. It is measured in decibels (dB).
+The SNR values in the LoRaWAN can range from around -20 dB to +14 dB.
+- A negative SNR means that the noise is stronger than the signal, which typically occurs at very long distances or in poor environmental conditions.
+- A positive SNR indicates that the signal is stronger than the noise, which is necessary for effective communication.
+
+| SNR (dB)    | Range           | Label      | Meaning                                      |
+|-------------|-----------------|------------|----------------------------------------------|
+| > 5         | > 5             | Excellent  | Very clean signal                            |
+| 0 ... 5     | 0 to 5          | Good       | Clean signal                                 |
+| -7 ... 0    | -7 to 0         | Fair       | Acceptable, may have issues at lowest SF     |
+| -15 ... -7  | -15 to -7       | Bad        | Very noisy, close to LoRa decoding limit     |
+| < -15       | < -15           | Limit      | Below decoding limit; add gateway/move device|
+
+**How to use:**  
+- Compare your measured RSSI and SNR values to the tables above.
+- Both parameters should be at least in the **Fair** range for reliable operation; **Good** or **Excellent** is ideal.
+- If you see **Bad** or **Limit** readings, adjust device placement, increase SF, or consider more gateways.
+
+---
+
+## Data Rate, Spreading Factor & Battery Life
+
+The **Data Rate (DR)** and **Spreading Factor (SF)** impact both range and battery life. Lower DR (higher SF) means longer range but higher power usage and much slower data transfer.
+
+| DR  | SF | Min. SNR (dB) | Bitrate (bps) | Airtime (ms) | Min. Sampling Rate | Min. Sampling Rate |
+|-----|----|---------------|---------------|--------------|--------------------|--------------------|
+| 5   | 7  | -7.5          | 5470          | 127          | 0.10 h             | 6 min              |
+| 4   | 8  | -10           | 3125          | 223          | 0.18 h             | 11 min             |
+| 3   | 9  | -12.5         | 1760          | 395          | 0.32 h             | 19 min             |
+| 2   | 10 | -15           | 980           | 710          | 0.57 h             | 34 min             |
+| 1   | 11 | -17.5         | 440           | 1582         | 1.27 h             | 1h 16min           |
+| 0   | 12 | -20           | 250           | 2784         | 2.23 h             | 2h 14min           |
+
+**Notes:**
+- **Minimum SNR**: If your measured SNR is below the value in this table for the chosen SF, LoRa cannot decode the signal at all.
+- **Airtime**: How long the radio is transmitting for one packet. Longer airtime = higher energy use, shorter battery.
+- **Min. Sampling Rate**: Due to **duty cycle regulations** (e.g., 1% for EU868), you must not send packets more frequently than this interval at each SF. **Violating this can lead to message loss or regulatory issues.**
+- **Battery life is best with the lowest SF (highest DR) that gives reliable coverage.**
 
 ---
 
@@ -83,7 +117,7 @@ It determines:
 This represents the transmit power.
 More power = longer range, but also more battery consumption and possibly violating regional limits
 
-| TX Power Index | Output Power (dBm) |
+| TX Power Index on RAK10701-P | Output Power (dBm) |
 |----------------|---------------------|
 | 0              | 14 dBm (Max legal for EU/CH)  |
 | 1              | 13 dBm              |
@@ -96,156 +130,154 @@ More power = longer range, but also more battery consumption and possibly violat
 
 ---
 
-### Recommended Settings for Testing
+## How to Test Coverage
 
-#### Close to Gateway (Urban / Strong Signal)
-- **Data Rate**: `DR5 (SF7)`
-- **TX Power Index**: `3–5` (11–9 dBm)
+1. Charge your tester beforehand
+2. Mount the antenna on your tester
+3. **Select test locations**: Include every floor, corner, and difficult area.
+4. Switch on the tester by pressing the button on the right side for at least five seconds
+   <img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/rak10701-p_02.png" width="128" align="left">
+5. **Set DR and TX Power and other settins**: 
+   - **Close/urban/indoor:** DR5 (SF7), lower TX power to e.g. `3–5` (11–9 dBm).
+   - **Long-range/obstructed/outdoor:** DR2 (SF10) or lower, higher TX power to `0` (14 dBm). Keep in mind that it has an effect on battery life!
+	 - **TX Interval:** Set it to 3600s, then the ttn network does not get flodded by periodic transmissions. You manually trigger a transmission by pressing the side button twice.
+6. **Send uplink(s) at each location** by double pressing the side button.
+7. **Record the following:** 
+   - Location, DR, SF, TX Power, Min. Sampling Rate, Min. SNR for SF, RSSI, SNR, Gateway count, Notes (obstacles, interference, etc.)
+8. **Compare your readings** with the RSSI & SNR thresholds. Check if the resulting sampling rate corresponds to your project requirements.
+9. **Adjust:** Move sensor/gateway, change SF, increase TX power, or install more gateways as needed.
+10. If done, power off the device by pressing the button on the right side for at least five seconds and press the off icon on the screen.
 
-#### Long Range / Weak Signal
-- **Data Rate**: `DR2`
-- **TX Power Index**: `0` (14 dBm)
+**Sample Table:**
+
+| Location | DR | SF | TX Power [dBm] | Min. Sampling Rate | Min SNR for SF | RSSI [dBm] | SNR [dB] | Gateway Count | Notes                     |
+|----------|----|----|----------------|--------------------|----------------|------------|----------|--------------|---------------------------|
+| Office   | 1  | 11 | 14             | 1h 16min           | -17.5          | -100       | 2        | 1            | Obstacles, machinery, etc.|
 
 ---
 
-### Tips
+## Interpreting and Troubleshooting RSSI & SNR
 
+Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (Signal-to-Noise Ratio) readings is essential for reliable LoRaWAN operation. Use the tables and troubleshooting tips below to assess results and improve your network.
+
+---
+
+### Typical Value Ranges & Quick Classification
+
+| Situation                  | Example RSSI | Example SNR | Interpretation                               |
+|----------------------------|--------------|-------------|----------------------------------------------|
+| Low RSSI, Good SNR         | -115 dBm     | +6 dB       | Weak, but clean (far, few obstacles)         |
+| Good RSSI, Low SNR         | -80 dBm      | -8 dB       | Strong, but noisy (interference present)     |
+| Both Low                   | -120 dBm     | -12 dB      | Weak and noisy (may not work reliably)       |
+| Both Good                  | -85 dBm      | +5 dB       | Ideal conditions                             |
+
+**General Quality Rules:**
+
+- **GOOD:** RSSI > -100 dBm, SNR > 0 dB, Gateway count ≥ 2, SF 7–9
+- **FAIR:** RSSI -100 ... -115 dBm, SNR -7 ... 0 dB, Gateway count = 1, SF ≥ 10
+- **BAD:** RSSI < -115 dBm or SNR < -7 dB, join failures, or only SF12 works
+
+> **Key:** If either RSSI or SNR is in the **red/yellow** range, try a higher SF, more TX power, or move/add gateways. If SNR is below the SF minimum, the link will NOT work even with good RSSI.
+
+---
+
+### How to interpret the results in detail
+
+#### 1. **Low RSSI, Good SNR**
+- **What it means:** Signal is weak, but there’s little noise.
+- **What to do:**  
+  - Move sensor or gateway higher.  
+  - Remove obstacles (try for line-of-sight).  
+  - Move sensor/gateway closer.
+
+#### 2. **Good RSSI, Low SNR**
+- **What it means:** Strong signal, but lots of interference or noise.
+- **What to do:**  
+  - Move devices away from interference (Wi-Fi routers, power supplies, industrial equipment).  
+  - Change LoRa frequency (if possible).  
+  - Avoid metallic surfaces or crowded electronics.
+
+#### 3. **Both RSSI and SNR Low**
+- **What it means:** Weak and noisy signal.
+- **What to do:**  
+  - Use higher spreading factor (SF).  
+  - Increase transmit power.  
+  - Add/move gateway centrally.  
+  - Remove major obstacles; try higher-gain antenna.
+
+#### 4. **Unstable/Fluctuating RSSI or SNR**
+- **What it means:** Signal quality changes over time.
+- **What to do:**  
+  - Try different antenna orientations.  
+  - Test at different times of day.  
+  - Secure antennas/cables.  
+  - Check for moving obstacles.
+
+#### 5. **Good RSSI and SNR but Packet Loss**
+- **What it means:** Signal is fine, but uplinks are missing.
+- **What to do:**  
+  - Check for duty cycle violations (too many messages).  
+  - Check for gateway congestion.  
+  - Check device settings (ADR/SF mismatches).
+
+#### 6. **Strong Signal Near Gateway, Weak Far Away**
+- **What it means:** Coverage not uniform.
+- **What to do:**  
+  - Add gateways in dead zones.  
+  - Use a repeater if supported.  
+  - Reposition gateway for more central coverage.
+
+#### 7. **Unexpected Drop in RSSI/SNR Over Time**
+- **What it means:** Signal quality worsened recently.
+- **What to do:**  
+  - Look for new obstacles, equipment, or construction.  
+  - Inspect cables, connectors, and antenna attachment.
+
+#### 8. **Sensor Only Works with High SF**
+- **What it means:** Marginal link—signal barely reaches gateway.
+- **What to do:**  
+  - Move device or gateway for even small improvement.  
+  - Use external or higher-gain antenna.
+
+#### 9. **Multiple Sensors Interfering**
+- **What it means:** Sensors too close or transmitting at the same time.
+- **What to do:**  
+  - Space out sensors.  
+  - Stagger transmissions if possible.  
+  - Enable ADR for auto-optimization.
+---
+
+## When to Install or Move a Gateway
+
+Install or move a gateway if:
+- Many locations show **weak or no coverage** (RSSI < -115 dBm, SNR < -7 dB, or only SF12 works)
+- Only one gateway receives your tester in key spots
+- High packet loss, failed joins, or regulatory violations (duty cycle)
+- You cannot reach sampling rates which fullfill your requirements for the project
+
+**Gateway tips:**
+- Place gateways high and central.
+- Avoid metal enclosures and dense walls.
+- Use an external antenna if possible.
+
+**Sensor tips:**
+- Mount at least 1 meter from the gateway antenna
+- Antenna vertical, not pressed against metal or walls
+- Document obstacles and re-test after moving/installing gateways
+
+---
+
+## Tips for Reliable Testing
+
+- Test at different times of day (people and machinery can affect RF)
+- Wait for results at each location
+- Note and document obstacles, metal, and EMI sources
+- Do not exceed duty cycle regulations (see Min. Sampling Rate table)
+- In the final setup, use Adaptive Data Rate ADR (only for stationary devices)
 - Use **lowest TX power** and **highest DR** that still gives reliable communication.
 - **Avoid DR0** unless necessary – very slow and uses a lot of airtime.
 - Don't flood TTN with test packets – it's a **shared, fair-use network**.
-- **ADR should be disabled** when the tester is moving between locations.
-
----
-
-### Sample Test Scenarios
-
-| Scenario        | TX Power | DR  | Notes                          |
-|-----------------|----------|-----|--------------------------------|
-| Close Range     | 4        | DR5 (SF7)| Low power, fast transmission  |
-| Medium Range    | 2        | DR3 (SF9) | Balanced speed and range      |
-| Long Range Test | 0        | DR0 (SF12) | Max power, extended coverage  |
-
----
-
-### Test Procedure
-
-1. Charge your tester
-2. Mount the antenna on your tester
-3. Switch on the tester by pressing the button on the right side for at least five seconds
-   <img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/rak10701-p_02.png" width="128" align="left">
-4. Set the DR and TX Power according to your test scenario (see description above). For Indoor testing with own gateways set it to `TX Power 4` and `DR5` (SF7).
-5. Take your tester to the first test location (e.g., office, basement, outdoors)
-   > **Note:** If you are indoors, there will be no reception of the GPS signal. The latitude and longitude data will be empty.
-6. Send a test uplink/join:
-    - The device sends automatically every 30s (can be changed in Settings). You can force an uplink by pressing the button on the side twice.
-    - Watch for join success (for OTAA) and uplink send.
-7. Observe and record the results:
-    - RSSI (signal strength)
-    - SNR (signal clarity)
-    - Gateway count (number of gateways receiving your signal)
-    - Spreading Factor (SF)
-    - Packet loss / failed sends
-
-    > **Important:** Note your location and results, see example table below
-		
-		> **Hints:** If the screen shows a lock icon on bottom right, then you can press the side button once to leave the locked mode.
-
-8. Repeat at all locations where you need coverage: every floor, corner, room, or outdoor spot.
-
-9. If done, power off the device by pressing the button on the right side for at least five seconds.
-
-| Location    | RSSI    | SNR   | GW Count | SF  | Join | Notes         |
-|-------------|---------|-------|----------|-----|------|---------------|
-| Entrance    | -75 dBm | +7 dB | 3        | 7   | Yes  | Great         |
-| Basement    | -115 dBm| -3 dB | 0        | —   | No   | Needs gateway |
-| Hallway 2F  | -105 dBm| +1 dB | 1        | 11  | Yes  | Marginal      |
-| Parking Lot | -95 dBm | +4 dB | 2        | 9   | Yes  | Good          |
-
----
-
-## How to Interpret the Results
-
-| Parameter | What’s Good? | What’s Bad? | Notes |
-|-----------|--------------|-------------|-------|
-| **RSSI**  | 0 to -90 dBm | below -120 dBm | Stronger is better; above -110 is reliable, below -130 dBm are not ok |
-| **SNR**   | >+5 dB       | <0 dB       | Higher means clearer signal |
-| **Gateway Count** | ≥2   | 0–1         | More gateways = better reliability |
-| **Spreading Factor (SF)** | 7–9 | 11–12      | Low SF = good coverage; SF12 = weak signal |
-| **Join Success** | Yes   | No          | Failed joins = no coverage or wrong keys |
-
-### Quick Rules
-- **GOOD coverage:** RSSI > -115 dBm, SNR > -7 dB, GW ≥2, SF ≤9
-- **FAIR coverage:** RSSI > -126 dBm, SNR > -15 dB, GW 0–1, SF ≥11
-- **BAD coverage:** No join or uplink; nothing in console
-
----
-
-### RSSI and SNR
-
-In the LoRaWAN network, the Received Signal Strength Indicator (RSSI) and the Signal-to-Noise Ratio (SNR) are important metrics for evaluating the communication quality between LoRa devices and gateways.
-
-#### **RSSI** (Received Signal Strength Indicator)
-
-RSSI measures the strength of the received signal in decibels relative to 1 milliwatt (dBm).
-The values for RSSI in the LoRaWAN can typically range from around -120 dBm to -40 dBm. A value of -120 dBm indicates a very weak signal that is close to the reception limit, while a value of -40 dBm indicates a very strong signal.
-
-
-#### **SNR** (Signal-to-Noise Ratio)
-
-SNR is a measure of how much stronger the signal is than the background noise. It is measured in decibels (dB).
-The SNR values in the LoRaWAN can range from around -20 dB to +14 dB.
-- A negative SNR means that the noise is stronger than the signal, which typically occurs at very long distances or in poor environmental conditions.
-- A positive SNR indicates that the signal is stronger than the noise, which is necessary for effective communication.
-
-#### **What are good values?**
-
-**To assess the quality, the two values must be considered together!**
-
-<img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn_rssi_vs_snr.png" width="600"/>><br>
-
-- The radio link can be described as **GOOD** if RSSI > -115dB and SNR > -7dB
-- The radio link is **FAIR** (range limit) if RSSI <= -115 dB or SNR <= -7dB
-- The radio link is **BAD** (range limit) if RSSI <= -126 dB or SNR <= -15dB
-
-If RSSI is **GOOD** (> -115dB), but SNR is **BAD** (<= -15dB), this means that the environment is very noisy
-
-**Note:** The SNR must be checked theoretically over several days to be sure that the radio link is stable enough to receive all messages.
-
-If RSSI is **BAD** (<=-126dB) but SNR is **GOOD** (> -7dB), this means that the device is probably far away from the gateway.
-
----
-
-## When to Install (or move) a Gateway
-
-### Install a new gateway if:
-- Many locations show weak or no coverage: (RSSI < -115 dBm, SNR < -7 dB, SF12, join failures)
-- Important areas (e.g., basement, far office) get 0 packets received.
-- Only one gateway receives your tester in key spots: (GW count = 1 or 0)
-- You have high packet loss or messages don’t reach the network.
-- You want reliable indoor coverage across large or dense buildings.
-
-### How to Position the Gateway
-- Place the gateway as **high** and **central** as possible. That means, place it in a high floor and centralized in the location.
-- Avoid metal enclosures or dense walls.
-- Use an external antenna if possible for more range.
-- In case of a LTE Gateway, make shure that you have a good LTE reception of the used network provider.
-
-### How to Position the sensors
-- Sensor at least 1 meter of the gateway antenna
-- Sensor antenna vertical aligned and in the open air, not on a wall or metal construction
-- Mount the sensor/device anteanna vertically, imagine, its antenna should create a donut-shape. See device manual for detailed mounting instructions.
-
-### After Gateway Install
-- Repeat tests in previous weak spots to verify coverage improved.
-- Adjust antenna or gateway placement if needed.
-
----
-
-## Tips for reliable testing
-
-- Test at different times of day (buildings can affect signal depending on occupancy).
-- Walk slowly and wait for test results in each location.
-- Note obstacles (concrete, metal) that may block the signal.
+- If the screen of the tester shows a lock icon on bottom right, then you can press the side button once to leave the locked mode.
 
 ---
 
