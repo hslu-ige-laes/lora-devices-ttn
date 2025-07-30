@@ -304,4 +304,5 @@ Install or move a gateway if:
 - <a href="https://avbentem.github.io/airtime-calculator/ttn/eu868/51" target="_blank">Airtime calculator for LoRAWAN</a>
 - <a href="https://www.thethingsnetwork.org/airtime-calculator" target="_blank">TTN's Airtime calculator for LoRAWAN</a>
 
+
 ---
