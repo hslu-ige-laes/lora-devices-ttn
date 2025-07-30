@@ -83,8 +83,10 @@ The SNR values in the LoRaWAN can range from around -20 dB to +14 dB.
 | > 5           | Excellent  | Very clean signal                               |
 | 0 to 5        | Good       | Clean signal                                    |
 | -7 to 0       | Fair       | Acceptable, may have issues at lowest SF        |
-| -15 to -7     | Bad        | Very noisy, close to LoRa decoding limit        |
-| < -15         | Limit      | Below decoding limit; add gateway/move device   |
+| -15* to -7     | Bad        | Very noisy, close to LoRa decoding limit        |
+| < -15*         | Limit      | Below decoding limit; add gateway/move device   |
+
+* Limit depends on DR/SF: -7.5dB (SF7) to -20dB (SF12)
 
 **How to use:**  
 - Compare your measured RSSI and SNR values to the tables above.
