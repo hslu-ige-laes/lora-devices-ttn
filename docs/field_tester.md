@@ -102,6 +102,7 @@ LoRaWAN transmission parameters affect both **coverage** and **battery life**. T
 - **Airtime & Minimum Sampling Rate:** Each message takes a certain time “on air” (airtime). Duty cycle laws (e.g., 1% for EU868) set a strict minimum time between messages to avoid network congestion. The slower the data rate (higher SF), the longer you must wait before sending the next message.
 
 **TTN (The Things Network) Fair Use Policy and Restrictions:**
+
 When using public TTN infrastructure, further restrictions apply:
 
 - **Daily Uplink Limit:** **Max 30 seconds airtime per device per day** (about 20-30 messages/day at SF12, up to 500/day at SF7 with short payloads).
@@ -156,9 +157,7 @@ More power = longer range, but also more battery consumption and possibly violat
 1. Charge your tester beforehand
 2. Mount the antenna on your tester
 3. **Select test locations**: Include every floor, corner, and difficult area.
-4. Switch on the tester by pressing the button on the right side for at least five seconds
-   <img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/rak10701-p_02.png" width="128" align="left">
-
+4. Switch on the tester by pressing the button on the right side for at least five seconds.
 5. **Set DR and TX Power and other settings**: 
    - **Close/urban/indoor:** DR5 (SF7), lower TX power to e.g. `3–5` (11–9 dBm).
    - **Long-range/obstructed/outdoor:** DR2 (SF10) or lower, higher TX power to `0` (14 dBm). Keep in mind that it has an effect on battery life!
