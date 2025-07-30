@@ -255,7 +255,8 @@ Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (S
 	
 ---
 
-## When to Install or Move a Gateway
+## Tips
+### When to Install or Move a Gateway
 
 Install or move a gateway if:
 - Many locations show **weak or no coverage** (RSSI < -115 dBm, SNR < -7 dB, or only SF12 works)
@@ -263,19 +264,23 @@ Install or move a gateway if:
 - High packet loss, failed joins, or regulatory violations (duty cycle)
 - You cannot reach sampling rates which fullfill your requirements for the project
 
-**Gateway tips:**
+---
+
+### Device Placement
+
+**Gateways**
 - Place gateways high and central.
 - Avoid metal enclosures and dense walls.
 - Use an external antenna if possible.
 
-**Sensor tips:**
+**Sensors**
 - Mount at least 1 meter from the gateway antenna
 - Antenna vertical, not pressed against metal or walls
 - Document obstacles and re-test after moving/installing gateways
 
 ---
 
-## Tips for Reliable Testing
+### Reliable Testing
 
 - Test at different times of day (people and machinery can affect RF)
 - Wait for results at each location
