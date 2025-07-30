@@ -192,15 +192,9 @@ Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (S
 | Both Low                   | -120 dBm     | -12 dB      | Weak and noisy (may not work reliably)       |
 | Both Good                  | -85 dBm      | +5 dB       | Ideal conditions                             |
 
-**General Quality Rules:**
-
-- **GOOD:** RSSI > -100 dBm, SNR > 0 dB, Gateway count ≥ 2, SF 7–9
-- **FAIR:** RSSI -100 ... -115 dBm, SNR -7 ... 0 dB, Gateway count = 1, SF ≥ 10
-- **BAD:** RSSI < -115 dBm or SNR < -7 dB, join failures, or only SF12 works
-
-> **Key:** If either RSSI or SNR is in the **red/yellow** range, try a higher SF, more TX power, or move/add gateways. If SNR is below the SF minimum, the link will NOT work even with good RSSI.
-
 ### How to interpret the results in detail
+
+!["ttn_rssi_vs_snr.png"]("https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn_rssi_vs_snr.png")
 
 #### 1. **Low RSSI, Good SNR**
 - **What it means:** Signal is weak, but there’s little noise.
