@@ -62,13 +62,13 @@ Understanding **RSSI** (Received Signal Strength Indicator) and **SNR** (Signal-
 RSSI measures the strength of the received signal in decibels relative to 1 milliwatt (dBm).
 The values for RSSI in the LoRaWAN can typically range from around -120 dBm to -40 dBm. A value of -120 dBm indicates a very weak signal that is close to the reception limit, while a value of -40 dBm indicates a very strong signal.
 
-| RSSI (dBm)   | Range            | Label      | Meaning                             |
-|--------------|------------------|------------|-------------------------------------|
-| > -90        | > -90            | Excellent  | Very strong signal                  |
-| -90 ... -100 | -90 to -100      | Good       | Strong signal                       |
-| -100 ... -115| -100 to -115     | Fair       | Usable, maybe unreliable            |
-| -115 ...-125 | -115 to -125     | Bad        | Weak, only works at high SF, add additional gateway |
-| < -125       | < -125           | Limit      | Unusable; add additional gateway    |
+| RSSI (dBm)     | Label      | Meaning                                         |
+|----------------|------------|-------------------------------------------------|
+| > -90          | Excellent  | Very strong signal                              |
+| -90 to -100    | Good       | Strong signal                                   |
+| -100 to -115   | Fair       | Usable, maybe unreliable                        |
+| -115 to -125   | Bad        | Weak, only works at high SF, add additional gateway |
+| < -125         | Limit      | Unusable; add additional gateway                |
 
 ### SNR Thresholds
 
@@ -77,13 +77,13 @@ The SNR values in the LoRaWAN can range from around -20 dB to +14 dB.
 - A negative SNR means that the noise is stronger than the signal, which typically occurs at very long distances or in poor environmental conditions.
 - A positive SNR indicates that the signal is stronger than the noise, which is necessary for effective communication.
 
-| SNR (dB)    | Range           | Label      | Meaning                                      |
-|-------------|-----------------|------------|----------------------------------------------|
-| > 5         | > 5             | Excellent  | Very clean signal                            |
-| 0 ... 5     | 0 to 5          | Good       | Clean signal                                 |
-| -7 ... 0    | -7 to 0         | Fair       | Acceptable, may have issues at lowest SF     |
-| -15 ... -7  | -15 to -7       | Bad        | Very noisy, close to LoRa decoding limit     |
-| < -15       | < -15           | Limit      | Below decoding limit; add gateway/move device|
+| SNR (dB)      | Label      | Meaning                                         |
+|---------------|------------|-------------------------------------------------|
+| > 5           | Excellent  | Very clean signal                               |
+| 0 to 5        | Good       | Clean signal                                    |
+| -7 to 0       | Fair       | Acceptable, may have issues at lowest SF        |
+| -15 to -7     | Bad        | Very noisy, close to LoRa decoding limit        |
+| < -15         | Limit      | Below decoding limit; add gateway/move device   |
 
 **How to use:**  
 - Compare your measured RSSI and SNR values to the tables above.
@@ -94,22 +94,42 @@ The SNR values in the LoRaWAN can range from around -20 dB to +14 dB.
 
 ## Data Rate, Spreading Factor & Battery Life
 
-The **Data Rate (DR)** and **Spreading Factor (SF)** impact both range and battery life. Lower DR (higher SF) means longer range but higher power usage and much slower data transfer.
+LoRaWAN transmission parameters affect both **coverage** and **battery life**. The three most important factors to understand are:
 
-| DR  | SF | Min. SNR (dB) | Bitrate (bps) | Airtime (ms) | Min. Sampling Rate | Min. Sampling Rate |
-|-----|----|---------------|---------------|--------------|--------------------|--------------------|
-| 5   | 7  | -7.5          | 5470          | 127          | 0.10 h             | 6 min              |
-| 4   | 8  | -10           | 3125          | 223          | 0.18 h             | 11 min             |
-| 3   | 9  | -12.5         | 1760          | 395          | 0.32 h             | 19 min             |
-| 2   | 10 | -15           | 980           | 710          | 0.57 h             | 34 min             |
-| 1   | 11 | -17.5         | 440           | 1582         | 1.27 h             | 1h 16min           |
-| 0   | 12 | -20           | 250           | 2784         | 2.23 h             | 2h 14min           |
+- **Spreading Factor (SF):** A higher SF increases range and signal robustness, but also greatly increases airtime (slows transmission) and drains battery faster. Lower SF means shorter range but much faster and more efficient messages.
+- **Data Rate (DR):** This is directly linked to SF. Higher DR (lower SF) gives faster data transmission and saves battery, but is usable only with strong signal quality.
+- **Airtime & Minimum Sampling Rate:** Each message takes a certain time “on air” (airtime). Duty cycle laws (e.g., 1% for EU868) set a strict minimum time between messages to avoid network congestion. The slower the data rate (higher SF), the longer you must wait before sending the next message.
+
+**TTN (The Things Network) Fair Use Policy and Restrictions:**
+When using public TTN infrastructure, further restrictions apply:
+
+- **Daily Uplink Limit:** **Max 30 seconds airtime per device per day** (about 20-30 messages/day at SF12, up to 500/day at SF7 with short payloads).
+- **Max Payload:** 51 bytes at SF12, up to 222 bytes at SF7. Always use the smallest payload possible.
+- **Downlinks (including ACKs):** Very limited; keep to a minimum (**TTN Fair Use: 10 downlinks per day**).
+- **Duty Cycle:** All TTN gateways in EU868 obey the 1% duty cycle regulation—**do not exceed minimum intervals above**.
+- **Do not flood the network** with test or redundant packets—this affects all users.
+
+
+The **Data Rate (DR)** and **Spreading Factor (SF)** are related and impact range and battery life. Lower DR (higher SF) means longer range but higher power usage and much slower data transfer.
+
+| DR  | SF | Min. SNR (dB) | Bitrate (bps) | Airtime (ms) | Min. Sampling Rate |
+|-----|----|---------------|---------------|--------------|--------------------|
+| 5   | 7  | -7.5          | 5470          | 127          | 6 min              |
+| 4   | 8  | -10           | 3125          | 223          | 11 min             |
+| 3   | 9  | -12.5         | 1760          | 395          | 19 min             |
+| 2   | 10 | -15           | 980           | 710          | 34 min             |
+| 1   | 11 | -17.5         | 440           | 1582         | 1h 16min           |
+| 0   | 12 | -20           | 250           | 2784         | 2h 14min           |
 
 **Notes:**
 - **Minimum SNR**: If your measured SNR is below the value in this table for the chosen SF, LoRa cannot decode the signal at all.
 - **Airtime**: How long the radio is transmitting for one packet. Longer airtime = higher energy use, shorter battery.
 - **Min. Sampling Rate**: Due to **duty cycle regulations** (e.g., 1% for EU868), you must not send packets more frequently than this interval at each SF. **Violating this can lead to message loss or regulatory issues.**
+- The minimum sampling rates in this table are calculated using the **maximum allowed LoRaWAN payload size**.  
+  - If your project uses smaller payloads (amount of sensor values in a telegram and other infos), the minimum allowed sampling interval may be even shorter (messages can be sent a bit more frequently).  
+  - These values are conservative and on the safe side for compliance and network planning.
 - **Battery life is best with the lowest SF (highest DR) that gives reliable coverage.**
+- **Tip:** For field testing, use only the minimum number of test packets, and always comply with the minimum sampling rate for your chosen SF and TTN’s fair use recommendations.
 
 ---
 
@@ -140,7 +160,7 @@ More power = longer range, but also more battery consumption and possibly violat
 5. **Set DR and TX Power and other settins**: 
    - **Close/urban/indoor:** DR5 (SF7), lower TX power to e.g. `3–5` (11–9 dBm).
    - **Long-range/obstructed/outdoor:** DR2 (SF10) or lower, higher TX power to `0` (14 dBm). Keep in mind that it has an effect on battery life!
-	 - **TX Interval:** Set it to 3600s, then the ttn network does not get flodded by periodic transmissions. You manually trigger a transmission by pressing the side button twice.
+   - **TX Interval:** Set it to 3600s, then the ttn network does not get flodded by periodic transmissions. You manually trigger a transmission by pressing the side button twice.
 6. **Send uplink(s) at each location** by double pressing the side button.
 7. **Record the following:** 
    - Location, DR, SF, TX Power, Min. Sampling Rate, Min. SNR for SF, RSSI, SNR, Gateway count, Notes (obstacles, interference, etc.)
