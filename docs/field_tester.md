@@ -194,7 +194,7 @@ Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (S
 
 ### How to interpret the results in detail
 
-!["ttn_rssi_vs_snr.png"]("https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn_rssi_vs_snr.png")
+![ttn_rssi_vs_snr.png](https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn_rssi_vs_snr.png)
 
 #### 1. **Low RSSI, Good SNR**
 - **What it means:** Signal is weak, but there’s little noise.
