@@ -62,6 +62,7 @@ The device can either be configured via Bluetooth and an app called `Oxon Device
 
 - To swith on/off the device, open the case and there you find an on/off switch
 - To activate Bluetooth, open the case and press the BLE button
+- To reinitialize the button capacitive sensitivity, press an active button for at least 10s until the led blinkes red, then release the button. At success, all LED's should blink shortly lightblue from top down. 
 
 ### Feature Set
 
