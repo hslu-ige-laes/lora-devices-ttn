@@ -95,9 +95,9 @@ Please refer to the payload description in the [Documentation ](https://github.c
 4. Press `Send`
 5. In the `Live data` tab you should now see the scheduled telegram. The device only receives downlink data after a transmission. Therefore start a transmission by pressing a button or wait for the next regular transmission to happen.
 
-- 'B000050303010100600005': ADR off, SF7, 3 Send Trials, 3 Uplink Trials, FPort 1, Confirmed messages, Heartbeat every 24 hours 24*15 = 96 -> 0x60, 5s minimum interval until next message
-- 'C0': Triggers that device sends power settings states
-- 'C100000103': Batch every 10 minutes, Power safe mode, Sending and Feedback are shown in LED
+- `B000050303010100600005`: ADR off, SF7, 3 Send Trials, 3 Uplink Trials, FPort 1, Confirmed messages, Heartbeat every 24 hours 24*15 = 96 -> 0x60, 5s minimum interval until next message
+- `C0`: Triggers that device sends power settings states
+- `C100000103`: Batch every 10 minutes, Power safe mode, Sending and Feedback are shown in LED
 
 ---
 
@@ -106,7 +106,10 @@ Please refer to the payload description in the [Documentation ](https://github.c
 - We need to tell the "The Things Network" where to find e.g. the temperature etc. in these cryptic numbers and letters. We can do that with configuring a "Payload Decoder Function".
 
 1. [Log in](https://console.thethingsnetwork.org/applications) and open the `application`
-2. Select the tab `Payload formatters > Uplink` and copy/paste the following code:
+2. Select the tab `Payload formatters > Uplink` and copy/paste the following code
+3. Press `save payload functions`
+
+- Now you should be able to see the decoded data of your device in the tab `Live data`.<br>
 
 ```javascript
 function decodeUplink({ bytes }) {
@@ -205,6 +208,3 @@ function buttonboardPowerSaveConfigs(bytes) {
 
 ```
 
-3. Press `save payload functions`
-
-- Now you should be able to see the decoded data of your device in the tab `Live data`.<br>
