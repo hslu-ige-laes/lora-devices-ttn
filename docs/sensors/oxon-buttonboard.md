@@ -31,11 +31,11 @@ If a button is pressed, the LEDs shimmer through the paper inlay and generates a
 - Price ca. CHF 99.- (30.07.2025, bulk prices upon request)
 - Features
   - <b>6 capacitive touch sensor buttons</b>
-  - <b>6 LED rings with each 8 ultrabright multicolor LEDs around the buttons</b
+  - <b>6 LED rings</b> with each 8 ultrabright multicolor LEDs around the buttons
   - <b>Temperature</b>, ± 2 °C
-  - <b>Accelerometer (x, y, z)</b>
-  - <b>Vibration motor for touch feedback</b>
-  - <b>Piezo speaker for touch feedback</b>
+  - <b>Accelerometer</b> (x, y, z)
+  - <b>Vibration motor</b> for touch feedback
+  - <b>Piezo speaker</b> for touch feedback
 - LoRaWAN v1.0.3 Class A
 - Power Supply: 1 lithium battery (CP405050), 3V, 2400 mAh
   - Expected life time: up to 4 years with 12 uplinks per day
