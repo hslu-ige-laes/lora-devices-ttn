@@ -179,38 +179,27 @@ More power = longer range, but also more battery consumption and possibly violat
 
 ---
 
-## Interpreting and Troubleshooting RSSI & SNR
+## How to interpret the results in detail
 
 Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (Signal-to-Noise Ratio) readings is essential for reliable LoRaWAN operation. Use the tables and troubleshooting tips below to assess results and improve your network.
 
-### Typical Value Ranges & Quick Classification
-
-| Situation                  | Example RSSI | Example SNR | Interpretation                               |
-|----------------------------|--------------|-------------|----------------------------------------------|
-| Low RSSI, Good SNR         | -115 dBm     | +6 dB       | Weak, but clean (far, few obstacles)         |
-| Good RSSI, Low SNR         | -80 dBm      | -8 dB       | Strong, but noisy (interference present)     |
-| Both Low                   | -120 dBm     | -12 dB      | Weak and noisy (may not work reliably)       |
-| Both Good                  | -85 dBm      | +5 dB       | Ideal conditions                             |
-
-### How to interpret the results in detail
-
 ![ttn_rssi_vs_snr.png](https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn_rssi_vs_snr.png)
 
-#### 1. **Low RSSI, Good SNR**
+### 1. **Low RSSI, Good SNR**
 - **What it means:** Signal is weak, but there’s little noise.
 - **What to do:**  
   - Move sensor or gateway higher.  
   - Remove obstacles (try for line-of-sight).  
   - Move sensor/gateway closer.
 
-#### 2. **Good RSSI, Low SNR**
+### 2. **Good RSSI, Low SNR**
 - **What it means:** Strong signal, but lots of interference or noise.
 - **What to do:**  
   - Move devices away from interference (Wi-Fi routers, power supplies, industrial equipment).  
   - Change LoRa frequency (if possible).  
   - Avoid metallic surfaces or crowded electronics.
 
-#### 3. **Both RSSI and SNR Low**
+### 3. **Both RSSI and SNR Low**
 - **What it means:** Weak and noisy signal.
 - **What to do:**  
   - Use higher spreading factor (SF).  
@@ -218,7 +207,7 @@ Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (S
   - Add/move gateway centrally.  
   - Remove major obstacles; try higher-gain antenna.
 
-#### 4. **Unstable/Fluctuating RSSI or SNR**
+### 4. **Unstable/Fluctuating RSSI or SNR**
 - **What it means:** Signal quality changes over time.
 - **What to do:**  
   - Try different antenna orientations.  
@@ -226,33 +215,33 @@ Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (S
   - Secure antennas/cables.  
   - Check for moving obstacles.
 
-#### 5. **Good RSSI and SNR but Packet Loss**
+### 5. **Good RSSI and SNR but Packet Loss**
 - **What it means:** Signal is fine, but uplinks are missing.
 - **What to do:**  
   - Check for duty cycle violations (too many messages).  
   - Check for gateway congestion.  
   - Check device settings (ADR/SF mismatches).
 
-#### 6. **Strong Signal Near Gateway, Weak Far Away**
+### 6. **Strong Signal Near Gateway, Weak Far Away**
 - **What it means:** Coverage not uniform.
 - **What to do:**  
   - Add gateways in dead zones.  
   - Use a repeater if supported.  
   - Reposition gateway for more central coverage.
 
-#### 7. **Unexpected Drop in RSSI/SNR Over Time**
+### 7. **Unexpected Drop in RSSI/SNR Over Time**
 - **What it means:** Signal quality worsened recently.
 - **What to do:**  
   - Look for new obstacles, equipment, or construction.  
   - Inspect cables, connectors, and antenna attachment.
 
-#### 8. **Sensor Only Works with High SF**
+### 8. **Sensor Only Works with High SF**
 - **What it means:** Marginal link—signal barely reaches gateway.
 - **What to do:**  
   - Move device or gateway for even small improvement.  
   - Use external or higher-gain antenna.
 
-#### 9. **Multiple Sensors Interfering**
+### 9. **Multiple Sensors Interfering**
 - **What it means:** Sensors too close or transmitting at the same time.
 - **What to do:**  
   - Space out sensors.  
