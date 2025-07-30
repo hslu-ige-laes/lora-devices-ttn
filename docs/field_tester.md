@@ -55,7 +55,7 @@ In some cases it is possible to place devices in buildings and have the next gat
 
 ---
 
-## Key Parameters: RSSI & SNR
+## Key Parameters
 
 Understanding **RSSI** (Received Signal Strength Indicator) and **SNR** (Signal-to-Noise Ratio) is crucial for evaluating LoRaWAN radio links. Use the tables below to quickly assess the signal quality at your test points.
 
@@ -70,6 +70,8 @@ The values for RSSI in the LoRaWAN can typically range from around -120 dBm to -
 | -100 to -115   | Fair       | Usable, maybe unreliable                        |
 | -115 to -125   | Bad        | Weak, only works at high SF, add additional gateway |
 | < -125         | Limit      | Unusable; add additional gateway                |
+
+---
 
 ### SNR Thresholds
 
@@ -95,7 +97,7 @@ The SNR values in the LoRaWAN can range from around -20 dB to +14 dB.
 
 ---
 
-## Data Rate, Spreading Factor & Battery Life
+### Data Rate, Spreading Factor & Battery Life
 
 LoRaWAN transmission parameters affect both **coverage** and **battery life**. The three most important factors to understand are:
 
@@ -137,7 +139,8 @@ The **Data Rate (DR)** and **Spreading Factor (SF)** are related and impact rang
 
 ---
 
-### TX Power Index Mapping (RAK10701-P, EU868)
+### TX Power
+
 This represents the transmit power.
 More power = longer range, but also more battery consumption and possibly violating regional limits
 
