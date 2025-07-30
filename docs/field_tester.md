@@ -184,8 +184,6 @@ More power = longer range, but also more battery consumption and possibly violat
 
 Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (Signal-to-Noise Ratio) readings is essential for reliable LoRaWAN operation. Use the tables and troubleshooting tips below to assess results and improve your network.
 
----
-
 ### Typical Value Ranges & Quick Classification
 
 | Situation                  | Example RSSI | Example SNR | Interpretation                               |
@@ -202,8 +200,6 @@ Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (S
 - **BAD:** RSSI < -115 dBm or SNR < -7 dB, join failures, or only SF12 works
 
 > **Key:** If either RSSI or SNR is in the **red/yellow** range, try a higher SF, more TX power, or move/add gateways. If SNR is below the SF minimum, the link will NOT work even with good RSSI.
-
----
 
 ### How to interpret the results in detail
 
