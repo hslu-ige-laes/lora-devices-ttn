@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Field Testing Guideline
+title: Field Testing Guide
 nav_order: 5
 has_children: false
 permalink: /docs/field_testing_guideline
@@ -160,25 +160,33 @@ More power = longer range, but also more battery consumption and possibly violat
 ## How to Test Coverage
 
 1. Charge your tester beforehand
-1. Mount the antenna on your tester
-1. **Select test locations**: Include every floor, corner, and difficult area.
-1. Switch on the tester by pressing the button on the right side for at least five seconds.
-1. **Set DR and TX Power and other settings**: 
-   - **Close/urban/indoor:** DR5 (SF7), lower TX power to e.g. `3–5` (11–9 dBm).
-   - **Long-range/obstructed/outdoor:** DR2 (SF10) or lower, higher TX power to `0` (14 dBm). Keep in mind that it has an effect on battery life!
+1. Mount the antenna on the tester
+1. Go outside the building
+1. Switch on the tester by pressing the button on the right side for at least five seconds
+1. Wait until the GPS has good connection
+1. **Set DR and TX Power**: 
+   - **TX Power** 0 (14dBm) -> maximum Power for first message
+   - **DR:** DR0 (SF12) slowest spreading factor to see how many gateways are reachable
    - **TX Interval:** Set it to 3600s, then the ttn network does not get flodded by periodic transmissions. You manually trigger a transmission by pressing the side button twice.
-1. **Send uplink(s) at each location** by double pressing the side button.
-1. **Record the following:** 
-   - Location, DR, SF, TX Power, Min. Sampling Rate, Min. SNR for SF, RSSI, SNR, Gateway count, Notes (obstacles, interference, etc.)
+1. Send an uplink message by double pressing the side button
+   - in Grafana select the fieldtester device in both pull-downs
+   - the result shows the maximum possible reachable gateways
+1. **Set DR and TX Power**: 
+   - **TX Power** 7 (7dBm)
+   - **DR:** DR0 (SF7) fastest spreading factor to see how many gateways are reachable
+   - **TX Interval:** Leave it on 3600s
+1. Send an uplink message by double pressing the side button
+   - the result in Grafana shows the maximum possible reachable gateways with a desirable setting
+   - so if none gateway is reachable, you have to install own gateways
+   - if there are some, a try with these gateways inside the building is a good idea
+1. **Send uplink(s) at each location you want to install a device** by double pressing the side button.
+1. Record the results in the Excel sheet from below 
 1. **Compare your readings** with the RSSI & SNR thresholds. Check if the resulting sampling rate corresponds to your project requirements.
 1. **Adjust:** Move sensor/gateway, change SF, increase TX power, or install more gateways as needed.
-1. If done, power off the device by pressing the button on the right side for at least five seconds and press the off icon on the screen.
-
-**Sample Table:**
-
-| Location | DR | SF | TX Power [dBm] | Min. Sampling Rate | Min SNR for SF | RSSI [dBm] | SNR [dB] | Gateway Count | Notes                     |
-|----------|----|----|----------------|--------------------|----------------|------------|----------|--------------|---------------------------|
-| Office   | 1  | 11 | 14             | 1h 16min           | -17.5          | -100       | 2        | 1            | Obstacles, machinery, etc.|
+1. Now you can go on and test the locations with the dedicated test devices you wanna use to be shure that a probably smaller antenna is as well reachable.
+   - you might have less good results, but a resulting spreading factor of SF9 or SF10 is as well good.
+   - watch the airtime with the device payload, which could be bigger than the fieldtester payload. Make shure, that the sampling rate you wanna have does not exceed a maximum airtime of 30s a day.
+1. If done, power off the devices, fieldtester by pressing the button on the right side for at least five seconds and press the off icon on the screen.
 
 - [LoRaWAN Field Testing Excel](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/field_tester_table.xlsx)
 
