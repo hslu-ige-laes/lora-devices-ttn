@@ -160,19 +160,19 @@ More power = longer range, but also more battery consumption and possibly violat
 ## How to Test Coverage
 
 1. Charge your tester beforehand
-2. Mount the antenna on your tester
-3. **Select test locations**: Include every floor, corner, and difficult area.
-4. Switch on the tester by pressing the button on the right side for at least five seconds.
-5. **Set DR and TX Power and other settings**: 
+1. Mount the antenna on your tester
+1. **Select test locations**: Include every floor, corner, and difficult area.
+1. Switch on the tester by pressing the button on the right side for at least five seconds.
+1. **Set DR and TX Power and other settings**: 
    - **Close/urban/indoor:** DR5 (SF7), lower TX power to e.g. `3–5` (11–9 dBm).
    - **Long-range/obstructed/outdoor:** DR2 (SF10) or lower, higher TX power to `0` (14 dBm). Keep in mind that it has an effect on battery life!
    - **TX Interval:** Set it to 3600s, then the ttn network does not get flodded by periodic transmissions. You manually trigger a transmission by pressing the side button twice.
-6. **Send uplink(s) at each location** by double pressing the side button.
-7. **Record the following:** 
+1. **Send uplink(s) at each location** by double pressing the side button.
+1. **Record the following:** 
    - Location, DR, SF, TX Power, Min. Sampling Rate, Min. SNR for SF, RSSI, SNR, Gateway count, Notes (obstacles, interference, etc.)
-8. **Compare your readings** with the RSSI & SNR thresholds. Check if the resulting sampling rate corresponds to your project requirements.
-9. **Adjust:** Move sensor/gateway, change SF, increase TX power, or install more gateways as needed.
-10. If done, power off the device by pressing the button on the right side for at least five seconds and press the off icon on the screen.
+1. **Compare your readings** with the RSSI & SNR thresholds. Check if the resulting sampling rate corresponds to your project requirements.
+1. **Adjust:** Move sensor/gateway, change SF, increase TX power, or install more gateways as needed.
+1. If done, power off the device by pressing the button on the right side for at least five seconds and press the off icon on the screen.
 
 **Sample Table:**
 
