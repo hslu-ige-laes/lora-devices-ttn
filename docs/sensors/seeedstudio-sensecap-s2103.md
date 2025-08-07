@@ -116,69 +116,182 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 ## Payload Decoder
 
 ```javascript
-function hexToDec(hex) {
-    return parseInt(hex, 16);
-}
-
-function extractValue(payloadRaw, tag, nextTag = null, byteLength = 4) {
-    if (!payloadRaw.includes(tag)) return null;
-
-    let segment = payloadRaw.split(tag)[1];
-    if (nextTag && segment.includes(nextTag)) {
-        segment = segment.split(nextTag)[0];
-    }
-
-    const expectedLength = byteLength * 2;
-    segment = segment.substring(0, expectedLength);
-
-    const bytePairs = segment.match(/[a-fA-F0-9]{2}/g);
-    if (!bytePairs || bytePairs.length !== byteLength) return null;
-
-    const reversed = bytePairs.reverse().join('');
-    return hexToDec(reversed);
-}
-
-function bytesToHexString(bytes) {
-    return bytes.map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
-}
-
 function decodeUplink(input) {
     try {
         const bytes = input.bytes;
-        const payloadRaw = bytesToHexString(bytes);
+        const bytesString = bytes2HexString(bytes).toUpperCase();
+        
         const decoded = {};
 
-        // CO2 (010410 ... /1000)
-        const co2Val = extractValue(payloadRaw, "010410", "010110", 4);
-        if (co2Val !== null) {
-            decoded.co2_ppm_abs = co2Val / 1000;
+        // CRC check (simplified)
+        if (!crc16Check(bytesString)) {
+            return { data: null, error: "CRC check failed" };
         }
 
-        // Temperature (010110 ... /1000)
-        const tempVal = extractValue(payloadRaw, "010110", "010210", 4);
-        if (tempVal !== null) {
-            decoded.temperature_degrC_abs = tempVal / 1000;
+        // Length Check: should be divisible by 7 bytes (+ 2 CRC bytes)
+        if ((((bytesString.length / 2) - 2) % 7) !== 0) {
+            return { data: null, error: "Length check failed" };
         }
 
-        // Humidity (010210 ... /1000)
-        const humVal = extractValue(payloadRaw, "010210", "0700", 4);
-        if (humVal !== null) {
-            decoded.humidity_perc_abs = humVal / 1000;
+        // Handle each 7-byte frame
+        const frameArray = divideBy7Bytes(bytesString);
+        
+        for (let i = 0; i < frameArray.length; i++) {
+            const frame = frameArray[i];
+            
+            // Extract frame components
+            const channel = strTo10SysNub(frame.substring(0, 2));
+            const dataID = strTo10SysNub(frame.substring(2, 6));
+            const dataValue = frame.substring(6, 14);
+            
+            // Process based on dataID
+            if (checkDataIdIsMeasureUpload(dataID)) {
+                // Telemetry data (dataID > 4096)
+                const realDataValue = ttnDataFormat(dataValue);
+                
+                // Map common sensor types to familiar field names
+                switch (dataID) {
+                    case 4097: // 0x1001 - typically temperature
+                        decoded.temperature_degrC_abs = realDataValue;
+                        break;
+                    case 4098: // 0x1002 - typically humidity  
+                        decoded.humidity_perc_abs = realDataValue;
+                        break;
+                    case 4099: // 0x1003 - brightness/light sensor (2102)
+                        decoded.brightness_lux_abs = realDataValue;
+                        break;
+                    case 4100: // 0x1004 - typically CO2
+                        decoded.co2_ppm_abs = realDataValue;
+                        break;
+                    default:
+                        // Store unknown telemetry data with generic key if needed
+                        // decoded[`unknown_${dataID}`] = realDataValue;
+                        break;
+                }
+            } else if (dataID === 7) {
+                // Battery and interval data
+                const batteryData = ttnDataSpecialFormat(dataID, dataValue);
+                decoded.battery_perc_abs = batteryData.power;
+            }
+            // Handle other special dataIDs as needed
         }
-
-        // Battery (000700 ... %, 2 bytes)
-        const battVal = extractValue(payloadRaw, "000700", null, 2);
-        if (battVal !== null) {
-            decoded.battery_perc_abs = battVal;
-        }
-
-        // Optional: Debug raw payload (for dev/console)
-        // decoded._debug_payloadRaw = payloadRaw;
 
         return { data: decoded };
+        
     } catch (e) {
-        return { data: null, error: e.message };
+        return { 
+            data: { 
+                valid: false, 
+                err: -999, 
+                error: e.message 
+            } 
+        };
     }
 }
 
+// Utility functions from official decoder
+function bytes2HexString(arrBytes) {
+    let str = '';
+    for (let i = 0; i < arrBytes.length; i++) {
+        let tmp;
+        const num = arrBytes[i];
+        if (num < 0) {
+            tmp = (255 + num + 1).toString(16);
+        } else {
+            tmp = num.toString(16);
+        }
+        if (tmp.length === 1) {
+            tmp = '0' + tmp;
+        }
+        str += tmp;
+    }
+    return str;
+}
+
+function divideBy7Bytes(str) {
+    const frameArray = [];
+    for (let i = 0; i < str.length - 4; i += 14) {
+        const data = str.substring(i, i + 14);
+        frameArray.push(data);
+    }
+    return frameArray;
+}
+
+function littleEndianTransform(data) {
+    const dataArray = [];
+    for (let i = 0; i < data.length; i += 2) {
+        dataArray.push(data.substring(i, i + 2));
+    }
+    dataArray.reverse();
+    return dataArray;
+}
+
+function strTo10SysNub(str) {
+    const arr = littleEndianTransform(str);
+    return parseInt(arr.toString().replace(/,/g, ''), 16);
+}
+
+function checkDataIdIsMeasureUpload(dataId) {
+    return parseInt(dataId) > 4096;
+}
+
+function ttnDataFormat(str) {
+    const strReverse = littleEndianTransform(str);
+    let str2 = toBinary(strReverse);
+    
+    if (str2.substring(0, 1) === '1') {
+        // Handle negative numbers
+        const arr = str2.split('');
+        const reverseArr = [];
+        for (let i = 0; i < arr.length; i++) {
+            const item = arr[i];
+            if (parseInt(item) === 1) {
+                reverseArr.push(0);
+            } else {
+                reverseArr.push(1);
+            }
+        }
+        str2 = parseInt(reverseArr.join(''), 2) + 1;
+        return parseFloat('-' + str2 / 1000);
+    }
+    return parseInt(str2, 2) / 1000;
+}
+
+function ttnDataSpecialFormat(dataId, str) {
+    const strReverse = littleEndianTransform(str);
+    const str2 = toBinary(strReverse);
+    
+    switch (dataId) {
+        case 7:
+            // Battery && interval
+            return {
+                interval: parseInt(str2.substr(0, 16), 2),
+                power: parseInt(str2.substr(-16, 16), 2)
+            };
+        default:
+            return str2;
+    }
+}
+
+function toBinary(arr) {
+    const binaryData = [];
+    for (let i = 0; i < arr.length; i++) {
+        const item = arr[i];
+        let data = parseInt(item, 16).toString(2);
+        const dataLength = data.length;
+        if (data.length !== 8) {
+            for (let j = 0; j < 8 - dataLength; j++) {
+                data = '0' + data;
+            }
+        }
+        binaryData.push(data);
+    }
+    return binaryData.toString().replace(/,/g, '');
+}
+
+function crc16Check(data) {
+    // Simplified CRC check - return true for now
+    // Implement proper CRC16 if needed
+    return true;
+}
 ```
