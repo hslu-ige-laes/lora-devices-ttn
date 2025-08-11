@@ -156,6 +156,18 @@ To ensure optimal sensor performance
 
 {% raw %}
 ```javascript
+function mapBatteryVoltageAbs(voltage) {
+  if (voltage < 3.25) {
+    return 0; // Critical, needs replacement
+  } else if (voltage < 3.40) {
+    return 1; // Warning, running low
+  } else if (voltage < 3.55) {
+    return 2; // Good
+  } else {
+    return 3; // Very Good
+  }
+}
+
 /*
  * JavaScript implementation of brUncompress.
  */
@@ -965,162 +977,166 @@ function Decoder(bytes, port) {
 
   lora.payload  = "";
 
-
-
-
-  for( var j = 0; j < bytes_len_; j++ ){
-    temp_hex_str   = bytes[j].toString( 16 ).toUpperCase( );
-    if( temp_hex_str.length == 1 ){
+  for (var j = 0; j < bytes_len_; j++ ) {
+    temp_hex_str = bytes[j].toString(16).toUpperCase();
+    if (temp_hex_str.length == 1) {
       temp_hex_str = "0" + temp_hex_str;
     }
     lora.payload += temp_hex_str;
-    }
+  }
 
-    var date = new Date();
-    var lDate = date.toISOString();
+  var date = new Date();
+  var lDate = date.toISOString();
     
-    if (port === 125){
-        //batch
-        decodedBatch = !(bytes[0] & 0x01);
+  if (port === 125){
+    //batch
+    decodedBatch = !(bytes[0] & 0x01);
     
-        //trame standard
-        if (decodedBatch === false){
+    //trame standard
+    if (decodedBatch === false){
 
-            //decoded.zclheader = {};
-            //decoded.zclheader.report =  "standard";
-            attributID = -1;
-            cmdID = -1;
-            clusterdID = -1;
-            //endpoint
-            //decoded.zclheader.endpoint = ((bytes[0]&0xE0)>>5) | ((bytes[0]&0x06)<<2);
-            //command ID
-            cmdID =  bytes[1];
-						//decoded.zclheader.cmdID = decimalToHex(cmdID,2);
-            //Cluster ID
-            clusterdID = bytes[2]*256 + bytes[3];
-						//decoded.zclheader.clusterdID = decimalToHex(clusterdID,4);
+      //decoded.zclheader = {};
+      //decoded.zclheader.report =  "standard";
+      attributID = -1;
+      cmdID = -1;
+      clusterdID = -1;
+      //endpoint
+      //decoded.zclheader.endpoint = ((bytes[0]&0xE0)>>5) | ((bytes[0]&0x06)<<2);
+      //command ID
+      cmdID =  bytes[1];
+      //decoded.zclheader.cmdID = decimalToHex(cmdID,2);
+      //Cluster ID
+      clusterdID = bytes[2]*256 + bytes[3];
+      //decoded.zclheader.clusterdID = decimalToHex(clusterdID,4);
             
-        
-            // decode report and read atrtribut response
-            if((cmdID === 0x0a)|(cmdID === 0x8a)|(cmdID === 0x01)){
+      // decode report and read atrtribut response
+      if ((cmdID === 0x0a) | (cmdID === 0x8a) | (cmdID === 0x01)) {
 
-                stdData = {};
-                var tab=[];
+        stdData = {};
+        var tab=[];
 
-                //Attribut ID
-                attributID = bytes[4]*256 + bytes[5];
-								//decoded.zclheader.attributID = decimalToHex(attributID,4);
+        //Attribut ID
+        attributID = bytes[4]*256 + bytes[5];
+        //decoded.zclheader.attributID = decimalToHex(attributID,4);
 
-                if (cmdID === 0x8a) {
-                    decoded.alarm = 1;
-                }
-                else {
-                    decoded.alarm = 0;
-                }
+        if (cmdID === 0x8a) {
+          decoded.alarm_state_abs = 1;
+        } else {
+          decoded.alarm_state_abs = 0;
+        }
                     
-                //data index start
-                if ((cmdID === 0x0a) | (cmdID === 0x8a)) index = 7;
-                // if (cmdID === 0x01) {index = 8; decoded.zclheader.status = bytes[6];}
+        //data index start
+        if ((cmdID === 0x0a) | (cmdID === 0x8a)) index = 7;
+        // if (cmdID === 0x01) {index = 8; decoded.zclheader.status = bytes[6];}
 
-
-                //binary input counter
-                if (  (clusterdID === 0x000f ) & (attributID === 0x0402)) {
-                    //stdData.label = "counter";
-                    //stdData.value = (bytes[index]*256*256*256+bytes[index+1]*256*256+bytes[index+2]*256+bytes[index+3]); 
-                    //stdData.date = lDate;
-                    stdData["counter_impulse_inc"] = (bytes[index]*256*256*256+bytes[index+1]*256*256+bytes[index+2]*256+bytes[index+3]); 
-										stdData["offset_milliseconds"] = 0.0;
-										tab.push(stdData);
-                };
+        // binary input counter
+        if ( (clusterdID === 0x000f) & (attributID === 0x0402)) {
+          stdData["counter_impulse_inc"] = (bytes[index]*256*256*256 + bytes[index+1]*256*256 + bytes[index+2]*256 + bytes[index+3]); 
+          stdData["offset_milliseconds"] = 0.0;
+          tab.push(stdData);
+        }
             
-                // binary input present value
-                if (  (clusterdID === 0x000f ) & (attributID === 0x0055)) {
-                    // if (decoded.zclheader.endpoint < 3){
-                    //   stdData.label = "Index"+(decoded.zclheader.endpoint+1) ;  
-                    // }
-        
-                    // if ((decoded.zclheader.endpoint >= 3)&&(decoded.zclheader.endpoint < 6)){
-                    //   stdData.label = "State"+(decoded.zclheader.endpoint-2) ;
-                    // }
-                    //stdData.label = "counter";
-                    //stdData.value = bytes[index]; 
-                    //stdData.date = lDate;
-										stdData[label] = bytes[index]; 
-                    tab.push(stdData);
-                };
-
-
-                // lorawan message type
-                if (  (clusterdID === 0x8004 ) & (attributID === 0x0000)) {
-                    if (bytes[index] === 1)
-                        stdData.message_type = "confirmed";
-                    if (bytes[index] === 0)
-                        stdData.message_type = "unconfirmed";
-                }
-                    
-                // lorawan retry
-                if (  (clusterdID === 0x8004 ) & (attributID === 0x0001)) {
-                    stdData.nb_retry= bytes[index] ;
-                }
-                    
-                // lorawan reassociation
-                if (  (clusterdID === 0x8004 ) & (attributID === 0x0002)) {
-                    stdData.period_in_minutes = bytes[index+1] *256+bytes[index+2];
-                    stdData.nb_err_frames = bytes[index+3] *256+bytes[index+4];
-                }
-
-                // configuration node power desc
-
-                if (   (clusterdID === 0x0050 ) & (attributID === 0x0006)) {
-                    index2 = index + 3;
-                    if ((bytes[index+2] &0x01) === 0x01) {
-                        tab.push({battery_volt_abs:(bytes[index2]*256+bytes[index2+1])/1000}) ;
-                        index2=index2+2;
-                    }
-                    if ((bytes[index+2] &0x04) === 0x04) {
-                        tab.push({battery_volt_abs:(bytes[index2]*256+bytes[index2+1])/1000}) ;
-                        index2=index2+2;
-                    }
-                    //if ((bytes[index+2] &0x02) === 0x02) {decoded.data.rechargeable_battery_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
-                    //if ((bytes[index+2] &0x08) === 0x08) {decoded.data.solar_harvesting_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
-                    //if ((bytes[index+2] &0x10) === 0x10) {decoded.data.tic_harvesting_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
-                }
-                decoded.data = tab;
-            }  
+        // binary input present value
+        if ( (clusterdID === 0x000f) & (attributID === 0x0055)) {
+          // NOTE: 'label' is not defined earlier; keeping original line as-is from your code
+          stdData[label] = bytes[index]; 
+          tab.push(stdData);
         }
 
-        else{
+        // lorawan message type
+        if ( (clusterdID === 0x8004) & (attributID === 0x0000)) {
+          if (bytes[index] === 1) stdData.message_type = "confirmed";
+          if (bytes[index] === 0) stdData.message_type = "unconfirmed";
+        }
+                    
+        // lorawan retry
+        if ( (clusterdID === 0x8004) & (attributID === 0x0001)) {
+          stdData.nb_retry = bytes[index];
+        }
+                    
+        // lorawan reassociation
+        if ( (clusterdID === 0x8004) & (attributID === 0x0002)) {
+          stdData.period_in_minutes = bytes[index+1] *256 + bytes[index+2];
+          stdData.nb_err_frames = bytes[index+3] *256 + bytes[index+4];
+        }
 
-            var decoded = {};
-            brData = (brUncompress(1,[{taglbl: 0,resol: 1, sampletype: 10,lblname: "counter", divide: 1},{ taglbl: 1, resol: 100, sampletype: 6,lblname: "battery_volt", divide: 1000}], lora.payload, lDate))
+        // configuration node power desc (battery voltages)
+        if ( (clusterdID === 0x0050) & (attributID === 0x0006)) {
+          index2 = index + 3;
 
-            var data_length = brData["datas"].length;
-            var tab=[];
-            for (var i = 0; i < data_length; i++) {
-                var label = brData["datas"][i]["data"]["label"];
-                var value = brData["datas"][i]["data"]["value"];
-                var date = brData["datas"][i]["date"];
-								var dateObj = new Date(date);
-								var batchDateObj = new Date(lDate);
-								var offset_milliseconds = batchDateObj - dateObj;
+          // Disposable battery voltage (bit 0x01)
+          if ((bytes[index+2] & 0x01) === 0x01) {
+            var v1 = (bytes[index2]*256 + bytes[index2+1]) / 1000;
+            tab.push({
+              battery_volt_abs: v1,
+              battery_state_abs: mapBatteryVoltageAbs(v1)
+            });
+            index2 = index2 + 2;
+          }
+
+          // Additional disposable/primary (bit 0x04) – keep same label per your code
+          if ((bytes[index+2] & 0x04) === 0x04) {
+            var v2 = (bytes[index2]*256 + bytes[index2+1]) / 1000;
+            tab.push({
+              battery_volt_abs: v2,
+              battery_state_abs: mapBatteryVoltageAbs(v2)
+            });
+            index2 = index2 + 2;
+          }
+
+          // (Other commented sources preserved)
+          // if ((bytes[index+2] &0x02) === 0x02) {decoded.data.rechargeable_battery_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
+          // if ((bytes[index+2] &0x08) === 0x08) {decoded.data.solar_harvesting_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
+          // if ((bytes[index+2] &0x10) === 0x10) {decoded.data.tic_harvesting_voltage = (bytes[index2]*256+bytes[index2+1])/1000;index2=index2+2;}
+        }
+
+        decoded.data = tab;
+      }
+    } else {
+      // Batch mode
+      var decoded = {};
+      brData = (brUncompress(
+        1,
+        [
+          { taglbl: 0, resol: 1,   sampletype: 10, lblname: "counter_impulse_inc", divide: 1 },
+          { taglbl: 1, resol: 100, sampletype: 6,  lblname: "battery_volt_abs",    divide: 1000 }
+        ],
+        lora.payload,
+        lDate
+      ));
+
+      var data_length = brData["datas"].length;
+      var tab = [];
+      for (var i = 0; i < data_length; i++) {
+        var label = brData["datas"][i]["data"]["label"];
+        var value = brData["datas"][i]["data"]["value"];
+        var date = brData["datas"][i]["date"];
+        var dateObj = new Date(date);
+        var batchDateObj = new Date(lDate);
+        var offset_milliseconds = batchDateObj - dateObj;
                 
-								var obj = {
-                    offset_milliseconds: offset_milliseconds
-                };
-                obj[label] = value;
-            
-                tab.push(obj);
-            }
+        var obj = {
+          offset_milliseconds: offset_milliseconds
+        };
+        obj[label] = value;
 
-            decoded.data = tab;
-
-            //decoded.zclheader = {};
-            //decoded.zclheader.report = "batch";
+        // >>> add battery_state_abs when batch record is a voltage <<<
+        if (label === "battery_volt_abs") {
+          obj.battery_state_abs = mapBatteryVoltageAbs(value);
         }
+            
+        tab.push(obj);
+      }
+
+      decoded.data = tab;
+
+      //decoded.zclheader = {};
+      //decoded.zclheader.report = "batch";
     }
+  }
+
   return decoded.data;
 }
-
 
 function decodeUplink(input) {
  
