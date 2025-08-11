@@ -100,7 +100,7 @@ function decodeUplink(input) {
     const alarm = bytes[9] & 0x01;
   
     let data = {
-        battery_volt: batteryVoltage
+        battery_volt_abs: batteryVoltage
     };
 
     switch (input.fPort) {
@@ -112,13 +112,13 @@ function decodeUplink(input) {
                 case 1: 
                     data.open_state_abs = doorStatus;
                     data.counter_impulse_inc = times;
-                    data.openDuration_min = duration;
+                    data.openDuration_min_abs = duration;
                     data.alarm_state_abs = alarm;
                     break;
                 case 2: 
                     data.waterleak_state_abs = waterLeakStatus;
                     data.counter_impulse_inc = times;
-                    data.waterleaknDuration_min = duration;
+                    data.waterleakDuration_min = duration;
                     data.alarm_state_abs = alarm;
                     break;
                 case 3: 
@@ -135,5 +135,4 @@ function decodeUplink(input) {
 
     return { data: data };
 }
-
 ```
