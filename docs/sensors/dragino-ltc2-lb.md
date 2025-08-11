@@ -138,6 +138,18 @@ The time interval in minutes at which the sensor queries the current values.
 ## Payload Decoder
 
 ```javascript
+function mapBatteryVoltageAbs(voltage) {
+  if (voltage < 3.35) {
+    return 0; // Critical
+  } else if (voltage < 3.45) {
+    return 1; // Warning
+  } else if (voltage < 3.55) {
+    return 2; // Good
+  } else {
+    return 3; // Very Good
+  }
+}
+
 function decodeUplink(input) {
   const port = input.fPort;
   const bytes = input.bytes;
@@ -150,6 +162,7 @@ function decodeUplink(input) {
 
   if (port === 2) {
     data.battery_volt_abs = (bytes[0] << 8 | bytes[1]) / 1000;
+		data.battery_state_abs = mapBatteryVoltageAbs(data.battery_volt_abs);
     data["temperature_degrC_abs@channel1"] = toTemperature(bytes[3], bytes[4]);
     data["temperature_degrC_abs@channel2"] = toTemperature(bytes[5], bytes[6]);
     return { data };
