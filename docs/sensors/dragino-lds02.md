@@ -91,6 +91,18 @@ By default, the sensor sends a status message every day. This interval can be re
 ## Payload Decoder
 
 ```javascript
+function mapBatteryVoltageAbs(voltage) {
+  if (voltage < 2.45) {
+    return 0; // Critical, needs replacement
+  } else if (voltage < 2.60) {
+    return 1; // Warning, running low
+  } else if (voltage < 2.90) {
+    return 2; // Good
+  } else {
+    return 3; // Very Good
+  }
+}
+
 function decodeUplink(input) {
     const bytes = input.bytes;
     const batteryVoltage = ((bytes[0] << 8 | bytes[1]) & 0x3FFF) / 1000;
@@ -100,7 +112,8 @@ function decodeUplink(input) {
     const alarm = bytes[9] & 0x01;
   
     let data = {
-        battery_volt_abs: batteryVoltage
+        battery_volt_abs: batteryVoltage,
+        battery_state_abs: mapBatteryVoltageAbs(batteryVoltage)
     };
 
     switch (input.fPort) {
@@ -135,4 +148,5 @@ function decodeUplink(input) {
 
     return { data: data };
 }
+
 ```
