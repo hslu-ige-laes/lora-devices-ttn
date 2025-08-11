@@ -195,11 +195,11 @@ E.g. the impact of an opened window might not be visible in the temperature data
 
 ```javascript
 function mapBatteryLevelPerc(batteryPercent) {
-  if (batteryPercent <= 15) {
+  if (batteryPercent <= 90) {
     return 0; // Critical
-  } else if (batteryPercent <= 30) {
+  } else if (batteryPercent <= 95) {
     return 1; // Warning
-  } else if (batteryPercent <= 70) {
+  } else if (batteryPercent <= 99.9) {
     return 2; // Good
   } else {
     return 3; // Very Good
