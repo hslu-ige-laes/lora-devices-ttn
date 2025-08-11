@@ -124,31 +124,43 @@ To ensure optimal sensor performance
 3. Change the `FPort` to `125`
 4. Copy/paste the following payloads step by step into the `Payload` field and press `Schedule downlink`. Open a second tab with the `Live data` view, to see whether the command got transmitted.
 
-#### single report at least every 15min samples or 200 impulses
-`11 06 00 0F 00 04 02 23 00 00 03 84 00 00 00 C8`
-- 11 = Endpoint 0 (Input 1)
-- 06: Command
-- 00 0f: Binary Input
+#### single report at least every 15min samples or 2500 impulses
+delta_impulses=(impulses/kWh)×(kW threshold)×(window hours)
+If we expect 10 kW then: 
+delta_impulses = 1000 × 10 × 0.25 = 2500
+
+`11 06 00 0F 00 04 02 23 00 00 03 84 00 00 09 C4`
+- 11 = Endpoint 0 (Input 1+/1-)
+- 06: Configure Reporting Command
+- 00 0F: Binary Input Cluster
 - 00: ?
 - 04 02: Count
 - 23: Type U32
 - 00 00: minimum reporting interval (0s, allow immediate send when delta is hit)
 - 03 84: maximum reporting interval (900 s = 15 min)
-- 00 00 00 C8: delta/reportable change (200 pulses)
+- 00 00 09 C4: delta/reportable change (2500 pulses)
 
 #### battery state once per day
-`11 06 00 50 00 00 06 29 00 00 85 A0 00 00`
-- 11: Endpoint 0 (Input 1)
-- 06: Command
-- 00 50: Configuration
+`11 06 00 50 00 00 06 41 80 3C 85 A0 05 00 04 00 C8 00`
+- 11: Endpoint 0 (Input 1+/1-)
+- 06: Configure Reporting Command
+- 00 50: Configuration Cluster
 - 00: ?
 - 00 06: Node power descriptor
-- 29: Type U16
-- 00 00: minimum reporting interval (0s, allow immediate send when delta is hit)
-- 85 A0: maximum reporting interval, minutes mode with MSB=1; 0x05A0 = 1440 min = 24 h
+- 41: Type Byte string
+- 80 3C: minimum reporting interval (8000(minutes) or 003C (60min)  => periodicity of measure every 60 minutes)
+- 85 A0: maximum reporting interval (8000(minutes) or 05A0 (1440min)  => periodicity of sending all 1440 minutes = 1 day)
+- 05: Number of the following bytes
+- 00: Mode power (there is only one, dont change)
+- 04: Power Source (disposable battery is 04)
 - 00 00: delta/reportable change (so it’s strictly periodic daily)
+- 00 C8: the delta variation for which a report will be sent (200 mV)
+- 00: report on power source change (00 is deactivated, leave that as it is)
 
-- For details and other configurations see [Frame Examples](http://support.watteco.com/flasho/#FrameExamples)
+- For details and other configurations see
+  - [Frame Examples](http://support.watteco.com/flasho/#FrameExamples)
+  - [Configuration Cluster](https://support.watteco.com/configuration-cluster/)
+  - [Binary Input Cluster](https://support.watteco.com/cluster-binary-input/)
 
 ---
 
