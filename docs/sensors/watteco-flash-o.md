@@ -123,9 +123,30 @@ To ensure optimal sensor performance
 2. Put the device in `Configuration Mode` (see table above). In this mode, the device sends a telegram every minute and opens a window for receiving Downlink messages for configuration.
 3. Change the `FPort` to `125`
 4. Copy/paste the following payloads step by step into the `Payload` field and press `Schedule downlink`. Open a second tab with the `Live data` view, to see whether the command got transmitted.
-   - deactivate standard report: `11 06 00 0f 00 04 02 23 00 00 00 00 00 00 00 00`
-	 - activate battery report every 24 hours or 0.1V at min 10 minutes: `11 06 00 50 15 00 06 04 80 0a 85 a0 00 64 00 64 09`
-	 - activate batch report at least every 15min samples or 200 impulses: `11 06 00 0f 1d 04 02 00 00 00 80 0f 00 00 00 c8 00 00 00 01 01`
+
+#### single report at least every 15min samples or 200 impulses
+`11 06 00 0F 00 04 02 23 00 00 03 84 00 00 00 C8`
+- 11 = Endpoint 0 (Input 1)
+- 06: Command
+- 00 0f: Binary Input
+- 00: ?
+- 04 02: Count
+- 23: Type U32
+- 00 00: minimum reporting interval (0s, allow immediate send when delta is hit)
+- 03 84: maximum reporting interval (900 s = 15 min)
+- 00 00 00 C8: delta/reportable change (200 pulses)
+
+#### battery state once per day
+`11 06 00 50 00 00 06 29 00 00 85 A0 00 00`
+- 11: Endpoint 0 (Input 1)
+- 06: Command
+- 00 50: Configuration
+- 00: ?
+- 00 06: Node power descriptor
+- 29: Type U16
+- 00 00: minimum reporting interval (0s, allow immediate send when delta is hit)
+- 85 A0: maximum reporting interval, minutes mode with MSB=1; 0x05A0 = 1440 min = 24 h
+- 00 00: delta/reportable change (so it’s strictly periodic daily)
 
 - For details and other configurations see [Frame Examples](http://support.watteco.com/flasho/#FrameExamples)
 
