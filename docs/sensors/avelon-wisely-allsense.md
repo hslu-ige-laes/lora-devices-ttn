@@ -312,8 +312,8 @@ function mapBatteryLevelPerc(batteryPercent) {
 
 function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, datasetLength, payloadOffset) {
   var decoded = [];
-  var measurementByteLengths = {"pressure_hPa": 2, "temperature_degrC": 2, "humidity_perc": 1, "voc_index": 2, "brightness_lux": 2, "co2_ppm": 2, "presence_min": 2};
-  var divFactors = {"pressure_hPa": 10.0, "temperature_degrC": 10.0, "humidity_perc": 2.0, "voc_index": 1.0, "brightness_lux": 1.0, "co2_ppm": 1.0, "presence_min": 1.0};
+  var measurementByteLengths = {"pressure_hPa_abs": 2, "temperature_degrC_abs": 2, "humidity_perc_abs": 1, "voc_index_abs": 2, "brightness_lux_abs": 2, "co2_ppm_abs": 2, "presence_min_inc": 2};
+  var divFactors = {"pressure_hPa_abs": 10.0, "temperature_degrC_abs": 10.0, "humidity_perc_abs": 2.0, "voc_index_abs": 1.0, "brightness_lux_abs": 1.0, "co2_ppm_abs": 1.0, "presence_min_inc": 1.0};
 
   if (measurement in byteIndices[deviceType]) {
     var byteIndexValue = byteIndices[deviceType][measurement];
@@ -387,7 +387,7 @@ function decodeUplink(input) {
       errors.push("Error: datasetCount is not a whole number!");
     } else {
       for (var i = 0; i < datasetCount; i++) {
-        var reading = { battery_perc: batteryPerc , battery_state: batteryState };
+        var reading = { battery_perc_abs: batteryPerc , battery_state_abs: batteryState };
         
         for (const [key, value] of Object.entries(byteIndices[deviceType])) {
           var decoded = getValues(input.bytes, key, byteIndices, deviceType, 1, datasetLength, payloadOffset + i * datasetLength);
