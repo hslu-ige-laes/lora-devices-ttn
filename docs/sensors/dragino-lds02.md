@@ -73,18 +73,55 @@ The LDS02 is a LoRaWAN Window/Door sensor.
 
 ---
 
+## Important Comissioning Steps
+Here are important settings you have to make at comissioning.
+
+Once at first commissioning:
+- **Set LoRaWAN Uplink Mode** to **confirmed**, see [Set LoRaWAN Uplink Mode]( #set-lorawan-uplink-mode-type-code-0x05 )
+- **Enable Adaptive Data Rate**, see [Set ADR and Data Rate](#set-adr-and-data-rate-type-code-0xa8)
+
+Every time the device gets assigned to a new project:
+- **Clear Counter**, see [Clear Counting]( #clear-counting-type-code-0xa6 ) 
+
+---
+
 ## Optional Settings
 
-### Change TDC (Transmit Time Interval resp. Keep Alive Interval)
-In some cases, the sensor has sent incorrect values. This can be remedied by reducing the TDC.
-
-By default, the sensor sends a status message every day. This interval can be reduced to 1 hour (3600s -> HEX E10) as follows:
+To change settings of the device, you have to send downlink-messages:
 
 1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
 2. Change the `FPort to 1`
 3. Copy/paste the payload from the examples below, e.g. `01 00 0E 10` into the `Payload` field
 4. Press `Send`
 5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore wait max 1 day or manually open/close the window to trigger a new transmission.
+
+### Change Transmit Time Interval / Keep Alive Interval (type code 0x01)
+By default, the sensor sends a status message every day. This interval can be reduced to e.g. 1 hour (3600s -> HEX E10).  
+`01 00 0E 10` = 3600 seconds.
+`01 01 51 80` = 3600 seconds.
+
+### Reset LDS02 (type code 0x04)
+If the payload is `04FF`, it will reset the LDS02.
+
+### Set LoRaWAN Uplink Mode (type code 0x05)
+- `05 00`: Set uplink to LoRaWAN **unconfirmed** mode  
+- `05 01`: Set uplink to LoRaWAN **confirmed** mode
+
+### Clear Counting (type code 0xA6)
+Example: `A601` – Clears both the count number and time for the LDS02.
+
+### Enable/Disable Alarm (type code 0xA7)
+- `A701`: Enable
+- `A700`: Disable
+
+### Set ADR and Data Rate (type code 0xA8)
+Format: `A8 aa bb`  
+- **aa**: `1` – Enable ADR (Adaptive Data Rate); `0` – Disable ADR 
+- **bb**: Set a fixed DR (only valid after `ADR=0`)  
+
+Examples:
+- `A8 00 02` – Deactivate ADR and set it DR1 (SF10)
+- `A8 01 00` – Enable ADR
 
 ---
 
