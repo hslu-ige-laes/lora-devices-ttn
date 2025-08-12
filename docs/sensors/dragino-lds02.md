@@ -76,11 +76,11 @@ The LDS02 is a LoRaWAN Window/Door sensor.
 ## Important Comissioning Steps
 Here are important settings you have to make at comissioning.
 
-Once at first commissioning:
+**Once at first commissioning:**
 - **Set LoRaWAN Uplink Mode** to **confirmed**, see [Set LoRaWAN Uplink Mode]( #set-lorawan-uplink-mode-type-code-0x05 )
 - **Enable Adaptive Data Rate**, see [Set ADR and Data Rate](#set-adr-and-data-rate-type-code-0xa8)
 
-Every time the device gets assigned to a new project:
+**Every time the device gets assigned to a new project:**
 - **Clear Counter**, see [Clear Counting]( #clear-counting-type-code-0xa6 ) 
 
 ---
@@ -108,11 +108,11 @@ If the payload is `04FF`, it will reset the LDS02.
 - `05 01`: Set uplink to LoRaWAN **confirmed** mode
 
 ### Clear Counting (type code 0xA6)
-Example: `A601` – Clears both the count number and time for the LDS02.
+Example: `A6 01` – Clears both the count number and time for the LDS02.
 
 ### Enable/Disable Alarm (type code 0xA7)
-- `A701`: Enable
-- `A700`: Disable
+- `A7 01`: Enable
+- `A7 00`: Disable
 
 ### Set ADR and Data Rate (type code 0xA8)
 Format: `A8 aa bb`  
