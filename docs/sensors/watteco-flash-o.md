@@ -65,7 +65,7 @@ The device does not have a physical button, but a magnetic contact. Hold a magne
 | Hold magnet > 1s on ILS sticker    | Power on and join network      | 1. LED will flash red during this 1s period <br>2. Waiting to join LoRa network: LED blinks shortly red every 5s <br>3. Join LoRa network success: green LED solid on for 3s |
 | Hold magnet > 5s on ILS sticker     | Power off           | 1. LED will flash red during this 5s period<br>2. Before device turns of it flashes red 5 times in 3s      |
 | Pass magnet over ILS sticker     | Switch on/off configuration mode  | 1. The LED blinks  red (3s off, 3s on) while in config mode <br>2. The device sends an uplink frame every minute. <br>3. The configuration mode lasts 10 minutes |
-| Quick passage and long hold over ILS sticker     | Factory reset  | All the applicative settings gets deleted and set to factory default |
+| 2 2uick passages and long hold over ILS sticker     | Factory reset  | All the applicative settings gets deleted and set to factory default |
 
 ---
 
@@ -157,6 +157,13 @@ delta_impulses = 1000 × 10 × 0.25 = 2500
 - 00 C8: the delta variation for which a report will be sent (200 mV)
 - 00: report on power source change (00 is deactivated, leave that as it is)
 
+#### deactivate stanard reports
+`11 06 00 0f 00 04 02 23 00 00 00 00 00 00 00 00`
+
+#### ceactivate batch configurations
+`11 06 00 0F 1D 04 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00`
+
+### Links
 - For details and other configurations see
   - [Frame Examples](http://support.watteco.com/flasho/#FrameExamples)
   - [Configuration Cluster](https://support.watteco.com/configuration-cluster/)
