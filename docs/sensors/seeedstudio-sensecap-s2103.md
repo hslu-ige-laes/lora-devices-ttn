@@ -105,7 +105,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 4. Go to tab `Settings`
 5. Under `Platform` choose `The Things Network` (Attention, dont choose "SenceCAP for The Things Network")
 6. Under `Frequency Plan` choose `EU868`
-7. Under `Upling Interval (min)` choose `10`
+7. Under `Upling Interval (min)` choose `15`
 8. Under `Activation Type` choose `OTAA` (Over the air activation)
 9. Under `Packet Policy` choose `2C+1N` (Over the air activation)
 10. Press `Send`
@@ -113,6 +113,25 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 - After Configuration, the device restarts automatically and tries to join the network
 
 ---
+
+## Change Settings over Downlink messages
+
+To change settings of the device over LoRaWAN remotely, you have to send downlink-messages:
+
+1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
+2. Change the `FPort to 2`
+3. Copy/paste the payload from the examples below, e.g. `01 00 0E 10` into the `Payload` field
+4. Press `Send`
+5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore wait max 1 day or manually open/close the window to trigger a new transmission.
+
+### Uplink Interval
+- `00890011220A0038B4` = 10 minutes
+- `00890011220F0080CA` = 15 minutes
+- `00890011221E00C946` = 30 minutes
+- `00890011223C004A56` = 60 minutes
+
+---
+
 ## Payload Decoder
 
 ```javascript
