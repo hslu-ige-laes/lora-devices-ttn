@@ -6,7 +6,7 @@ parent: Sensors
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-ltc2-ft_01.jpg" width="250" align="right">
 
-# Dragino - LTC2-LB
+# Dragino - LTC2-FT
 {: .no_toc }
 
 - Manufacturer: <a href="https://www.dragino.com/" target="_blank">Dragino</a>
@@ -30,7 +30,7 @@ The LTC2-FT is a LoRaWAN Waterproof Outdoor Temperature Sensor with 2 external P
 
 - indoor/outdoor device
 - Attention, LTC2-FT doesn't include temperature sensors, you need to purchase them separately
-- Price LTC2-LB ca. CHF 66.- (07.04.2025) without sensors
+- Price LTC2-FT ca. CHF 66.- (07.04.2025) with 1 sensor
 - 2 External **Temperature** Sensors PT100 (support 3-wire), Cable Length 2m
 - Power Supply: 1 built in 8500mAh Li-SOCI2 battery
   - Expected life time: depending on usage, 5 ... 10 years
