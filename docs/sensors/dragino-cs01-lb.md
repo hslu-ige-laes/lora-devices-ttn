@@ -45,12 +45,13 @@ The current sensors are detachable and can be replaced with different scales.
 - [Datasheet from dragino.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-cs01-lb_02.pdf)
 - [User Manual (online)](https://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20LoRaWAN%20End%20Nodes/CS01-LB_LoRaWAN_4_Channels_Current_Sensor_Converter_User_Manual/)
 - [User Manual (pdf, 2025-02-04)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-cs01-lb_03.pdf)
+
 ---
 
 ## Ordering Info
 - Part Number: CS01-LB-EU868
 - [Ordering Link CS01-LB](https://www.bastelgarage.ch/lsn50v2-d23-lorawan-3-kanal-temperatursensor-node-868mhz?search=lsn50%20v2)
-  Current clamps are not included in the scope of delivery and must be purchased separately.
+  - Attention: Current clamps are not included in the scope of delivery and must be purchased separately.
 - [Ordering Link SCT013G-D-100](https://www.bastelgarage.ch/sct013g-d-100-stromwandler-100a-50ma?search=Dragino%20Stromwandler)
 
 ---
@@ -58,6 +59,7 @@ The current sensors are detachable and can be replaced with different scales.
 ## Device specific Information
 
 ### Push button
+
 | Behavior on ACT | Function | Action |
 |---|---|---|
 | Pressing ACT between 1s and 3s | Send an uplink | If the sensor is already joined to the LoRaWAN network, it will send an uplink packet; blue LED will blink once. <br>Meanwhile, the BLE module will be active and the user can connect via BLE to configure the device. |
