@@ -28,8 +28,8 @@ The current sensors are detachable and can be replaced with different scales.
 ## Specifications
 
 - indoor/outdoor device
-- Price ca. CHF 79.- (19.08.2025)
-- 4 External Sensors
+- Price ca. CHF 79.- without sensors (19.08.2025)
+- 4 External Sensors, each ca. CHF 17.00
   - **SCT013G-D-100 Current Converter 100A:50mA**
 - Power Supply: 1 built in 8500mAh Li-SOCI2 battery
   - Expected life time: depending on usage, 5 ... 10 years
