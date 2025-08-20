@@ -38,7 +38,7 @@ Wind speed, wind direction and temperature sensor.
   - <b>Temperature:</b><br>
 	  Range: -50 ... +60 [°C], Resolution: 0.1 °C, Accuracy: ±0.6 °C
 		not protected from solar radiation
-- Power Supply: 2 C alkaline batteries
+- Power Supply: 2 C alkaline batteries (LR14)
 - Size:
   Device 135 × 81 × 70 mm
 	Sensor: 100 x 100 x 160 mm
@@ -115,6 +115,7 @@ To check whether the device is active or in sleep mode (on or off), push the but
 ## Payload formatter
 
 ```javascript
+// --- Manufacturer decoder ---
 var decentlab_decoder = {
   PROTOCOL_VERSION: 2,
   SENSORS: [
@@ -183,25 +184,23 @@ var decentlab_decoder = {
     // decode payload
     var pos = 5;
     for (i = 0; i < this.SENSORS.length; i++, flags >>= 1) {
-      if ((flags & 1) !== 1)
-        continue;
+      if ((flags & 1) !== 1) continue;
 
       var sensor = this.SENSORS[i];
       var x = [];
-      // convert data to 16-bit integer array
       for (j = 0; j < sensor.length; j++) {
         x.push(this.read_int(bytes, pos));
         pos += 2;
       }
 
-      // decode sensor values
       for (j = 0; j < sensor.values.length; j++) {
         var value = sensor.values[j];
         if ('convert' in value) {
-          result[value.name] = {displayName: value.displayName,
-                                value: value.convert.bind(this)(x)};
-          if ('unit' in value)
-            result[value.name]['unit'] = value.unit;
+          result[value.name] = {
+            displayName: value.displayName,
+            value: value.convert.bind(this)(x)
+          };
+          if ('unit' in value) result[value.name]['unit'] = value.unit;
         }
       }
     }
@@ -209,12 +208,83 @@ var decentlab_decoder = {
   }
 };
 
+// --- Battery voltage → state mapping ---
+function mapBatteryVoltageAbs(voltage) {
+  if (voltage < 2.4) {
+    return 0; // Critical
+  } else if (voltage < 2.6) {
+    return 1; // Warning
+  } else if (voltage < 2.9) {
+    return 2; // Good
+  } else {
+    return 3; // Very Good
+  }
+}
+
+// --- TTN/LoRaWAN entry point: remap to your measurement names ---
 function decodeUplink(input) {
-  return {
-    data: decentlab_decoder.decode(input.bytes),
-    warnings: [],
-    errors: []
-  };
+  try {
+    const raw = decentlab_decoder.decode(input.bytes);
+    if (raw && raw.error) {
+      return { errors: [raw.error] };
+    }
+
+    const data = {};
+
+    // Helper to safely pluck a value if present
+    const v = (obj, key) => (obj && obj[key] && typeof obj[key].value !== 'undefined') ? obj[key].value : undefined;
+
+    // Remap to requested names
+    const air_temperature = v(raw, 'air_temperature');
+    if (typeof air_temperature !== 'undefined') {
+      data['temperature_degrC_abs'] = air_temperature; // °C
+    }
+
+    const wind_direction = v(raw, 'wind_direction');
+    if (typeof wind_direction !== 'undefined') {
+      data['windDirection_degr_abs'] = wind_direction; // °
+    }
+
+    const wind_speed_avg = v(raw, 'wind_speed');
+    if (typeof wind_speed_avg !== 'undefined') {
+      data['windSpeed_mpers_abs@average'] = wind_speed_avg; // m/s
+    }
+
+    const wind_speed_max = v(raw, 'maximum_wind_speed');
+    if (typeof wind_speed_max !== 'undefined') {
+      data['windSpeed_mpers_abs@maximum'] = wind_speed_max; // m/s
+    }
+
+    const wind_speed_east = v(raw, 'east_wind_speed');
+    if (typeof wind_speed_east !== 'undefined') {
+      data['windSpeed_mpers_abs@east'] = wind_speed_east; // m/s
+    }
+
+    const wind_speed_north = v(raw, 'north_wind_speed');
+    if (typeof wind_speed_north !== 'undefined') {
+      data['windSpeed_mpers_abs@north'] = wind_speed_north; // m/s
+    }
+
+    const x_angle = v(raw, 'x_orientation_angle');
+    if (typeof x_angle !== 'undefined') {
+      data['deviceTiltAngle_degr_abs@x-axis'] = x_angle; // °
+    }
+
+    const y_angle = v(raw, 'y_orientation_angle');
+    if (typeof y_angle !== 'undefined') {
+      data['deviceTiltAngle_degr_abs@y-axis'] = y_angle; // °
+    }
+
+    const batt_v = v(raw, 'battery_voltage');
+    if (typeof batt_v !== 'undefined') {
+      data['battery_volt_abs'] = batt_v;                    // V
+      data['battery_state_abs'] = mapBatteryVoltageAbs(batt_v);
+    }
+
+    return { data, warnings: [], errors: [] };
+  } catch (e) {
+    return { errors: [String(e)] };
+  }
 }
 ```
 
