@@ -6,7 +6,7 @@ parent: Sensors
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/plenom-kuando-busylight_01.png" width="250" align="right">
 
-# Dragino - LHT65N-E5
+# Plenom - Kuando-Busylight
 {: .no_toc }
 
 - Manufacturer: <a href="https://www.plenom.com/" target="_blank">Plenom</a>
