@@ -91,6 +91,7 @@ The time interval in minutes at which the sensor queries the current values.
 - red slow blink: `FF 00 00 A0 A0`
 - green fast blink: `00 FF 00 20 20`
 - green slow blink: `00 FF 00 A0 A0`
+- off: `00 00 00 00 00`
 
 ---
 
