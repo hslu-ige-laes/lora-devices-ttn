@@ -84,7 +84,13 @@ The time interval in minutes at which the sensor queries the current values.
 
 #### Example messages
 
--	
+- solid white: `FF FF FF FF 00`
+- solid red: `FF 00 00 FF 00`
+- solid green: `00 FF 00 FF 00`
+- red fast blink: `FF 00 00 20 20`
+- red slow blink: `FF 00 00 A0 A0`
+- green fast blink: `00 FF 00 20 20`
+- green slow blink: `00 FF 00 A0 A0`
 
 ---
 
