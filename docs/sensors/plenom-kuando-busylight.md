@@ -96,6 +96,7 @@ The time interval in minutes at which the sensor queries the current values.
 ---
 
 ## Payload Decoder
+### Uplink
 
 ```javascript
 function decodeUplink(input) {
@@ -124,5 +125,38 @@ function byteArrayToLong(byteArray, from) {
     (byteArray[from + 2] << 16) |
     (byteArray[from + 3] << 24)
   );
+}
+```
+
+### Downlink
+
+```javascript
+function encodeDownlink(input) {
+  return {
+    bytes: [
+      input.data.red & 0xFF,
+      input.data.blue & 0xFF,
+      input.data.green & 0xFF,
+      input.data.ontime & 0xFF,
+      input.data.offtime & 0xFF
+    ],
+    fPort: 15,
+    warnings: [],
+    errors: []
+  };
+}
+
+function decodeDownlink(input) {
+  return {
+    data: {
+      red: input.bytes[0],
+      green: input.bytes[2],
+      blue: input.bytes[1],
+      ontime: input.bytes[3],
+      offtime: input.bytes[4]
+    },
+    warnings: [],
+    errors: []
+  };
 }
 ```
