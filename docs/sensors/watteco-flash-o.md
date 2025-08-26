@@ -1050,7 +1050,9 @@ function Decoder(bytes, port) {
 
         // binary input counter
         if ( (clusterdID === 0x000f) & (attributID === 0x0402)) {
-          stdData["counter_impulse_inc"] = (bytes[index]*256*256*256 + bytes[index+1]*256*256 + bytes[index+2]*256 + bytes[index+3]); 
+          const rawValue = (bytes[index]*256*256*256 + bytes[index+1]*256*256 + bytes[index+2]*256 + bytes[index+3]);
+          stdData["counter_impulse_inc"] = rawValue;
+          stdData["energy_kWh_inc"] = rawValue !== 0 ? rawValue/1000 : 0;				
           stdData["offset_milliseconds"] = 0.0;
           tab.push(stdData);
         }
@@ -1118,6 +1120,7 @@ function Decoder(bytes, port) {
         1,
         [
           { taglbl: 0, resol: 1,   sampletype: 10, lblname: "counter_impulse_inc", divide: 1 },
+					{ taglbl: 0, resol: 1,   sampletype: 10, lblname: "energy_kWh_inc", divide: 1000 },
           { taglbl: 1, resol: 100, sampletype: 6,  lblname: "battery_volt_abs",    divide: 1000 }
         ],
         lora.payload,
