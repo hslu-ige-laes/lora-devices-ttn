@@ -70,27 +70,35 @@ The Busylight can show any color and be used as a visual notifier, indicating a 
 
 ---
 
-## Optional Settings
+## Downlink messages
 
-### Change sampling interval
+### Change color
 To change the sampling interval, you have to send the device configuration telegrams (Downlink-Messages)
 The time interval in minutes at which the sensor queries the current values.
 
 1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
 2. Change the `FPort to 15`
-3. Copy/paste the payload, e.g. `01000258` into the `Payload` field to set the led to red
+3. Copy/paste the payload, e.g. `FF 00 00 20 20` into the `Payload` field to set the led to red
 4. Press `Send`
 5. In the `Data` tab you should now see the scheduled telegram. The device receives downlink data immediately, because its a class C device.
 
-#### Example messages
+#### Format
+Format bytes
+- red: bytes[0]
+- blue: bytes[1]
+- green: bytes[2]
+- ontime: bytes[3]
+- offtime: bytes[4]
 
+#### Example messages
 - solid white: `FF FF FF FF 00`
 - solid red: `FF 00 00 FF 00`
-- solid green: `00 FF 00 FF 00`
+- solid green: `00 00 FF FF 00`
+- solid orange: `FF 00 40 FF 00`
 - red fast blink: `FF 00 00 20 20`
 - red slow blink: `FF 00 00 A0 A0`
-- green fast blink: `00 FF 00 20 20`
-- green slow blink: `00 FF 00 A0 A0`
+- green fast blink: `00 00 FF 20 20`
+- green slow blink: `00 00 FF A0 A0`
 - off: `00 00 00 00 00`
 
 ---
