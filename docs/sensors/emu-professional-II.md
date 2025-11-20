@@ -84,24 +84,23 @@ The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval, measure
 ### Sampling Interval and Measurement Selection
 You can configure the device via a LoRaWAN downlink and determine which measured values are to be transmitted.
 
-EMU provides an online [Payload Generator](https://www.emuag.ch/files/software/Lora-Payload-Generator.html) that generates the hex code for the configuration. This hex code can then be sent to the device via TTN downlink (in the console under ‘Messaging - Downlink’). You can send the telegrams to Fport 1 to 10. This gives you the option of sending the energy every 15 minutes (configuration Fport 1) and sending a data configuration to Fport 2 that is only to be reported daily, for example.
+- EMU provides an online [Payload Generator](https://www.emuag.ch/files/software/Lora-Payload-Generator.html) that generates the hex code for the configuration.
+- This hex code can then be sent to the device via TTN downlink (in the console under ‘Messaging - Downlink’).
+- You can send the telegrams to different slots (Fport 1 to 10). This gives you the possibility of sending the energy every 15 minutes (configuration Fport 1) and sending another value to Fport 2 that is only to be reported daily, for example.
 
-#### Examples
-**Active Energy Import T1 in kWh** with different intervals:
--	 5 Minutes: '05 00 08 1C B2'
--	10 Minutes: '0A 00 08 1C 60'
--	15 Minutes: '0F 00 08 1C 2E'
--	60 Minutes: '3C 00 08 1C BD'
-- 24 Hours:   '10 0E 08 1C B7'
+**Examples**
+"Active Energy Import T1 in kWh" with different intervals:
+-	 5 Minutes: `05 00 08 1C B2`
+-	10 Minutes: `0A 00 08 1C 60`
+-	15 Minutes: `0F 00 08 1C 2E`
+-	60 Minutes: `3C 00 08 1C BD`
+- 24 Hours:   `10 0E 08 1C B7`
 
-uplink_interval_3600min_energy_import_t1
-Uplink Interval 24 hr - Active Energy Import T1 in kWh
-
-A so called slot can get deactivated by sending '00 00 00 00'
+A slot can get deactivated by sending `00 00 00 00`
 
 ---
 
-## Payload formatter
+## Original Payload formatter EMU
 
 ```javascript
 /**
@@ -869,4 +868,134 @@ function crc8_encode(data) {
     
 }
 
+```
+
+## Adapted Payload formatter HSLU for only one value with specific name
+
+```javascript
+/**
+ * Simplified TTN Decoder - Extract Active Energy Import T1 in kWh
+ */
+function decodeUplink(input) {
+    var data = input.bytes;
+    
+    // Uplink with only 2 bytes is status update, ignore it
+    if (data.length <= 2) {
+        return {
+            data: {},
+            warnings: ["Payload too short"]
+        };
+    }
+    
+    // Check CRC-8 (last byte)
+    var crc8Received = data[data.length - 1];
+    var dataToCheck = data.slice(0, -1);
+    
+    if (crc8_encode(dataToCheck) !== crc8Received) {
+        return {
+            data: {},
+            warnings: ["CRC-8 validation failed"]
+        };
+    }
+    
+    // Search for Active Energy Import T1 kWh (ID: 0x1C) or Wh (ID: 0x03)
+    var energy_kWh = null;
+    var i = 4; // Skip first 4 bytes (timestamp)
+    
+    while (i < data.length - 1) { // Stop before CRC byte
+        var dataTypeId = data[i];
+        i++;
+        
+        if (dataTypeId === 0x1C) {
+            // Found Active Energy Import T1 in kWh (4 bytes, Uint32)
+            energy_kWh = getUint32(data.slice(i, i + 4));
+            break;
+        } else if (dataTypeId === 0x03) {
+            // Found Active Energy Import T1 in Wh (4 bytes, Uint32)
+            var energy_Wh = getUint32(data.slice(i, i + 4));
+            energy_kWh = energy_Wh / 1000;
+            break;
+        } else {
+            // Skip this value based on known lengths
+            var length = getDataTypeLength(dataTypeId);
+            if (length === 255) break; // Invalid data type
+            i += length;
+        }
+    }
+    
+    // Return result
+    if (energy_kWh !== null) {
+        return {
+            data: {
+                energy_kWh_inc: energy_kWh
+            }
+        };
+    } else {
+        return {
+            data: {},
+            warnings: ["Active Energy Import T1 not found in payload"]
+        };
+    }
+}
+
+/**
+ * Get data type length for skipping unknown values
+ */
+function getDataTypeLength(id) {
+    var lengths = {
+        0x00: 4, 0x01: 4, 0x02: 4, 0x03: 4, 0x04: 4, 0x05: 4, 
+        0x06: 4, 0x07: 4, 0x08: 4, 0x09: 4, 0x0A: 4, 0x0B: 4,
+        0x0C: 4, 0x0D: 4, 0x0E: 4, 0x0F: 4, 0x10: 4, 0x11: 4,
+        0x12: 4, 0x13: 4, 0x14: 4, 0x15: 4, 0x16: 4, 0x17: 1,
+        0x18: 1, 0x19: 1, 0x1A: 2, 0x1B: 4, 0x1C: 4, 0x1D: 4,
+        0x1E: 4, 0x1F: 4, 0x20: 4, 0x21: 4, 0x22: 4, 0x23: 4,
+        0x24: 8, 0x25: 8, 0x26: 8, 0x27: 8, 0x28: 8, 0x29: 8,
+        0x2A: 8, 0x2B: 8, 0xF0: 1, 0xF1: 4, 0xF2: 4, 0xF3: 2,
+        0xF4: 2, 0xF5: 2, 0xF6: 2, 0xF7: 1, 0xF8: 4, 0xF9: 4,
+        0xFA: 4, 0xFB: 4, 0xFC: 4, 0xFD: 4, 0xFE: 4
+    };
+    return lengths[id] || 255;
+}
+
+/**
+ * Read 4 bytes as Uint32 (little-endian)
+ */
+function getUint32(data) {
+    return (data[3] << 24 | data[2] << 16 | data[1] << 8 | data[0]) >>> 0;
+}
+
+/**
+ * CRC-8 calculation
+ */
+function crc8_encode(data) {
+    var table = [
+        0x00, 0x07, 0x0E, 0x09, 0x1C, 0x1B, 0x12, 0x15, 0x38, 0x3F, 0x36, 0x31,
+        0x24, 0x23, 0x2A, 0x2D, 0x70, 0x77, 0x7E, 0x79, 0x6C, 0x6B, 0x62, 0x65,
+        0x48, 0x4F, 0x46, 0x41, 0x54, 0x53, 0x5A, 0x5D, 0xE0, 0xE7, 0xEE, 0xE9,
+        0xFC, 0xFB, 0xF2, 0xF5, 0xD8, 0xDF, 0xD6, 0xD1, 0xC4, 0xC3, 0xCA, 0xCD,
+        0x90, 0x97, 0x9E, 0x99, 0x8C, 0x8B, 0x82, 0x85, 0xA8, 0xAF, 0xA6, 0xA1,
+        0xB4, 0xB3, 0xBA, 0xBD, 0xC7, 0xC0, 0xC9, 0xCE, 0xDB, 0xDC, 0xD5, 0xD2,
+        0xFF, 0xF8, 0xF1, 0xF6, 0xE3, 0xE4, 0xED, 0xEA, 0xB7, 0xB0, 0xB9, 0xBE,
+        0xAB, 0xAC, 0xA5, 0xA2, 0x8F, 0x88, 0x81, 0x86, 0x93, 0x94, 0x9D, 0x9A,
+        0x27, 0x20, 0x29, 0x2E, 0x3B, 0x3C, 0x35, 0x32, 0x1F, 0x18, 0x11, 0x16,
+        0x03, 0x04, 0x0D, 0x0A, 0x57, 0x50, 0x59, 0x5E, 0x4B, 0x4C, 0x45, 0x42,
+        0x6F, 0x68, 0x61, 0x66, 0x73, 0x74, 0x7D, 0x7A, 0x89, 0x8E, 0x87, 0x80,
+        0x95, 0x92, 0x9B, 0x9C, 0xB1, 0xB6, 0xBF, 0xB8, 0xAD, 0xAA, 0xA3, 0xA4,
+        0xF9, 0xFE, 0xF7, 0xF0, 0xE5, 0xE2, 0xEB, 0xEC, 0xC1, 0xC6, 0xCF, 0xC8,
+        0xDD, 0xDA, 0xD3, 0xD4, 0x69, 0x6E, 0x67, 0x60, 0x75, 0x72, 0x7B, 0x7C,
+        0x51, 0x56, 0x5F, 0x58, 0x4D, 0x4A, 0x43, 0x44, 0x19, 0x1E, 0x17, 0x10,
+        0x05, 0x02, 0x0B, 0x0C, 0x21, 0x26, 0x2F, 0x28, 0x3D, 0x3A, 0x33, 0x34,
+        0x4E, 0x49, 0x40, 0x47, 0x52, 0x55, 0x5C, 0x5B, 0x76, 0x71, 0x78, 0x7F,
+        0x6A, 0x6D, 0x64, 0x63, 0x3E, 0x39, 0x30, 0x37, 0x22, 0x25, 0x2C, 0x2B,
+        0x06, 0x01, 0x08, 0x0F, 0x1A, 0x1D, 0x14, 0x13, 0xAE, 0xA9, 0xA0, 0xA7,
+        0xB2, 0xB5, 0xBC, 0xBB, 0x96, 0x91, 0x98, 0x9F, 0x8A, 0x8D, 0x84, 0x83,
+        0xDE, 0xD9, 0xD0, 0xD7, 0xC2, 0xC5, 0xCC, 0xCB, 0xE6, 0xE1, 0xE8, 0xEF,
+        0xFA, 0xFD, 0xF4, 0xF3
+    ];
+    var crc = 0x00;
+    for (var j = 0; j < data.length; j++) {
+        crc = table[crc ^ data[j]];
+    }
+    return crc;
+}
 ```
