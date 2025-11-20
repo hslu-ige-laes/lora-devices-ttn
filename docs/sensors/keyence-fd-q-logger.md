@@ -9,7 +9,8 @@ parent: Sensors
 # Keyence FD-Q + LoRaWAN Logger
 {: .no_toc }
 
-- Manufacturer: <a href="https://www.keyence.com/" target="_blank">Keyence Corporation</a>
+- Manufacturer ultrasonic sensor: <a href="https://www.keyence.com/" target="_blank">Keyence Corporation</a>
+- Manufacturer Logger: HSLU T&A IGE
 - Product: <a href="https://www.keyence.com/products/process/flow/fd-q/" target="_blank">FD-Q Series</a>
 
 The Keyence FD-Q ultrasonic flow sensor can get extended with a self-made LoRaWAN-capable ESP-based module.
