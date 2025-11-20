@@ -1,12 +1,12 @@
 ---
 layout: default
-title: emu - professional II
+title: EMU - Professional II
 parent: Sensors
 ---
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/emu-professional-II.jpg" width="250" align="right" class="inline"/>
 
-# EMU - Professional II 3/5 LoRaExtern
+# EMU - Professional II 3/5 LoRa Extern
 {: .no_toc }
 
 - Manufacturer: <a href="https://www.emuag.ch/" target="_blank">EMU Electronic AG</a>
@@ -83,6 +83,11 @@ EMU provides an online [Payload Generator](https://www.emuag.ch/files/software/L
 -	15 Minutes: '0F 00 00 1C 86'
 -	60 Minutes: '3C 00 00 1C 15'
 - 24 Hours:   '10 0E 00 1C 1F'
+
+uplink_interval_3600min_energy_import_t1
+Uplink Interval 24 hr - Active Energy Import T1 in kWh
+
+A channel can get deactivated by sending '00 00 00 00'
 
 ---
 
