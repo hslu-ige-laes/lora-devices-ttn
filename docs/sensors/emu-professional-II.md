@@ -39,6 +39,7 @@ The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval, measure
 - Communication interfaces: M-Bus, Modbus RTU RS485, TCP, web server, Direct-http, S0 pulse output
 - LoRaWAN Class C device
 - LoRaWAN version 1.0.3, RP001 Regional Parameters 1.0.3 revision A
+- External Antenna: Switchable (depending on model)
 - Size: Body: 90 × 91 × 72mm
 - Weight: Body: ca. 350g
 - Operating Temperature Range: -25°C ... 70°C
