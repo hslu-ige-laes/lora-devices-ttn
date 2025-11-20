@@ -72,7 +72,9 @@ The module measures flow from the Keyence sensor via the 4-20mA signal and captu
 
 ## Documents
 
-- [Keyence FD-Q Datasheet](https://www.keyence.com/products/process/flow/fd-q/)
+- [Keyence FD-Q product page online](https://www.keyence.com/products/process/flow/fd-q/)
+- [Overview German](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/keyence-fd-q-logger-produkteübersicht.pdf)
+- [User Manual German](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/keyence-fd-q-logger-bedienungsanleitung.pdf)
 
 ---
 
