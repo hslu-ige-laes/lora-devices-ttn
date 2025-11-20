@@ -6,13 +6,13 @@ parent: Sensors
 
 <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/emu-professional-II.jpg" width="250" align="right" class="inline"/>
 
-# EMU - Professional II 3/5 LoRa Extern
+# EMU - Professional II
 {: .no_toc }
 
 - Manufacturer: <a href="https://www.emuag.ch/" target="_blank">EMU Electronic AG</a>
-- Product: <a href="http://www.netvox.com.tw/product.asp?pro=R718N37" target="_blank">R718N37</a>
+- Product: <a href="https://www.emuag.ch/produkte/energiezaehler/emu-professional-ii/" target="_blank">Professional II 3/5 LoRa</a>
 
-The EMU Professional II is a 3-Phase Energy Meter with MID B+D, measures current over transformer connections (clamp on).
+The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval, measures current over transformers or direct.
 
 ---
 
@@ -26,8 +26,17 @@ The EMU Professional II is a 3-Phase Energy Meter with MID B+D, measures current
 
 ## Specifications
 - Price ca. CHF 700.- (details on request)
-- Protection: [Body IP53](https://en.wikipedia.org/wiki/IP_Code), [Sensor IP30](https://en.wikipedia.org/wiki/IP_Code) 
 - Display: 38x28 mm graphic LC with LED backlighting
+- Current transformer ratio (5/5A to 20,000/5A or 1/1A to 4,000/1A)
+- Measurement data points:
+   - Current (total & pro Phase)
+   - Voltage (L1–L3)
+   - Power Factor (L1–L3)
+   - Active & Reactive Energy Import/Export (T1/T2, L1–L3 & total, Wh/kWh/varh/kvarh)
+   - Active Power (total & pro Phase)
+   - Frequency
+   - ...
+- Communication interfaces: M-Bus, Modbus RTU RS485, TCP, web server, Direct-http, S0 pulse output
 - LoRaWAN Class C device
 - LoRaWAN version 1.0.3, RP001 Regional Parameters 1.0.3 revision A
 - Size: Body: 90 × 91 × 72mm
