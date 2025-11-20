@@ -78,16 +78,16 @@ EMU provides an online [Payload Generator](https://www.emuag.ch/files/software/L
 
 #### Examples
 **Active Energy Import T1 in kWh** with different intervals:
--	 5 Minutes: '05 00 00 1C 1A'
--	10 Minutes: '0A 00 00 1C C8'
--	15 Minutes: '0F 00 00 1C 86'
--	60 Minutes: '3C 00 00 1C 15'
-- 24 Hours:   '10 0E 00 1C 1F'
+-	 5 Minutes: '05 00 08 1C B2'
+-	10 Minutes: '0A 00 08 1C 60'
+-	15 Minutes: '0F 00 08 1C 2E'
+-	60 Minutes: '3C 00 08 1C BD'
+- 24 Hours:   '10 0E 08 1C B7'
 
 uplink_interval_3600min_energy_import_t1
 Uplink Interval 24 hr - Active Energy Import T1 in kWh
 
-A channel can get deactivated by sending '00 00 00 00'
+A so called slot can get deactivated by sending '00 00 00 00'
 
 ---
 
