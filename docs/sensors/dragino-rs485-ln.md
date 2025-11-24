@@ -68,12 +68,13 @@ Wire colors:
 **Steps:**
 
 1. Download and start the [RS485 Configure Tool](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-rs485-ln_05_tool.zip).
-2. Wire the USB-TTL adapter with the device cables and plug it into the computer.
-3. Plug the programming cable into the RS485-LN's 3.5mm "PROG" jack.
-4. Power the RS485-LN via the screw terminal (7-24V DC).
-5. Start the RS485 Configure Tool and connect to the device
-6. Load the [AT Command text file](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-rs485-ln_03_commands.txt) into the tool and Write the parameters.
-7. Add the device to a ttn application, add the payload decoder from below and restart the device.
+1. Wire the USB-TTL adapter with the device cables and plug it into the computer.
+1. Plug the programming cable into the RS485-LN's 3.5mm "PROG" jack.
+1. Power the RS485-LN via the screw terminal (7-24V DC).
+1. Start the RS485 Configure Tool and connect to the device
+1. Load the [AT Command text file](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-rs485-ln_03_commands.txt) into the tool and Write the parameters.
+1. Add the device to a ttn application, add the payload decoder from below and restart the device.
+1. Make shure to set the correct parity and stopbits in the device as well.
 
 **Example**:
 If you have 5 Modbus devices (addresses 3,4,5,6,7), each with 3 registers (Temp on 0, Humidity on 1, CO2 on 5, all 16-bit signed), use these AT commands for direct serial configuration, or enter them in the RS485 Configure Tool:
