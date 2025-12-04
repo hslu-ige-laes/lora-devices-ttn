@@ -24,6 +24,18 @@ The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval, measure
 
 ---
 
+<div style="border: 2px solid #d32f2f; background:#ffebee; padding:16px; border-radius:6px;">
+  <strong style="color:#b71c1c; font-size:1.2em;">
+    ⚠️ WARNING – Installation only by certified electricians (NIV, Switzerland)
+  </strong>
+  <p style="margin-top:10px; color:#000;">
+    Installation inside electrical distribution boards / control cabinets and connection via current transformers is strictly prohibited for untrained persons – even on single-phase circuits with RCD/FI protection.  
+    Risk of severe electric shock and fire!
+  </p>
+</div>
+
+---
+
 ## Specifications
 - Price ca. CHF 700.- (details on request)
 - Display: 38x28 mm graphic LC with LED backlighting
