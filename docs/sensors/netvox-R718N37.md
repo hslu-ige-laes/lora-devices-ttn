@@ -14,7 +14,15 @@ parent: Sensors
 
 The R718N37 is a 3-Phase Current Meter with 3 x 75A Clamp-On Current Transformer.
 
----
+<div style="border: 2px solid #d32f2f; background:#ffebee; padding:16px; border-radius:6px;">
+  <strong style="color:#b71c1c; font-size:1.2em;">
+    ⚠️ WARNING – Installation only by certified electricians (NIV, Switzerland)
+  </strong>
+  <p style="margin-top:10px; color:#000;">
+    Installation inside electrical distribution boards / control cabinets and connection via current transformers is strictly prohibited for untrained persons – even on single-phase circuits with RCD/FI protection.  
+    Risk of severe electric shock and fire!
+  </p>
+</div>
 
 ## Table of contents
 {: .no_toc .text-delta }
