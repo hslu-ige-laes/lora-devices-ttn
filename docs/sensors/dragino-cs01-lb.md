@@ -16,6 +16,8 @@ The CS01-LB is a LoRaWAN 4 Channel Current Sensor Converter. It can be used to m
 The current reading cannot be used for power calculations. But with machines running different stages, the stage can get identified with the current signal.
 The current sensors are detachable and can be replaced with different scales.
 
+---
+
 <div style="border: 2px solid #d32f2f; background:#ffebee; padding:16px; border-radius:6px;">
   <strong style="color:#b71c1c; font-size:1.2em;">
     ⚠️ WARNING – Installation only by certified electricians (NIV, Switzerland)
@@ -25,6 +27,8 @@ The current sensors are detachable and can be replaced with different scales.
     Risk of severe electric shock and fire!
   </p>
 </div>
+
+---
 
 ## Table of contents
 {: .no_toc .text-delta }

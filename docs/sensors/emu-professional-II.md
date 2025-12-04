@@ -14,6 +14,8 @@ parent: Sensors
 
 The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval, measures current over transformers or direct.
 
+---
+
 <div style="border: 2px solid #d32f2f; background:#ffebee; padding:16px; border-radius:6px;">
   <strong style="color:#b71c1c; font-size:1.2em;">
     ⚠️ WARNING – Installation only by certified electricians (NIV, Switzerland)
@@ -23,6 +25,8 @@ The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval, measure
     Risk of severe electric shock and fire!
   </p>
 </div>
+
+---
 
 ## Table of contents
 {: .no_toc .text-delta }
