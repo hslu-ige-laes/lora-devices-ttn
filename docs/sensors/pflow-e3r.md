@@ -47,16 +47,20 @@ The E3R is a LoRaWAN Ultrasonic Heat Flow Meter.
 
 ## Settings (mandatory!)
 
-1. On the device, go to `Settings / 3. Communication / 4. Lora USC` and set it to 868100000 Hz
+1. On the device, go to `Device Settings / 3. Communication / 4. Lora USC` and set it to `868100000 Hz`
+   - you can enter the `Device Settings` by pressing the button with the three lines on the device
 2. Make shure, that in ttn `Device Class C` is configured under `Network layer`
-3. Reset Lora (in `Settings / 3. Communication / 8. Reset Lora`) 
-4. Mount the device on the pipe, use a lot of gel on the ultrasonic contact surfaces. Mount as well the temperature sensors with thermal paste.
-5. Set the pipe Diameter, Wall Thickness and pipe material (in `Settings / 1. Pipe Parameter`)
+3. Reset Lora (in `Device Settings / 3. Communication / 8. Reset Lora`) 
+4. Mount the device on the pipe
+   - use a lot of ultrasonic contact gel on the ultrasonic contacts
+   - mount as well the temperature sensors with thermal paste
+5. Set the pipe Diameter, Wall Thickness and Pipe Material (in `Device Settings / 1. Pipe Parameter`)
    - the thickness could also be measured with a separate ultrasonic thickness sensor
-6. Stop the water flow in the hydraulic circuit and make a zero set (in `Settings / 5. Select Setting / 4. Reset Zero`)
-7. If possible (recommended):
-   - Activate the water flow and make a paralell measurement with a high quality ultrasonic flow meter.
-   - Calculate the correction factor and set it in the device (in `Settings / 6. Calibration / 1. Scale Factor`)
+6. Stop the water flow in the hydraulic circuit and make a zero set (in `Device Settings / 5. Select Setting / 4. Reset Zero`)
+7. Start the water flow, done
+8. If possible (recommended):
+   - Make a paralell measurement with a high quality ultrasonic flow meter
+   - Calculate the correction factor and set it in the device (in `Device Settings / 6. Calibration / 1. Scale Factor`)
 
 ---
 
