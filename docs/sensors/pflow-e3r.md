@@ -32,10 +32,8 @@ The E3R is a LoRaWAN Ultrasonic Heat Flow Meter.
 - Pipe size range: DN20,DN25,DN32,DN40,DN50,DN65,DN80
 - Power Supply: 10-36 VDC/500mA
 - LoRaWAN version: 1.0.2
-- LoRaWAN device class: A
+- LoRaWAN device class: C
 - Modbus as well available
-- Size: tbd
-- Weight: tbd
 
 ---
 ## Documents
@@ -47,30 +45,19 @@ The E3R is a LoRaWAN Ultrasonic Heat Flow Meter.
 
 ---
 
-## Adding the Device to TTN
-- The `JoinEUI`, `App EUI` and the `DevEUI` should be on a sticker on the cardboard box.
-- Before a device can communicate via "The Things Network" we have to add it to an application.<br>
+## Settings (mandatory!)
 
-1. [Create a new application](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/getting_started#create-a-new-application)
-2. Under `End devices` in the application click `(+) Register end device`
-3. Under `Input method` select `Enter end device specifics manually`
-4. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
-5. Under `LoRaWAN version` select `1.0.2`, Regional Parameters version `RP001 Regional Parameters 1.0.2`
-6. Under `JoinEUI` enter the `App EUI` from the App and press `Confirm`
-7. Enter as well the `DevEUI` and the `AppKey` from the App
-8. Set an end-device name
-9. Press `Register end device`
-10. Add the payload formatter from below, either to the device itself or if all devices in the app are from the same type, to the application
-11. Plug in the device or restart LoRa in Communication settings
+1. On the device, go to `Settings / 3. Communication / 4. Lora USC` and set it to 868100000 Hz
+2. Make shure, that in ttn `Device Class C` is configured under `Network layer`
+3. Reset Lora (in `Settings / 3. Communication / 8. Reset Lora`) 
+4. Mount the device on the pipe, use a lot of gel on the ultrasonic contact surfaces. Mount as well the temperature sensors with thermal paste.
+5. Set the pipe Diameter, Wall Thickness and pipe material (in `Settings / 1. Pipe Parameter`)
+   - the thickness could also be measured with a separate ultrasonic thickness sensor
+6. Stop the water flow in the hydraulic circuit and make a zero set (in `Settings / 5. Select Setting / 4. Reset Zero`)
+7. If possible (recommended):
+   - Activate the water flow and make a paralell measurement with a high quality ultrasonic flow meter.
+   - Calculate the correction factor and set it in the device (in `Settings / 6. Calibration / 1. Scale Factor`)
 
-- Now the device should join the network and you can see the incoming telegrams in the `Live data` section
-
----
-
-## Optional Settings
-
-### Change TDC (Transmit Time Interval resp. Keep Alive Interval)
-tbd
 ---
 
 ## Payload Decoder
