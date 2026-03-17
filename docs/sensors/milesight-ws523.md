@@ -4,7 +4,7 @@ title: Milesight - WS523
 parent: Sensors
 ---
 
-<img src="https://www.milesight.com/upload/image/20220506/1651814400451072219.png" width="250" align="right" class="inline"/>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/milesight-ws523_01.png" width="250" align="right" class="inline"/>
 
 # Milesight - WS523
 {: .no_toc }
@@ -33,7 +33,6 @@ The Milesight WS523 is a LoRaWAN® Class C smart plug for remote ON/OFF control 
   - Voltage (VAC)
   - Current (mA)
   - Active Power (W)
-  - Power Factor (%)
   - Power Consumption (kWh, cumulative)
 - Measurement Accuracy: typical ±3 %, maximum ±5 % (±1 % customisable)
 - Overload Protection: yes (configurable threshold, audible/visual alarm)
@@ -65,8 +64,6 @@ The Milesight WS523 is a LoRaWAN® Class C smart plug for remote ON/OFF control 
 
 ## Ordering Info
 - EU Type F (868 MHz): `WS523-868M-EU` – WS523 LoRaWAN Smart Portable Socket, Type F (Europe)
-- UK Type G (868 MHz): `WS523-868M-UK`
-- US Type B (915 MHz): `WS523-915M-15A-US`
 
 ---
 
@@ -145,12 +142,11 @@ Sent when mains power is lost (capacitor-backed).
 
 ---
 
-## Original Payload Formatter (Milesight / TTN)
+##  Payload Formatter
 
 The official decoder is maintained by Milesight on GitHub:  
-👉 **[https://github.com/Milesight-IoT/SensorDecoders/tree/main/ws-series/ws52x](https://github.com/Milesight-IoT/SensorDecoders/tree/main/ws-series/ws52x)**
+ **[https://github.com/Milesight-IoT/SensorDecoders/tree/main/ws-series/ws52x](https://github.com/Milesight-IoT/SensorDecoders/tree/main/ws-series/ws52x)**
 
-Below is a copy of the decoder for reference (check the GitHub repository for the latest version):
 
 ```javascript
 /**
@@ -165,12 +161,13 @@ Below is a copy of the decoder for reference (check the GitHub repository for th
  *
  * Example decoded output:
  * {
- *   "socket": "open",
- *   "voltage": 231.4,       // V
- *   "current": 824,         // mA
- *   "active_power": 187,    // W
- *   "power_factor": 98,     // %
- *   "power_consumption": 14.036  // kWh (cumulative)
+ *   "socket":            "open",   // open = ON, close = OFF
+ *   "voltage":           231.4,    // V
+ *   "current":           0.824,    // A
+ *   "active_power":      187,      // W
+ *   "power_factor":      98,       // %
+ *   "power_consumption": 14.036,   // kWh (cumulative)
+ *   "power_outage":      true,     // present only on power outage alert
  * }
  */
 function decodeUplink(input) {
@@ -182,12 +179,12 @@ function decodeUplink(input) {
         var type    = bytes[i++];
 
         if (channel === 0x03 && type === 0x74) {
-            // Voltage: UINT16, unit 0.1 V
+            // Voltage: UINT16, unit 0.1 V → V
             decoded.voltage = (bytes[i] | (bytes[i + 1] << 8)) / 10;
             i += 2;
         } else if (channel === 0x04 && type === 0x74) {
-            // Current: UINT16, unit mA
-            decoded.current = bytes[i] | (bytes[i + 1] << 8);
+            // Current: UINT16, unit mA → A
+            decoded.current = (bytes[i] | (bytes[i + 1] << 8)) / 1000;
             i += 2;
         } else if (channel === 0x05 && type === 0x74) {
             // Active Power: INT16, unit W
@@ -199,13 +196,17 @@ function decodeUplink(input) {
             decoded.power_factor = bytes[i];
             i += 1;
         } else if (channel === 0x07 && type === 0xC8) {
-            // Power Consumption: UINT32, unit Wh → convert to kWh
-            var wh = bytes[i] | (bytes[i+1] << 8) | (bytes[i+2] << 16) | (bytes[i+3] << 24);
-            decoded.power_consumption = (wh >>> 0) / 1000;
+            // Power Consumption: UINT32, unit Wh → kWh
+            var wh = (bytes[i] | (bytes[i+1] << 8) | (bytes[i+2] << 16) | (bytes[i+3] << 24)) >>> 0;
+            decoded.power_consumption = wh / 1000;
             i += 4;
         } else if (channel === 0x08 && type === 0x70) {
-            // Socket Status: 0x00 = off, 0x01 = on
+            // Socket Status: 0x00 = close (OFF), 0x01 = open (ON)
             decoded.socket = bytes[i] === 0x00 ? "close" : "open";
+            i += 1;
+        } else if (channel === 0x09 && type === 0x70) {
+            // Power Outage Alert: 0x00 = power restored, 0x01 = power outage
+            decoded.power_outage = bytes[i] !== 0x00;
             i += 1;
         } else {
             // Unknown channel/type – skip 1 byte and attempt to resync
@@ -219,16 +220,36 @@ function decodeUplink(input) {
 
 ---
 
-## Adapted Payload Formatter HSLU – Power Consumption only
+## Adapted Payload Formatter HSLU
 
-The following simplified decoder extracts only the cumulative power consumption in kWh and exposes it as `energy_kWh_inc`, consistent with the HSLU naming convention used for other energy meters.
+The following decoder uses HSLU field naming conventions and covers all relevant uplink types:
+- Periodic report (voltage, current, power, energy)
+- Socket change report (on/off state)
+- Power outage alert
+
+| Field | Type | Description |
+|---|---|---|
+| `voltage_volt_abs` | float | Mains voltage in V |
+| `current_ampere_abs` | float | Load current in A |
+| `power_W_abs` | int | Active power in W |
+| `energy_kWh_inc` | float | Cumulative energy consumption in kWh |
+| `onOff_state_abs` | int | Socket state: 1 = ON (open), 0 = OFF (close) |
+| `alarm_state_abs` | int | Power outage alert: 1 = outage active, 0 = power restored |
 
 ```javascript
 /**
- * Simplified TTN Decoder – Extract Power Consumption (kWh) from Milesight WS523
+ * TTN Decoder – Milesight WS523 LoRaWAN Smart Portable Socket
  * HSLU adapted version
  *
- * Returns: { data: { energy_kWh_inc: <float> } }
+ * Uplink port: 85 | Byte order: little-endian
+ *
+ * Field mapping:
+ *   voltage_volt_abs    – Mains voltage [V]
+ *   current_ampere_abs  – Load current [A]
+ *   power_W_abs         – Active power [W]
+ *   energy_kWh_inc      – Cumulative energy consumption [kWh]
+ *   onOff_state_abs     – Socket state: 1=ON, 0=OFF
+ *   alarm_state_abs     – Power outage: 1=outage active, 0=power restored
  */
 function decodeUplink(input) {
     var bytes = input.bytes;
@@ -237,44 +258,58 @@ function decodeUplink(input) {
         return { data: {}, warnings: ["Payload too short"] };
     }
 
-    var energy_kWh = null;
+    var decoded = {};
 
     for (var i = 0; i < bytes.length - 1; ) {
         var channel = bytes[i++];
         var type    = bytes[i++];
 
         if (channel === 0x03 && type === 0x74) {
-            i += 2; // skip voltage
+            // Voltage: UINT16, unit 0.1 V → V
+            decoded.voltage_volt_abs = (bytes[i] | (bytes[i + 1] << 8)) / 10;
+            i += 2;
+
         } else if (channel === 0x04 && type === 0x74) {
-            i += 2; // skip current
+            // Current: UINT16, unit mA → A
+            decoded.current_ampere_abs = (bytes[i] | (bytes[i + 1] << 8)) / 1000;
+            i += 2;
+
         } else if (channel === 0x05 && type === 0x74) {
-            i += 2; // skip active power
+            // Active Power: INT16, unit W
+            var rawPwr = bytes[i] | (bytes[i + 1] << 8);
+            decoded.power_W_abs = (rawPwr & 0x8000) ? rawPwr - 0x10000 : rawPwr;
+            i += 2;
+
         } else if (channel === 0x06 && type === 0x74) {
-            i += 1; // skip power factor
+            // Power Factor: not used – skip
+            i += 1;
+
         } else if (channel === 0x07 && type === 0xC8) {
-            // Power Consumption in Wh (UINT32, little-endian) → kWh
+            // Power Consumption: UINT32, unit Wh → kWh
             var wh = (bytes[i] | (bytes[i+1] << 8) | (bytes[i+2] << 16) | (bytes[i+3] << 24)) >>> 0;
-            energy_kWh = wh / 1000;
+            decoded.energy_kWh_inc = wh / 1000;
             i += 4;
-            break;
+
         } else if (channel === 0x08 && type === 0x70) {
-            i += 1; // skip socket status
+            // Socket Status: 0x00=OFF (close), 0x01=ON (open)
+            decoded.onOff_state_abs = bytes[i] === 0x00 ? 0 : 1;
+            i += 1;
+
+        } else if (channel === 0x09 && type === 0x70) {
+            // Power Outage Alert: 0x00=restored, 0x01=outage active
+            decoded.alarm_state_abs = bytes[i] === 0x00 ? 0 : 1;
+            i += 1;
+
         } else {
-            i += 1; // unknown – try to continue
+            // Unknown channel/type – skip 1 byte and attempt to resync
+            i += 1;
         }
     }
 
-    if (energy_kWh !== null) {
-        return {
-            data: {
-                energy_kWh_inc: energy_kWh
-            }
-        };
-    } else {
-        return {
-            data: {},
-            warnings: ["Power Consumption (channel 0x07) not found in payload"]
-        };
+    if (Object.keys(decoded).length === 0) {
+        return { data: {}, warnings: ["No known channels found in payload"] };
     }
+
+    return { data: decoded };
 }
 ```
