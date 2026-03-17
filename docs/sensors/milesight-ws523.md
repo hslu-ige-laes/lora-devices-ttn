@@ -150,72 +150,328 @@ The official decoder is maintained by Milesight on GitHub:
 
 ```javascript
 /**
- * Milesight WS52x LoRaWAN Smart Portable Socket
- * Payload Decoder for The Things Network (TTN v3)
+ * Payload Decoder
  *
- * Source: https://github.com/Milesight-IoT/SensorDecoders
- * License: see repository
+ * Copyright 2025 Milesight IoT
  *
- * Uplink port: 85
- * Byte order:  little-endian
- *
- * Example decoded output:
- * {
- *   "socket":            "open",   // open = ON, close = OFF
- *   "voltage":           231.4,    // V
- *   "current":           0.824,    // A
- *   "active_power":      187,      // W
- *   "power_factor":      98,       // %
- *   "power_consumption": 14.036,   // kWh (cumulative)
- *   "power_outage":      true,     // present only on power outage alert
- * }
+ * @product WS52x
  */
+var RAW_VALUE = 0x00;
+
+/* eslint no-redeclare: "off" */
+/* eslint-disable */
+// Chirpstack v4
 function decodeUplink(input) {
-    var bytes = input.bytes;
-    var decoded = {};
-
-    for (var i = 0; i < bytes.length; ) {
-        var channel = bytes[i++];
-        var type    = bytes[i++];
-
-        if (channel === 0x03 && type === 0x74) {
-            // Voltage: UINT16, unit 0.1 V → V
-            decoded.voltage = (bytes[i] | (bytes[i + 1] << 8)) / 10;
-            i += 2;
-        } else if (channel === 0x04 && type === 0x74) {
-            // Current: UINT16, unit mA → A
-            decoded.current = (bytes[i] | (bytes[i + 1] << 8)) / 1000;
-            i += 2;
-        } else if (channel === 0x05 && type === 0x74) {
-            // Active Power: INT16, unit W
-            var raw = bytes[i] | (bytes[i + 1] << 8);
-            decoded.active_power = (raw & 0x8000) ? raw - 0x10000 : raw;
-            i += 2;
-        } else if (channel === 0x06 && type === 0x74) {
-            // Power Factor: UINT8, unit %
-            decoded.power_factor = bytes[i];
-            i += 1;
-        } else if (channel === 0x07 && type === 0xC8) {
-            // Power Consumption: UINT32, unit Wh → kWh
-            var wh = (bytes[i] | (bytes[i+1] << 8) | (bytes[i+2] << 16) | (bytes[i+3] << 24)) >>> 0;
-            decoded.power_consumption = wh / 1000;
-            i += 4;
-        } else if (channel === 0x08 && type === 0x70) {
-            // Socket Status: 0x00 = close (OFF), 0x01 = open (ON)
-            decoded.socket = bytes[i] === 0x00 ? "close" : "open";
-            i += 1;
-        } else if (channel === 0x09 && type === 0x70) {
-            // Power Outage Alert: 0x00 = power restored, 0x01 = power outage
-            decoded.power_outage = bytes[i] !== 0x00;
-            i += 1;
-        } else {
-            // Unknown channel/type – skip 1 byte and attempt to resync
-            i += 1;
-        }
-    }
-
+    var decoded = milesightDeviceDecode(input.bytes);
     return { data: decoded };
 }
+
+// Chirpstack v3
+function Decode(fPort, bytes) {
+    return milesightDeviceDecode(bytes);
+}
+
+// The Things Network
+function Decoder(bytes, port) {
+    return milesightDeviceDecode(bytes);
+}
+/* eslint-enable */
+
+function milesightDeviceDecode(bytes) {
+    var decoded = {};
+
+    for (var i = 0; i < bytes.length;) {
+        var channel_id = bytes[i++];
+        var channel_type = bytes[i++];
+
+        // IPSO VERSION
+        if (channel_id === 0xff && channel_type === 0x01) {
+            decoded.ipso_version = readProtocolVersion(bytes[i]);
+            i += 1;
+        }
+        // HARDWARE VERSION
+        else if (channel_id === 0xff && channel_type === 0x09) {
+            decoded.hardware_version = readHardwareVersion(bytes.slice(i, i + 2));
+            i += 2;
+        }
+        // FIRMWARE VERSION
+        else if (channel_id === 0xff && channel_type === 0x0a) {
+            decoded.firmware_version = readFirmwareVersion(bytes.slice(i, i + 2));
+            i += 2;
+        }
+        // TSL VERSION
+        else if (channel_id === 0xff && channel_type === 0xff) {
+            decoded.tsl_version = readTslVersion(bytes.slice(i, i + 2));
+            i += 2;
+        }
+        // SERIAL NUMBER
+        else if (channel_id === 0xff && channel_type === 0x16) {
+            decoded.sn = readSerialNumber(bytes.slice(i, i + 8));
+            i += 8;
+        }
+        // LORAWAN CLASS TYPE
+        else if (channel_id === 0xff && channel_type === 0x0f) {
+            decoded.lorawan_class = readLoRaWANClass(bytes[i]);
+            i += 1;
+        }
+        // RESET EVENT
+        else if (channel_id === 0xff && channel_type === 0xfe) {
+            decoded.reset_event = readResetEvent(1);
+            i += 1;
+        }
+        // DEVICE STATUS
+        else if (channel_id === 0xff && channel_type === 0x0b) {
+            decoded.device_status = readDeviceStatus(1);
+            i += 1;
+        }
+        // VOLTAGE
+        else if (channel_id === 0x03 && channel_type === 0x74) {
+            decoded.voltage = readUInt16LE(bytes.slice(i, i + 2)) / 10;
+            i += 2;
+        }
+        // ACTIVE POWER
+        else if (channel_id === 0x04 && channel_type === 0x80) {
+            decoded.active_power = readUInt32LE(bytes.slice(i, i + 4));
+            i += 4;
+        }
+        // POWER FACTOR
+        else if (channel_id === 0x05 && channel_type === 0x81) {
+            decoded.power_factor = readUInt8(bytes[i]);
+            i += 1;
+        }
+        // POWER CONSUMPTION
+        else if (channel_id === 0x06 && channel_type == 0x83) {
+            decoded.power_consumption = readUInt32LE(bytes.slice(i, i + 4));
+            i += 4;
+        }
+        // CURRENT
+        else if (channel_id === 0x07 && channel_type == 0xc9) {
+            decoded.current = readUInt16LE(bytes.slice(i, i + 2));
+            i += 2;
+        }
+        // SOCKET STATUS
+        else if (channel_id === 0x08 && channel_type == 0x70) {
+            var data = bytes[i++];
+            decoded.socket_status = readSocketStatus(data & 0x01);
+        }
+        // DOWNLINK RESPONSE
+        else if (channel_id === 0xfe || channel_id === 0xff) {
+            var result = handle_downlink_response(channel_type, bytes, i);
+            decoded = Object.assign(decoded, result.data);
+            i = result.offset;
+        } else {
+            break;
+        }
+    }
+    return decoded;
+}
+
+function handle_downlink_response(channel_type, bytes, offset) {
+    var decoded = {};
+
+    switch (channel_type) {
+        case 0x03:
+            decoded.report_interval = readUInt16LE(bytes.slice(offset, offset + 2));
+            offset += 2;
+            break;
+        case 0x10:
+            decoded.reboot = readYesNoStatus(1);
+            offset += 1;
+            break;
+        case 0x28:
+            decoded.report_status = readYesNoStatus(1);
+            offset += 1;
+            break;
+        case 0x22:
+            // skip first byte
+            decoded.delay_time = readUInt16LE(bytes.slice(offset + 1, offset + 3));
+            decoded.socket_status = readOnOffStatus(bytes[offset + 3] & 0x0F);
+            offset += 4;
+            break;
+        case 0x23:
+            decoded.cancel_delay_task = readUInt8(bytes[offset]);
+            // skip next byte
+            offset += 2;
+            break;
+        case 0x24:
+            decoded.current_alarm_config = {};
+            decoded.current_alarm_config.enable = readEnableStatus(bytes[offset]);
+            decoded.current_alarm_config.threshold = readUInt8(bytes[offset + 1]);
+            offset += 2;
+            break;
+        case 0x25:
+            var child_lock_data = readUInt16LE(bytes.slice(offset, offset + 2));
+            decoded.child_lock_config = {};
+            decoded.child_lock_config.enable = readEnableStatus((child_lock_data >>> 15) & 0x01);
+            decoded.child_lock_config.lock_time = child_lock_data & 0x7fff;
+            offset += 2;
+            break;
+        case 0x26:
+            decoded.power_consumption_enable = readEnableStatus(bytes[offset]);
+            offset += 1;
+            break;
+        case 0x27:
+            decoded.reset_power_consumption = readYesNoStatus(1);
+            offset += 1;
+            break;
+        case 0x2c:
+            decoded.report_attribute = readYesNoStatus(1);
+            offset += 1;
+            break;
+        case 0x2f:
+            decoded.led_indicator_enable = readEnableStatus(bytes[offset]);
+            offset += 1;
+            break;
+        case 0x30:
+            decoded.over_current_protection = {};
+            decoded.over_current_protection.enable = readEnableStatus(bytes[offset]);
+            decoded.over_current_protection.trip_current = readUInt8(bytes[offset + 1]);
+            offset += 2;
+            break;
+        default:
+            throw new Error("unknown downlink response");
+    }
+
+    return { data: decoded, offset: offset };
+}
+
+function readProtocolVersion(bytes) {
+    var major = (bytes & 0xf0) >> 4;
+    var minor = bytes & 0x0f;
+    return "v" + major + "." + minor;
+}
+
+function readHardwareVersion(bytes) {
+    var major = (bytes[0] & 0xff).toString(16);
+    var minor = (bytes[1] & 0xff) >> 4;
+    return "v" + major + "." + minor;
+}
+
+function readFirmwareVersion(bytes) {
+    var major = (bytes[0] & 0xff).toString(16);
+    var minor = (bytes[1] & 0xff).toString(16);
+    return "v" + major + "." + minor;
+}
+
+function readTslVersion(bytes) {
+    var major = bytes[0] & 0xff;
+    var minor = bytes[1] & 0xff;
+    return "v" + major + "." + minor;
+}
+
+function readSerialNumber(bytes) {
+    var temp = [];
+    for (var idx = 0; idx < bytes.length; idx++) {
+        temp.push(("0" + (bytes[idx] & 0xff).toString(16)).slice(-2));
+    }
+    return temp.join("");
+}
+
+function readLoRaWANClass(type) {
+    var class_map = {
+        0: "Class A",
+        1: "Class B",
+        2: "Class C",
+        3: "Class CtoB",
+    };
+    return getValue(class_map, type);
+}
+
+function readResetEvent(status) {
+    var status_map = { 0: "normal", 1: "reset" };
+    return getValue(status_map, status);
+}
+
+function readDeviceStatus(status) {
+    var status_map = { 0: "off", 1: "on" };
+    return getValue(status_map, status);
+}
+
+function readSocketStatus(status) {
+    var on_off_map = { 0: "off", 1: "on" };
+    return getValue(on_off_map, status);
+}
+
+function readEnableStatus(status) {
+    var status_map = { 0: "disable", 1: "enable" };
+    return getValue(status_map, status);
+}
+
+function readYesNoStatus(status) {
+    var yes_no_map = { 0: "no", 1: "yes" };
+    return getValue(yes_no_map, status);
+}
+
+function readOnOffStatus(status) {
+    var on_off_map = { 0: "off", 1: "on" };
+    return getValue(on_off_map, status);
+}
+
+/* eslint-disable */
+function readUInt8(bytes) {
+    return bytes & 0xff;
+}
+
+function readInt8(bytes) {
+    var ref = readUInt8(bytes);
+    return ref > 0x7f ? ref - 0x100 : ref;
+}
+
+function readUInt16LE(bytes) {
+    var value = (bytes[1] << 8) + bytes[0];
+    return value & 0xffff;
+}
+
+function readUInt32LE(bytes) {
+    var value = (bytes[3] << 24) + (bytes[2] << 16) + (bytes[1] << 8) + bytes[0];
+    return (value & 0xffffffff) >>> 0;
+}
+
+function getValue(map, key) {
+    if (RAW_VALUE) return key;
+
+    var value = map[key];
+    if (!value) value = "unknown";
+    return value;
+}
+
+//if (!Object.assign) {
+    Object.defineProperty(Object, "assign", {
+        enumerable: false,
+        configurable: true,
+        writable: true,
+        value: function (target) {
+            "use strict";
+            if (target == null) {
+                throw new TypeError("Cannot convert first argument to object");
+            }
+
+            var to = Object(target);
+            for (var i = 1; i < arguments.length; i++) {
+                var nextSource = arguments[i];
+                if (nextSource == null) {
+                    continue;
+                }
+                nextSource = Object(nextSource);
+
+                var keysArray = Object.keys(Object(nextSource));
+                for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+                    var nextKey = keysArray[nextIndex];
+                    var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+                    if (desc !== undefined && desc.enumerable) {
+                        // concat array
+                        if (Array.isArray(to[nextKey]) && Array.isArray(nextSource[nextKey])) {
+                            to[nextKey] = to[nextKey].concat(nextSource[nextKey]);
+                        } else {
+                            to[nextKey] = nextSource[nextKey];
+                        }
+                    }
+                }
+            }
+            return to;
+        },
+    });
+//}
 ```
 
 ---
@@ -239,77 +495,129 @@ The following decoder uses HSLU field naming conventions and covers all relevant
 ```javascript
 /**
  * TTN Decoder – Milesight WS523 LoRaWAN Smart Portable Socket
- * HSLU adapted version
+ * HSLU adapted version – based on official Milesight decoder
+ *
+ * Copyright 2025 Milesight IoT (structure), HSLU adaptations (field names & units)
  *
  * Uplink port: 85 | Byte order: little-endian
  *
  * Field mapping:
  *   voltage_volt_abs    – Mains voltage [V]
- *   current_ampere_abs  – Load current [A]
+ *   current_ampere_abs  – Load current [A]  (mA ÷ 1000)
  *   power_W_abs         – Active power [W]
- *   energy_kWh_inc      – Cumulative energy consumption [kWh]
+ *   energy_kWh_inc      – Cumulative energy [kWh]  (Wh ÷ 1000)
  *   onOff_state_abs     – Socket state: 1=ON, 0=OFF
  *   alarm_state_abs     – Power outage: 1=outage active, 0=power restored
+ *
+ * Example payload:  08700105816307C90C0103748F0906832B4C0400048041000000
+ * Expected result:
+ *   onOff_state_abs     = 1         (socket ON)
+ *   voltage_volt_abs    = 244.7     (V)
+ *   current_ampere_abs  = 0.268     (A)
+ *   power_W_abs         = 65        (W)
+ *   energy_kWh_inc      = 281.643   (kWh)
  */
 function decodeUplink(input) {
-    var bytes = input.bytes;
+    var decoded = milesightDeviceDecode(input.bytes);
+    return { data: decoded };
+}
 
-    if (bytes.length < 2) {
-        return { data: {}, warnings: ["Payload too short"] };
-    }
-
+function milesightDeviceDecode(bytes) {
     var decoded = {};
 
-    for (var i = 0; i < bytes.length - 1; ) {
-        var channel = bytes[i++];
-        var type    = bytes[i++];
+    for (var i = 0; i < bytes.length;) {
+        var channel_id   = bytes[i++];
+        var channel_type = bytes[i++];
 
-        if (channel === 0x03 && type === 0x74) {
-            // Voltage: UINT16, unit 0.1 V → V
-            decoded.voltage_volt_abs = (bytes[i] | (bytes[i + 1] << 8)) / 10;
+        // IPSO / hardware / firmware / serial info (join message)
+        if (channel_id === 0xff && channel_type === 0x01) {
+            i += 1; // ipso version – skip
+        } else if (channel_id === 0xff && channel_type === 0x09) {
+            i += 2; // hardware version – skip
+        } else if (channel_id === 0xff && channel_type === 0x0a) {
+            i += 2; // firmware version – skip
+        } else if (channel_id === 0xff && channel_type === 0xff) {
+            i += 2; // tsl version – skip
+        } else if (channel_id === 0xff && channel_type === 0x16) {
+            i += 8; // serial number – skip
+        } else if (channel_id === 0xff && channel_type === 0x0f) {
+            i += 1; // lorawan class – skip
+        } else if (channel_id === 0xff && channel_type === 0xfe) {
+            i += 1; // reset event – skip
+        } else if (channel_id === 0xff && channel_type === 0x0b) {
+            i += 1; // device status – skip
+
+        // VOLTAGE  ch=0x03, type=0x74, UINT16, unit 0.1 V → V
+        } else if (channel_id === 0x03 && channel_type === 0x74) {
+            decoded.voltage_volt_abs = readUInt16LE(bytes.slice(i, i + 2)) / 10;
             i += 2;
 
-        } else if (channel === 0x04 && type === 0x74) {
-            // Current: UINT16, unit mA → A
-            decoded.current_ampere_abs = (bytes[i] | (bytes[i + 1] << 8)) / 1000;
-            i += 2;
-
-        } else if (channel === 0x05 && type === 0x74) {
-            // Active Power: INT16, unit W
-            var rawPwr = bytes[i] | (bytes[i + 1] << 8);
-            decoded.power_W_abs = (rawPwr & 0x8000) ? rawPwr - 0x10000 : rawPwr;
-            i += 2;
-
-        } else if (channel === 0x06 && type === 0x74) {
-            // Power Factor: not used – skip
-            i += 1;
-
-        } else if (channel === 0x07 && type === 0xC8) {
-            // Power Consumption: UINT32, unit Wh → kWh
-            var wh = (bytes[i] | (bytes[i+1] << 8) | (bytes[i+2] << 16) | (bytes[i+3] << 24)) >>> 0;
-            decoded.energy_kWh_inc = wh / 1000;
+        // ACTIVE POWER  ch=0x04, type=0x80, UINT32, unit W
+        } else if (channel_id === 0x04 && channel_type === 0x80) {
+            decoded.power_W_abs = readUInt32LE(bytes.slice(i, i + 4));
             i += 4;
 
-        } else if (channel === 0x08 && type === 0x70) {
-            // Socket Status: 0x00=OFF (close), 0x01=ON (open)
-            decoded.onOff_state_abs = bytes[i] === 0x00 ? 0 : 1;
+        // POWER FACTOR  ch=0x05, type=0x81, UINT8, unit % – not used
+        } else if (channel_id === 0x05 && channel_type === 0x81) {
             i += 1;
 
-        } else if (channel === 0x09 && type === 0x70) {
-            // Power Outage Alert: 0x00=restored, 0x01=outage active
+        // POWER CONSUMPTION  ch=0x06, type=0x83, UINT32, unit Wh → kWh
+        } else if (channel_id === 0x06 && channel_type === 0x83) {
+            decoded.energy_kWh_inc = readUInt32LE(bytes.slice(i, i + 4)) / 1000;
+            i += 4;
+
+        // CURRENT  ch=0x07, type=0xC9, UINT16, unit mA → A
+        } else if (channel_id === 0x07 && channel_type === 0xc9) {
+            decoded.current_ampere_abs = readUInt16LE(bytes.slice(i, i + 2)) / 1000;
+            i += 2;
+
+        // SOCKET STATUS  ch=0x08, type=0x70, bit0: 0=off, 1=on
+        } else if (channel_id === 0x08 && channel_type === 0x70) {
+            decoded.onOff_state_abs = (bytes[i] & 0x01) === 0x01 ? 1 : 0;
+            i += 1;
+
+        // POWER OUTAGE ALERT  ch=0x09, type=0x70, 0x00=restored, 0x01=outage
+        } else if (channel_id === 0x09 && channel_type === 0x70) {
+            decoded.alarm_state_abs = bytes[i] === 0x00 ? 0 : 1;
+            i += 1;
+
+        // POWER OUTAGE ALERT (device-level)  ch=0xFF, type=0x3F
+        // observed in field: ff3fff = outage active, ff3f00 = power restored
+        } else if (channel_id === 0xff && channel_type === 0x3f) {
             decoded.alarm_state_abs = bytes[i] === 0x00 ? 0 : 1;
             i += 1;
 
         } else {
-            // Unknown channel/type – skip 1 byte and attempt to resync
-            i += 1;
+            break; // unknown channel – stop parsing
         }
     }
 
-    if (Object.keys(decoded).length === 0) {
-        return { data: {}, warnings: ["No known channels found in payload"] };
+    // If any power measurement is present, check voltage to determine alarm state:
+    // voltage == 0 → mains power lost → alarm_state_abs = 1
+    // voltage  > 0 → mains power ok  → alarm_state_abs = 0
+    // Only overwrite if no explicit outage alert was already set in this telegram
+    if ((decoded.voltage_volt_abs !== undefined ||
+         decoded.current_ampere_abs !== undefined ||
+         decoded.power_W_abs !== undefined ||
+         decoded.energy_kWh_inc !== undefined) &&
+        decoded.alarm_state_abs === undefined) {
+        decoded.alarm_state_abs = (decoded.voltage_volt_abs === 0) ? 1 : 0;
     }
 
-    return { data: decoded };
+    return decoded;
+}
+
+// --- helpers (little-endian) ---
+
+function readUInt8(byte) {
+    return byte & 0xff;
+}
+
+function readUInt16LE(bytes) {
+    return ((bytes[1] << 8) + bytes[0]) & 0xffff;
+}
+
+function readUInt32LE(bytes) {
+    return ((bytes[3] << 24) + (bytes[2] << 16) + (bytes[1] << 8) + bytes[0]) >>> 0;
 }
 ```
