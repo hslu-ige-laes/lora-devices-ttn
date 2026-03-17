@@ -154,6 +154,19 @@ The seller Alliot provisioned the device with default `AppEUI` and `AppKey`.
 ## Payload formatter
 
 ```javascript
+function mapBatteryVoltageAbs(voltage) {
+  // Thresholds adjusted for SAFT Li-SOCl2 3.6V (flat discharge curve, low threshold 3.2V)
+  if (voltage < 3.2) {
+    return 0; // Critical  — at/below rated low-voltage cutoff
+  } else if (voltage < 3.3) {
+    return 1; // Warning   — near end of life
+  } else if (voltage < 3.5) {
+    return 2; // Good
+  } else {
+    return 3; // Very Good
+  }
+}
+
 function getCfgCmd(cfgcmd){
   var cfgcmdlist = {
     1:   "ConfigReportReq",
@@ -163,156 +176,101 @@ function getCfgCmd(cfgcmd){
   };
   return cfgcmdlist[cfgcmd];
 }
-
 function getCmdToID(cmdtype){
-  if (cmdtype == "ConfigReportReq")
-	  return 1;
-  else if (cmdtype == "ConfigReportRsp")
-	  return 129;
-  else if (cmdtype == "ReadConfigReportReq")
-	  return 2;
-  else if (cmdtype == "ReadConfigReportRsp")
-	  return 130;
+  if (cmdtype == "ConfigReportReq")    return 1;
+  else if (cmdtype == "ConfigReportRsp")     return 129;
+  else if (cmdtype == "ReadConfigReportReq") return 2;
+  else if (cmdtype == "ReadConfigReportRsp") return 130;
 }
-
-function getDeviceName(dev){
-  var deviceName = {
-	74: "R718N3"
-  };
-  return deviceName[dev];
-}
-
 function getDeviceID(devName){
-  if (devName == "R718N3")
-	  return 74;
+  if (devName == "R718N3") return 74;
 }
-
 function padLeft(str, len) {
-    str = '' + str;
-    if (str.length >= len) {
-        return str;
-    } else {
-        return padLeft("0" + str, len);
-    }
+  str = '' + str;
+  return str.length >= len ? str : padLeft("0" + str, len);
 }
 
 function decodeUplink(input) {
   var data = {};
   switch (input.fPort) {
     case 6:
-		if (input.bytes[2] === 0x00)
-		{
-			data.Device = getDeviceName(input.bytes[1]);
-			data.SWver =  input.bytes[3]/10;
-			data.HWver =  input.bytes[4];
-			data.Datecode = padLeft(input.bytes[5].toString(16), 2) + padLeft(input.bytes[6].toString(16), 2) + padLeft(input.bytes[7].toString(16), 2) + padLeft(input.bytes[8].toString(16), 2);
-			
-			return {
-				data: data,
-			};
-		}
-		
-		data.Device = getDeviceName(input.bytes[1]);
-		if (input.bytes[3] & 0x80)
-		{
-			var tmp_v = input.bytes[3] & 0x7F;
-			data.Volt = (tmp_v / 10).toString() + '(low battery)';
-		}
-		else
-			data.Volt = input.bytes[3]/10;
+      if (input.bytes[2] === 0x00) {
+        data.SWver    = input.bytes[3] / 10;
+        data.HWver    = input.bytes[4];
+        data.Datecode = padLeft(input.bytes[5].toString(16), 2)
+                      + padLeft(input.bytes[6].toString(16), 2)
+                      + padLeft(input.bytes[7].toString(16), 2)
+                      + padLeft(input.bytes[8].toString(16), 2);
+        return { data: data };
+      }
 
-		if (input.bytes[2] === 0x01)
-		{
-			data.Current1 = (input.bytes[4]<<8 | input.bytes[5]);
-			data.Current2 = (input.bytes[6]<<8 | input.bytes[7]);
-			data.Current3 = (input.bytes[8]<<8 | input.bytes[9]);
-			data.Multiplier1 = input.bytes[10];
-		}
-		else if (input.bytes[2] === 0x02)
-		{	
-			data.Multiplier2 = input.bytes[4];
-			data.Multiplier3 = input.bytes[5];
-		}
-		break;
-		
-	case 7:
-		data.Cmd = getCfgCmd(input.bytes[0]);
-		data.Device = getDeviceName(input.bytes[1]);
-		if (input.bytes[0] === getCmdToID("ConfigReportRsp"))
-		{
-			data.Status = (input.bytes[2] === 0x00) ? 'Success' : 'Failure';
-		}
-		else if (input.bytes[0] === getCmdToID("ReadConfigReportRsp"))
-		{
-			data.MinTime = (input.bytes[2]<<8 | input.bytes[3]);
-			data.MaxTime = (input.bytes[4]<<8 | input.bytes[5]);
-			data.CurrentChange = (input.bytes[6]<<8 | input.bytes[7]);
-		}
-		
-		break;	
+      // Battery voltage — strip low-battery flag bit
+      var rawVoltByte = input.bytes[3];
+      var voltValue   = (rawVoltByte & 0x7F) / 10;
+      data.battery_volt_abs  = voltValue;
+      data.battery_state_abs = mapBatteryVoltageAbs(voltValue);
 
-	default:
-      return {
-        errors: ['unknown FPort'],
-      };
-	  
-    }
-          
-	 return {
-		data: data,
-	};
- }
-  
+      if (input.bytes[2] === 0x01) {
+        data["current_ampere_abs@channelA"] = (input.bytes[4] << 8 | input.bytes[5]);
+        data["current_ampere_abs@channelB"] = (input.bytes[6] << 8 | input.bytes[7]);
+        data["current_ampere_abs@channelC"] = (input.bytes[8] << 8 | input.bytes[9]);
+        // Multiplier omitted intentionally
+      }
+      break;
+
+    case 7:
+      data.Cmd    = getCfgCmd(input.bytes[0]);
+      if (input.bytes[0] === getCmdToID("ConfigReportRsp")) {
+        data.Status = (input.bytes[2] === 0x00) ? 'Success' : 'Failure';
+      } else if (input.bytes[0] === getCmdToID("ReadConfigReportRsp")) {
+        data.MinTime       = (input.bytes[2] << 8 | input.bytes[3]);
+        data.MaxTime       = (input.bytes[4] << 8 | input.bytes[5]);
+        data.CurrentChange = (input.bytes[6] << 8 | input.bytes[7]);
+      }
+      break;
+
+    default:
+      return { errors: ['unknown FPort'] };
+  }
+
+  return { data: data };
+}
+
 function encodeDownlink(input) {
   var ret = [];
-  var devid;
-  var getCmdID;
-	  
-  getCmdID = getCmdToID(input.data.Cmd);
-  devid = getDeviceID(input.data.Device);
+  var getCmdID = getCmdToID(input.data.Cmd);
+  var devid    = getDeviceID(input.data.Device);
 
-  if (input.data.Cmd == "ConfigReportReq")
-  {
-	  var mint = input.data.MinTime;
-	  var maxt = input.data.MaxTime;
-	  var currentChg = input.data.CurrentChange;
-	  
-	  ret = ret.concat(getCmdID, devid, (mint >> 8), (mint & 0xFF), (maxt >> 8), (maxt & 0xFF), (currentChg >> 8), (currentChg & 0xFF), 0x00, 0x00, 0x00);
+  if (input.data.Cmd == "ConfigReportReq") {
+    var mint       = input.data.MinTime;
+    var maxt       = input.data.MaxTime;
+    var currentChg = input.data.CurrentChange;
+    ret = ret.concat(getCmdID, devid,
+      (mint >> 8), (mint & 0xFF),
+      (maxt >> 8), (maxt & 0xFF),
+      (currentChg >> 8), (currentChg & 0xFF),
+      0x00, 0x00, 0x00);
+  } else if (input.data.Cmd == "ReadConfigReportReq") {
+    ret = ret.concat(getCmdID, devid, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
   }
-  else if (input.data.Cmd == "ReadConfigReportReq")
-  {
-	  ret = ret.concat(getCmdID, devid, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
-  }  
-  
-  return {
-    fPort: 7,
-    bytes: ret
-  };
-}  
-  
+
+  return { fPort: 7, bytes: ret };
+}
+
 function decodeDownlink(input) {
   var data = {};
   switch (input.fPort) {
     case 7:
-		data.Cmd = getCfgCmd(input.bytes[0]);
-		data.Device = getDeviceName(input.bytes[1]);
-		if (input.bytes[0] === getCmdToID("ConfigReportReq"))
-		{
-			data.MinTime = (input.bytes[2]<<8 | input.bytes[3]);
-			data.MaxTime = (input.bytes[4]<<8 | input.bytes[5]);
-			data.CurrentChange = (input.bytes[6]<<8 | input.bytes[7]);
-		}
-
-		break;
-		
+      data.Cmd    = getCfgCmd(input.bytes[0]);
+      if (input.bytes[0] === getCmdToID("ConfigReportReq")) {
+        data.MinTime       = (input.bytes[2] << 8 | input.bytes[3]);
+        data.MaxTime       = (input.bytes[4] << 8 | input.bytes[5]);
+        data.CurrentChange = (input.bytes[6] << 8 | input.bytes[7]);
+      }
+      break;
     default:
-      return {
-        errors: ['invalid FPort'],
-      };
+      return { errors: ['invalid FPort'] };
   }
-  
-  return {
-		data: data,
-	};
+  return { data: data };
 }
 ```
