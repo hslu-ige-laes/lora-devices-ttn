@@ -192,7 +192,7 @@ function decodeUplink(input) {
     if (typeA === 1) {
       data["voltage_volt_abs@channelA"] = parseFloat((rawValueA / 1000000).toFixed(3));
     } else if (typeA === 2) {
-      data["current_milliampere_abs@channelA"] = parseFloat((rawValueA / 100000).toFixed(3));
+      data["current_ampere_abs@channelA"] = parseFloat((rawValueA / 100000000).toFixed(6));
     }
 
     var typeB = bytes[6] & 0x0f;
@@ -201,7 +201,7 @@ function decodeUplink(input) {
     if (typeB === 1) {
       data["voltage_volt_abs@channelB"] = parseFloat((rawValueB / 1000000).toFixed(3));
     } else if (typeB === 2) {
-      data["current_milliampere_abs@channelB"] = parseFloat((rawValueB / 100000).toFixed(3));
+      data["current_ampere_abs@channelB"] = parseFloat((rawValueB / 100000000).toFixed(6));
     }
   }
 
