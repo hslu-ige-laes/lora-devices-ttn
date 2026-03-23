@@ -75,6 +75,19 @@ Adeunis bietet den Analog-Transmitter auch als **Current Sensor** Bundle an, ink
 
 ## Device specific Information
 
+### Activation / Deactivation
+
+The device is delivered in **PARK mode** (standby, minimal power consumption).
+
+| Action | Method | LED feedback |
+|---|---|---|
+| **Power on** | Hold a magnet on top of the device for at least **6 seconds** | Green LED lights up for 1s (magnet detected), then blinks rapidly (startup) |
+| **Power on** (alternative) | Via USB with IoT Configurator: change mode from PARK to PRODUCTION, click `SEND TO SENSOR` | - |
+| **Power off** | Via USB with IoT Configurator: change mode from PRODUCTION to PARK, click `SEND TO SENSOR` | - |
+
+**Note**<br>
+A deactivation via magnet is not described in the manufacturer documentation.
+
 ### Configuration
 - The device can be configured via USB using the Adeunis IoT Configurator software or via LoRaWAN downlinks.
 - Each of the 2 channels (A and B) can be independently configured as:
