@@ -16,7 +16,7 @@ The Adeunis Analog is a ready-to-use IoT sensor that transforms any type of 0-10
 
 ### Current Sensor Variant
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/adeunis-analog_03.jpg" width="200" align="right" class="inline"/>
+<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/adeunis-analog_03.jpg" width="150" align="right" class="inline"/>
 
 Adeunis bietet den Analog-Transmitter auch als **Current Sensor** Bundle an, inkl. Stromwandler (CT Clamp). Dabei wird der 4-20mA Eingang des Analog-Transmitters genutzt. Verfügbare Varianten:
 
