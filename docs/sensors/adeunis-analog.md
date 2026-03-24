@@ -75,18 +75,56 @@ Adeunis bietet den Analog-Transmitter auch als **Current Sensor** Bundle an, ink
 
 ## Device specific Information
 
-### Activation / Deactivation
+### Operating Modes
 
-The device is delivered in **PARK mode** (standby, minimal power consumption).
+The device has the following operating modes:
 
-| Action | Method | LED feedback |
-|---|---|---|
-| **Power on** | Hold a magnet on top of the device for at least **6 seconds** | Green LED lights up for 1s (magnet detected), then blinks rapidly (startup) |
-| **Power on** (alternative) | Via USB with IoT Configurator: change mode from PARK to PRODUCTION, click `SEND TO SENSOR` | - |
-| **Power off** | Via USB with IoT Configurator: change mode from PRODUCTION to PARK, click `SEND TO SENSOR` | - |
+```
+                        ┌───────────┐
+                        │ PARK MODE │ (standby, minimal consumption)
+                        └─────┬─────┘
+                              │ Magnet on product > 5s
+                              ▼
+  ┌──────────────┐     ┌──────────────┐         ┌─────────────────────┐
+  │ COMMAND MODE │◄────│  PRODUCTION  │◄────────│ Replacing the       │
+  │              │────►│     MODE     │         │ battery             │
+  └──────────────┘     └──────┬───────┘         └─────────────────────┘
+  USB-C connect/               │                          ▲
+  disconnect            Send "battery                     │
+                         low" flag                        │
+                              │                           │
+                              ▼                           │
+                        ┌───────────┐                     │
+                        │    OFF    │─────────────────────┘
+                        │(dead bat.)│
+                        └───────────┘
+```
+
+- **PARK mode**: The product is delivered in PARK mode. It is in standby and its consumption is minimal. To switch out of PARK mode, hold a magnet on top of the product for more than 5 seconds. The green LED illuminates to indicate magnet detection and then flashes quickly during the starting phase. The device then sends its configuration and data frames.
+- **PRODUCTION mode**: Normal operating mode for final use, optimized for maximum battery autonomy.
+- **COMMAND mode**: Allows configuration of the product registers. Connect a USB-C cable and use the [IoT Configurator](https://www.adeunis.com/en/produit/analog-wired-sensor-interface/). Requires the [Silabs USB to UART Bridge VCP Driver](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers). To exit, use the disconnect function in the IoT Configurator or disconnect the USB-C cable. The product returns to its previous mode (PARK or PRODUCTION).
+- **OFF**: The product switches off automatically when the battery is dead. Replace the battery and it returns to PRODUCTION mode.
 
 **Note**<br>
 A deactivation via magnet is not described in the manufacturer documentation.
+
+### LED States
+
+| Mode | LED red | LED green |
+|---|---|---|
+| PARK mode | OFF | OFF |
+| Magnet detection (1 to 6 sec) | OFF | ON from detection of the magnet, max. 1 sec |
+| Product start (after magnet detection) | OFF | Rapid flashing, 6 cycles (100 ms ON / 100 ms OFF) |
+| Joining process | Flashing: 50 ms ON / 1 sec OFF | Flashing: 50 ms ON / 1 sec OFF (just after red LED) |
+| JOIN accept | Flashing: 50 ms ON / 50 ms OFF (6×) | Flashing: 50 ms ON / 50 ms OFF (just before red LED) |
+| Network quality test running | 10 to 20 sec ON | 10 to 20 sec ON |
+| Network quality test: bad coverage | 10 sec ON | OFF |
+| Network quality test: medium coverage | 10 sec ON | 10 sec ON |
+| Network quality test: good coverage | OFF | 10 sec ON |
+| Magnet detection in PRODUCTION mode | OFF | Flashing 50 ms ON / 50 ms OFF after 3 sec of magnet presence |
+| Low battery level | Flashing 500 ms ON every 60 sec | OFF |
+| Switching to command mode (USB) | ON | ON |
+| Product faulty (return to factory) | ON | OFF |
 
 ### Configuration
 - The device can be configured via USB using the Adeunis IoT Configurator software or via LoRaWAN downlinks.
