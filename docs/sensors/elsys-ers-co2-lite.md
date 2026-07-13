@@ -107,6 +107,15 @@ To trigger a new join manually (e.g. after changing keys or if the device got st
 - **Power cycle**: remove the batteries for a few seconds and reinsert them
 - If the device is already joined: send the reboot downlink `3E01FE` (see below)
 
+### LED Indication
+| LED Indicator | Action |
+|---------------|--------|
+| Red/Green Sequence | Sensor is starting up |
+| Short Orange Blink | LoRa Join Request Transmission |
+| Short Green Blink | LoRa Uplink Transmission |
+| Short Red Blink | Sensor failed to send an uplink. Common cause is duty cycle limits. |
+| Long Blue Blink | Sensor has loaded new configuration from NFC |
+
 ---
 
 ## Change Settings over Downlink messages (optional)
@@ -149,6 +158,30 @@ The full list of configurable parameters is documented in the [ELSYS Sensor down
 
 ---
 
+## CO2 Sensor and ABC Calibration
+
+The CO<sub>2</sub> sensor is an NDIR sensor (non-dispersive infrared): an IR source shines through the measurement chamber, CO<sub>2</sub> absorbs the light at ~4.26 µm and the attenuation at the detector corresponds to the CO<sub>2</sub> concentration. Because the optical components slowly age, the reading drifts over months — this is compensated by the **ABC algorithm** (Automatic Baseline Correction):
+
+- ABC records the lowest CO<sub>2</sub> value over a period of **8 days** and anchors it to the fresh air level (~400 ppm). It assumes that the room is unoccupied and ventilated at some point during each period (nights/weekends)
+- After installation, ABC needs **3 consecutive 8-day periods** with fresh air contact until the measurement is fully corrected (plan for ~1 month)
+- ABC is **enabled by default** and is the right, maintenance-free choice for normal rooms (offices, classrooms)
+- In permanently occupied or poorly ventilated rooms (24/7 operation), ABC learns a wrong baseline and pulls the readings down. In such cases disable ABC (via the ELSYS Sensor Settings App) and calibrate manually once per year instead
+
+### Manual calibration
+Setting `Co2Cfg = 1` (downlink ID `0x12`) triggers a **one-time** manual calibration. The sensor **must be in fresh air** (outside) — the current reading is set as the fresh air reference:
+
+| Action | Payload (FPort 6) |
+|--------|-------------------|
+| Trigger manual CO<sub>2</sub> calibration (sensor must be in fresh air!) | `3E021201` |
+
+The calibration can also be triggered via NFC in the ELSYS Sensor Settings App (parameter `Co2Cfg`).
+
+### Back to ABC / normal operation
+- The manual calibration is a one-shot action and does **not** disable ABC — afterwards the sensor simply continues in normal operation (`Co2Cfg = 0`, downlink `3E021200` if you want to set it explicitly)
+- If ABC was **disabled** in the Sensor Settings App, re-enable it there via NFC — there is no documented downlink command for the ABC on/off toggle
+
+---
+
 ## Data Points
 The payload decoder below uses the same data point naming convention as the Avelon Wisely sensors:
 
@@ -158,6 +191,7 @@ The payload decoder below uses the same data point naming convention as the Avel
 | `humidity` | `humidity_perc_abs` | %rH | Relative humidity |
 | `co2` | `co2_ppm_abs` | ppm | CO<sub>2</sub> concentration |
 | `vdd` | `battery_volt_abs` | V | Battery voltage |
+| `vdd` | `battery_state_abs` | - | Battery state, mapped from voltage (0 = Critical, 1 = Warning, 2 = Good, 3 = Very Good) |
 
 ---
 
@@ -169,6 +203,18 @@ ELSYS uses one universal payload decoder for all its devices. The decoder below 
 // ELSYS universal payload decoder (official, www.elsys.se)
 // Source: https://github.com/TheThingsNetwork/lorawan-devices/blob/master/vendor/elsys/elsys.js
 // Extended with a mapping to the data point naming convention used in this documentation.
+
+function mapBatteryVoltageAbs(voltage) {
+  if (voltage < 3.35) {
+    return 0; // Critical
+  } else if (voltage < 3.45) {
+    return 1; // Warning
+  } else if (voltage < 3.55) {
+    return 2; // Good
+  } else {
+    return 3; // Very Good
+  }
+}
 
 var TYPE_TEMP = 0x01; // temp 2 bytes -3276.8°C -->3276.7°C
 var TYPE_RH = 0x02; // Humidity 1 byte  0-100%
@@ -373,7 +419,10 @@ function decodeUplink(input) {
   if (raw.temperature !== undefined) data.temperature_degrC_abs = raw.temperature;
   if (raw.humidity !== undefined) data.humidity_perc_abs = raw.humidity;
   if (raw.co2 !== undefined) data.co2_ppm_abs = raw.co2;
-  if (raw.vdd !== undefined) data.battery_volt_abs = raw.vdd / 1000;
+  if (raw.vdd !== undefined) {
+    data.battery_volt_abs = raw.vdd / 1000;
+    data.battery_state_abs = mapBatteryVoltageAbs(data.battery_volt_abs);
+  }
 
   return { data: data };
 }
