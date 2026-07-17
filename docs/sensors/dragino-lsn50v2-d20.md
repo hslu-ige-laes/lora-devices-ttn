@@ -40,7 +40,7 @@ The LSN50v2-D20 is a LoRaWAN Waterproof Outdoor Temperature Sensor with 1 extern
 ---
 
 ## Documents/Links
-- [Payload description (2026-07-17)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d20_04.txt)
+- [Payload description (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d20_04.txt)
 - [Datasheet from dragino.com (2026-07-17)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d20_03.pdf)
 - [User Manual (online)](http://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20LoRaWAN%20End%20Nodes/LSN50v2-D20-D22-D23%20LoRaWAN%20Temperature%20Sensor%20User%20Manual)
 - [Datasheet Temperaturesensor DS18B20](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d20_02.pdf)
@@ -50,6 +50,7 @@ The LSN50v2-D20 is a LoRaWAN Waterproof Outdoor Temperature Sensor with 1 extern
 ## Ordering Info
 - Part Number: LSN50v2-D20-EU868
 - Remark: The LSN50v2-D20 is phased out at most distributors. The successor is the [Dragino D20-LB](https://www.bastelgarage.ch/d20-lb-lorawan-temperatursensor-node-868mhz) (ca. CHF 65.-, 17.07.2026)
+  - Attention: The D20-LB uses a different payload format, so this page and its payload decoder do not apply to it.
 
 ---
 
@@ -71,13 +72,13 @@ Out of the factory the device is switched off. To power on the LSN50v2-D20, open
 3. Under `Input method` select `Enter end device specifics manually`
 4. Under `Frequency plan` select `Europe 863-870 Mhz (SF9 for RX2 - recommended)`
 5. Under `LoRaWAN version` select `1.0.3`
-5. Under `JoinEUI` enter the `App EUI` from the App and press `Confirm`
-6. Enter as well the `DevEUI` and the `AppKey` from the App
-7. Set an end-device name
-8. Press `Register end device`
-9. Add the payload formatter from below, either to the device itself or if all devices in the app are from the same type, to the application
-10. [Switch on the device](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/dragino-lsn50v2-d20#switch-on-the-device)
-11. Close the case
+6. Under `JoinEUI` enter the `App EUI` from the App and press `Confirm`
+7. Enter as well the `DevEUI` and the `AppKey` from the App
+8. Set an end-device name
+9. Press `Register end device`
+10. Add the payload formatter from below, either to the device itself or if all devices in the app are from the same type, to the application
+11. [Switch on the device](#switch-on-the-device)
+12. Close the case
 
 - After Configuration, the device restarts automatically and tries to join the network
 - Now the device should join the network and you can see the incoming telegrams in the `Live data` section
@@ -87,14 +88,16 @@ Out of the factory the device is switched off. To power on the LSN50v2-D20, open
 ## Optional Settings
 
 ### Change sampling interval
-To change the sampling interval, you have to send the device configuration telegrams (Downlink-Messages)
-The time interval in minutes at which the sensor queries the current values.
+Out of the factory the device measures and transmits every 20 minutes.
+
+To change the sampling interval, you have to send the device configuration telegrams (Downlink-Messages).
+The interval is the time in **seconds** (hex encoded) at which the sensor measures and transmits the current values.
 
 1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
 2. Change the `FPort to 2`
 3. Copy/paste the payload, e.g. `01000258` into the `Payload` field to set interval to 10 minutes
 4. Press `Send`
-5. In the `Data` tab you should now see the scheduled telegram. The device only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
+5. In the `Data` tab you should now see the scheduled telegram. The device only receives downlink data after an uplink. Therefore either wait for the next periodic uplink or open the case and press the `ACT` button on the PCB once short to trigger an uplink
 
 #### Examples
 '0100' is an identifier, the rest represents the sampling interval in hex
@@ -129,7 +132,7 @@ function decodeUplink(input) {
 
   switch (port) {
     case 2:
-      if (mode == '0') {
+      if (mode === 0) {
         data.battery_volt_abs = (bytes[0] << 8 | bytes[1]) / 1000;
 				data.battery_state_abs = mapBatteryVoltageAbs(data.battery_volt_abs);
         data.alarm_state_abs = (bytes[6] & 0x01) ? 1 : 0;
@@ -146,7 +149,9 @@ function decodeUplink(input) {
           data: data,
         };
       }
-      break;
+      return {
+        errors: ["unexpected payload length"]
+      };
 
     default:
       return {
