@@ -4,7 +4,7 @@ title: Milesight - WS523
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/milesight-ws523_01.png" width="250" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/milesight-ws523_01.png" width="250" align="right" class="inline"/>
 
 # Milesight - WS523
 {: .no_toc }

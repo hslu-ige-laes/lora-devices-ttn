@@ -6,7 +6,7 @@ has_children: false
 permalink: /docs/field_testing_guideline
 ---
 
-<img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/rak10701-p_01.png" width="128" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/rak10701-p_01.png" width="128" align="right" class="inline"/>
 
 # LoRaWAN Field Testing Guideline
 {: .no_toc }
@@ -25,7 +25,7 @@ This guide helps you test LoRaWAN coverage and decide when to install a gateway
 - A LoRaWAN connection tester (e.g., RAK10701-P)
 - LoRaWAN gateway(s) - public TTN gateways, or your own LTE gateways
 - Notebook with Excel for recording results or oldstyle printed table:
-  - [LoRaWAN Field Testing Excel](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/field_tester_table.xlsx)
+  - [LoRaWAN Field Testing Excel](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/field_tester_table.xlsx)
 
 ---
 
@@ -188,7 +188,7 @@ More power = longer range, but also more battery consumption and possibly violat
    - watch the airtime with the device payload, which could be bigger than the fieldtester payload. Make shure, that the sampling rate you wanna have does not exceed a maximum airtime of 30s a day.
 1. If done, power off the devices, fieldtester by pressing the button on the right side for at least five seconds and press the off icon on the screen.
 
-- [LoRaWAN Field Testing Excel](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/field_tester_table.xlsx)
+- [LoRaWAN Field Testing Excel](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/field_tester_table.xlsx)
 
 ---
 
@@ -196,7 +196,7 @@ More power = longer range, but also more battery consumption and possibly violat
 
 Correctly interpreting your RSSI (Received Signal Strength Indicator) and SNR (Signal-to-Noise Ratio) readings is essential for reliable LoRaWAN operation. Use the tables and troubleshooting tips below to assess results and improve your network.
 
-![ttn_rssi_vs_snr.png](https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn_rssi_vs_snr.png)
+![ttn_rssi_vs_snr.png](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/ttn_rssi_vs_snr.png)
 
 1. **Low RSSI, Good SNR**
 - **What it means:** Signal is weak, but there’s little noise.

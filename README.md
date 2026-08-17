@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn-logo.svg" width="128" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/ttn-logo.svg" width="128" align="right" class="inline"/>
 
 # LoRa Devices for TTN
 

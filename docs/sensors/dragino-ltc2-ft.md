@@ -4,7 +4,7 @@ title: Dragino - LTC2-FT
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-ltc2-ft_01.jpg" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-ltc2-ft_01.jpg" width="250" align="right">
 
 # Dragino - LTC2-FT
 {: .no_toc }
@@ -43,7 +43,7 @@ The LTC2-FT is a LoRaWAN Waterproof Outdoor Temperature Sensor with 2 external P
 ---
 
 ## Documents/Links
-- [Datasheet from dragino.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-ltc2-ft_02.pdf)
+- [Datasheet from dragino.com (2023-08-09)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-ltc2-ft_02.pdf)
 - [User Manual (online)](https://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20LoRaWAN%20End%20Nodes/LTC2%20-%20LoRaWAN%20Temperature%20Transmitter%20User%20Manual/)
 
 ---
@@ -58,7 +58,7 @@ The LTC2-FT is a LoRaWAN Waterproof Outdoor Temperature Sensor with 2 external P
 ### Switch on the device
 Out of the factory the device is switched off. To power on the LTC2-FT, open the case and set the jumper (connect the two pins):
 
-![Switching between active and sleep mode (switch off / on, reset)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lsn50v2-d23_05.png "Power on the LSN50v2-D20")
+![Switching between active and sleep mode (switch off / on, reset)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-lsn50v2-d23_05.png "Power on the LSN50v2-D20")
 
 ---
 

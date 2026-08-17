@@ -4,7 +4,7 @@ title: Dragino - LDS02
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_01.jpg" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-lds02_01.jpg" width="250" align="right">
 
 # Dragino - LDS02
 {: .no_toc }
@@ -38,8 +38,8 @@ The LDS02 is a LoRaWAN Window/Door sensor.
 
 ---
 ## Documents
-- [Payload description ttn v1.5 (2023-08-03)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_04.txt)
-- [Datasheet from dragino.com (2023-08-03)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lds02_02.pdf)
+- [Payload description ttn v1.5 (2023-08-03)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-lds02_04.txt)
+- [Datasheet from dragino.com (2023-08-03)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-lds02_02.pdf)
 - <a href="http://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20LoRaWAN%20End%20Nodes/LDS02%20-%20LoRaWAN%20Door%20Sensor%20User%20Manual/" target="_blank">User Manual (online)</a>
 
 ---

@@ -4,7 +4,7 @@ title: Avelon - Wisely Standard
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-standard_01.png" width="250" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-standard_01.png" width="250" align="right" class="inline"/>
 
 # Avelon - Wisely Standard
 {: .no_toc }
@@ -39,10 +39,10 @@ The Wisely Standard is an indoor room sensor to measure temperature, humidity an
 
 ## Documents / Links
 - [Payload description from avelon (online)](https://avelon.cloud/docs/de/appendix/wisely-payload.html)
-- [Wisely Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_03.pdf)
+- [Wisely Datasheet from avelon.com (2020-07-14)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-carbonsense_03.pdf)
 - [FAQ on avelon.com](https://avelon.com/support/wisely-faq/)
-- [Temp- and Humidity Sensor Datasheet - Sensirion SHT3x](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-sensirion-sht3x.pdf)
-- [Atmospheric Pressure Sensor Datasheet - Bosch BMP380](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-bosch-bmp280.pdf)
+- [Temp- and Humidity Sensor Datasheet - Sensirion SHT3x](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-sensirion-sht3x.pdf)
+- [Atmospheric Pressure Sensor Datasheet - Bosch BMP380](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-bosch-bmp280.pdf)
 
 ---
 

@@ -4,7 +4,7 @@ title: Decentlab - DL-ATM22
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_02.jpg" width="250" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/decentlab-dl-atm22_02.jpg" width="250" align="right" class="inline"/>
 
 # Decentlab - DL-ATM22
 {: .no_toc }
@@ -50,7 +50,7 @@ Wind speed, wind direction and temperature sensor.
 
 ## Documents
   - [Payload decoder](https://github.com/decentlab/decentlab-decoders/blob/master/DL-ATM22/DL-ATM22.js)
-  - [Datasheet (2023-08-03)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_01.pdf)
+  - [Datasheet (2023-08-03)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/decentlab-dl-atm22_01.pdf)
   
 ---
 
@@ -77,9 +77,9 @@ Wind speed, wind direction and temperature sensor.
 - To perform a device reset, switch to sleep mode first (if necessary) by pushing and holding the button for 3 seconds until the LEDs flash three times; wait 3 seconds; then push and hold the button for 3 seconds until the LEDs fade in and out.
 - To switch between active and test mode, push the button for 1 second (blue LED on / off). If the blue LED is off, the device is in active or sleep mode. If the blue LED is on, the device is in test mode.
 
-![Switching between active and sleep mode (switch off / on, reset)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_03.png "Switching between active and sleep mode (switch off / on, reset)")
+![Switching between active and sleep mode (switch off / on, reset)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/decentlab-dl-atm22_03.png "Switching between active and sleep mode (switch off / on, reset)")
 
-![Switching between active and test mode](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/decentlab-dl-atm22_04.png "Switching between active and test mode")
+![Switching between active and test mode](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/decentlab-dl-atm22_04.png "Switching between active and test mode")
 
 **HINT**<br>
 To check whether the device is active or in sleep mode (on or off), push the button twice

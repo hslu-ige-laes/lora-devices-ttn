@@ -4,7 +4,7 @@ title: Dragino - LHT65N-E3
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65n-e3_01.png" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-lht65n-e3_01.png" width="250" align="right">
 
 # Dragino - LHT65N-E3
 {: .no_toc }
@@ -41,8 +41,8 @@ The LHT65-E3 includes a built-in SHT20 temperature/humidity sensor and a jack to
 ---
 ## Documents
   - [Payload description v1.7 (2020-07-15)](https://www.dragino.com/downloads/downloads/LHT65/payload_decode/ttn_payload_decode_v1.7.txt)
-  - [Datasheet from dragino.com (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_02.pdf)
-  - [User manual from dragino.com (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-lht65_03.pdf)
+  - [Datasheet from dragino.com (2020-07-15)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-lht65_02.pdf)
+  - [User manual from dragino.com (2020-07-15)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-lht65_03.pdf)
 
 ---
 

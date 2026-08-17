@@ -4,7 +4,7 @@ title: Dragino - RS485-LN
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-rs485-ln_01.jpeg" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-rs485-ln_01.jpeg" width="250" align="right">
 
 # Dragino - RS485-LN
 {: .no_toc }
@@ -43,10 +43,10 @@ There is as well a function to listen only to a modbus network and send the list
 ---
 ## Documents & Downloads
 - [Official Dragino RS485-LN product page](https://www.dragino.com/products/lora-lorawan-end-node/item/154-rs485-ln.html)
-- [User Manual](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-rs485-ln_02.pdf)
-- [RS485 Configure Tool Manual](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-rs485-ln_04.pdf)
-  - [Direct Windows download (v1.3.1)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-rs485-ln_05_tool.zip)
-  - [AT Command text file](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-rs485-ln_03_commands.txt)
+- [User Manual](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-rs485-ln_02.pdf)
+- [RS485 Configure Tool Manual](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-rs485-ln_04.pdf)
+  - [Direct Windows download (v1.3.1)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-rs485-ln_05_tool.zip)
+  - [AT Command text file](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-rs485-ln_03_commands.txt)
 
 ## Ordering Info
 - Part Number: RS485-LN
@@ -67,12 +67,12 @@ Wire colors:
 
 **Steps:**
 
-1. Download and start the [RS485 Configure Tool](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-rs485-ln_05_tool.zip).
+1. Download and start the [RS485 Configure Tool](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-rs485-ln_05_tool.zip).
 1. Wire the USB-TTL adapter with the device cables and plug it into the computer.
 1. Plug the programming cable into the RS485-LN's 3.5mm "PROG" jack.
 1. Power the RS485-LN via the screw terminal (7-24V DC).
 1. Start the RS485 Configure Tool and connect to the device
-1. Load the [AT Command text file](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-rs485-ln_03_commands.txt) into the tool and Write the parameters.
+1. Load the [AT Command text file](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-rs485-ln_03_commands.txt) into the tool and Write the parameters.
 1. Add the device to a ttn application, add the payload decoder from below and restart the device.
 1. Make shure to set the correct parity and stopbits in the device as well.
 

@@ -4,7 +4,7 @@ title: Alpha Omega Technology - Klax 2.0
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/alphaomega-klax2_01.png" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/alphaomega-klax2_01.png" width="250" align="right">
 
 # Alpha Omega Technology - Klax 2.0
 {: .no_toc }
@@ -45,7 +45,7 @@ The Klax 2.0 is a LoRaWAN indoor SML Opto Head for modern electricity/heat meter
 ---
 
 ## Documents/Links
-- [SML manual with payload description (2023-08-22)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/alphaomega-klax2_02.pdf)
+- [SML manual with payload description (2023-08-22)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/alphaomega-klax2_02.pdf)
 - [Payload decoder](https://github.com/Alpha-Omega-Technology/ttn-klax)
 
 ---

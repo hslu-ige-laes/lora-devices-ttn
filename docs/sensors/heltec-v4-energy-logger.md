@@ -4,7 +4,7 @@ title: Heltec V4 LoRaWAN Energy Logger
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/heltec_universal_logger_01.png" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/heltec_universal_logger_01.png" width="250" align="right">
 
 # Heltec V4 LoRaWAN Energy Logger
 {: .no_toc }

@@ -4,7 +4,7 @@ title: Dragino - LTC2-LB
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-ltc2-lb_01.PNG" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-ltc2-lb_01.PNG" width="250" align="right">
 
 # Dragino - LTC2-LB
 {: .no_toc }
@@ -57,8 +57,8 @@ The LTC2-LB is a LoRaWAN Waterproof Outdoor Temperature Sensor with 2 external P
 ---
 
 ## Documents/Links
-- [Payload description (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-ltc2-lb_03.txt)
-- [Datasheet from dragino.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-ltc2-lb_02.pdf)
+- [Payload description (2023-08-09)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-ltc2-lb_03.txt)
+- [Datasheet from dragino.com (2023-08-09)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-ltc2-lb_02.pdf)
 - [User Manual (online)](https://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20LoRaWAN%20End%20Nodes/LTC2-LB--LoRaWAN_Temperature_Transmitter_User_Manual/)
 
 ---
@@ -75,7 +75,7 @@ The LTC2-LB is a LoRaWAN Waterproof Outdoor Temperature Sensor with 2 external P
 
 ## Button Actions, Modes and LED States
 
-![Device Overview](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-ltc2-lb_04.PNG "Device Overview")
+![Device Overview](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-ltc2-lb_04.PNG "Device Overview")
 
 The LTC2-LB has two operating modes:
 - In **Deep Sleep Mode**, which is the default mode used for storage and shipping, the device does not perform any LoRaWAN activity to conserve battery life.

@@ -4,7 +4,7 @@ title: Avelon - Wisely CarbonSense
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_01.png" width="250" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-carbonsense_01.png" width="250" align="right" class="inline"/>
 
 # Avelon - Wisely CarbonSense
 {: .no_toc }
@@ -41,12 +41,12 @@ The Wisely CarbonSense is an indoor room sensor to measure temperature, humidity
 
 ## Documents / Links
 - [Payload description from avelon (online)](https://avelon.cloud/docs/de/appendix/wisely-payload.html)
-- [Wisely Datasheet from avelon.com (2020-07-14)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-carbonsense_03.pdf)
+- [Wisely Datasheet from avelon.com (2020-07-14)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-carbonsense_03.pdf)
 - [FAQ on avelon.com](https://avelon.com/support/wisely-faq/)
-- [Temp- and Humidity Sensor Datasheet - Sensirion SHT3x](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-sensirion-sht3x.pdf)
-- [Atmospheric Pressure Sensor Datasheet - Bosch BMP380](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-bosch-bmp280.pdf)
-- [CO<sub>2</sub> Sensor Datasheet - Senseair Sunrise](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-senseair-sunrise.pdf)
-- [Wisely LED Payload Creator Excel (2023-10-19)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-ledPayload.xlsx)
+- [Temp- and Humidity Sensor Datasheet - Sensirion SHT3x](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-sensirion-sht3x.pdf)
+- [Atmospheric Pressure Sensor Datasheet - Bosch BMP380](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-bosch-bmp280.pdf)
+- [CO<sub>2</sub> Sensor Datasheet - Senseair Sunrise](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-senseair-sunrise.pdf)
+- [Wisely LED Payload Creator Excel (2023-10-19)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-ledPayload.xlsx)
 
 ---
 
@@ -252,9 +252,9 @@ With the following procedure you can deactivate the LED
   - `06 06 0B 03 20 00 00 FF 01`
   - `06 06 0B 05 78 FF 00 00 01`
 
-Look at the [Wisely LED Payload Creator Excel](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-ledPayload.xlsx) to create the payload information.
+Look at the [Wisely LED Payload Creator Excel](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-ledPayload.xlsx) to create the payload information.
 
-Further info in the [payload description ](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/avelon-wisely-payload.pdf).
+Further info in the [payload description ](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-payload.pdf).
 
 ---
 

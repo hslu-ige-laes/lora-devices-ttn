@@ -4,7 +4,7 @@ title: Seeedstudio - SenseCap-S2103
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_01.jpg" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seeedstudio-sensecap-s2103_01.jpg" width="250" align="right">
 
 # Seeedstudio - SenseCap-S2103
 {: .no_toc }
@@ -44,8 +44,8 @@ The SenseCap S2103 is a LoRaWAN indoor/outdoor sensor to measure temperature, hu
 ---
 
 ## Documents/Links
-- [S210X Sensor User Guide from seeedstudio.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
-- [Battery Life Prediction Table (Excel document)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_02.xlsx)
+- [S210X Sensor User Guide from seeedstudio.com (2023-08-09)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
+- [Battery Life Prediction Table (Excel document)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seeedstudio-sensecap-s2103_02.xlsx)
 
 ---
 
@@ -57,7 +57,7 @@ The SenseCap S2103 is a LoRaWAN indoor/outdoor sensor to measure temperature, hu
 
 ## Button Actions, Modes and LED States
 
-![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
+![2-in-1 Configuration Button and LED](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
 | Action | Description | Green LED Status |
 |--------|-------------|------------------|
@@ -72,7 +72,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 ---
 
 ## Adding the Device to TTN
-- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
+- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
 - Copy the `JoinEUI`, `App EUI` and the `DevEUI` and send it from the smartphone via E-Mail to your computer.
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>
 
@@ -94,7 +94,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 ---
 
 ## Settings (mandatory!)
-- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
+- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
   -> you don't have to create an account, simply click `Skip` on top right
 - Copy the `JoinEUI`, `App EUI` and the `DevEUI` and send it from the smartphone via E-Mail to your computer.
 - Before a device can communicate via "The Things Network" we have to add it to an application.<br>

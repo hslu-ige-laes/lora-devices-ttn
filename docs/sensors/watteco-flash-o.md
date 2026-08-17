@@ -4,7 +4,7 @@ title: WATTECO - Flash O
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_01.jpg" width="250" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/watteco-flash-o_01.jpg" width="250" align="right" class="inline"/>
 
 # WATTECO - Flash O
 {: .no_toc }
@@ -45,8 +45,8 @@ The counter value can later be converted into an energy unit, such as kilowatt-h
 
 ## Documents
   - [Payload description from support.watteco.com (2020-07-15)](http://support.watteco.com/flasho/#HumanMachineInterface)
-  - [Datasheet from watteco.fr (2020-07-15)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_02.pdf)
-	- [Quick Start Guide from watteco.fr (2025-04-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_06.pdf)
+  - [Datasheet from watteco.fr (2020-07-15)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/watteco-flash-o_02.pdf)
+	- [Quick Start Guide from watteco.fr (2025-04-09)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/watteco-flash-o_06.pdf)
   - [Online Device Support Page](https://support.nke-watteco.com/flasho/)
 
 ---
@@ -73,11 +73,11 @@ The device does not have a physical button, but a magnetic contact. Hold a magne
 The device was successfully tested with the following products.
 
 - **Landis & Gyr ZMD120AP** (1'000 impulses per kWh)<br>
-  <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_04.png" width="250"><br>
+  <img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/watteco-flash-o_04.png" width="250"><br>
   - Place the sensor over the LED (yellow colored)
 
 - **Kamstrup DK-8660 Omnipower** (1'000 impulses per kWh)<br>
-  <img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/watteco-flash-o_05.png" width="250"><br>
+  <img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/watteco-flash-o_05.png" width="250"><br>
   - Place the sensor over the LED (yellow colored)
 
 ---

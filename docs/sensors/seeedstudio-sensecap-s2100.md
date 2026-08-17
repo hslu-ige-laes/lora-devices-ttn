@@ -4,7 +4,7 @@ title: Seeedstudio - SenseCap-S2100
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2100_01.jpg" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seeedstudio-sensecap-s2100_01.jpg" width="250" align="right">
 
 # Seeedstudio - SenseCap-S2100
 {: .no_toc }
@@ -49,7 +49,7 @@ The SenseCap S2100 is a LoRaWAN indoor/outdoor Data Logger for RS485-Modbus/Anal
 ---
 
 ## Documents/Links
-- [S2100 Sensor User Guide from seeedstudio.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2100_03.pdf)
+- [S2100 Sensor User Guide from seeedstudio.com (2023-08-09)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seeedstudio-sensecap-s2100_03.pdf)
 
 ---
 
@@ -63,7 +63,7 @@ The SenseCap S2100 is a LoRaWAN indoor/outdoor Data Logger for RS485-Modbus/Anal
 
 ## Button Actions, Modes and LED States
 
-![2-in-1 Configuration Button and LED](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
+![2-in-1 Configuration Button and LED](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seeedstudio-sensecap-s2103_04.png "Power on the SenseCap")
 
 | Action | Description | Green LED Status |
 |--------|-------------|------------------|
@@ -78,7 +78,7 @@ After power off, you need to reconfigure the frequency band. Power off is recomm
 ---
 
 ## Adding the Device to TTN
-- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
+- Configure the device via Bluetooth with the `SenseCAP Mate App`. [See User Guide chapter 5.2 for details](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/seeedstudio-sensecap-s2103_03.pdf)
   -> you don't have to create an account, simply click `Skip` on top right
 - In the Basic settings, select the Platform 'The Things Network' (not SenseCAP for The Things Network!)
 - Configure the device to your needs, select Frequency Plan 'EU868'

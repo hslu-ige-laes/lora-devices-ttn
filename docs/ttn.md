@@ -6,7 +6,7 @@ has_children: false
 permalink: /docs/ttn
 ---
 
-<img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn-logo.svg" width="128" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/ttn-logo.svg" width="128" align="right" class="inline"/>
 
 # The Things Network
 {: .no_toc }
@@ -44,7 +44,7 @@ In a LoRaWAN, the setup involves the following components
 - **End User Application**<br>
   The end user application is for example a dashboard where the transmitted data gets processed and visualized. The data can also get transmitted to an automation system.
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/ttn_components.PNG" width="700"><br>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/ttn_components.PNG" width="700"><br>
 
 The data flow is as follows
 1. The sensor sends data

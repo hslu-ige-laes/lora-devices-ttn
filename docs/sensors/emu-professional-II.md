@@ -4,7 +4,7 @@ title: EMU - Professional II
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/emu-professional-II.jpg" width="250" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/emu-professional-II.jpg" width="250" align="right" class="inline"/>
 
 # EMU - Professional II
 {: .no_toc }
@@ -59,9 +59,9 @@ The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval, measure
 ---
 
 ## Documents
-- [User Manual EMU Professional II (2025-11-20)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/emu-professional-II_manual.pdf)
-- [Manual EMU Professional II Lora (2025-11-20)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/emu-professional-II_lora_interface.pdf)
-- [Datasheet EMU Professional II Lora (2025-11-20)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/emu-professional-II_datasheet.pdf)
+- [User Manual EMU Professional II (2025-11-20)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/emu-professional-II_manual.pdf)
+- [Manual EMU Professional II Lora (2025-11-20)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/emu-professional-II_lora_interface.pdf)
+- [Datasheet EMU Professional II Lora (2025-11-20)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/emu-professional-II_datasheet.pdf)
 
 ---
 

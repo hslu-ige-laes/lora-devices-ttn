@@ -4,7 +4,7 @@ title: Oxon - Buttonboard
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/oxon-buttonboard.png" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/oxon-buttonboard.png" width="250" align="right">
 
 # Oxon - Buttonboard
 {: .no_toc }
@@ -44,9 +44,9 @@ If a button is pressed, the LEDs shimmer through the paper inlay and generates a
 ---
 ## Documents
 
-- [SpecSheet from oxonbutton.ch (30.07.2025)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/oxon-buttonboard_specSheet.pdf)
-- [Documentation from oxonbutton.ch (30.07.2025)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/oxon-buttonboard_documentation.pdf)
-- [Paper Inlay Template for Visio](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/oxon-buttonboard_paperInlayTemplate.vsdx)
+- [SpecSheet from oxonbutton.ch (30.07.2025)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/oxon-buttonboard_specSheet.pdf)
+- [Documentation from oxonbutton.ch (30.07.2025)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/oxon-buttonboard_documentation.pdf)
+- [Paper Inlay Template for Visio](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/oxon-buttonboard_paperInlayTemplate.vsdx)
 
 ---
 
@@ -88,7 +88,7 @@ The device can either be configured via Bluetooth and an app called `Oxon Device
 
 ### Example LoRa Downlink messages
 
-Please refer to the payload description in the [Documentation ](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/oxon-buttonboard_documentation.pdf). Here some examples...
+Please refer to the payload description in the [Documentation ](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/oxon-buttonboard_documentation.pdf). Here some examples...
 
 1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
 2. Change the `FPort to 1`

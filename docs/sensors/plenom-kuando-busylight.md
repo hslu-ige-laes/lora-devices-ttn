@@ -4,7 +4,7 @@ title: Plenom - Kuando-Busylight
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/plenom-kuando-busylight_01.png" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/plenom-kuando-busylight_01.png" width="250" align="right">
 
 # Plenom - Kuando-Busylight
 {: .no_toc }
@@ -38,8 +38,8 @@ The Busylight can show any color and be used as a visual notifier, indicating a 
 
 ---
 ## Documents
-- [Datasheet pdf (2025-08-20)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/plenom-kuando-busylight_03.pdf)
-- [Getting Started pdf (2025-08-20)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/plenom-kuando-busylight_02.pdf)
+- [Datasheet pdf (2025-08-20)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/plenom-kuando-busylight_03.pdf)
+- [Getting Started pdf (2025-08-20)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/plenom-kuando-busylight_02.pdf)
 
 ---
 

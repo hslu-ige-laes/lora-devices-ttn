@@ -6,7 +6,7 @@ has_children: false
 permalink: /docs/getting_started
 ---
 
-<img src="https://raw.githubusercontent.com/hslu-ige-laes/lora-devices-ttn/master/docs/ttn-logo.svg" width="128" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/ttn-logo.svg" width="128" align="right" class="inline"/>
 
 # Getting started with TTN
 {: .no_toc }
@@ -48,7 +48,7 @@ permalink: /docs/getting_started
 1. Click [(+) Create application](https://eu1.cloud.thethings.network/console/applications/add)
    - For `Application ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
    - For `Application Description`, enter anything you like.
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/ttn_create_application.png" width="700"><br>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/ttn_create_application.png" width="700"><br>
 1. Click `Create Application` to finish.
 
 You will be redirected to an application page where you can add and manage devices.

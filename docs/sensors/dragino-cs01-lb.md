@@ -4,7 +4,7 @@ title: Dragino - CS01-LB
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-cs01-lb_01.jpg" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-cs01-lb_01.jpg" width="250" align="right">
 
 # Dragino - CS01-LB
 {: .no_toc }
@@ -55,9 +55,9 @@ The current sensors are detachable and can be replaced with different scales.
 ---
 
 ## Documents/Links
-- [Datasheet from dragino.com (2023-08-09)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-cs01-lb_02.pdf)
+- [Datasheet from dragino.com (2023-08-09)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-cs01-lb_02.pdf)
 - [User Manual (online)](https://wiki.dragino.com/xwiki/bin/view/Main/User%20Manual%20for%20LoRaWAN%20End%20Nodes/CS01-LB_LoRaWAN_4_Channels_Current_Sensor_Converter_User_Manual/)
-- [User Manual (pdf, 2025-02-04)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/dragino-cs01-lb_03.pdf)
+- [User Manual (pdf, 2025-02-04)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/dragino-cs01-lb_03.pdf)
 
 ---
 

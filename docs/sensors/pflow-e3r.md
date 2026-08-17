@@ -4,7 +4,7 @@ title: pFlow - E3R
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/pflow-e3r_01.jpg" width="250" align="right">
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/pflow-e3r_01.jpg" width="250" align="right">
 
 # pFlow - E3R
 {: .no_toc }

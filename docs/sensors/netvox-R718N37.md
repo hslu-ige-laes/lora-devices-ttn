@@ -4,7 +4,7 @@ title: netvox - R718N37
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/netvox-r871n37_01.jpg" width="250" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/netvox-r871n37_01.jpg" width="250" align="right" class="inline"/>
 
 # netvox - R718N37
 {: .no_toc }
@@ -50,8 +50,8 @@ The R718N37 is a 3-Phase Current Meter with 3 x 75A Clamp-On Current Transformer
 ---
 
 ## Documents
-  - [Datasheet (2020-11-25)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/netvox-r871n37_02.pdf)
-  - [User Manual (2023-03-01)](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/netvox-r871n37_02.pdf)
+  - [Datasheet (2020-11-25)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/netvox-r871n37_02.pdf)
+  - [User Manual (2023-03-01)](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/netvox-r871n37_02.pdf)
 
 ---
 

@@ -4,7 +4,7 @@ title: Adeunis - Analog
 parent: Sensors
 ---
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/adeunis-analog_01.png" width="250" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/adeunis-analog_01.png" width="250" align="right" class="inline"/>
 
 # Adeunis - Analog
 {: .no_toc }
@@ -16,7 +16,7 @@ The Adeunis Analog is a ready-to-use IoT sensor that transforms any type of 0-10
 
 ### Current Sensor Variant
 
-<img src="https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/adeunis-analog_03.jpg" width="150" align="right" class="inline"/>
+<img src="https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/adeunis-analog_03.jpg" width="150" align="right" class="inline"/>
 
 Adeunis bietet den Analog-Transmitter auch als **Current Sensor** Bundle an, inkl. Stromwandler (CT Clamp). Dabei wird der 4-20mA Eingang des Analog-Transmitters genutzt. Verfügbare Varianten:
 
@@ -63,8 +63,8 @@ Adeunis bietet den Analog-Transmitter auch als **Current Sensor** Bundle an, ink
 ---
 
 ## Documents
-  - [Datasheet Analog LoRaWAN EU863-870](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/adeunis-analog_02.pdf)
-  - [Datasheet Current Sensor LoRaWAN EU863-870](https://github.com/hslu-ige-laes/lora-devices-ttn/raw/master/docs/sensors/adeunis-analog_04.pdf)
+  - [Datasheet Analog LoRaWAN EU863-870](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/adeunis-analog_02.pdf)
+  - [Datasheet Current Sensor LoRaWAN EU863-870](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/adeunis-analog_04.pdf)
 
 ---
 
