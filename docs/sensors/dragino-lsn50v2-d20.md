@@ -150,15 +150,15 @@ function decodeUplink(input) {
   // Bytes 0-6 sind in Mode 0, 1, 3, 4, 5 identisch aufgebaut
   data.battery_volt_abs = (bytes[0] << 8 | bytes[1]) / 1000;
   data.battery_state_abs = mapBatteryVoltageAbs(data.battery_volt_abs);
-  data.alarm_state_abs = (bytes[6] & 0x01) ? 1 : 0;
-  data.digital_input_abs = (bytes[6] & 0x02) ? 1 : 0;
-  data.adc_volt_abs = (bytes[4] << 8 | bytes[5]) / 1000;
+  //data.alarm_state_abs = (bytes[6] & 0x01) ? 1 : 0;
+  //data.digital_input_abs = (bytes[6] & 0x02) ? 1 : 0;
+  //data.adc_volt_abs = (bytes[4] << 8 | bytes[5]) / 1000;
   data.temperature_degrC_abs = decodeTemp(bytes[2], bytes[3]);
 
   if (mode === 3) {
     // 3DS18B20-Modus: zwei weitere Temperaturen
-    data.temperature2_degrC_abs = decodeTemp(bytes[7], bytes[8]);
-    data.temperature3_degrC_abs = decodeTemp(bytes[9], bytes[10]);
+    //data.temperature2_degrC_abs = decodeTemp(bytes[7], bytes[8]);
+    //data.temperature3_degrC_abs = decodeTemp(bytes[9], bytes[10]);
   }
 
   return { data: data };
