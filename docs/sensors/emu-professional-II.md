@@ -10,9 +10,14 @@ parent: Sensors
 {: .no_toc }
 
 - Manufacturer: <a href="https://www.emuag.ch/" target="_blank">EMU Electronic AG</a>
-- Product: <a href="https://www.emuag.ch/produkte/energiezaehler/emu-professional-ii/" target="_blank">Professional II 3/5 LoRa</a>
+- Product: <a href="https://www.emuag.ch/produkte/energiezaehler/emu-professional-ii/" target="_blank">Professional II LoRa</a>
 
-The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval, measures current over transformers or direct.
+The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval. It is available in two variants:
+
+- **Professional II 3/5 LoRa**: measurement over current transformers (max. 5A secondary)
+- **Professional II 3/100 LoRa**: direct measurement up to max. 100A
+
+The LoRa interface and payload decoder are identical for both variants (confirmed in the EMU LoRa manual).
 
 ---
 
@@ -37,15 +42,17 @@ The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval, measure
 ---
 
 ## Specifications
-- Price ca. CHF 700.- (details on request)
+- Price:
+  - 3/5 variant: ca. CHF 700.- incl. current transformers (details on request)
+  - 3/100 variant: ca. CHF 430.- with external antenna (as of 20.08.2026)
 - Display: 38x28 mm graphic LC with LED backlighting
-- Current transformer ratio (5/5A to 20,000/5A or 1/1A to 4,000/1A)
+- Current transformer ratio, 3/5 variant only (5/5A to 20,000/5A or 1/1A to 4,000/1A)
 - Measurement data points:
-   - Current (total & pro Phase)
+   - Current (total & per phase)
    - Voltage (L1–L3)
    - Power Factor (L1–L3)
    - Active & Reactive Energy Import/Export (T1/T2, L1–L3 & total, Wh/kWh/varh/kvarh)
-   - Active Power (total & pro Phase)
+   - Active Power (total & per phase)
    - Frequency
    - ...
 - Communication interfaces: M-Bus, Modbus RTU RS485, TCP, web server, Direct-http, S0 pulse output
@@ -70,23 +77,29 @@ The EMU Professional II is a 3-Phase Energy Meter with MID B+D approval, measure
 - [LoRa Payload Generator to configure meter](https://www.emuag.ch/files/software/Lora-Payload-Generator.html)
 
 ## Ordering Info
-- Meter: `P21A000LE` - EMU Professional II 3/5 LoRa interne und externe Antenne (SMA)
+
+**Variant 3/5 (current transformers):**
+- Meter: `P21A000LE` - EMU Professional II 3/5 LoRa internal and external antenna (SMA)
 -	Clamps: 3x 942226 TQ40-C 250/1° 
--	Antenna: 12417 Antenne LoRa
+-	Antenna: 12417 LoRa antenna
+
+**Variant 3/100 (direct measurement up to 100A):**
+- Meter: `P20A000LE` - EMU Professional II 3/100 LoRa internal and external antenna (SMA)
+- Antenna: 12417 LoRa antenna
 
 ---
 ## Device specific Information
 
 - Don't forget to select "Class C device" when adding to TTN
 - go to [LoRa Payload Generator to configure meter](https://www.emuag.ch/files/software/Lora-Payload-Generator.html), select the required points and intervals
-- Deactivate `Energy per Tarif`, then all the measurements will vom on T1 (Tarif 1). Otherwise we have to read two measurements (T1 & T2)
+- Deactivate `Energy per Tariff`, then all the measurements will come on T1 (Tariff 1). Otherwise we have to read two measurements (T1 & T2)
 
 ### Get DEV-EUI, AppEUI and AppKey
 - press button `->` until settings-page
 - then press `v` until you see "LoRa DevEUI"
 - a further press on `v` brings you to the AppKey, so see it, you have to press the `service` button on upper right below red plate shortly with a thin screwdriver.
 - JoinEUI (formerly AppEUI): `10 2C EF 00 00 00 00 00` on every meter
-- Change in settings the Antanna to `External` if needed
+- Change in settings the antenna to `External` if needed
 
   - screwdriver-press on `service` button on upper right below red plate shortly to enter settings
   - `v` button to change to `External`
