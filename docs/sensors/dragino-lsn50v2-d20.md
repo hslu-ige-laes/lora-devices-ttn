@@ -124,39 +124,43 @@ function mapBatteryVoltageAbs(voltage) {
   }
 }
 
+function decodeTemp(hi, lo) {
+  if (hi === 0xff && lo === 0xff) {
+    return 32767.0; // kein Sensor angeschlossen
+  }
+  return parseFloat(((hi << 24 >> 16 | lo) / 10).toFixed(1));
+}
+
 function decodeUplink(input) {
   var port = input.fPort;
   var bytes = input.bytes;
-  var mode = (bytes[6] & 0x7C) >> 2;
   var data = {};
 
-  switch (port) {
-    case 2:
-      if (mode === 0) {
-        data.battery_volt_abs = (bytes[0] << 8 | bytes[1]) / 1000;
-				data.battery_state_abs = mapBatteryVoltageAbs(data.battery_volt_abs);
-        data.alarm_state_abs = (bytes[6] & 0x01) ? 1 : 0;
-
-        if ((bytes[2] == 0xff) && (bytes[3] == 0xff)) {
-          data.temperature_degrC_abs = 32767.0;
-        } else {
-          data.temperature_degrC_abs = parseFloat(((bytes[2] << 24 >> 16 | bytes[3]) / 10).toFixed(1));
-        }
-      }
-
-      if (bytes.length == 11) {
-        return {
-          data: data,
-        };
-      }
-      return {
-        errors: ["unexpected payload length"]
-      };
-
-    default:
-      return {
-        errors: ["unknown FPort"]
-      };
+  if (port !== 2) {
+    return { errors: ["unknown FPort"] };
   }
+
+  if (bytes.length !== 11) {
+    return { errors: ["unexpected payload length"] };
+  }
+
+  var mode = (bytes[6] & 0x7C) >> 2;
+  data.mode = mode;
+
+  // Bytes 0-6 sind in Mode 0, 1, 3, 4, 5 identisch aufgebaut
+  data.battery_volt_abs = (bytes[0] << 8 | bytes[1]) / 1000;
+  data.battery_state_abs = mapBatteryVoltageAbs(data.battery_volt_abs);
+  data.alarm_state_abs = (bytes[6] & 0x01) ? 1 : 0;
+  data.digital_input_abs = (bytes[6] & 0x02) ? 1 : 0;
+  data.adc_volt_abs = (bytes[4] << 8 | bytes[5]) / 1000;
+  data.temperature_degrC_abs = decodeTemp(bytes[2], bytes[3]);
+
+  if (mode === 3) {
+    // 3DS18B20-Modus: zwei weitere Temperaturen
+    data.temperature2_degrC_abs = decodeTemp(bytes[7], bytes[8]);
+    data.temperature3_degrC_abs = decodeTemp(bytes[9], bytes[10]);
+  }
+
+  return { data: data };
 }
 ```
