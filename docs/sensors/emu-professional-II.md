@@ -51,7 +51,7 @@ The LoRa interface and payload decoder are identical for both variants (confirme
    - Current (total & per phase)
    - Voltage (L1–L3)
    - Power Factor (L1–L3)
-   - Active & Reactive Energy Import/Export (T1/T2, L1–L3 & total, Wh/kWh/varh/kvarh)
+   - Active & Reactive Energy Import/Export (T1/T2, L1–L3 & total, Wh/kWh/varh/kvarh) – via LoRa only the L123 total per tariff is available, per-phase energy only on the display / other interfaces
    - Active Power (total & per phase)
    - Frequency
    - ...
@@ -90,9 +90,12 @@ The LoRa interface and payload decoder are identical for both variants (confirme
 ---
 ## Device specific Information
 
-- Don't forget to select "Class C device" when adding to TTN
+- Don't forget to select "Class C device" when adding to TTN. If the network does not support Class C the meter falls back to Class A; downlinks are then only delivered after the next uplink (up to one uplink interval later).
 - go to [LoRa Payload Generator to configure meter](https://www.emuag.ch/files/software/Lora-Payload-Generator.html), select the required points and intervals
-- Deactivate `Energy per Tariff`, then all the measurements will come on T1 (Tariff 1). Otherwise we have to read two measurements (T1 & T2)
+- Make sure the meter always counts on **Tariff 1** so that a single register (T1) is the total, see [Tariff](#tariff-keep-everything-on-t1). Note: the meter never resets counters (MID), so energy already accumulated on T2 stays there and would be missing from a T1-only readout.
+- Set the **load profile (data logger) interval** of the meter to the shortest uplink interval you plan to use (e.g. 5 minutes), see [Load profile interval](#load-profile-interval-data-logger). The LoRa uplink only sends the latest data logger entry (default 15 minutes); with a 5 minute uplink and a 15 minute logger interval you receive the same value three times in a row.
+- To verify that a downlink was received, check the meter display `LoRa JoinMode 4/4 -> Lst. Downlink` (timestamp / ACK).
+- Uplinks with only 2 bytes (fPort 100) are time synchronisation requests (`DeviceTimeReq`) and contain no data; the payload formatter ignores them.
 
 ### Get DEV-EUI, AppEUI and AppKey
 - press button `->` until settings-page
@@ -106,20 +109,58 @@ The LoRa interface and payload decoder are identical for both variants (confirme
   - long press with screwdriver until settings are applied, then release
 
 
+### Button operation on the meter
+All settings use the same pattern (User Manual Doc.Ref 1451, chapter Settings):
+- `->` (Arrow right): next main menu page, long press (>2 s) jumps to `Settings`
+- `v` (Arrow down): next sub menu item / next option value
+- `SRVC` (service button, upper right below the red plate, press with a thin screwdriver): short press (<2 s) = unlock parameter for editing (it starts blinking), long press (>2 s) until the LCD flashes = save. A second short press exits without saving.
+
+### Tariff: keep everything on T1
+The tariff cannot be switched off in the menu. The active tariff is selected by the 230 VAC tariff inputs E1 (clamp 10) / E2 (clamp 9) against NE (clamp 11); with nothing connected the meter stays on Tariff 1 (ex-factory). To be sure that all energy is counted on T1:
+- Leave the tariff inputs E1 / E2 unconnected.
+- `->` to `Settings`, `v` to `Number of Tariffs`, `SRVC` short, `v` to select **two-rate tariff (2)** (default). Do **not** select one of the "over interface" options: on LoRa meters there is no interface to switch the tariff back and the meter could be stuck on T2. Save with `SRVC` long press.
+- Check on the display: the current tariff (`T1`) is shown at the top of the main menu page.
+- The setting `Energy per Tariff` under `Settings -> Energy Display` is display-only (On: shows T1/T2 separately, Off: shows the sum). It does not change how energy is counted or what is sent via LoRa. `Energy per Phase` is also display-only.
+
+### Load profile interval (data logger)
+The LoRa module reads the newest load profile entry, so the load profile interval must be equal to or shorter than the LoRa uplink interval. Options: 1 min, 5 min, 15 min (default), 30 min, 1 h, 6 h, 12 h, 24 h. Available on LoRa meters (load profile is active ex-factory), not on the PTB-certified LP version (fixed 15 min).
+- `->` to `Settings`
+- `v` to `Load Profile Interval`
+- `SRVC` short press (<2 s), value starts blinking
+- `v` until `5 min`
+- `SRVC` long press (>2 s) until the LCD flashes
+- Verify in TTN: the `timestamp` field in the decoded uplink must change with every 5 minute uplink.
+
+A shorter interval has no drawback for LoRa, it only fills the meter's internal load profile memory (approx. 110'000 entries, ring buffer) faster: 15 min ≈ 3 years, 5 min ≈ 1 year of on-meter history.
+
 ### Sampling Interval and Measurement Selection
 You can configure the device via a LoRaWAN downlink and determine which measured values are to be transmitted.
 
 - EMU provides an online [Payload Generator](https://www.emuag.ch/files/software/Lora-Payload-Generator.html) that generates the hex code for the configuration.
 - This hex code can then be sent to the device via TTN downlink (in the console under ‘Messaging - Downlink’).
 - You can send the telegrams to different slots (Fport 1 to 10). This gives you the possibility of sending the energy every 15 minutes (configuration Fport 1) and sending another value to Fport 2 that is only to be reported daily, for example.
+- Max. 10 registers per slot. Keep the resulting uplink below 51 bytes (EU868 limit for SF10-SF12), otherwise the uplink is dropped at bad signal quality. Rule of thumb: 4 bytes timestamp + 5 bytes per 32-bit register + 3 bytes error code/CRC.
+- The downlink format is `interval (2 bytes, little-endian, minutes)` `config flag` `register IDs...` `CRC-8`. Config flag `08` = port active, no ACK, no re-join.
+- **Resolution:** register `0x1C` (Active Energy Import T1 in kWh) has a resolution of 1 kWh, i.e. small loads show 0 for hours. Use register `0x03` (same value in Wh, 1 Wh resolution) and convert to kWh in the payload formatter. The uint32 Wh counter overflows at 4.29 GWh, which is irrelevant for the 3/100 variant; for a 3/5 variant with large current transformers use register `0x24` (uint64 Wh) instead.
+- Energy registers are only available as total L123 (T1/T2), not per phase. Active power, current and voltage are available per phase (`0x0C`-`0x0E`, `0x10`-`0x12`, `0x14`-`0x16`).
 
 **Examples**
-"Active Energy Import T1 in kWh" with different intervals:
--	 5 Minutes: `05 00 08 1C B2`
--	10 Minutes: `0A 00 08 1C 60`
--	15 Minutes: `0F 00 08 1C 2E`
--	60 Minutes: `3C 00 08 1C BD`
-- 24 Hours:   `10 0E 08 1C B7`
+"Active Energy Import T1 in Wh" (register `0x03`, recommended) with different intervals, sent to Fport 1:
+
+| Interval | Downlink (hex) |
+|---|---|
+| 5 minutes | `05 00 08 03 EF` |
+| 10 minutes | `0A 00 08 03 3D` |
+| 15 minutes | `0F 00 08 03 73` |
+| 60 minutes | `3C 00 08 03 E0` |
+| 24 hours (3600 min) | `10 0E 08 03 EA` |
+
+Further examples (5 minutes):
+- Energy Import T1 + T2 in Wh (total independent of tariff setting): `05 00 08 03 04 9F`
+- Energy Import T1 in Wh + active power L123/L1/L2/L3 + current L1/L2/L3: `05 00 08 03 0B 0C 0D 0E 10 11 12 5E` (uplink approx. 47 bytes)
+- Energy Import T1 as uint64 Wh (3/5 variant with large current transformers): `05 00 08 24 1A`
+
+The examples with only one register can be decoded with the adapted HSLU payload formatter (single value) below. The multi-register examples need the original EMU payload formatter or the generic HSLU payload formatter at the end of this page, which also returns `energy_kWh_inc`.
 
 A slot can get deactivated by sending `00 00 00 00`
 
@@ -897,9 +938,11 @@ function crc8_encode(data) {
 
 ## Adapted Payload formatter HSLU for only one value with specific name
 
+Returns `energy_kWh_inc` (Active Energy Import T1 in kWh). Works with register `0x03` (Wh, converted to kWh with 3 decimals) and `0x1C` (kWh). It stops after the first energy register found, so it is not suitable for multi-register downlinks.
+
 ```javascript
 /**
- * Simplified TTN Decoder - Extract Active Energy Import T1 in kWh
+ * Simplified TTN Decoder - Extract Active Energy Import T1 (register 0x03 in Wh or 0x1C in kWh) and return it as kWh
  */
 function decodeUplink(input) {
     var data = input.bytes;
@@ -1022,5 +1065,178 @@ function crc8_encode(data) {
         crc = table[crc ^ data[j]];
     }
     return crc;
+}
+```
+
+## Generic Payload formatter HSLU (all registers, energy_kWh_inc)
+
+Decodes every register ID of the LoRa manual (energy, power, current, voltage per phase, error code, and the fPort 100 configuration telegram with serial number and transformer ratios). `energy_kWh_inc` is the sum of Active Energy Import T1 + T2 in kWh, taken from register 0x03/0x04 (Wh), 0x24/0x25 (uint64 Wh) or 0x1C/0x1D (kWh), whichever is present. Warnings are only added on real problems (CRC error, unknown ID); 2-byte status uplinks return `status_only: true`. Works for the 3/100 and 3/5 variants.
+
+```javascript
+/**
+ * TTN Uplink-Decoder für EMU Professional II LoRa (3/100 und 3/5 identisch)
+ * Dekodiert ALLE bekannten Register-IDs, egal welche per Downlink gewählt wurden.
+ * Quelle der IDs: Manual 1490 V3.0, Kap. "Measurement-Registers"
+ */
+
+// id: [Länge, Name, Typ, Skalierung]
+var REG = {
+  0x00: [4, "index",              "u32", 1],
+  0x01: [4, "timestamp",          "u32", 1],
+  0x02: [4, "timestamp_prev",     "u32", 1],
+  0x03: [4, "energy_import_T1_Wh","u32", 1],
+  0x04: [4, "energy_import_T2_Wh","u32", 1],
+  0x05: [4, "energy_export_T1_Wh","u32", 1],
+  0x06: [4, "energy_export_T2_Wh","u32", 1],
+  0x07: [4, "reactive_import_T1_varh","u32", 1],
+  0x08: [4, "reactive_import_T2_varh","u32", 1],
+  0x09: [4, "reactive_export_T1_varh","u32", 1],
+  0x0A: [4, "reactive_export_T2_varh","u32", 1],
+  0x0B: [4, "power_L123_W",       "i32", 1],
+  0x0C: [4, "power_L1_W",         "i32", 1],
+  0x0D: [4, "power_L2_W",         "i32", 1],
+  0x0E: [4, "power_L3_W",         "i32", 1],
+  0x0F: [4, "current_L123_mA",    "i32", 1],
+  0x10: [4, "current_L1_mA",      "i32", 1],
+  0x11: [4, "current_L2_mA",      "i32", 1],
+  0x12: [4, "current_L3_mA",      "i32", 1],
+  0x13: [4, "reserved",           "i32", 1],
+  0x14: [4, "voltage_L1_V",       "i32", 0.1],
+  0x15: [4, "voltage_L2_V",       "i32", 0.1],
+  0x16: [4, "voltage_L3_V",       "i32", 0.1],
+  0x17: [1, "pf_L1",              "i8",  0.01],
+  0x18: [1, "pf_L2",              "i8",  0.01],
+  0x19: [1, "pf_L3",              "i8",  0.01],
+  0x1A: [2, "frequency_Hz",       "i16", 0.1],
+  0x1B: [4, "power_avg_W",        "i32", 1],
+  0x1C: [4, "energy_import_T1_kWh","u32", 1],
+  0x1D: [4, "energy_import_T2_kWh","u32", 1],
+  0x1E: [4, "energy_export_T1_kWh","u32", 1],
+  0x1F: [4, "energy_export_T2_kWh","u32", 1],
+  0x20: [4, "reactive_import_T1_kvarh","u32", 1],
+  0x21: [4, "reactive_import_T2_kvarh","u32", 1],
+  0x22: [4, "reactive_export_T1_kvarh","u32", 1],
+  0x23: [4, "reactive_export_T2_kvarh","u32", 1],
+  0x24: [8, "energy_import_T1_Wh64","u64", 1],
+  0x25: [8, "energy_import_T2_Wh64","u64", 1],
+  0x26: [8, "energy_export_T1_Wh64","u64", 1],
+  0x27: [8, "energy_export_T2_Wh64","u64", 1],
+  0x28: [8, "reactive_import_T1_varh64","u64", 1],
+  0x29: [8, "reactive_import_T2_varh64","u64", 1],
+  0x2A: [8, "reactive_export_T1_varh64","u64", 1],
+  0x2B: [8, "reactive_export_T2_varh64","u64", 1],
+  0xF0: [1, "error_code",         "u8",  1],
+  0xF1: [4, "serial_number",      "hex", 1],
+  0xF2: [4, "factory_number",     "hex", 1],
+  0xF3: [2, "ct_primary",         "u16", 1],
+  0xF4: [2, "ct_secondary",       "u16", 1],
+  0xF5: [2, "vt_primary",         "u16", 1],
+  0xF6: [2, "vt_secondary",       "u16", 1],
+  0xF7: [1, "meter_type",         "u8",  1],
+  0xF8: [4, "mid_year",           "bcd", 1],
+  0xF9: [4, "manufacture_year",   "bcd", 1],
+  0xFA: [4, "firmware",           "ascii", 1],
+  0xFB: [4, "mid_version",        "ascii", 1],
+  0xFC: [4, "manufacturer",       "ascii", 1],
+  0xFD: [4, "hardware_index",     "ascii", 1],
+  0xFE: [4, "system_time",        "u32", 1],
+  0xFF: [1, "error_code",         "u8",  1]   // Default-Uplink laut Manual nutzt 0xFF
+};
+
+function decodeUplink(input) {
+  var b = input.bytes;
+  var out = { data: {}, warnings: [] };
+
+  if (b.length <= 2) {                      // DeviceTimeReq / Status
+    out.data.status_only = true;
+    return out;
+  }
+
+  var body = b.slice(0, -1);
+  if (crc8(body) !== b[b.length - 1]) {
+    out.warnings.push("CRC-8 wrong");
+  }
+
+  out.data.fport = input.fPort;
+  out.data.timestamp = u32(b, 0);           // erste 4 Bytes immer Datalogger-Zeitstempel
+
+  var i = 4;
+  while (i < b.length - 1) {
+    var id = b[i++];
+    var r = REG[id];
+    if (!r) { out.warnings.push("unknown id 0x" + id.toString(16) + " at " + (i - 1)); break; }
+    var len = r[0], name = r[1], type = r[2], scale = r[3];
+    if (i + len > b.length - 1) { out.warnings.push("truncated " + name); break; }
+
+    var v;
+    switch (type) {
+      case "u8":  v = b[i]; break;
+      case "i8":  v = (b[i] << 24) >> 24; break;
+      case "u16": v = b[i] | (b[i+1] << 8); break;
+      case "i16": v = ((b[i] | (b[i+1] << 8)) << 16) >> 16; break;
+      case "u32": v = u32(b, i); break;
+      case "i32": v = u32(b, i) | 0; break;
+      case "u64": v = u32(b, i) + u32(b, i + 4) * 4294967296; break;
+      case "hex": v = u32(b, i).toString(16); break;
+      case "bcd": v = u32(b, i).toString(16); break;
+      case "ascii": v = String.fromCharCode(b[i], b[i+1], b[i+2], b[i+3]); break;
+    }
+    if (scale !== 1 && typeof v === "number") v = Math.round(v * scale * 1000) / 1000;
+    out.data[name] = v;
+    i += len;
+  }
+
+  // Komfortwerte
+  // Total = T1 + T2 (unabhängig von Tarifumschaltung); nimmt was vorhanden ist
+  var d = out.data, wh = null;
+  function add(v) { if (v !== undefined) wh = (wh || 0) + v; }
+  add(d.energy_import_T1_Wh);   add(d.energy_import_T2_Wh);     // 0x03, 0x04
+  add(d.energy_import_T1_Wh64); add(d.energy_import_T2_Wh64);   // 0x24, 0x25
+  if (wh !== null) {
+    d.energy_kWh_inc = wh / 1000;
+  } else if (d.energy_import_T1_kWh !== undefined || d.energy_import_T2_kWh !== undefined) {
+    d.energy_kWh_inc = (d.energy_import_T1_kWh || 0) + (d.energy_import_T2_kWh || 0); // 0x1C, 0x1D
+  }
+  if (out.data.error_code !== undefined) {
+    out.data.error_flags = decodeError(out.data.error_code);
+  }
+  if (out.warnings.length === 0) delete out.warnings;
+  return out;
+}
+
+function decodeError(e) {
+  var names = ["time_set","ct_ratio_adjusted","vt_ratio_adjusted","impulse_length_adjusted",
+               "impulse_ratio_adjusted","voltage_interruption","time_not_valid","logbook_full"];
+  var f = [];
+  for (var k = 0; k < 8; k++) if (e & (1 << k)) f.push(names[k]);
+  return f;
+}
+
+function u32(d, o) {
+  return (d[o+3] << 24 | d[o+2] << 16 | d[o+1] << 8 | d[o]) >>> 0;
+}
+
+function crc8(data) {
+  var table = [
+    0x00,0x07,0x0E,0x09,0x1C,0x1B,0x12,0x15,0x38,0x3F,0x36,0x31,0x24,0x23,0x2A,0x2D,
+    0x70,0x77,0x7E,0x79,0x6C,0x6B,0x62,0x65,0x48,0x4F,0x46,0x41,0x54,0x53,0x5A,0x5D,
+    0xE0,0xE7,0xEE,0xE9,0xFC,0xFB,0xF2,0xF5,0xD8,0xDF,0xD6,0xD1,0xC4,0xC3,0xCA,0xCD,
+    0x90,0x97,0x9E,0x99,0x8C,0x8B,0x82,0x85,0xA8,0xAF,0xA6,0xA1,0xB4,0xB3,0xBA,0xBD,
+    0xC7,0xC0,0xC9,0xCE,0xDB,0xDC,0xD5,0xD2,0xFF,0xF8,0xF1,0xF6,0xE3,0xE4,0xED,0xEA,
+    0xB7,0xB0,0xB9,0xBE,0xAB,0xAC,0xA5,0xA2,0x8F,0x88,0x81,0x86,0x93,0x94,0x9D,0x9A,
+    0x27,0x20,0x29,0x2E,0x3B,0x3C,0x35,0x32,0x1F,0x18,0x11,0x16,0x03,0x04,0x0D,0x0A,
+    0x57,0x50,0x59,0x5E,0x4B,0x4C,0x45,0x42,0x6F,0x68,0x61,0x66,0x73,0x74,0x7D,0x7A,
+    0x89,0x8E,0x87,0x80,0x95,0x92,0x9B,0x9C,0xB1,0xB6,0xBF,0xB8,0xAD,0xAA,0xA3,0xA4,
+    0xF9,0xFE,0xF7,0xF0,0xE5,0xE2,0xEB,0xEC,0xC1,0xC6,0xCF,0xC8,0xDD,0xDA,0xD3,0xD4,
+    0x69,0x6E,0x67,0x60,0x75,0x72,0x7B,0x7C,0x51,0x56,0x5F,0x58,0x4D,0x4A,0x43,0x44,
+    0x19,0x1E,0x17,0x10,0x05,0x02,0x0B,0x0C,0x21,0x26,0x2F,0x28,0x3D,0x3A,0x33,0x34,
+    0x4E,0x49,0x40,0x47,0x52,0x55,0x5C,0x5B,0x76,0x71,0x78,0x7F,0x6A,0x6D,0x64,0x63,
+    0x3E,0x39,0x30,0x37,0x22,0x25,0x2C,0x2B,0x06,0x01,0x08,0x0F,0x1A,0x1D,0x14,0x13,
+    0xAE,0xA9,0xA0,0xA7,0xB2,0xB5,0xBC,0xBB,0x96,0x91,0x98,0x9F,0x8A,0x8D,0x84,0x83,
+    0xDE,0xD9,0xD0,0xD7,0xC2,0xC5,0xCC,0xCB,0xE6,0xE1,0xE8,0xEF,0xFA,0xFD,0xF4,0xF3
+  ];
+  var crc = 0;
+  for (var j = 0; j < data.length; j++) crc = table[crc ^ data[j]];
+  return crc;
 }
 ```
