@@ -995,7 +995,8 @@ function decodeUplink(input) {
     if (energy_kWh !== null) {
         return {
             data: {
-                energy_kWh_inc: energy_kWh
+                energy_kWh_inc: energy_kWh,
+                timestamp: getUint32(data.slice(0, 4))   // Datenlogger-Zeit, Unix-Sekunden UTC
             }
         };
     } else {
