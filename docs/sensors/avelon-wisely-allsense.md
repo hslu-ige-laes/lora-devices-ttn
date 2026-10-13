@@ -88,7 +88,9 @@ Attention, there are four different versions of the same sensor which have diffe
 ---
 
 ## LED States
-If a CO<sub>2</sub> limit is exceeded, the LED on the front side of the device changes color. It blinks every [SensorSampleTime](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-allsense/#sensorsampletime) (250 ms lighting, 500 ms pause - repeating 4 times).
+If a CO<sub>2</sub> limit is exceeded, the LED on the front side of the device changes color. According to the Avelon payload description it blinks every 60 seconds while the limit is exceeded (250 ms lighting, 500 ms pause - repeating 4 times).
+
+The limit is evaluated on the measured CO<sub>2</sub> value. A new value is only available every [SensorSampleTime](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-allsense/#sensorsampletime), so with a longer SensorSampleTime the LED reacts more slowly to changes in CO<sub>2</sub> concentration.
 
 | CO<sub>2</sub> value | LED Color |
 |----------------------|-----------|
@@ -174,8 +176,8 @@ This is how you end the 2 weeks period.
 ## Optional Settings
 
 ### Change sensor selection (Payload format)
-Per default the Wisely AllSense is transmitting a reduced set of measurements, the so called "Simple Payload".
-Only with the "Extended Payload", the Wisely AllSense is transmitting the Pressure, Brighntess and Presence information.
+Per default the Wisely AllSense is transmitting a reduced set of measurements, the so called "Simple Payload" (fPort 5, 7 bytes per dataset).
+Only with the "Extended Payload" (fPort 6, 13 bytes per dataset), the Wisely AllSense is transmitting the Pressure, Brightness and Presence information.
 
 | Sensor               | Simple Payload | Extended Payload |
 |----------------------|:--------------:|:----------------:|
@@ -194,14 +196,29 @@ To change the payload type the device has to be configured accordingly:
 3. Copy/paste `FF FE 02` into the `Payload` field for changing to the "Extended payload"
 4. Press `Send`
 
+The device confirms the change with the message `F1 00` on fPort 11.
+
 To change the format back to "Simple Payload", send `FF FE 01`
+
+**Note:** The extended payload almost doubles the size of the transmitted data. This reduces battery life and increases the number of telegrams.
 
 ### Change sampling and transmission intervals
 There are two configuration values, `SensorSampleTime` and `CyclicTransmissionCounter`. 
-To change these two values, you have to send the device configuration telegrams (Downlink-Messages)
+To change these two values, you have to send the device configuration telegrams (Downlink-Messages).
+
+#### How sampling and transmission work
+- **Every sample is one measurement.** Each time the sensor samples (every `SensorSampleTime`), one complete dataset is stored (7 bytes with the simple payload, 13 bytes with the extended payload). The device does **not** average samples.
+- After `CyclicTransmissionCounter` samples, the stored datasets are transmitted together in one payload (1 byte battery + n datasets + 1 byte offset).
+- A LoRaWAN telegram can only carry a limited number of bytes, depending on the spreading factor (EU868: 51 bytes at SF10–SF12, 115 bytes at SF9, 222 bytes at SF7–SF8). If the collected datasets don't fit, the device sends a full telegram **before** the scheduled transmission and the remaining datasets with the next one. Such early telegrams are marked with `OFFSET > 0` (last byte of the payload).
+
+`Values per day = 1440 / SensorSampleTime`
+
+`Bytes per transmission = 2 + CyclicTransmissionCounter × 7` (simple payload) or `2 + CyclicTransmissionCounter × 13` (extended payload)
 
 #### SensorSampleTime
-The time interval in minutes at which the sensor queries the current values.
+The time interval in minutes between two measurements. Each sample results in one dataset in the payload.
+
+According to Avelon, the default value is 1 minute (`FF 01 01`).
 
 1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
 2. Change the `FPort to 10`
@@ -209,26 +226,14 @@ The time interval in minutes at which the sensor queries the current values.
 4. Press `Send`
 5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
 
-#### CyclicTransmissionTime and CyclicTransmissionCounter
-The time interval at which the sensor transmits the recorded measurement values. Must be a multiple of the sampling period.
-
-To avoid overburdening the battery of the device, the smallest permissible time interval is 10 minutes.
-
-The CyclicTransmissionTime cannot be configured. Instead, a counter can be configured.
+#### CyclicTransmissionCounter
+The number of samples (datasets) that are collected before a transmission. The resulting transmission interval is:
 
 `CyclicTransmissionTime = CyclicTransmissionCounter × SensorSampleTime`
 
-This setting cannot be configured. But instead the value `CyclicTransmissionCounter` can be set.
+The CyclicTransmissionTime itself cannot be configured, only the counter. To avoid overburdening the battery of the device, the smallest permissible transmission interval is 10 minutes.
 
-#### CyclicTransmissionCounter
-Per default the CyclicTransmissionCounter is set to 60, which means the device in default configuration sends data every 60 minutes (60 × 1 min = 60 min).
-
-The device sends the data cyclically. When a certain number of samples has been taken, the measured values are sent.
-The `CyclicTransmissionCounter` is therefore the number of samples that are to be sent together.
-
-`CyclicTransmissionCounter = CyclicTransmissionTime / SensorSampleTime`
-
-Per default the `CyclicTransmissionCounter` is set to 60, so every 1h a set of 6 measurements of all sensors gets transmitted.
+According to Avelon, the default value is 60 (`FF F0 3C`). Together with the default SensorSampleTime of 1 minute this means **60 datasets per hour** (1440 values per day). These 420 bytes (simple payload) don't fit into one telegram, so the device sends several telegrams per hour.
 
 1. In the TTN Console on the device view, select the device and change to the tab `Messaging`, select `Downlink`
 2. Change the `FPort to 10`
@@ -236,41 +241,46 @@ Per default the `CyclicTransmissionCounter` is set to 60, so every 1h a set of 6
 4. Press `Send`
 5. In the `Data` tab you should now see the scheduled telegram. The wisely sensor only receives downlink data after a transmission. Therefore start a transmission by pressing the button on the back of the sensor (push once short, green led will illuminate)
 
+**Important:** Only one downlink is delivered per uplink. Send the configuration downlinks one after the other and check in the TTN Console that the first one has been delivered before scheduling the next one. Data already collected with the old settings may still be transmitted afterwards, so wait one or two transmission intervals before checking the result.
+
+To check the actual configuration, look at the payload length of an uplink: `number of datasets = (payload bytes - 2) / 7` on port 5, or `/ 13` on port 6.
+
 #### Example configurations
+The byte sizes below are given for the simple payload (extended payload in brackets).
+
 **Example 1 (default config)**<br>
-This configuration makes sense if the LED is used, so the occupant gets every minute a flashing LED.
-If the LED gets deactivated anyway, the sampling rate is unecessary high.
+Fastest LED reaction and highest time resolution, but highest battery consumption and airtime. If the LED is deactivated anyway, the sampling rate is unnecessarily high.
 
 - SensorSampleTime = 1 (HEX 01 -> `FF 01 01`)
-  Every 1 min a sensor sample, every 10 min an averaged measurement.
+  Every 1 min one measurement.
 - CyclicTransmissionCounter = 60 (HEX 3C -> `FF F0 3C`)
-  After 60 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 60 minutes.
+  60 datasets, 420 bytes (782 bytes) per hour → split into several telegrams per hour, 1440 values per day.
 
 **Example 2**<br>
-This configuration makes sense if the LED is used and the values should arrive faster than every hour. This has an impact on battery life!
-If the LED gets deactivated anyway, the sampling rate is unecessary high.
+Fast LED reaction, values arrive at least every 20 minutes. High impact on battery life!
 
 - SensorSampleTime = 1 (HEX 01 -> `FF 01 01`)
-  Every 1 min a sensor sample, every 10 min an averaged measurement.
+  Every 1 min one measurement.
 - CyclicTransmissionCounter = 20 (HEX 14 -> `FF F0 14`)
-  After 20 samples a data transmission, that means 2 averaged measurements in the payload, transmitted every 20 minutes.
+  20 datasets, 142 bytes (262 bytes) every 20 minutes → split into several telegrams depending on the spreading factor. 1440 values per day.
 
-**Example 3**<br>
-This configuration makes sense if the smallest possible measuring rate is required and the LED gets deactivated. 
+**Example 3 (recommended for 10 min values)**<br>
+10-minute resolution with one telegram per hour. The LED still works, but reacts with a delay of up to 10 minutes.
 
 - SensorSampleTime = 10 (HEX 0A -> `FF 01 0A`)
-  Every 10 min a sensor sample, every 10 min an averaged measurement.
+  Every 10 min one measurement.
 - CyclicTransmissionCounter = 6 (HEX 06 -> `FF F0 06`)
-  After 6 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 60 minutes.
+  6 datasets, 44 bytes (80 bytes) transmitted every 60 minutes. The simple payload fits into one telegram at all spreading factors, the extended payload only up to SF9. 144 values per day.
 
 **Example 4**<br>
-This configuration makes sense if a long battery life is required and the LED gets deactivated.
-The sensor acts as a logger and the data is not real time, but battery life is optimized. Small changes in sensor values cannot get detected, so the accuracy is slightly lower. E.g. the impact of an opened window might not be visible in the temperature data.
+Long battery life, the sensor acts as a logger. The data is not real time and short events (e.g. an opened window) might not be visible. The LED should be deactivated, as it only reacts once per hour.
 
 - SensorSampleTime = 60 (HEX 3C -> `FF 01 3C`)
-  Every 60 min a sensor sample, every 60 min an averaged measurement.
-- CyclicTransmissionCounter = 24 (HEX 18 -> `FF F0 18`)
-  After 6 samples a data transmission, that means 6 averaged measurements in the payload, transmitted every 360 minutes (6 hours).
+  Every 60 min one measurement.
+- CyclicTransmissionCounter = 6 (HEX 06 -> `FF F0 06`)
+  6 datasets, 44 bytes (80 bytes) transmitted every 360 minutes (6 hours). 24 values per day.
+
+Don't forget to set `SENSOR_SAMPLE_TIME_MIN` and `CYCLIC_TRANSMISSION_COUNTER` in the [payload decoder](https://hslu-ige-laes.github.io/lora-devices-ttn/docs/sensors/avelon-wisely-allsense/#payload-decoder) to the same values, otherwise the timestamps of the datasets are wrong.
 
 ### Change the LED blinking behaviour
 With the following procedure you can deactivate the LED
@@ -297,9 +307,32 @@ Further info in the [payload description ](https://hslu-ige-laes.github.io/lora-
 
 ## Payload Decoder
 
+Set the three configuration values at the top to match the device. `SENSOR_SAMPLE_TIME_MIN` and `CYCLIC_TRANSMISSION_COUNTER` are needed to calculate the time offset of each dataset. Simple (fPort 5) and extended (fPort 6) payloads are detected automatically.
+
 ```javascript
+// ===== Configuration - must match the settings of the device =====
+var DEVICE_TYPE = "AllSense";        // "Standard", "CarbonSense" or "AllSense"
+var SENSOR_SAMPLE_TIME_MIN = 10;     // SensorSampleTime in minutes (downlink FF 01 xx)
+var CYCLIC_TRANSMISSION_COUNTER = 6; // CyclicTransmissionCounter (downlink FF F0 xx)
+// =================================================================
+
+var DATASET_LENGTH = { "Standard": 5, "CarbonSense": 7, "AllSense": 7, "AllSenseExt": 13 };
+
+var BYTE_INDICES = {
+  "Standard":    { "pressure_hPa_abs": 0, "temperature_degrC_abs": 2, "humidity_perc_abs": 4 },
+  "CarbonSense": { "pressure_hPa_abs": 0, "temperature_degrC_abs": 2, "humidity_perc_abs": 4, "co2_ppm_abs": 5 },
+  "AllSense":    { "temperature_degrC_abs": 0, "humidity_perc_abs": 2, "voc_index_abs": 3, "co2_ppm_abs": 5 },
+  "AllSenseExt": { "pressure_hPa_abs": 0, "temperature_degrC_abs": 2, "humidity_perc_abs": 4, "voc_index_abs": 5, "brightness_lux_abs": 7, "co2_ppm_abs": 9, "presence_min_inc": 11 }
+};
+
+var BYTE_LENGTHS = { "pressure_hPa_abs": 2, "temperature_degrC_abs": 2, "humidity_perc_abs": 1, "voc_index_abs": 2, "brightness_lux_abs": 2, "co2_ppm_abs": 2, "presence_min_inc": 2 };
+var DIV_FACTORS  = { "pressure_hPa_abs": 10.0, "temperature_degrC_abs": 10.0, "humidity_perc_abs": 2.0, "voc_index_abs": 1.0, "brightness_lux_abs": 1.0, "co2_ppm_abs": 1.0, "presence_min_inc": 1.0 };
+var SIGNED       = { "temperature_degrC_abs": true }; // Int16
+
 function mapBatteryLevelPerc(batteryPercent) {
-  if (batteryPercent <= 90) {
+  if (batteryPercent === null) {
+    return null;
+  } else if (batteryPercent <= 90) {
     return 0; // Critical
   } else if (batteryPercent <= 95) {
     return 1; // Warning
@@ -310,97 +343,89 @@ function mapBatteryLevelPerc(batteryPercent) {
   }
 }
 
-function getValues(bytes, measurement, byteIndices, deviceType, datasetCount, datasetLength, payloadOffset) {
-  var decoded = [];
-  var measurementByteLengths = {"pressure_hPa_abs": 2, "temperature_degrC_abs": 2, "humidity_perc_abs": 1, "voc_index_abs": 2, "brightness_lux_abs": 2, "co2_ppm_abs": 2, "presence_min_inc": 2};
-  var divFactors = {"pressure_hPa_abs": 10.0, "temperature_degrC_abs": 10.0, "humidity_perc_abs": 2.0, "voc_index_abs": 1.0, "brightness_lux_abs": 1.0, "co2_ppm_abs": 1.0, "presence_min_inc": 1.0};
-
-  if (measurement in byteIndices[deviceType]) {
-    var byteIndexValue = byteIndices[deviceType][measurement];
-
-    for (var i = 0; i < datasetCount; i++) {
-      var byteIndex = i * datasetLength + byteIndexValue + payloadOffset;
-      if (measurementByteLengths[measurement] === 2) {
-        decoded.push((bytes[byteIndex] << 8 | bytes[byteIndex + 1]) / divFactors[measurement]);
-      } else {
-        decoded.push((bytes[byteIndex]) / divFactors[measurement]);
-      }
-    }
+function decodeBattery(batVal, warnings) {
+  if (batVal === 0) {
+    warnings.push("No battery inserted (external power supply)");
+    return null;
   }
-  return decoded;
+  if (batVal === 255) {
+    warnings.push("Battery Warning: Could not acquire the voltage");
+    return null;
+  }
+  if (batVal === 1) {
+    warnings.push("Battery Warning: No further battery capacity available");
+  } else if (batVal < 30) {
+    warnings.push("Battery Warning: Low state");
+  }
+  return Math.round(batVal / 254.0 * 100.0 * 10) / 10;
+}
+
+function readValue(bytes, index, key) {
+  var value;
+  if (BYTE_LENGTHS[key] === 2) {
+    value = (bytes[index] << 8) | bytes[index + 1];
+    if (SIGNED[key] && value > 0x7FFF) {
+      value -= 0x10000;
+    }
+  } else {
+    value = bytes[index];
+  }
+  return value / DIV_FACTORS[key];
 }
 
 function decodeUplink(input) {
-  var deviceType = "AllSense"; // manually defined: "Standard", "CarbonSense", or "AllSense"
-  var samplingRate = 10; //minutes
-  var datasetLengthDict = {
-    "Standard": 5,
-    "CarbonSense": 7,
-    "AllSense": 7,
-    "AllSenseExt": 13
-  };
-  var byteIndices = {
-    "Standard": {"pressure_hPa_abs": 0, "temperature_degrC_abs": 2, "humidity_perc_abs": 4},
-    "CarbonSense": {"pressure_hPa_abs": 0, "temperature_degrC_abs": 2, "humidity_perc_abs": 4, "co2_ppm_abs": 5},
-    "AllSense": {"temperature_degrC_abs": 0, "humidity_perc_abs": 2, "voc_index_abs": 3, "co2_ppm_abs": 5},
-    "AllSenseExt": {"pressure_hPa_abs": 0, "temperature_degrC_abs": 2, "humidity_perc_abs": 4, "voc_index_abs": 5, "brightness_lux_abs": 7, "co2_ppm_abs": 9, "presence_min_inc": 11}
-  };
-  var payloadOffset = 1; // Offset of battery information, offset before datasets
+  var deviceType = DEVICE_TYPE;
+  var bytes = input.bytes;
+  var readings = [];
   var warnings = [];
   var errors = [];
-  
-  if(datasetLengthDict[deviceType] === undefined){
-    errors.push("Error: Typo in deviceType configuration in payload decoder");
+
+  if (DATASET_LENGTH[deviceType] === undefined) {
+    errors.push("Error: Typo in DEVICE_TYPE configuration in payload decoder");
+    return { data: readings, warnings: warnings, errors: errors };
   }
-  
-  if((input.fPort === 5) || (input.fPort === 6)){
-    // Battery status and percent
-    var batVal = input.bytes[0];
-    var batteryPerc;
-    if((batVal >= 30) && (batVal < 254)){
-      batteryPerc = Math.round(batVal / 254.0 * 100.0 * 10) / 10;
-    }else if((batVal < 30) && (batVal > 1)){
-      batteryPerc = Math.round(batVal / 254.0 * 100.0 * 10) / 10;
-      warnings.push("Battery Warning: Low state");
-    }else if((batVal === 1)){
-      batteryPerc = 1;
-      warnings.push("Battery Warning: No further battery capacity available");
-    }else if(batVal === 254){
-      batteryPerc = 100.0;
-    } else{
-      batteryPerc = 0.0;
-      warnings.push("Battery Warning: Could not acquire the voltage");
+
+  if (input.fPort !== 5 && input.fPort !== 6) {
+    errors.push("Unknown fPort " + input.fPort);
+    return { data: readings, warnings: warnings, errors: errors };
+  }
+
+  if (input.fPort === 6) {
+    if (deviceType !== "AllSense") {
+      errors.push("Error: fPort 6 (extended payload) is only used by Wisely AllSense, check DEVICE_TYPE");
+      return { data: readings, warnings: warnings, errors: errors };
     }
-		
-		const batteryState = mapBatteryLevelPerc(batteryPerc); 
-        
-    if(input.fPort === 6 && deviceType === "AllSense"){
-      warnings.push("Warning: deviceType in payload decoder is not set to AllSense");
-      deviceType = "AllSenseExt";
+    deviceType = "AllSenseExt";
+  }
+
+  var datasetLength = DATASET_LENGTH[deviceType];
+  var datasetCount = (bytes.length - 2) / datasetLength; // 1 byte battery + datasets + 1 byte offset
+
+  if (bytes.length < 2 + datasetLength || datasetCount % 1 !== 0) {
+    errors.push("Error: Payload length " + bytes.length + " does not match DEVICE_TYPE " + deviceType);
+    return { data: readings, warnings: warnings, errors: errors };
+  }
+
+  var batteryPerc = decodeBattery(bytes[0], warnings);
+  var batteryState = mapBatteryLevelPerc(batteryPerc);
+
+  // OFFSET (last byte): number of intervals of length CyclicTransmissionCounter × SensorSampleTime
+  // between the last dataset and the transmission time. 0 for regular transmissions.
+  var offset = bytes[bytes.length - 1];
+  var sampleMs = SENSOR_SAMPLE_TIME_MIN * 60 * 1000.0;
+  var offsetMs = offset * CYCLIC_TRANSMISSION_COUNTER * sampleMs;
+
+  for (var i = 0; i < datasetCount; i++) {
+    var reading = { battery_perc_abs: batteryPerc, battery_state_abs: batteryState };
+    var start = 1 + i * datasetLength;
+
+    for (var key in BYTE_INDICES[deviceType]) {
+      reading[key] = readValue(bytes, start + BYTE_INDICES[deviceType][key], key);
     }
-    
-    var datasetLength = datasetLengthDict[deviceType];
-    var datasetCount = (input.bytes.length - 2) / datasetLength;
-    var readings = [];
-    
-    if(!Number.isInteger(datasetCount)) {
-      errors.push("Error: datasetCount is not a whole number!");
-    } else {
-      for (var i = 0; i < datasetCount; i++) {
-        var reading = { battery_perc_abs: batteryPerc , battery_state_abs: batteryState };
-        
-        for (const [key, value] of Object.entries(byteIndices[deviceType])) {
-          var decoded = getValues(input.bytes, key, byteIndices, deviceType, 1, datasetLength, payloadOffset + i * datasetLength);
-          if (decoded.length > 0) {
-            reading[key] = decoded[0];
-          }
-        }
-        reading["offset_milliseconds"] = (datasetCount - i - 1) * samplingRate * (-1) * 60 * 1000.0; 
-        readings.push(reading);
-      }
-    }
-  } else {
-    errors.push("Unknown fPort");
+
+    // first dataset is the oldest, the last one corresponds to the transmission time (minus offset)
+    reading["offset_milliseconds"] = -((datasetCount - i - 1) * sampleMs + offsetMs);
+    readings.push(reading);
   }
 
   return {
