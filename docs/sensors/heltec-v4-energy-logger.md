@@ -140,6 +140,7 @@ function decodeUplink(input) {
 
   // ===== ACK PAYLOADS (0x81-0x85) =====
   if (type === 0x81) {
+    // TX Interval Override ACK (2 Bytes total)
     if (bytes.length < 2) {
       return { errors: ["TX Override ACK: payload too short"] };
     }
@@ -152,6 +153,7 @@ function decodeUplink(input) {
   }
 
   if (type === 0x82) {
+    // Reset Counters ACK (1 Byte total)
     return {
       data: {
         ack_type: "counters_reset",
@@ -161,12 +163,15 @@ function decodeUplink(input) {
   }
 
   if (type === 0x85) {
+    // Config Query Response (5 Bytes total - Version 0.1.0)
     if (bytes.length < 5) {
       return { errors: ["Config Query: payload too short"] };
     }
+
     const energyFlags = bytes[2];
     const energyMode = (energyFlags & 0x01) ? "cooling" : "heating";
     const sensorLocation = (energyFlags & 0x02) ? "return" : "flow";
+
     return {
       data: {
         ack_type: "config_query_response",
@@ -184,6 +189,7 @@ function decodeUplink(input) {
       return { errors: ["Sensor payload v3 too short"] };
     }
 
+    // Temperatures (bit-packed in bytes 0-2)
     const tempFlowHigh = bytes[0] & 0x0F;
     const tempFlowLow = (bytes[1] >> 2) & 0x3F;
     const tempReturnHigh = bytes[1] & 0x03;
@@ -195,28 +201,32 @@ function decodeUplink(input) {
     const temperature_degrC_abs_flow = (tFlowRaw === 1023) ? null : tFlowRaw / 10.0;
     const temperature_degrC_abs_return = (tReturnRaw === 1023) ? null : tReturnRaw / 10.0;
 
+    // Flow uint16
     const flowRaw = (bytes[3] << 8) | bytes[4];
     const flow_l_min = (flowRaw === 65535) ? null : flowRaw / 10.0;
     const volumeFlow_m3perh_abs = (flow_l_min === null) ? null : flow_l_min * 60.0 / 1000.0;
 
-    const vol_m3_x1000 =
-      ((bytes[5] << 24) >>> 0) |
-      ((bytes[6] << 16) >>> 0) |
-      ((bytes[7] << 8)  >>> 0) |
-      ((bytes[8] << 0)  >>> 0);
+    // Volume uint32
+    const vol_m3_x1000 = (
+      (bytes[5] << 24) |
+      (bytes[6] << 16) |
+      (bytes[7] << 8)  |
+      (bytes[8] << 0)) >>> 0;   // >>> 0: unsigned uint32 (| alone yields signed int32)
     const volume_m3_inc = (vol_m3_x1000 === 0xFFFFFFFF) ? null : vol_m3_x1000 / 1000.0;
 
+    // Power uint24
     const powerRaw =
       ((bytes[9] << 16) >>> 0) |
       ((bytes[10] << 8)  >>> 0) |
       ((bytes[11] << 0)  >>> 0);
     const power_kW_abs = (powerRaw === 0xFFFFFF) ? null : powerRaw / 1000.0;
 
-    const energyRaw =
-      ((bytes[12] << 24) >>> 0) |
-      ((bytes[13] << 16) >>> 0) |
-      ((bytes[14] << 8)  >>> 0) |
-      ((bytes[15] << 0)  >>> 0);
+    // Energy uint32
+    const energyRaw = (
+      (bytes[12] << 24) |
+      (bytes[13] << 16) |
+      (bytes[14] << 8)  |
+      (bytes[15] << 0)) >>> 0;   // >>> 0: unsigned uint32 (| alone yields signed int32)
     const energy_kWh_inc = (energyRaw === 0xFFFFFFFF) ? null : energyRaw / 10.0;
 
     const flags = bytes[16];
@@ -237,6 +247,11 @@ function decodeUplink(input) {
       }
     };
 
+    // Optional byte 17: Modbus signal quality 0-100 (0xFF = n/a)
+    if (bytes.length >= 18) {
+      result.data.signal_quality_pct = (bytes[17] === 0xFF) ? null : bytes[17];
+    }
+
     result.data[powerKey] = power_kW_abs;
     result.data[energyKey] = energy_kWh_inc;
 
@@ -250,6 +265,7 @@ function decodeUplink(input) {
     }
 
     if (bytes.length === 18) {
+      // Flow int16 big-endian (l/min * 10)
       let flowRaw = (bytes[1] << 8) | bytes[2];
       if (flowRaw & 0x8000) {
         flowRaw = flowRaw - 0x10000;
@@ -257,6 +273,7 @@ function decodeUplink(input) {
       const flow_l_min = flowRaw / 10.0;
       const volumeFlow_m3perh_abs = flow_l_min * 60.0 / 1000.0;
 
+      // Volume uint32
       const vol_m3_x1000 =
         ((bytes[3] << 24) >>> 0) |
         ((bytes[4] << 16) >>> 0) |
@@ -264,21 +281,25 @@ function decodeUplink(input) {
         ((bytes[6] << 0)  >>> 0);
       const volume_m3_inc = vol_m3_x1000 / 1000.0;
 
+      // Temperature flow int16
       let tFlowRaw = (bytes[7] << 8) | bytes[8];
       if (tFlowRaw & 0x8000) {
         tFlowRaw = tFlowRaw - 0x10000;
       }
       const temperature_degrC_abs_flow = tFlowRaw === -32768 ? null : tFlowRaw / 10.0;
 
+      // Temperature return int16
       let tReturnRaw = (bytes[9] << 8) | bytes[10];
       if (tReturnRaw & 0x8000) {
         tReturnRaw = tReturnRaw - 0x10000;
       }
       const temperature_degrC_abs_return = tReturnRaw === -32768 ? null : tReturnRaw / 10.0;
 
+      // Power uint16 (kW * 100)
       const powerRaw = (bytes[11] << 8) | bytes[12];
       const power_kW = powerRaw / 100.0;
 
+      // Energy uint32 (kWh * 10)
       const energy_kwh_x10 =
         ((bytes[13] << 24) >>> 0) |
         ((bytes[14] << 16) >>> 0) |
@@ -286,6 +307,7 @@ function decodeUplink(input) {
         ((bytes[16] << 0)  >>> 0);
       const energy_kWh = energy_kwh_x10 / 10.0;
 
+      // Flags (Byte 17)
       const flags = bytes[17];
       const energyMode = (flags & 0x01) ? "cooling" : "heating";
       const sensorLocation = (flags & 0x02) ? "return" : "flow";
