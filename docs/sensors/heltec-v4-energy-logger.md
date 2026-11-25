@@ -171,6 +171,7 @@ function decodeUplink(input) {
     const energyFlags = bytes[2];
     const energyMode = (energyFlags & 0x01) ? "cooling" : "heating";
     const sensorLocation = (energyFlags & 0x02) ? "return" : "flow";
+    const flowOnly = (energyFlags & 0x04) !== 0;
 
     return {
       data: {
@@ -178,9 +179,33 @@ function decodeUplink(input) {
         tx_interval_min: bytes[1],
         energy_mode: energyMode,
         sensor_location: sensorLocation,
-        flow_max_lpm: bytes[3] * 10
+        flow_max_lpm: bytes[3] * 10,
+        flow_only: flowOnly
       }
     };
+  }
+
+  // ===== FLOW-ONLY SENSOR DATA (type 0x40, 8 or 9 Bytes) =====
+  // No temperature sensors configured: flow + volume only, no energy.
+  if (type === 0x40) {
+    if (bytes.length < 8) {
+      return { errors: ["Flow-only payload too short"] };
+    }
+    const flowRaw = (bytes[1] << 8) | bytes[2];
+    const flow_l_min = (flowRaw === 65535) ? null : flowRaw / 10.0;
+    const volRaw = ((bytes[3] << 24) | (bytes[4] << 16) | (bytes[5] << 8) | bytes[6]) >>> 0;
+    const result = {
+      data: {
+        payload_type: "flow_only_v1",
+        volumeFlow_m3perh_abs: (flow_l_min === null) ? null : flow_l_min * 60.0 / 1000.0,
+        volume_m3_inc: (volRaw === 0xFFFFFFFF) ? null : volRaw / 1000.0
+      }
+    };
+    // Optional byte 8: Modbus signal quality 0-100 (0xFF = n/a)
+    if (bytes.length >= 9) {
+      result.data.signal_quality_pct = (bytes[8] === 0xFF) ? null : bytes[8];
+    }
+    return result;
   }
 
   // ===== VERSION 3 SENSOR DATA (17 Bytes) =====
@@ -346,6 +371,7 @@ function decodeUplink(input) {
     warnings: [`Unknown payload type: 0x${type.toString(16).toUpperCase()}`]
   };
 }
+
 ```
 
 ### Step 3 - Device configuration
